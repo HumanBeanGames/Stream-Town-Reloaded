@@ -9,6 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Assets/AmplifyShaderEditor*
+/Assets/AstarPathfindingProject*
+/Assets/Polaris - Low Poly Ecosystem*
+/Screenshots*
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
