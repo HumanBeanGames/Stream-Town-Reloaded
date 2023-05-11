@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level13WallsAndGates
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level13WallsAndGates
+  <NodeTitle>k__BackingField: Fortification 4
+  <Description>k__BackingField: 'Boost Wall max level to 13
+
+    Boost Gate max level
+    to 13'
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 37f86af3-d1e2-4087-9a25-2e901c616798
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c28f6623e031654409f9596e521cd9de, type: 2}
+  - <NodeID>k__BackingField: 664f4e58-1d4a-40a3-9947-8566ab5e2183
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 9bb45367b6b587b4a9261e12bf5ff529, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 13
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 13
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 13
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 14
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 600
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: cb42bf9456551ab4fa3b4641d4e48160, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Gate.png
+  <Unavailable>k__BackingField: 0

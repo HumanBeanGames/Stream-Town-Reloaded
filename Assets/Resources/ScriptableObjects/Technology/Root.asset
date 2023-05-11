@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56025024e0667f546b2140edbe3d8e16, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  UniqueID: root
+  DisplayName: Hamlet
+  Description: 
+  ResourceCost:
+    WoodCost: 0
+    OreCost: 0
+    GoldCost: 0
+    FoodCost: 0
+  ResearchTime: 0
+  TechnologyNodeUnlock: []
+  Age: 0
+  Children:
+  - {fileID: 11400000, guid: 1471e8dc63bf3cb43bb7c6de36ba4d77, type: 2}
+  - {fileID: 11400000, guid: 771130a3c55498044bc72877aa326cb0, type: 2}
+  - {fileID: 11400000, guid: 86c7123e4465e734e87c3b130c8d4545, type: 2}
+  - {fileID: 11400000, guid: 5c731642cd1a8024abcb546d30e67521, type: 2}
+  - {fileID: 11400000, guid: 25c71dd86ca5a384eb426371fb87ef1b, type: 2}
+  EditorPosition: {x: 580, y: 530}

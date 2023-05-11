@@ -1,0 +1,347 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7413765136032693509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4601162772344994877}
+  m_Layer: 0
+  m_Name: Env_Necrolands_Bones_Dragon_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4601162772344994877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413765136032693509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6096433763341192271}
+  - {fileID: 4319262380482809854}
+  - {fileID: 7395650191790417496}
+  - {fileID: 7449751901075902040}
+  - {fileID: 6693396028707653691}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &201060721094737560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4601162772344994877}
+    m_Modifications:
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6709093717647861869, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+      propertyPath: m_Name
+      value: Env_Necrolands_Bones_Ribs_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+--- !u!4 &6096433763341192271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6219661971051311831, guid: b47eb4c1080cb46c1bf0cacfb3c28a14, type: 3}
+  m_PrefabInstance: {fileID: 201060721094737560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &568568064650279134
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4601162772344994877}
+    m_Modifications:
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641066650935723068, guid: c0108747895434630b338dc11bd89346, type: 3}
+      propertyPath: m_Name
+      value: Env_Necrolands_Bones_Tail_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0108747895434630b338dc11bd89346, type: 3}
+--- !u!4 &7395650191790417496 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7007976014062804614, guid: c0108747895434630b338dc11bd89346, type: 3}
+  m_PrefabInstance: {fileID: 568568064650279134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1253532078425548862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4601162772344994877}
+    m_Modifications:
+    - target: {fileID: 5101760743469857471, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_Name
+      value: Env_Necrolands_Bones_Wings_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+--- !u!4 &6693396028707653691 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5586373326038491141, guid: 3f6075282ef7d43ef9ee7596e4528cf8, type: 3}
+  m_PrefabInstance: {fileID: 1253532078425548862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2254149868207787854
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4601162772344994877}
+    m_Modifications:
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454986248401607178, guid: a17eb20596224446ebada04f8b701783, type: 3}
+      propertyPath: m_Name
+      value: Env_Necrolands_Bones_Skull_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a17eb20596224446ebada04f8b701783, type: 3}
+--- !u!4 &4319262380482809854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2646220046235730096, guid: a17eb20596224446ebada04f8b701783, type: 3}
+  m_PrefabInstance: {fileID: 2254149868207787854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3722333119972103401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4601162772344994877}
+    m_Modifications:
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881895018064248843, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+      propertyPath: m_Name
+      value: Env_Necrolands_Bones_Wings_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+--- !u!4 &7449751901075902040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6109897751027276465, guid: f18cc29199bf643e6826ffd1da4ee9d2, type: 3}
+  m_PrefabInstance: {fileID: 3722333119972103401}
+  m_PrefabAsset: {fileID: 0}

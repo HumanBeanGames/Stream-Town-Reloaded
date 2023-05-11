@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: IncreaseMinerLevel2
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: IncreaseMinerLevel2
+  <NodeTitle>k__BackingField: 
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: dcd6b53f-8d61-473b-b01c-2dfed5a6a6a7
+    <NextTech>k__BackingField: {fileID: 11400000, guid: ea93f48490d7b0249950a6180487d932, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 11
+  <Parent>k__BackingField: {fileID: 11400000, guid: 2dd7542efa28a2b4eb21eacd4ecf6b77, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Characters/UI_Icon_Character_Miner.png
+  <Unavailable>k__BackingField: 0

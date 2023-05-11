@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: FoodStorage
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: FoodStorage
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 7124f906-e638-4397-a297-91dce4035202
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 6f2550f57f4e366458746739d2b5f9ad, type: 2}
+  - <NodeID>k__BackingField: f7f409d2-a223-4633-b57d-3c7136882cde
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 7365900c85ecb9f428985cea7f093344, type: 2}
+  - <NodeID>k__BackingField: 55147026-5eaa-42c3-b054-844736d49e96
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 6a1a541eb45cc2047a4c546cc7ebaf68, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}

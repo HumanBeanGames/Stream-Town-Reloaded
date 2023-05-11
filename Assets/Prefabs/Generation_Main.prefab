@@ -1,0 +1,466 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7332225645642957384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7332225645642957381}
+  - component: {fileID: 7332225645642957380}
+  - component: {fileID: 7332225645642957387}
+  - component: {fileID: 7332225645642957386}
+  - component: {fileID: 7332225645642957385}
+  m_Layer: 9
+  m_Name: Generation_Main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7332225645642957381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332225645642957384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalScale: {x: 4, y: 1, z: 4}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7332225645642957380
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332225645642957384}
+  m_Mesh: {fileID: 0}
+--- !u!23 &7332225645642957387
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332225645642957384}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4f78add7763965742bc2e69033ae53cd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7332225645642957386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332225645642957384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8efecb4b89b29644ab550ea21a58107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xScale: 4
+  _yScale: 4
+  _generationSettings:
+    Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 23
+    Octaves: 6
+    Persistance: 0
+    Lacunarity: 16.62
+    Seed: -1747536282
+    Offset: {x: -2.84, y: 0}
+    MeshHeightMultiplier: 3.5
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 0
+  _resourceGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 17
+    Octaves: 6
+    Persistance: 0.452
+    Lacunarity: 22.47
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 6
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 2
+    TargetType: 2
+    PoolName: Tree
+  - Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 7
+    Octaves: 1
+    Persistance: 1
+    Lacunarity: 0
+    Seed: 0
+    Offset: {x: 0.5, y: 0.5}
+    MeshHeightMultiplier: 11
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 1
+    TargetType: 4
+    PoolName: Ore
+  - Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 7
+    Octaves: 2
+    Persistance: 1
+    Lacunarity: 0
+    Seed: 0
+    Offset: {x: 0.5, y: 0.5}
+    MeshHeightMultiplier: 10
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 1
+    TargetType: 8
+    PoolName: Bush
+  _waterResourceGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 1
+    NoiseScale: 3
+    Octaves: 1
+    Persistance: 1
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 5
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 1
+    TargetType: 32
+    PoolName: Fish
+  _foliageGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.847
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 7
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 1
+    PoolNames:
+    - GrassLong1
+    - GrassLong2
+    - GrassLong3
+    - GrassShort1
+    - GrassShort2
+    - GrassShort3
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 4
+    Octaves: 1
+    Persistance: 0.847
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 14
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    Spacing: 1
+    PoolNames:
+    - Flower1
+    - Flower2
+    - Flower3
+    - Flower4
+    - Flower5
+    - Flower6
+  _waterFoliageGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.8
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 7
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    Spacing: 1
+    PoolNames:
+    - Seaweed1
+    - Seaweed2
+    - Seaweed3
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.8
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 10
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    Spacing: 1
+    PoolNames:
+    - CoralBrown1
+    - CoralBrown2
+    - CoralOrange1
+    - CoralOrange2
+    - CoralPurple1
+    - CoralPurple2
+  _campGenerationSettings:
+  - Size: 0
+    LevelOfDetail: 0
+    NoiseScale: 0
+    Octaves: 0
+    Persistance: 0
+    Lacunarity: 0
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 0
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    Spacing: 0
+    PoolName: EnemyCamp_Goblin
+    MaxBounds: {x: 120, y: 120}
+    MinBounds: {x: 50, y: 50}
+    MaxAmount: 10
+    MinDistanceFromCenter: 0
+    MinDistanceFromOther: 60
+    CampSize: 10
+  _generateOnStart: 1
+  _randomizeSeed: 1
+  _collisionMask:
+    serializedVersion: 2
+    m_Bits: 449
+  _terrainMask:
+    serializedVersion: 2
+    m_Bits: 528
+  _regen: 0
+  _previewTreePlacements: 0
+  _previewFoliagePlacements: 0
+  _treeMesh: {fileID: 0}
+--- !u!64 &7332225645642957385
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332225645642957384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

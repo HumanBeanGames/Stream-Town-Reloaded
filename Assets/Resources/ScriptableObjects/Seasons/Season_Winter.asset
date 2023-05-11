@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc6c476d8ddbe840a8b0a770d1f0504, type: 3}
+  m_Name: Season_Winter
+  m_EditorClassIdentifier: 
+  Season: 2
+  GrassGridColor1: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 0}
+  GrassGridColor2: {r: 0.77254903, g: 0.77254903, b: 0.77254903, a: 0}
+  GrassTopColor: {r: 1, g: 1, b: 1, a: 0}
+  GrassWindColor: {r: 0.965, g: 0.965, b: 0.965, a: 0}
+  TerrainColor1: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 0}
+  TerrainColor2: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
+  TreeColorGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0.8254717, g: 1, b: 1, a: 0}
+    key3: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 0.7122642, g: 1, b: 1, a: 0}
+    key5: {r: 1, g: 1, b: 1, a: 0}
+    key6: {r: 0.9084519, g: 1, b: 1, a: 0}
+    key7: {r: 1, g: 1, b: 1, a: 0}
+    ctime0: 0
+    ctime1: 11372
+    ctime2: 21395
+    ctime3: 30262
+    ctime4: 40670
+    ctime5: 52235
+    ctime6: 58403
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
+  VFX: {fileID: 0}
+  MaxParticleCount: 1000
+  ParticleLerpTime: 3
+  MinRunTime: 60
+  MaxRunTime: 600

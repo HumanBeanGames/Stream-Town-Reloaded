@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: IncreaseWoodStorage3
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: IncreaseWoodStorage3
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 22dc4455-8504-4c60-b12b-348d495f8ca2
+    <NextTech>k__BackingField: {fileID: 11400000, guid: d454402be08852941bf2350f13b77df3, type: 2}
+  - <NodeID>k__BackingField: f6e3bbed-2174-4ec8-9499-bd93844433a2
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 0aa81b017ff942948aff590478981b76, type: 2}
+  - <NodeID>k__BackingField: c047edec-a705-4534-928a-de2c659289e8
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 1c17f6da7c908dd459c19f56a1402e47, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}

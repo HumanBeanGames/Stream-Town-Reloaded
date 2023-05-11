@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Hamlet
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Hamlet
+  <NodeTitle>k__BackingField: Hamlet
+  <Description>k__BackingField: Unlock Town Hall
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 262bdb27-5e9d-45a7-b9d5-e40a4f2d8ac5
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 86078c454d64197439388985a0735019, type: 2}
+  - <NodeID>k__BackingField: 3859ee75-713c-4d58-b084-d6e153b88bd6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 14cd8a00e2b24c74094578a23f7cba4c, type: 2}
+  - <NodeID>k__BackingField: 8bbe3833-4ce0-4f98-a194-7ae98491ef8c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 995537c9771a19b42a4df6872775e47d, type: 2}
+  - <NodeID>k__BackingField: 243f8127-3c16-482f-a38d-20abaa2a6934
+    <NextTech>k__BackingField: {fileID: 11400000, guid: a28bcd233ca4cad4f8a6844a9eefed5e, type: 2}
+  - <NodeID>k__BackingField: 3dc70879-fd33-40ec-abf2-6d8c3c532315
+    <NextTech>k__BackingField: {fileID: 11400000, guid: b0cb8284afc8df14089f4684b407475f, type: 2}
+  - <NodeID>k__BackingField: f346ba05-dbf1-4b33-9f2e-f1fb57ed347f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: ff01e110cfa7a574eb182d3c1cf9a685, type: 2}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: b6f07b32-9de0-4a38-b417-cef5629c577a
+    <NextTech>k__BackingField: {fileID: 11400000, guid: fe6e49179ba2b0a47875cc0cec6a6bd0, type: 2}
+  - <NodeID>k__BackingField: 128cdc5c-12e1-41ad-8cf7-e24b4cc6e784
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 06ce5e9d5a4bcdc43937e2e55d36d6e4, type: 2}
+  - <NodeID>k__BackingField: 66a3f64b-e5b9-4989-b292-8d965421b583
+    <NextTech>k__BackingField: {fileID: 11400000, guid: b4622c1bec107be4b9c3fbc82d0e6d04, type: 2}
+  - <NodeID>k__BackingField: 047d5257-d898-4652-b254-c79072ada8f9
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 7ac644e72e5416e4e8ace870cc2b72a3, type: 2}
+  - <NodeID>k__BackingField: 99ad3513-cfdc-461d-b783-f2728d3bcab8
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 679e73304f5f93b468838a3d873a9ee9, type: 2}
+  - <NodeID>k__BackingField: 6112c264-1a67-4efd-8461-241d9903bf7b
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 2e7aa36a6fcc1c1428c6d8147a6ca0d7, type: 2}
+  - <NodeID>k__BackingField: e5a276be-cc19-4fed-856d-883c302b448c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 88857c053d1d59944a1b18c25e3d97cf, type: 2}
+  - <NodeID>k__BackingField: 3b4a61b2-94d3-4dbe-acac-36f79e21c4e4
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 3200529f34c39504dba6dfeac01ae7e3, type: 2}
+  - <NodeID>k__BackingField: d151f6be-45fc-48bc-b27a-6b54604d9850
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c072753fd1266cb4d9eec71ae033d912, type: 2}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_TownHall.png
+  <Unavailable>k__BackingField: 0

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Crenellations
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Crenellations
+  <NodeTitle>k__BackingField: Crenellations
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: e5a1d94c-fa40-4b82-bddc-c6cca9d3b05d
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 438810f9a26481d47b1a6f2877a399d6, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 40000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 9
+  <Parent>k__BackingField: {fileID: 11400000, guid: b874e926b4836fb409cff40a9d29372d, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Wall.png
+  <Unavailable>k__BackingField: 1

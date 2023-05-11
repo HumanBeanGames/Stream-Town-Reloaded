@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8551b15934f8b654cafa88d2d5d57441, type: 3}
+  m_Name: AutumnAudioData
+  m_EditorClassIdentifier: 
+  Season: 1
+  DayMusicTracks:
+  - {fileID: 8300000, guid: 5d381a86b8f37af43acf67d4536c3c91, type: 3}
+  NightMusicTracks:
+  - {fileID: 8300000, guid: aed7a56188e6f41429f6f25bee63f6cd, type: 3}
+  DayAmbienceTracks:
+  - {fileID: 8300000, guid: ca3eb4fff026acb4dba12fc5339f268b, type: 3}
+  NightAmbienceTracks:
+  - {fileID: 8300000, guid: ca3eb4fff026acb4dba12fc5339f268b, type: 3}

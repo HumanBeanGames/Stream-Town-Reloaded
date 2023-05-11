@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level3House
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level3House
+  <NodeTitle>k__BackingField: Living Standards 1
+  <Description>k__BackingField: Boost House max level to 3
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 85aa02df-4de2-4840-8a30-ba8a44644114
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 39e0851cfdc8d864184de7658b439b0d, type: 2}
+  - <NodeID>k__BackingField: bc99bd09-97cc-4b07-a095-4cbce5e1d877
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5049a93463b441e48ab440efef6b1fff, type: 2}
+  - <NodeID>k__BackingField: 7e45821d-d64a-463e-a1b2-0b55a510b678
+    <NextTech>k__BackingField: {fileID: 11400000, guid: e2ffc8933e8849c41833094922a1873a, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 3
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 1
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 7
+    <IntValue>k__BackingField: 1000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 677f593e6dce7cc40a08e6da6d5a94cb, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_House.png
+  <Unavailable>k__BackingField: 0

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level13Lumbermill
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level13Lumbermill
+  <NodeTitle>k__BackingField: Timberland 4
+  <Description>k__BackingField: Boost Lumbermill max level to 13
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 8a979630-5dca-4fb5-a637-a4e8da6de193
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c715a11e93e854643bfd0c77753bec0c, type: 2}
+  - <NodeID>k__BackingField: 94bfcf2b-cf5b-401b-a031-05aaa37063e1
+    <NextTech>k__BackingField: {fileID: 11400000, guid: d02d694596f50f448ba1e132636e62c1, type: 2}
+  - <NodeID>k__BackingField: 9d06d679-81b6-40e7-9d95-8c1064d18944
+    <NextTech>k__BackingField: {fileID: 11400000, guid: ec5ebfee8f9212f4ca2583a1fd183002, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 13
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 7
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 30000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 1
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: a3f1cc9741bb11c40afedd7344fa9c8e, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_LumberMill.png
+  <Unavailable>k__BackingField: 0

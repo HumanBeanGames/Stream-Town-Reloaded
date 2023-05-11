@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: IncreaseLoggerLevel1
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: IncreaseLoggerLevel1
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: baeee74a-e704-4073-b707-3548fa2c50e4
+    <NextTech>k__BackingField: {fileID: 11400000, guid: d611a329649f0f3439720c09996b4883, type: 2}
+  - <NodeID>k__BackingField: a8bcf6d2-c0d2-4bf6-8711-191d406b7856
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 562fbdece5b7909488551a9679ad6852, type: 2}
+  - <NodeID>k__BackingField: 405f8d04-5337-433d-b545-7ca713596127
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 4be9d57a8f56beb40bf599f3cdf2e740, type: 2}
+  - <NodeID>k__BackingField: 070df317-3a24-4afa-b5de-81e952cedf5c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5bf21b6dd70eadb4180ebd00ad263ee9, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}

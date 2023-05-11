@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: BasicDefense
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: BasicDefense
+  <NodeTitle>k__BackingField: Basic Defense
+  <Description>k__BackingField: 'Boost Wall and Gate max level to 10
+
+    Advance
+    Wall and Gate to Stone Age'
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: b1b0e663-43b9-4067-8982-25690b89aa1d
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 70bbe4f95540dad4da042a5de4920460, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 13
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 5
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 13
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 14
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 5
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 14
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 15000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 200
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 6
+  <Parent>k__BackingField: {fileID: 11400000, guid: 925e119965eb5c04aafc02b19128f021, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Gate.png
+  <Unavailable>k__BackingField: 0

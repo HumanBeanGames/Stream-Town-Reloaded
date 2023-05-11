@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level8Tower
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level8Tower
+  <NodeTitle>k__BackingField: Tower Defense 3
+  <Description>k__BackingField: Boost Tower max level to 8
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: eaf2f0e5-be00-4c04-949e-137dadd0aeb4
+    <NextTech>k__BackingField: {fileID: 11400000, guid: aa8228c883a5915449368c9149c3c3cb, type: 2}
+  - <NodeID>k__BackingField: 064b5a1e-e91a-4e80-b61d-c5295de86b44
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 666a0f6084264c441a3f8f54226c666f, type: 2}
+  - <NodeID>k__BackingField: d62ce30e-6b4e-46f4-a675-23fb71de488f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 115da84773c8ca544b4b6580611cbde3, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 8
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 10
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 250
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 7de13475c3a3211498f4f13875a2001b, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_Tower.png
+  <Unavailable>k__BackingField: 0

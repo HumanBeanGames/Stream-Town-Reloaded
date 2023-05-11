@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level3Barracks
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level3Barracks
+  <NodeTitle>k__BackingField: Military Base 1
+  <Description>k__BackingField: Boost Barracks max level to 3
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: fc8c4c38-2475-407a-85df-a056af7dc795
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 64856925b8b391b46a56714037ab3ab9, type: 2}
+  - <NodeID>k__BackingField: ac503780-a5b0-4c57-a6ce-0f748d847b0b
+    <NextTech>k__BackingField: {fileID: 11400000, guid: b60abfaaca14077408b792019268d4ae, type: 2}
+  - <NodeID>k__BackingField: 15b01484-fa31-4fb7-b472-96961e7f3931
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 8626c222ae380344c9655e1ed493e71c, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 3
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 11
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 35000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: e477e6c9c313e8f4c837952478249b3c, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Barracks.png
+  <Unavailable>k__BackingField: 0

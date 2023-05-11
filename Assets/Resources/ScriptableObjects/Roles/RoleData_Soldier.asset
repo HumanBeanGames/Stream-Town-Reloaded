@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a625c95a81f45d24f9589b2d9e7e29bf, type: 3}
+  m_Name: RoleData_Soldier
+  m_EditorClassIdentifier: 
+  Role: 8
+  RoleFlags: 2
+  TargetFlags: 64
+  Resource: 0
+  ActionAnimationName: 14
+  ActionAnimationVariants: 1
+  StationFlags: 16
+  BaseActionAmount: 5
+  BaseActionSpeed: 1
+  BaseActionRange: 2
+  BaseRoleLevel: 1
+  BaseFoodUpkeep: 0.5
+  BaseGoldUpkeep: 0.5
+  BaseHealth: 100
+  BaseHealthRegen: 0
+  BaseDamageReduction: 0
+  BaseMovementSpeed: 3
+  BaseMaxResource: 0
+  MaxResourcePerLevel: 0
+  MovementSpeedPerLevel: 0.05
+  ActionAmountPerLevel: 0.33
+  ActionSpeedPerLevel: 0.005
+  ActionRangePerLevel: 0
+  HealthPerLevel: 0
+  HealthRegenPerLevel: 0
+  DamageReductionPerLevel: 0.0025
+  GlobalActionPerLevel: 0.1
+  GlobalActionSpeedPerLevel: 0
+  GlobalActionRangePerLevel: 0
+  GlobalMovementSpeedPerLevel: 0
+  GlobalHealthPerLevel: 3
+  GlobalHealthRegenPerLevel: 0
+  GlobalResourceCarryPerLevel: 0
+  GlobalDamageReductionPerLevel: 0
+  HasUserLimit: 1
+  BaseMaxUserLimit: 0
+  ExpModifier: 5
+  DisplayIcon: {fileID: 21300000, guid: d38447e8cffe04de797700c6bcbf3539, type: 3}
+  ActionClips:
+  - {fileID: 8300000, guid: fcb4ee811e814d24bad95545d74155a3, type: 3}
+  - {fileID: 8300000, guid: 416ad1ad8ae95cb48ac63c93bc3e18b6, type: 3}

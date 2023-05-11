@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level18FoodStorage
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level18FoodStorage
+  <NodeTitle>k__BackingField: Safe Silage 6
+  <Description>k__BackingField: Boost Food Storage max level to 18
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: e30b2186-2c2e-4851-a3e7-d7928bb0588f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 39396a141fc39d440963aa92ffa32e0b, type: 2}
+  - <NodeID>k__BackingField: f4b9e1f1-2076-445f-95f3-db3f12b73ef1
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 82531056166ef2b40b3abe32aa442518, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 18
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 9
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 75000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 3
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 7368d52487a2f4f44a309cbbe1e73de7, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_FoodStorage.png
+  <Unavailable>k__BackingField: 0

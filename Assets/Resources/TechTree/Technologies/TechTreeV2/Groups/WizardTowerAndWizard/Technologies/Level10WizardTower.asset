@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level10WizardTower
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level10WizardTower
+  <NodeTitle>k__BackingField: Arch Magic 4
+  <Description>k__BackingField: Boost Wizard Tower max level to 10
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 8d67a6af-3307-4290-9c3b-8f1c09953d4f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5f74663c7dad1604fbf77dc037773920, type: 2}
+  - <NodeID>k__BackingField: 2a5c2960-80d1-4cc4-a49f-2736586e10b8
+    <NextTech>k__BackingField: {fileID: 11400000, guid: f59ee602c7bf0b24d96ae27c43d8a363, type: 2}
+  - <NodeID>k__BackingField: 13d3cd64-51be-4b64-9a40-761fe2ed4def
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 2fbcafdca2fdb1940a349b9d04109edc, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 23
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 750
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 300000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 1
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 300000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 9fe7681b342173a4fbc7849f5004bb7e, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_WizardTower.png
+  <Unavailable>k__BackingField: 0

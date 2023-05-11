@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level3NecroTower
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level3NecroTower
+  <NodeTitle>k__BackingField: Death Magic 1
+  <Description>k__BackingField: Boost Necro Tower max level to 3
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 04f12a50-23d8-4412-95aa-617bbdd73978
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 8cf1b889381d6184a9c77f1732ed3c3a, type: 2}
+  - <NodeID>k__BackingField: 94906afb-5d64-4784-825b-9cd23f6b462e
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 50e9ade77e101134f91c7ffe16794f87, type: 2}
+  - <NodeID>k__BackingField: ebf77917-9ba1-441e-ba93-21d4b3539cd6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5771c287afae73d4c8446fd591db59f8, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 3
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 22
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 750000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 400
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 2fbcafdca2fdb1940a349b9d04109edc, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_NecroTower.png
+  <Unavailable>k__BackingField: 0

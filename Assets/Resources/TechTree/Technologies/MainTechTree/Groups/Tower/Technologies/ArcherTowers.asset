@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: ArcherTowers
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: ArcherTowers
+  <NodeTitle>k__BackingField: Siege Tower 2
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 84ee4063-031a-448e-9af2-58027e7a8fa9
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 53ae97800f372f24f8c97bfb9acdabd8, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 25000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 0
+    <IntValue>k__BackingField: 40
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 10
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 8
+  <Parent>k__BackingField: {fileID: 11400000, guid: 2c7f7a5e6d88a6e4ab8e279e91e8319f, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Tower.png
+  <Unavailable>k__BackingField: 0

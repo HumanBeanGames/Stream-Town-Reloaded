@@ -1,0 +1,174 @@
+/* CONTAINERS */
+
+.techtree-node__title-container
+{
+	min-width: var(--techtree-metrics-window-pixels-180);
+}
+
+.techtree-node__extension-container
+{
+	background-color: var(--techtree-colors-window-dark-grey-1);
+	padding: var(--techtree-metrics-window-pixels-8);
+	flex: none;
+}
+
+.techtree-node__main-container
+{
+	background-color: var(--techtree-colors-window-dark-grey-1);
+}
+
+.techtree-node__custom-data-container
+{
+	background-color: var(--techtree-colors-window-dark-grey-3);
+	border-radius: var(--techtree-metrics-window-pixels-4);
+	padding: var(--techtree-metrics-window-pixels-8);
+}
+
+/* INPUTS */
+
+.techtree-node__text-field > .unity-text-field__input
+{
+	background-color: var(--techtree-colors-window-dark-grey-1);
+	border-color: var(--techtree-colors-window-dark-grey-6);
+	border-radius: var(--techtree-metrics-window-pixels-4);
+	max-width: var(--techtree-metrics-window-pixels-240);
+	min-width: var(--techtree-metrics-window-pixels-120);
+	padding: var(--techtree-metrics-window-pixels-8);
+	min-height: 32px;
+}
+
+.techtree-node__text-field__hidden > .unity-text-field__input
+{
+	background-color: transparent;
+	border-color: transparent;
+	min-height: 32px;
+}
+
+.techtree-node__text-field__hidden > .unity-text-field__input:focus
+{
+	background-color: var(--techtree-colors-window-dark-grey-1);
+	border-color: var(--techtree-colors-window-dark-grey-6);
+	min-height: 32px;
+}
+
+.techtree-node__filename-text-field > .unity-text-field__input
+{
+	max-width: var(--techtree-metrics-window-pixels-1000);
+	margin: var(--techtree-metrics-window-pixels-4);
+	padding: var(--techtree-metrics-window-pixels-4);
+}
+
+.techtree-node__choice-text-field > .unity-text-field__input
+{
+	font-size: var(--techtree-metrics-window-pixels-11);
+	height: var(--techtree-metrics-window-pixels-35);
+	max-width: var(--techtree-metrics-window-pixels-1000);
+	min-width: var(--techtree-metrics-window-pixels-0);
+	min-height: 25px;
+}
+
+.techtree-node__choice-text-field > .unity-text-field__input:focus
+{
+	height: var(--techtree-metrics-window-pixels-25);
+	margin: var(--techtree-metrics-window-pixels-4);
+	padding: var(--techtree-metrics-window-pixels-4);
+}
+
+.techtree-node__quote-text-field > .unity-text-field__input
+{
+	background-color: var(--techtree-colors-window-dark-grey-4);
+	border-color: transparent;
+	border-left-color: var(--techtree-colors-window-dark-grey-6);
+	border-left-width: var(--techtree-metrics-window-pixels-4);
+	padding: var(--techtree-metrics-window-pixels-16);
+	max-width: var(--techtree-metrics-window-pixels-600);
+	min-height: 64px;
+	max-height: none;
+	-unity-text-align: upper-left;
+}
+
+.techtree-node__quote-text-field > .unity-text-field__input:hover
+{
+	background-color: var(--techtree-colors-window-dark-grey-5);
+	min-height: 64px;
+	max-height: none;
+	-unity-text-align: upper-left;
+}
+
+.techtree-node__quote-text-field > .unity-text-field__input:focus
+{
+	background-color: var(--techtree-colors-window-dark-grey-1);
+	border-color: var(--techtree-colors-window-dark-grey-6);
+	min-height: 64px;
+	max-height: none;
+	-unity-text-align: upper-left;
+}
+
+/* BUTTONS */
+
+.techtree-node__button
+{
+	background-color: var(--techtree-colors-window-dark-grey-5);
+	border-color: var(--techtree-colors-window-dark-grey-1);
+	margin: var(--techtree-metrics-window-pixels-4);
+	max-height: var(--techtree-metrics-window-pixels-25);
+}
+
+.techtree-node__button:hover
+{
+	background-color: var(--techtree-colors-window-dark-grey-2);
+}
+
+.techtree-node__button:active
+{
+	background-color: var(--techtree-colors-window-dark-grey-3);
+	color: var(--techtree-colors-window-yellow);
+}
+
+/* ELEMENTS */
+
+TextField
+{
+	margin-left: var(--techtree-metrics-window-pixels-0);
+}
+
+.techtree-node__custom-data-container > Foldout
+{
+	margin-left: var(--techtree-metrics-window-pixels-n4);
+	margin-top: var(--techtree-metrics-window-pixels-4);
+}
+
+.techtree-node__custom-data-container > Foldout > TextField
+{
+	margin-left: var(--techtree-metrics-window-pixels-n12);
+	margin-top: var(--techtree-metrics-window-pixels-8);
+}
+
+/* BUILT IN */
+
+.unity-toggle__text
+{
+	margin-left: var(--techtree-metrics-window-pixels-2);
+}
+
+.techtree-node__unlock-header-container
+{
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: flex-start;
+	padding: 4px;
+	-unity-font-style: bold;
+	-unity-text-align: middle-center;
+}
+
+.techtree-node__unlock-label
+{
+	color: #3399ff;
+	-unity-text-align: middle-left;
+}
+
+.techtree-node__unlock-container
+{
+	background-color: var(--techtree-colors-window-dark-grey-4);
+	margin: 5px;
+}

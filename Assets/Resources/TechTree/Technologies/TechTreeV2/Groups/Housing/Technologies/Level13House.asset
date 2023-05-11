@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level13House
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level13House
+  <NodeTitle>k__BackingField: Living Standards 4
+  <Description>k__BackingField: Boost House max level to 13
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 0dabb52d-0f8a-4357-a6c9-b51399f3b56f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: d81a7eb7d54c2774cbc58fb064bce12c, type: 2}
+  - <NodeID>k__BackingField: ed1c5cae-7a00-4023-be50-d82e714a5cec
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 37d2416af6d611a40991ffe6f2aca994, type: 2}
+  - <NodeID>k__BackingField: 63da8f8d-4737-4926-a4bc-ea230f5c7894
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 30d8de887ca394a459048e56fa1b7fea, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 13
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 1
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 7
+    <IntValue>k__BackingField: 100000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 924a3335beff52f4f835dd5ca6e9373f, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_House.png
+  <Unavailable>k__BackingField: 0

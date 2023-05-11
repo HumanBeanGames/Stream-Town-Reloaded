@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: AgeUpWoodStorage1
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: AgeUpWoodStorage1
+  <NodeTitle>k__BackingField: Wood Storage 2
+  <Description>k__BackingField: 'Boost Wood Storage max level to 10
+
+    Advance
+    Wood Storage to Stone Age'
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: baeee74a-e704-4073-b707-3548fa2c50e4
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c57203f5c4cb64d429769432829e1a70, type: 2}
+  - <NodeID>k__BackingField: a8bcf6d2-c0d2-4bf6-8711-191d406b7856
+    <NextTech>k__BackingField: {fileID: 11400000, guid: aa87d3543c72fed49ab190bd7c457700, type: 2}
+  - <NodeID>k__BackingField: 405f8d04-5337-433d-b545-7ca713596127
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c4a08beb8ec90b14db7a65f223cfb597, type: 2}
+  - <NodeID>k__BackingField: 070df317-3a24-4afa-b5de-81e952cedf5c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 215ca9dd16056a2438c2951a41903802, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 4
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 5
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 4
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 20000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 1
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 5
+  <Parent>k__BackingField: {fileID: 11400000, guid: 97d3fd21aec448a4db1b90e1a669b879, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_WoodStorage.png
+  <Unavailable>k__BackingField: 0

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level5Castle
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level5Castle
+  <NodeTitle>k__BackingField: Stream Kingdom 2
+  <Description>k__BackingField: Boost Castle max level to 5
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: e0edc1fd-a7f2-4a05-b7ba-00974f19670a
+    <NextTech>k__BackingField: {fileID: 11400000, guid: a92c669b664a27948a0c2cc601227e98, type: 2}
+  - <NodeID>k__BackingField: 7c517e4e-f5a2-4438-98a5-d1a0ad8a1d91
+    <NextTech>k__BackingField: {fileID: 11400000, guid: ea6823ca2db84ea41a450b0f8c5580bb, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 24
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: a474f7e387447ea41806e4f82ed8294b, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Castle.png
+  <Unavailable>k__BackingField: 0

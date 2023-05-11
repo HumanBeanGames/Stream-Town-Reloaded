@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a625c95a81f45d24f9589b2d9e7e29bf, type: 3}
+  m_Name: RoleData_Blacksmith
+  m_EditorClassIdentifier: 
+  Role: 14
+  RoleFlags: 8
+  TargetFlags: 0
+  Resource: 0
+  ActionAnimationName: 0
+  ActionAnimationVariants: 1
+  StationFlags: 0
+  BaseActionAmount: 0
+  BaseActionSpeed: 0
+  BaseActionRange: 0
+  BaseRoleLevel: 0
+  BaseFoodUpkeep: 0
+  BaseGoldUpkeep: 0
+  BaseHealth: 100
+  BaseHealthRegen: 0
+  BaseDamageReduction: 0
+  BaseMovementSpeed: 3
+  BaseMaxResource: 0
+  MaxResourcePerLevel: 0
+  MovementSpeedPerLevel: 0.05
+  ActionAmountPerLevel: 0
+  ActionSpeedPerLevel: 0
+  ActionRangePerLevel: 0
+  HealthPerLevel: 0
+  HealthRegenPerLevel: 0
+  DamageReductionPerLevel: 0
+  GlobalActionPerLevel: 0
+  GlobalActionSpeedPerLevel: 0
+  GlobalActionRangePerLevel: 0
+  GlobalMovementSpeedPerLevel: 0
+  GlobalHealthPerLevel: 0
+  GlobalHealthRegenPerLevel: 0
+  GlobalResourceCarryPerLevel: 0
+  GlobalDamageReductionPerLevel: 0
+  HasUserLimit: 1
+  BaseMaxUserLimit: 0
+  DisplayIcon: {fileID: 21300000, guid: 7f38f762865184023b0b3437167df889, type: 3}

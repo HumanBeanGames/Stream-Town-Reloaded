@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: TrainingDrills1
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: TrainingDrills1
+  <NodeTitle>k__BackingField: Training Drills 1
+  <Description>k__BackingField: 'Melee combat roles do 5% more damage
+
+    and have
+    5% more health'
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: f5b0d3f1-772d-43e0-9d67-e56cbd9d5bff
+    <NextTech>k__BackingField: {fileID: 11400000, guid: a0442669122a7134eace4ef27b524ac7, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 2
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 3
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 4
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 3
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 8
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 3
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 13
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 3
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 2
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 4
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 8
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 0
+    <IntValue>k__BackingField: 5
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 13
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 250
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 5
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 8
+  <Parent>k__BackingField: {fileID: 11400000, guid: 679e73304f5f93b468838a3d873a9ee9, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Characters/UI_Icon_Character_Soldier.png
+  <Unavailable>k__BackingField: 0

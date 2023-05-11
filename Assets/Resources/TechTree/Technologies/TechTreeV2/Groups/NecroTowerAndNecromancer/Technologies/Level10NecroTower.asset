@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level10NecroTower
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level10NecroTower
+  <NodeTitle>k__BackingField: Death Magic 4
+  <Description>k__BackingField: Boost Necro Tower max level to 10
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 31fc761d-8fa2-410f-9cad-87430cd9618c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: b02125ccf55fdbc4bb364306adc4353a, type: 2}
+  - <NodeID>k__BackingField: 2df6ef6c-c6a5-4ea5-bd56-713f4d9f6ac7
+    <NextTech>k__BackingField: {fileID: 11400000, guid: d8e88218fde078c409d33952044913f1, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 22
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 1500000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 4
+    <IntValue>k__BackingField: 1000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 3986edf18afd95a4bafa903de45aac3b, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_NecroTower.png
+  <Unavailable>k__BackingField: 0

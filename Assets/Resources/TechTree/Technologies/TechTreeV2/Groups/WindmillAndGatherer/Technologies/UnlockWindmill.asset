@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: UnlockWindmill
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: UnlockWindmill
+  <NodeTitle>k__BackingField: Windmill 1
+  <Description>k__BackingField: Unlock Windmill
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: aa45f577-6f4d-4223-8ea8-c1ba0813b3f0
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 7b0556c90f8bacb4d991e65158cdec32, type: 2}
+  - <NodeID>k__BackingField: fc55dab8-fb6c-4afa-a837-5545a1a028a1
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 7d4c660ce82cf8d42a4cf2309cbf2554, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 1
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 3
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 3
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 400dcae2890b5214191c7782df0f067e, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_Windmill.png
+  <Unavailable>k__BackingField: 0

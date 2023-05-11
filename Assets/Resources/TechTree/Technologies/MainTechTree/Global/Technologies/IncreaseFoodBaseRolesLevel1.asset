@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: IncreaseFoodBaseRolesLevel1
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: IncreaseFoodBaseRolesLevel1
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 2c2a165c-b514-4c3f-8390-482b8766ad3c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 6f841fb25344bf3478ef6621c3a7c142, type: 2}
+  - <NodeID>k__BackingField: 2a880fdf-cd46-49a8-9543-c5d1f04e85a6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: de66545c9f160fe4bb73e10df78313a7, type: 2}
+  - <NodeID>k__BackingField: 28d1afd3-aef8-45fc-9075-87febc4fe7ee
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 86e26752fe1590b45a1fdcc2ac428d1b, type: 2}
+  - <NodeID>k__BackingField: 8494024e-8092-42ab-b916-e5e436a5981d
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 8c5c40b44a82c84408c5e8120827ab33, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}

@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Character_All
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Back_CommanderBanner
+    m_Weight: 1
+  - m_Path: Back_MinerCarryBag
+    m_Weight: 1
+  - m_Path: Body_Blacksmith_Bulk
+    m_Weight: 1
+  - m_Path: Body_Blacksmith_Feminine
+    m_Weight: 1
+  - m_Path: Body_Blacksmith_Slim
+    m_Weight: 1
+  - m_Path: Body_Builder_Bulk
+    m_Weight: 1
+  - m_Path: Body_Builder_Feminine
+    m_Weight: 1
+  - m_Path: Body_Builder_Slim
+    m_Weight: 1
+  - m_Path: Body_Default_Bulk
+    m_Weight: 1
+  - m_Path: Body_Default_Feminine
+    m_Weight: 1
+  - m_Path: Body_Default_Slim
+    m_Weight: 1
+  - m_Path: Body_Defender_Bulk
+    m_Weight: 1
+  - m_Path: Body_Defender_Feminine
+    m_Weight: 1
+  - m_Path: Body_Defender_Slim
+    m_Weight: 1
+  - m_Path: Body_Farmer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Farmer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Farmer_Slim
+    m_Weight: 1
+  - m_Path: Body_Fisher_Bulk
+    m_Weight: 1
+  - m_Path: Body_Fisher_Feminine
+    m_Weight: 1
+  - m_Path: Body_Fisher_Slim
+    m_Weight: 1
+  - m_Path: Body_Gatherer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Gatherer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Gatherer_Slim
+    m_Weight: 1
+  - m_Path: Body_Logger_Bulk
+    m_Weight: 1
+  - m_Path: Body_Logger_Feminine
+    m_Weight: 1
+  - m_Path: Body_Logger_Slim
+    m_Weight: 1
+  - m_Path: Body_Miner_Bulk
+    m_Weight: 1
+  - m_Path: Body_Miner_Feminine
+    m_Weight: 1
+  - m_Path: Body_Miner_Slim
+    m_Weight: 1
+  - m_Path: Body_Necromancer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Necromancer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Necromancer_Slim
+    m_Weight: 1
+  - m_Path: Body_Paladin_Bulk
+    m_Weight: 1
+  - m_Path: Body_Paladin_Feminine
+    m_Weight: 1
+  - m_Path: Body_Paladin_Slim
+    m_Weight: 1
+  - m_Path: Body_Priest_Bulk
+    m_Weight: 1
+  - m_Path: Body_Priest_Feminine
+    m_Weight: 1
+  - m_Path: Body_Priest_Slim
+    m_Weight: 1
+  - m_Path: Body_Ranger_Bulk
+    m_Weight: 1
+  - m_Path: Body_Ranger_Feminine
+    m_Weight: 1
+  - m_Path: Body_Ranger_Slim
+    m_Weight: 1
+  - m_Path: Body_Ruler_Bulk
+    m_Weight: 1
+  - m_Path: Body_Ruler_Feminine
+    m_Weight: 1
+  - m_Path: Body_Ruler_Slim
+    m_Weight: 1
+  - m_Path: Body_Soldier_Bulk
+    m_Weight: 1
+  - m_Path: Body_Soldier_Feminine
+    m_Weight: 1
+  - m_Path: Body_Soldier_Slim
+    m_Weight: 1
+  - m_Path: Body_Wizard_Bulk
+    m_Weight: 1
+  - m_Path: Body_Wizard_Feminine
+    m_Weight: 1
+  - m_Path: Body_Wizard_Slim
+    m_Weight: 1
+  - m_Path: CharacterArmature
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Head
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Head/Head_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_L/Calf_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_L/Calf_L/Calf_L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_R/Calf_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/Thigh_R/Calf_R/Calf_R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_L/LowerArm_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_L/LowerArm_L/Hand_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_L/LowerArm_L/Hand_L/Hand_L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_R/LowerArm_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_R/LowerArm_R/Hand_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/Body/UpperArm_R/LowerArm_R/Hand_R/Hand_R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Knee_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Knee_L/IK_Knee_L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Knee_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Knee_R/IK_Knee_R_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Target_L
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Target_L/IK_Target_L_end
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Target_R
+    m_Weight: 1
+  - m_Path: CharacterArmature/IK_Target_R/IK_Target_R_end
+    m_Weight: 1
+  - m_Path: Eyes_Angry
+    m_Weight: 1
+  - m_Path: Eyes_Annoyed
+    m_Weight: 1
+  - m_Path: Eyes_Cool
+    m_Weight: 1
+  - m_Path: Eyes_Happy
+    m_Weight: 1
+  - m_Path: Eyes_MissingEye
+    m_Weight: 1
+  - m_Path: Eyes_Normal
+    m_Weight: 1
+  - m_Path: Eyes_Pain
+    m_Weight: 1
+  - m_Path: Eyes_Sad
+    m_Weight: 1
+  - m_Path: Eyes_Wink
+    m_Weight: 1
+  - m_Path: Eyes_Worried
+    m_Weight: 1
+  - m_Path: FacialHair_Long_Beard
+    m_Weight: 1
+  - m_Path: FacialHair_Medium_Beard
+    m_Weight: 1
+  - m_Path: Hair_Long_Ponytail
+    m_Weight: 1
+  - m_Path: Hair_Long_Sidebraids
+    m_Weight: 1
+  - m_Path: Hair_Medium_Side
+    m_Weight: 1
+  - m_Path: Hair_Short_Bowlcut
+    m_Weight: 1
+  - m_Path: Hair_Short_Normal
+    m_Weight: 1
+  - m_Path: Hair_Short_Pushup
+    m_Weight: 1
+  - m_Path: Hair_Short_Sideswept
+    m_Weight: 1
+  - m_Path: Head_Box
+    m_Weight: 1
+  - m_Path: Helmet_Defender
+    m_Weight: 1
+  - m_Path: Helmet_Priest
+    m_Weight: 1
+  - m_Path: Helmet_Ruler
+    m_Weight: 1
+  - m_Path: Helmet_Soldier
+    m_Weight: 1
+  - m_Path: Helmet_Wizard
+    m_Weight: 1
+  - m_Path: LHand_DefenderToolShield_Starter
+    m_Weight: 1
+  - m_Path: LHand_FarmerCarryBag
+    m_Weight: 1
+  - m_Path: LHand_FishermanCarryFish
+    m_Weight: 1
+  - m_Path: LHand_GathererCarryBag
+    m_Weight: 1
+  - m_Path: LHand_LoggerCarryWood
+    m_Weight: 1
+  - m_Path: LHand_PaladinToolShield_Starter
+    m_Weight: 1
+  - m_Path: RHand_BlacksmithToolHammer_Starter
+    m_Weight: 1
+  - m_Path: RHand_BuilderToolHammer_Starter
+    m_Weight: 1
+  - m_Path: RHand_DefenderToolSpear_Starter
+    m_Weight: 1
+  - m_Path: RHand_FarmerToolHoe_Starter
+    m_Weight: 1
+  - m_Path: RHand_FisherToolFishingrod_Starter
+    m_Weight: 1
+  - m_Path: RHand_GathererToolSickle_Starter
+    m_Weight: 1
+  - m_Path: RHand_LoggerToolAxe_Starter
+    m_Weight: 1
+  - m_Path: RHand_MinerToolPickaxe_Starter
+    m_Weight: 1
+  - m_Path: RHand_NecromancerToolScepter_Starter
+    m_Weight: 1
+  - m_Path: RHand_PaladinToolHammer_Starter
+    m_Weight: 1
+  - m_Path: RHand_PriestToolScepter_Starter
+    m_Weight: 1
+  - m_Path: RHand_RangerToolBow_Starter
+    m_Weight: 1
+  - m_Path: RHand_RulerToolSword_Starter
+    m_Weight: 1
+  - m_Path: RHand_SoldierToolSword_Starter
+    m_Weight: 1
+  - m_Path: RHand_WizardsToolScepter_Starter
+    m_Weight: 1

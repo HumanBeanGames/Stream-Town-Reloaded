@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: UnlockLumbermill
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: UnlockLumbermill
+  <NodeTitle>k__BackingField: NewTechNode
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: ec419c8a-eb48-4369-be85-3a9f90596375
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 050104cf09f7887458065556a57f9918, type: 2}
+  - <NodeID>k__BackingField: 2e40e6a6-936b-4330-b179-ec9850048655
+    <NextTech>k__BackingField: {fileID: 11400000, guid: a4630b2d1c3a7d04d959a3837b3d945f, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_LumberMill.png
+  <Unavailable>k__BackingField: 0

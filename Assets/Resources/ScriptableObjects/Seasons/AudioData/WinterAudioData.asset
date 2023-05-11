@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8551b15934f8b654cafa88d2d5d57441, type: 3}
+  m_Name: WinterAudioData
+  m_EditorClassIdentifier: 
+  Season: 2
+  DayMusicTracks:
+  - {fileID: 8300000, guid: e8923090960319d4d99d0a495da0b2ae, type: 3}
+  NightMusicTracks:
+  - {fileID: 8300000, guid: aed7a56188e6f41429f6f25bee63f6cd, type: 3}
+  DayAmbienceTracks:
+  - {fileID: 8300000, guid: 72e1087698fa4e34caaaede1f75234ca, type: 3}
+  NightAmbienceTracks:
+  - {fileID: 8300000, guid: 72e1087698fa4e34caaaede1f75234ca, type: 3}

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: WoodStorage
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: WoodStorage
+  <NodeTitle>k__BackingField: Wood Storage 1
+  <Description>k__BackingField: Unlock Wood Storage
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 17b402dc-7f73-4676-ac7e-99195a17f774
+    <NextTech>k__BackingField: {fileID: 11400000, guid: a8b85465e33c1ea4d968fa04c2c76d0a, type: 2}
+  - <NodeID>k__BackingField: fd7c3bab-c504-4cbd-a924-6ea813bbd034
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 65771a7f8858e5e49ba1c9f6fec07e39, type: 2}
+  - <NodeID>k__BackingField: 8a8ee70b-93a3-46af-8c64-684e399f0182
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 81c35ee545843f044a8562628ecf5fe3, type: 2}
+  - <NodeID>k__BackingField: 620f66ef-7ae3-4e5b-8077-d4ba1fabee36
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 565d4597e650dcf42a49c86439399d14, type: 2}
+  - <NodeID>k__BackingField: 23077fd2-d5df-4f08-9fdf-63fce5ea5853
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 0da914bfd59abb243b194464106fb65c, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 1
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 4
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 4000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 1
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 3
+  <Parent>k__BackingField: {fileID: 11400000, guid: 14cd8a00e2b24c74094578a23f7cba4c, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_WoodStorage.png
+  <Unavailable>k__BackingField: 0

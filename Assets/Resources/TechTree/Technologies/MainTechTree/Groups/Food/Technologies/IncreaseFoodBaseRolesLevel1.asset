@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: IncreaseFoodBaseRolesLevel1
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: IncreaseFoodBaseRolesLevel1
+  <NodeTitle>k__BackingField: 
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 2c2a165c-b514-4c3f-8390-482b8766ad3c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5e36aec3e7ab2a14c8630aad270db095, type: 2}
+  - <NodeID>k__BackingField: 2a880fdf-cd46-49a8-9543-c5d1f04e85a6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 52f8815f63421764f90ab5585c453f2e, type: 2}
+  - <NodeID>k__BackingField: 28d1afd3-aef8-45fc-9075-87febc4fe7ee
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 6ffd133b55bc9e040ad180400bc31481, type: 2}
+  - <NodeID>k__BackingField: 8494024e-8092-42ab-b916-e5e436a5981d
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 5fcb20a78c5d7fa4e91cb1431199385b, type: 2}
+  - <NodeID>k__BackingField: a444242d-f1ac-4e9a-9a0a-f34555bee15c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: e16401b4c026be64c8647c9ced44ab99, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 20000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 3
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 5
+  <Parent>k__BackingField: {fileID: 11400000, guid: 4b935e78ee237ce49818abb4be4440c4, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Characters/UI_Icon_Character_Gatherer.png
+  <Unavailable>k__BackingField: 0

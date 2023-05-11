@@ -1,0 +1,473 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_All
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Back_Mesh
+    m_Weight: 1
+  - m_Path: Back_Mesh/Back_CommanderBanner
+    m_Weight: 1
+  - m_Path: Back_Mesh/Back_MinerCarryBag
+    m_Weight: 1
+  - m_Path: Body_Mesh
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Blacksmith_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Blacksmith_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Blacksmith_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Builder_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Builder_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Builder_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Defender_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Defender_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Defender_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Farmer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Farmer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Farmer_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Fisher_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Fisher_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Fisher_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Gatherer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Gatherer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Gatherer_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Logger_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Logger_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Logger_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Miner_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Miner_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Miner_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Necromancer_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Necromancer_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Necromancer_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Paladin_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Paladin_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Paladin_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Priest_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Priest_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Priest_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ranger_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ranger_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ranger_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ruler_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ruler_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Ruler_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Soldier_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Soldier_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Soldier_Slim
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Wizard_Bulk
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Wizard_Feminine
+    m_Weight: 1
+  - m_Path: Body_Mesh/Body_Wizard_Slim
+    m_Weight: 1
+  - m_Path: Eyes_Mesh
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Angry
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Annoyed
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Cool
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Happy
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_MissingEye
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Normal
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Pain
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Sad
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Wink
+    m_Weight: 1
+  - m_Path: Eyes_Mesh/Eyes_Worried
+    m_Weight: 1
+  - m_Path: Hair_Mesh
+    m_Weight: 1
+  - m_Path: Hair_Mesh/FacialHair_Long_Beard
+    m_Weight: 1
+  - m_Path: Hair_Mesh/FacialHair_Medium_Beard
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Long_Ponytail
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Long_Sidebraids
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Medium_Side
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Short_Bowlcut
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Short_Normal
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Short_Pushup
+    m_Weight: 1
+  - m_Path: Hair_Mesh/Hair_Short_Sideswept
+    m_Weight: 1
+  - m_Path: Helmet_Mesh
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Head_Box
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Helmet_Defender
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Helmet_Priest
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Helmet_Ruler
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Helmet_Soldier
+    m_Weight: 1
+  - m_Path: Helmet_Mesh/Helmet_Wizard
+    m_Weight: 1
+  - m_Path: LHand_Mesh
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_DefenderToolShield
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_FarmerCarryBag
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_FishermanCarryFish
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_GathererCarryBag
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_LoggerCarryWood
+    m_Weight: 1
+  - m_Path: LHand_Mesh/LHand_PaladinToolShield
+    m_Weight: 1
+  - m_Path: pelvis
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_l
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_l/shoulder_l
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_l/shoulder_l/elbow_l
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_l/shoulder_l/elbow_l/hand_l
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_r
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_r/shoulder_r
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_r/shoulder_r/elbow_r
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/clavicle_r/shoulder_r/elbow_r/hand_r
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/Head
+    m_Weight: 1
+  - m_Path: pelvis/Spine_01/Spine_02/Spine_03/Spine_04/Head/Head_end
+    m_Weight: 1
+  - m_Path: pelvis/thigh_l
+    m_Weight: 1
+  - m_Path: pelvis/thigh_l/calf_l
+    m_Weight: 1
+  - m_Path: pelvis/thigh_l/calf_l/ankle_l
+    m_Weight: 1
+  - m_Path: pelvis/thigh_l/calf_l/ankle_l/toe_l
+    m_Weight: 1
+  - m_Path: pelvis/thigh_r
+    m_Weight: 1
+  - m_Path: pelvis/thigh_r/calf_r
+    m_Weight: 1
+  - m_Path: pelvis/thigh_r/calf_r/ankle_r
+    m_Weight: 1
+  - m_Path: pelvis/thigh_r/calf_r/ankle_r/toe_r
+    m_Weight: 1
+  - m_Path: Rhand_Mesh
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_BlacksmithToolHammer
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_BuilderToolHammer
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_DefenderToolSpear
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_FarmerToolHoe
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_FisherToolFishingrod
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_GathererToolSickle
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_LoggerToolAxe
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_MinerToolPickaxe
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_NecromancerToolScepter
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_PaladinToolHammer
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_PriestToolScepter
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_RangerToolBow
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_RulerToolSword
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_SoldierToolSword
+    m_Weight: 1
+  - m_Path: Rhand_Mesh/RHand_WizardsToolScepter
+    m_Weight: 1
+  - m_Path: rig_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/FK_shoulder_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/FK_shoulder_l/FK_elbow_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/FK_shoulder_l/FK_elbow_l/FK_hand_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/IK_shoulder_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/IK_shoulder_l/IK_elbow_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/IK_shoulder_l/IK_elbow_l/IK_hand_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/IK_shoulder_l/IK_elbow_l/IK_hand_l/IK_hand_l_end
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp/fk_shoulder_l_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp/fk_shoulder_l_anim/fk_elbow_l_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp/fk_shoulder_l_anim/fk_elbow_l_anim_grp/fk_elbow_l_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp/fk_shoulder_l_anim/fk_elbow_l_anim_grp/fk_elbow_l_anim/fk_hand_l_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l/fk_shoulder_l_anim_grp/fk_shoulder_l_anim/fk_elbow_l_anim_grp/fk_elbow_l_anim/fk_hand_l_anim_grp/fk_hand_l_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_l_ctrl_grp/clavicle_l_anim_grp/clavicle_l_anim/shoulder_fk_orient_grp_l_shoulder
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_switch_l_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_switch_l_anim_grp/arm_switch_l_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/arm_switch_l_anim_grp/arm_switch_l_anim/polyToCurve1
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_elbow_anim_l_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_elbow_anim_l_grp/ik_elbow_anim_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_hand_anim_grp_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_hand_anim_grp_l/ik_hand_anim_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_hand_anim_grp_l/ik_hand_anim_l/arm_ikHandle_l
+    m_Weight: 1
+  - m_Path: rig_grp/arm_l_rig_grp/ik_hand_anim_grp_l/ik_hand_anim_l/arm_ikHandle_l/hand_ikHandle
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/FK_shoulder_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/FK_shoulder_r/FK_elbow_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/FK_shoulder_r/FK_elbow_r/FK_hand_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/IK_shoulder_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/IK_shoulder_r/IK_elbow_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/IK_shoulder_r/IK_elbow_r/IK_hand_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/IK_shoulder_r/IK_elbow_r/IK_hand_r/IK_hand_r_end
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp/fk_shoulder_r_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp/fk_shoulder_r_anim/fk_elbow_r_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp/fk_shoulder_r_anim/fk_elbow_r_anim_grp/fk_elbow_r_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp/fk_shoulder_r_anim/fk_elbow_r_anim_grp/fk_elbow_r_anim/fk_hand_r_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient/fk_shoulder_r_anim_grp/fk_shoulder_r_anim/fk_elbow_r_anim_grp/fk_elbow_r_anim/fk_hand_r_anim_grp/fk_hand_r_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_r_ctrl_grp/clavicle_r_anim_grp/clavicle_r_anim/shoulder_r_fk_orient_shoulder
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_switch_r_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/arm_switch_r_anim_grp/arm_switch_r_anim
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_elbow_anim_r_grp
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_elbow_anim_r_grp/ik_elbow_anim_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_hand_anim_grp_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_hand_anim_grp_r/ik_hand_anim_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_hand_anim_grp_r/ik_hand_anim_r/arm_ikHandle_r
+    m_Weight: 1
+  - m_Path: rig_grp/arm_r_righ_grp/ik_hand_anim_grp_r/ik_hand_anim_r/arm_ikHandle_r/hand_ikHandle_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp/ik_foot_anim_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp/ik_foot_anim_l/ik_toe_pivot_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp/ik_foot_anim_l/ik_toe_pivot_l/ik_heel_pivot_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp/ik_foot_anim_l/ik_toe_pivot_l/ik_heel_pivot_l/main_leg_ikHandle_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_l_grp/ik_foot_anim_l/ik_toe_pivot_l/ik_heel_pivot_l/toe_ikHandle_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp/ik_foot_anim_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp/ik_foot_anim_r/ik_toe_pivot_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp/ik_foot_anim_r/ik_toe_pivot_r/ik_heel_pivot_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp/ik_foot_anim_r/ik_toe_pivot_r/ik_heel_pivot_r/main_leg_ikHandle_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_foot_anim_r_grp/ik_foot_anim_r/ik_toe_pivot_r/ik_heel_pivot_r/toe_ikHandle_r
+    m_Weight: 1
+  - m_Path: rig_grp/ik_knee_anim_l_grp
+    m_Weight: 1
+  - m_Path: rig_grp/ik_knee_anim_l_grp/ik_knee_anim_l
+    m_Weight: 1
+  - m_Path: rig_grp/ik_knee_anim_r_grp
+    m_Weight: 1
+  - m_Path: rig_grp/ik_knee_anim_r_grp/ik_knee_anim_r
+    m_Weight: 1
+  - m_Path: rig_grp/Look_At_Target_grp
+    m_Weight: 1
+  - m_Path: rig_grp/Look_At_Target_grp/DirectionAim
+    m_Weight: 1
+  - m_Path: rig_grp/Look_At_Target_grp/Look_At_Target
+    m_Weight: 1
+  - m_Path: rig_grp/shoulder_fk_orient_grp_l_world
+    m_Weight: 1
+  - m_Path: rig_grp/shoulder_r_fk_orient_world
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim/head_ctrl_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim/head_ctrl_grp/head_ctrl
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim/ik_spine_04_orient
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim/spine_driver_top
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/chest_anim/spine_driver_top/spine_driver_top_end
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/chest_anim_grp/spine_driver_upper_follow
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp/hip_anim
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp/hip_anim/ik_pelvis
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp/hip_anim/spine_driver_base
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp/hip_anim/spine_driver_base/spine_driver_end
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/hip_anim_grp/spine_driver_lower_follow
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/spine_anim_grp
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/spine_anim_grp/spine_anim_driver
+    m_Weight: 1
+  - m_Path: rig_grp/spine_rig_grp/body_anim_grp/body_anim/spine_anim_grp/spine_anim_driver/spine_anim
+    m_Weight: 1
+  - m_Path: spine_grp_dnt
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_01
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_01/ik_spine_01
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_02
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_02/ik_spine_02
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_03
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_03/ik_spine_03
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_04
+    m_Weight: 1
+  - m_Path: spine_grp_dnt/spine_follicles_grp/spine_ribbon_surfaceFollicle_04/ik_spine_04
+    m_Weight: 1

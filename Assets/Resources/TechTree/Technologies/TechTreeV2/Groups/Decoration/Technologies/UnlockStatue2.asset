@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: UnlockStatue2
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: UnlockStatue2
+  <NodeTitle>k__BackingField: Public Sculptures 3
+  <Description>k__BackingField: Unlock Statue 2
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 0f53f7c0-5a1c-4929-8ed8-0c867bec08f2
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 7ad0b715ee0ce3f47a2b54e2ba58ca12, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 1
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 18
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 0
+    <IntValue>k__BackingField: 2
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 17
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 648a12a1f81753543a672ce0f6204f6f, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Statue02.png
+  <Unavailable>k__BackingField: 0

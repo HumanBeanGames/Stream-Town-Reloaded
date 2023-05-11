@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level8OreStorage
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level8OreStorage
+  <NodeTitle>k__BackingField: Mineral Reserves 3
+  <Description>k__BackingField: Boost Ore Storage max level to 8
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 0e0b6653-daca-4f33-9b44-b14abf082e1a
+    <NextTech>k__BackingField: {fileID: 11400000, guid: e9e0409a536bbd5448e7a23c1d4409a1, type: 2}
+  - <NodeID>k__BackingField: ec7878fc-ef0e-4dce-b1d1-89f4a2e6483f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 57fd72b5e8e75994ba1b51e835a3973b, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 8
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 5
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 10000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: e241fbd640aa8d84fbb1fb503989887d, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_OreStorage.png
+  <Unavailable>k__BackingField: 0

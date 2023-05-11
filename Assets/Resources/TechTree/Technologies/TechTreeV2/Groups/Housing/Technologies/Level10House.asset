@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level10House
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level10House
+  <NodeTitle>k__BackingField: Housing 2
+  <Description>k__BackingField: 'Boost House max level to 10
+
+    Advance House to
+    Stone Age'
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 44da6bba-bca2-40c3-aee5-985f4be57ee7
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c901b8fbf16e92a4cb409d9d76bac0f6, type: 2}
+  - <NodeID>k__BackingField: 0c3ba150-0332-4bb7-aa98-b92a32e2f3ff
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 789cebb3e1183f140ba01a022e900b9e, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 10
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 1
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  - <TechType>k__BackingField: 5
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 1
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 7
+    <IntValue>k__BackingField: 50000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: ca81494c90876ec498d3188e01a70cff, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_House.png
+  <Unavailable>k__BackingField: 0

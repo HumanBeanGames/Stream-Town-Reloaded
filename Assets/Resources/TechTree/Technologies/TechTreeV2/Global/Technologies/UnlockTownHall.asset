@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: UnlockTownHall
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: UnlockTownHall
+  <NodeTitle>k__BackingField: TownHall
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 81ba2933-9e14-4685-ad64-bac06bbad0f9
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 3d44148969ee94a4982a95fb8a52091c, type: 2}
+  - <NodeID>k__BackingField: 85085151-8496-427c-a0ff-d8ecc04cce0c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: e4ccdbd12b0609a49a861e3c9e8929de, type: 2}
+  - <NodeID>k__BackingField: 626b278e-f697-4611-bb10-f6da87a9dbba
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 15cae5211ed8f554e8ae295422894be6, type: 2}
+  - <NodeID>k__BackingField: 96aa487f-34cd-4816-a319-4755eed1892c
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 2ffc1b80e7e37ed469080ecf6d04a80b, type: 2}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 1
+    <IntValue>k__BackingField: 0
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_TownHall.png
+  <Unavailable>k__BackingField: 0

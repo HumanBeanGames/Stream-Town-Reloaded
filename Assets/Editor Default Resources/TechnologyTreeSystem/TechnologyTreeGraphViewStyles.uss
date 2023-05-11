@@ -1,0 +1,7 @@
+GridBackground
+{
+	--grid-background-color: var(--techtree-colors-grid-light-grey-1);
+	--line-color: var(--techtree-colors-grid-light-grey-2);
+	--thick-line-color: var(--techtree-colors-grid-light-grey-3);
+	--spacing: var(--techtree-metrics-grid-25);
+}

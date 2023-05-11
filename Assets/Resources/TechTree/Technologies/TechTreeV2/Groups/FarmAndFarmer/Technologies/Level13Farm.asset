@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level13Farm
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level13Farm
+  <NodeTitle>k__BackingField: Agriculture 5
+  <Description>k__BackingField: Boost Farm max level to 13
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 3f04a13d-f68e-459a-837b-81e46fb78bf6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c952162ddac2699429f38d67c6f1cc3a, type: 2}
+  - <NodeID>k__BackingField: c0dbe0ca-31a7-475d-916d-aa3f094c58d9
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c667c5d8df92838459f8a9006de55049, type: 2}
+  - <NodeID>k__BackingField: e1db24ba-eeec-4c18-ae2d-cd9003a93bcf
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 74896ea5c79b061479f49f9cb4876e75, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 13
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 6
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 3
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: bbe8800ad1b17e34c965a6234c740500, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Farm.png
+  <Unavailable>k__BackingField: 0

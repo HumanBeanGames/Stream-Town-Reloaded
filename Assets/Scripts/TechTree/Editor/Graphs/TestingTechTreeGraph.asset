@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896eee04fd576634e844735d914b7744, type: 3}
+  m_Name: TestingTechTreeGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TestingTechTree
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: a79d7c0d-1a5f-4b33-bdf6-63cac0a7b1a5
+    <Name>k__BackingField: Hamlet
+    <NodeTitle>k__BackingField: TestingTitle
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 1a3b6e1a-6970-4988-b0b8-75b5e4ced629
+    - <NodeID>k__BackingField: 57daf8dd-da79-4823-9cf0-9a62dd5892f8
+    - <NodeID>k__BackingField: 9d975d0f-6cd3-4f79-b0e8-b3afa319faa0
+    <Unlocks>k__BackingField: []
+    <Objectives>k__BackingField: []
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 212, y: 276}
+    <Unlocked>k__BackingField: 1
+    <Age>k__BackingField: 1
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/Barracks.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: 1a3b6e1a-6970-4988-b0b8-75b5e4ced629
+    <Name>k__BackingField: Barracks1
+    <NodeTitle>k__BackingField: 
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: b175e4ce-0a78-439c-aae6-31cf1ebddbfd
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 1
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 100
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 11
+      <StatType>k__BackingField: 3
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 200
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 1
+      <EnemyType>k__BackingField: 0
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 200
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 2
+      <EnemyType>k__BackingField: 0
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 200
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 3
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 625, y: 83}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/Blacksmith.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: b175e4ce-0a78-439c-aae6-31cf1ebddbfd
+    <Name>k__BackingField: NewTechNode2
+    <NodeTitle>k__BackingField: 
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 2
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 50
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 4
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    - <TechType>k__BackingField: 3
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 100
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 1
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 10
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 1
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 980, y: 194}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/Bowyard.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: 57daf8dd-da79-4823-9cf0-9a62dd5892f8
+    <Name>k__BackingField: Lumbermill1
+    <NodeTitle>k__BackingField: 
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 1
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 0
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 7
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 555
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 3
+      <ResourceType>k__BackingField: 2
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 598, y: 757}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/FishingHut.png
+    <Unavailable>k__BackingField: 1
+  - <ID>k__BackingField: 9d975d0f-6cd3-4f79-b0e8-b3afa319faa0
+    <Name>k__BackingField: AppleSauce1
+    <NodeTitle>k__BackingField: 
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 0
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 5
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 500
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 3
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 608, y: 1309}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/FoodStorage.png
+    <Unavailable>k__BackingField: 1
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - Hamlet
+  - Barracks1
+  - NewTechNode2
+  - Lumbermill1
+  - AppleSauce1
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

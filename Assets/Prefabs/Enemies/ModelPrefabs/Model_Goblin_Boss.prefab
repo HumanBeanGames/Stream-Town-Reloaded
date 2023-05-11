@@ -1,0 +1,205 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!95 &7184926426548110058
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091127505243528549}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 11894e4d53fa75c43971148df4df241f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1384900032369071750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091127505243528549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0c6edbe499563478d5a28c4bd14786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6824897127102812041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091127505243528549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21dbe2f49575de44a2d98e67f66444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseModels:
+  - {fileID: 5501427553894002933}
+  _permanentModels: []
+  _optionalModels:
+  - {fileID: 5669715614514454694}
+  - {fileID: 5449309457738382955}
+  - {fileID: 7945791535805894732}
+  - {fileID: 7145675896940329057}
+  _linkedWeaponModels:
+  - _mainWeaponModel: {fileID: 2422534437641503238}
+    _offHandModels: []
+    _weaponAnimationName: 17
+    _animationVariants: 2
+    _runAnimation: 0
+  _baseAnimationVariants: 1
+  _randomize: 0
+--- !u!1 &4762041643522663898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7105606715753240841}
+  m_Layer: 0
+  m_Name: Model_Goblin_Boss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7105606715753240841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762041643522663898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1607501185078953951}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1280223729235517492
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7105606715753240841}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2347882848204799854, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -941587756731525035, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_Name
+      value: GoblinBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510958929662959199, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187725867619446904, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+--- !u!1 &2091127505243528549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1607501185078953951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5501427553894002933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6745472519743869121, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5669715614514454694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2347882848204799854, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5449309457738382955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6510958929662959199, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7945791535805894732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9187725867619446904, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7145675896940329057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -941587756731525035, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2422534437641503238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3484333169344127538, guid: 77e10acba41fcfc41a0bb35a7b73775d, type: 3}
+  m_PrefabInstance: {fileID: 1280223729235517492}
+  m_PrefabAsset: {fileID: 0}

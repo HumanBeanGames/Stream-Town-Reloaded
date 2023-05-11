@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Hamlet
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Hamlet
+  <Description>k__BackingField: Tech Text.
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 1a3b6e1a-6970-4988-b0b8-75b5e4ced629
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c15b112102cbfa644aeab50eeda40f83, type: 2}
+  - <NodeID>k__BackingField: 57daf8dd-da79-4823-9cf0-9a62dd5892f8
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 358d152cf309cce479c8978910ac1a97, type: 2}
+  - <NodeID>k__BackingField: 9d975d0f-6cd3-4f79-b0e8-b3afa319faa0
+    <NextTech>k__BackingField: {fileID: 11400000, guid: c7436670bc76d454584f13db05816f61, type: 2}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/Barracks.png
+  <Unavailable>k__BackingField: 0

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level18TownHall
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level18TownHall
+  <NodeTitle>k__BackingField: Town Meeting 6
+  <Description>k__BackingField: Boost Town Hall max level to 18
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: 7572b1f4-b3e5-44fc-8a85-d32a42800b7d
+    <NextTech>k__BackingField: {fileID: 11400000, guid: eb774ff4407fd93499e62ff2903a6d03, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 18
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 1
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 3
+    <EnemyType>k__BackingField: 0
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 250000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 4
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 3ba938be7098ba545bc14c0f971ad942, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_TownHall.png
+  <Unavailable>k__BackingField: 0

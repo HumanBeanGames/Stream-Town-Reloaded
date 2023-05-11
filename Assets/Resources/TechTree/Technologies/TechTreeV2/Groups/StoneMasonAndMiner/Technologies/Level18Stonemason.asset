@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Level18Stonemason
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Level18Stonemason
+  <NodeTitle>k__BackingField: Brick & Mortar 6
+  <Description>k__BackingField: Boost Stonemason max level to 18
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: c7758fee-b707-43fc-ac78-0b8bc041dcb6
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 44e5f923154bda541ac8190dffe00fad, type: 2}
+  - <NodeID>k__BackingField: dd92ccc2-1e22-4c18-8498-ca247400fed3
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 4895ac38a6ce41749b4c23b4f46fa5d3, type: 2}
+  - <NodeID>k__BackingField: 5d275c2f-a2c0-40eb-9a53-7f20c783d901
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 72992d8e8a568274a8d7a00fce80c2ba, type: 2}
+  <Unlocks>k__BackingField:
+  - <TechType>k__BackingField: 4
+    <IntValue>k__BackingField: 18
+    <FloatValue>k__BackingField: 0
+    <StringValue>k__BackingField: 
+    <CharValue>k__BackingField: 0
+    <BoolValue>k__BackingField: 0
+    <PlayerRole>k__BackingField: 0
+    <BuildingType>k__BackingField: 8
+    <StatType>k__BackingField: 0
+    <ResourceType>k__BackingField: 0
+  <Objectives>k__BackingField:
+  - <ObjectiveType>k__BackingField: 2
+    <IntValue>k__BackingField: 75000
+    <FloatValue>k__BackingField: 0
+    <BuildingType>k__BackingField: 0
+    <ResourceType>k__BackingField: 2
+    <EnemyType>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 0
+  <Age>k__BackingField: 1
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 11400000, guid: 1c2910b1d386c564283e0065e78094ea, type: 2}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Stonemason.png
+  <Unavailable>k__BackingField: 0
