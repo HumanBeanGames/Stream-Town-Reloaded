@@ -14,5 +14,7 @@ Here you will also find some of the documents we created for Stream Town to help
 Please note that they may be in an unfinished state:
 
 Game Design Document: https://docs.google.com/document/d/1vqnT3kpXjyaRRbm3R8cjF-40W9evqaksKq3ECvn-7AM/edit?usp=share_link
+
 Technical Design Document: https://docs.google.com/document/d/12nDNNhhOYKf_gBjGFj0iP7-hvdjTWxNs_fvL98HrrQ8/edit?usp=share_link
+
 Art Bible: https://docs.google.com/presentation/d/1VG11I8TGiMwpkelAd9ERPDhKpsiAkukuqHoUEt8hr7E/edit?usp=share_link
