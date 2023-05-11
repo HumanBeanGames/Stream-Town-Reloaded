@@ -1,13 +1,14 @@
 # Stream-Town-Public
 This is the public repo of Stream Town
 
-
 Please note that the third party library A* Pathfinding project has been removed from the repo as it is a paid asset on the unity store.
 The game will not run without work, as this library is required for a lot of scripts.
 
 Installing A* Pathfinding Project will fix this issue, or, feel free to implement your own pathfinding solution and fix any errors.
 
 You will also need to provide your own Twitch bot details into the TL_Secrets.cs file. (Here is a wonderful guide to TwitchLib https://docs.google.com/document/d/1GfYC3BGW2gnS7GmNE1TwMEdk0QYY2zHccxXp53-WiKM/edit)
+
+All audio files were removed too due to potential licensing issues and we want to cover ourselves just in case. This may cause some errors to show up with the audio manager, but should be rather easy to resolve.
 
 Here you will also find some of the documents we created for Stream Town to help guide development.
 Please note that they may be in an unfinished state:
