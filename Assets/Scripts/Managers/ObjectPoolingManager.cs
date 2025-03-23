@@ -196,7 +196,7 @@ namespace Managers
 				}
 				DateTime after = DateTime.Now;
 				TimeSpan duration = after.Subtract(before);
-				Debug.Log($"Pooling {objName} took {duration.TotalMilliseconds}ms");
+				//Debug.Log($"Pooling {objName} took {duration.TotalMilliseconds}ms");
 				yield return new WaitForEndOfFrame();
 			}
 		}

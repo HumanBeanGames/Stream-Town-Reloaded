@@ -2,19 +2,28 @@ using UnityEngine;
 
 namespace MetaData
 {
-	public enum LoadType
-	{
-		Generate,
-		Load,
-	}
+    public enum LoadType
+    {
+        Generate,
+        Load,
+    }
 
-	public class MetaData : MonoBehaviour
-	{
-		public LoadType LoadType;
+    public class MetaData : MonoBehaviour
+    {
+        public static MetaData Instance { get; private set; }
 
-		private void Awake()
-		{
-			DontDestroyOnLoad(this);
-		}
-	}
+        public LoadType LoadType;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }

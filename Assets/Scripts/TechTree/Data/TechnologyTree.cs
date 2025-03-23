@@ -49,7 +49,7 @@ namespace TechTree.Data
 			if (AvailableNodes.Contains(node))
 				AvailableNodes.Remove(node);
 
-			Debug.Log($"{node} unlocked.");
+			//Debug.Log($"{node} unlocked.");
 			_unlockedNodes[node] = true;
 
 			RecursivelyAddAvailableNodes(node);

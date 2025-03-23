@@ -53,7 +53,7 @@ namespace VFX
 		private void PlayRandomAudioSound()
 		{
 			_audioTime = Random.Range(1.0f, 5.0f);
-			_audioSource.PlayOneShot(_clips[Random.Range(0, _clips.Length)]);
+			//_audioSource.PlayOneShot(_clips[Random.Range(0, _clips.Length)]);
 			_audioTimer = 0;
 		}
 

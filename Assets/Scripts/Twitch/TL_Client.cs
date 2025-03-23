@@ -38,6 +38,7 @@ namespace Twitch
 			Client.Initialize(credentials, _channelName);
 			Client.AddChatCommandIdentifier('!');
 			// Subscribe to any events here.
+			Client.OnJoinedChannel += OnJoinedChannel;
 			Client.OnMessageReceived += OnMessageReceived;
 			Client.OnChatCommandReceived += OnChatCommandReceived;
 			Client.OnNewSubscriber += OnNewSubscriber;
@@ -50,13 +51,23 @@ namespace Twitch
 			// Connect bot to channel
 			Client.Connect();
 
-			if (Client.IsConnected)
+            MessageSender.MessagesAllowed = true;
+
+            if (Client.IsConnected)
 				Debug.Log("Twitch Connected");
 			else
 				Debug.Log("Twitch Failed to Connect!");
 		}
 
-		private void OnRaidNotification(object sender, OnRaidNotificationArgs e)
+        private void OnJoinedChannel(object sender, OnJoinedChannelArgs e)
+        {
+            Debug.Log($"[Twitch] Successfully joined channel: {e.Channel}");
+
+            MessageSender.MessagesAllowed = true;
+            MessageSender.SendMessage("[BOT READY] Listening for commands. Type !connect <code> to begin.");
+        }
+
+        private void OnRaidNotification(object sender, OnRaidNotificationArgs e)
 		{
 			if (int.TryParse(e.RaidNotification.MsgParamViewerCount, out int viewerCount))
 			{
@@ -132,7 +143,6 @@ namespace Twitch
 		{
 			//TODO:: Move this to GameManager
 			InitClient();
-			StartCoroutine(SendPing());
 		}
 
 		private void Awake()
@@ -147,20 +157,6 @@ namespace Twitch
 
 			if (Keyboard.current.f1Key.wasReleasedThisFrame)
 				ForceDisconnect();
-		}
-
-		private IEnumerator SendPing()
-		{
-			for (; ; )
-			{
-				Client.SendRaw("PING");
-				if (Client == null || !Client.IsConnected || Client.JoinedChannels.Count == 0)
-				{
-					ForceDisconnect();
-					InitClient();
-				}
-				yield return new WaitForSeconds(30);
-			}
 		}
 
 		private void OnErrorReceived(string logString, string stackTrace, LogType type)

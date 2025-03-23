@@ -73,11 +73,11 @@ namespace UserInterface
 
 		private void Awake()
 		{
-			_cameraApplyChanges = FindObjectOfType<CameraApplyChanges>();
-			_loadingManager = FindObjectOfType<LoadingManager>();
-			if (FindObjectOfType<SettingsManager>())
+			_cameraApplyChanges = FindAnyObjectByType<CameraApplyChanges>();
+			_loadingManager = FindAnyObjectByType<LoadingManager>();
+			if (FindAnyObjectByType<SettingsManager>())
 			{
-				_settingsManager = FindObjectOfType<SettingsManager>();
+				_settingsManager = FindAnyObjectByType<SettingsManager>();
 				_settingsPanel = _settingsManager.SettingsPanel;
 				_settingsManager.SetUpCamera();
 				_settingsManager.GameSettingData(_cameraApplyChanges);

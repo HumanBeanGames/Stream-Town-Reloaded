@@ -4,210 +4,172 @@ using UnityEngine;
 
 namespace PlayerControls
 {
-	public class PlayerInputManager : MonoBehaviour
-	{
-		public enum Button
-		{
-			None,
-			LeftMouse,
-			RightMouse,
-			MiddleMouse,
-			Count
-		}
+    public class PlayerInputManager : MonoBehaviour
+    {
+        public enum Button
+        {
+            None,
+            LeftMouse,
+            RightMouse,
+            MiddleMouse,
+            Count
+        }
 
-		private static PlayerInput _playerInput;
+        private static PlayerInput _playerInput;
+        private static Dictionary<Button, bool> _heldKeys = new Dictionary<Button, bool>();
+        public static bool IsButtonHeld(Button button) => _heldKeys[button];
 
-		private static Dictionary<Button, bool> _heldKeys = new Dictionary<Button, bool>();
-		public static bool IsButtonHeld(Button button) => _heldKeys[button];
+        public static event Action<Button> OnLeftClickPress;
+        public static event Action<Button> OnLeftClickHold;
+        public static event Action<Button> OnLeftClickRelease;
 
-		public static event Action<Button> OnLeftClickPress;
-		public static event Action<Button> OnLeftClickHold;
-		public static event Action<Button> OnLeftClickRelease;
+        public static event Action<Button> OnRightClickPress;
+        public static event Action<Button> OnRightClickHold;
+        public static event Action<Button> OnRightClickRelease;
 
-		public static event Action<Button> OnRightClickPress;
-		public static event Action<Button> OnRightClickHold;
-		public static event Action<Button> OnRightClickRelease;
+        public static event Action<Button> OnMiddleClickPress;
+        public static event Action<Button> OnMiddleClickHold;
+        public static event Action<Button> OnMiddleClickRelease;
 
-		public static event Action<Button> OnMiddleClickPress;
-		public static event Action<Button> OnMiddleClickHold;
-		public static event Action<Button> OnMiddleClickRelease;
+        public static event Action<float> OnMouseScroll;
+        public static event Action<Vector2> OnMousePosition;
+        public static event Action OnEscape;
+        public static event Action OnBuildMenu;
+        public static event Action OnTechTree;
+        public static event Action OnRecruit;
 
-		public static event Action<float> OnMouseScroll;
+        // Temp
+        public static event Action OnSaveGame;
+        public static event Action OnLoadGame;
+        public static event Action OnGenerateGame;
+        //
 
-		public static event Action<Vector2> OnMousePosition;
+        private static Vector2 _mouseLastClickPosition = Vector2.zero;
+        private static Vector2 _previousMousePos = Vector2.zero;
+        private static Vector2 _mouseDelta = Vector2.zero;
+        private static Vector2 _mousePosition = Vector2.zero;
 
-		public static event Action OnEscape;
+        private readonly Queue<Action> _deferredInputQueue = new();
 
-		public static event Action OnBuildMenu;
+        public static Vector2 MousePosition => _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+        public static Vector2 MousePositionDelta => _mouseDelta;
+        public static Vector2 MouseLastClickPosition => _mouseLastClickPosition;
+        public static bool EscapePressed => _playerInput.BasicControls.Escape.ReadValue<float>() > 0.01f;
 
-		public static event Action OnTechTree;
+        private void Awake()
+        {
+            _playerInput = new PlayerInput();
 
-		public static event Action OnRecruit;
+            _playerInput.BasicControls.MouseLeftClick.started += ctx =>
+                _deferredInputQueue.Enqueue(() => OnLeftClickPress?.Invoke(Button.LeftMouse));
+            _playerInput.BasicControls.MouseLeftClick.performed += ctx =>
+                _deferredInputQueue.Enqueue(() => OnLeftClickHold?.Invoke(Button.LeftMouse));
+            _playerInput.BasicControls.MouseLeftClick.canceled += ctx =>
+                _deferredInputQueue.Enqueue(() => OnLeftClickRelease?.Invoke(Button.LeftMouse));
 
+            _playerInput.BasicControls.MouseRightClick.started += ctx =>
+                _deferredInputQueue.Enqueue(() => OnRightClickPress?.Invoke(Button.RightMouse));
+            _playerInput.BasicControls.MouseRightClick.performed += ctx =>
+                _deferredInputQueue.Enqueue(() => OnRightClickHold?.Invoke(Button.RightMouse));
+            _playerInput.BasicControls.MouseRightClick.canceled += ctx =>
+                _deferredInputQueue.Enqueue(() => OnRightClickRelease?.Invoke(Button.RightMouse));
 
-		// Temp
-		public static event Action OnSaveGame;
+            _playerInput.BasicControls.MouseMiddleClick.started += ctx =>
+                _deferredInputQueue.Enqueue(() => OnMiddleClickPress?.Invoke(Button.MiddleMouse));
+            _playerInput.BasicControls.MouseMiddleClick.performed += ctx =>
+                _deferredInputQueue.Enqueue(() => OnMiddleClickHold?.Invoke(Button.MiddleMouse));
+            _playerInput.BasicControls.MouseMiddleClick.canceled += ctx =>
+                _deferredInputQueue.Enqueue(() => OnMiddleClickRelease?.Invoke(Button.MiddleMouse));
 
-		public static event Action OnLoadGame;
+            _playerInput.BasicControls.MouseScroll.performed += ctx =>
+            {
+                float delta = ctx.ReadValue<Vector2>().y;
+                _deferredInputQueue.Enqueue(() => OnMouseScroll?.Invoke(delta));
+            };
 
-		public static event Action OnGenerateGame;
-		//
+            _playerInput.BasicControls.MousePosition.performed += ctx =>
+                _deferredInputQueue.Enqueue(() => OnMousePosition?.Invoke(ctx.ReadValue<Vector2>()));
 
-		private static Vector2 _mouseLastClickPosition = Vector2.zero;
-		private static Vector2 _previousMousePos = Vector2.zero;
-		private static Vector2 _mouseDelta = Vector2.zero;
-		private static Vector2 _mousePosition = Vector2.zero;
+            _playerInput.BasicControls.Escape.started += ctx => _deferredInputQueue.Enqueue(() => OnEscape?.Invoke());
+            _playerInput.BasicControls.BuildMenu.started += ctx => _deferredInputQueue.Enqueue(() => OnBuildMenu?.Invoke());
+            _playerInput.BasicControls.TechTree.started += ctx => _deferredInputQueue.Enqueue(() => OnTechTree?.Invoke());
+            _playerInput.BasicControls.Recruit.started += ctx => _deferredInputQueue.Enqueue(() => OnRecruit?.Invoke());
 
-		public static Vector2 MousePosition
-		{
-			get { return _playerInput.BasicControls.MousePosition.ReadValue<Vector2>(); }
-		}
+            _playerInput.BasicControls.TempGenerateWorld.started += ctx => _deferredInputQueue.Enqueue(() => OnGenerateGame?.Invoke());
+            _playerInput.BasicControls.TempLoadWorld.started += ctx => _deferredInputQueue.Enqueue(() => OnLoadGame?.Invoke());
+            _playerInput.BasicControls.TempSaveWorld.started += ctx => _deferredInputQueue.Enqueue(() => OnSaveGame?.Invoke());
 
-		public static Vector2 MousePositionDelta => _mouseDelta;
-		public static Vector2 MouseLastClickPosition => _mouseLastClickPosition;
-		public static bool EscapePressed
-		{
-			get { return _playerInput.BasicControls.Escape.ReadValue<float>() > 0.01f ? true : false; }
-		}
+            _previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
 
-		/// <summary>
-		/// Called when script is loaded
-		/// </summary>
-		private void Awake()
-		{
-			Debug.Log("Awake" + this);
-			_playerInput = new PlayerInput();
+            for (int i = 0; i < (int)Button.Count; i++)
+                _heldKeys.Add((Button)i, false);
+        }
 
-			_playerInput.BasicControls.MouseLeftClick.started += ctx => OnLeftClickPress?.Invoke(Button.LeftMouse);     // Started is called on button clicked
-			_playerInput.BasicControls.MouseLeftClick.performed += ctx => OnLeftClickHold?.Invoke(Button.LeftMouse);    // Performed is called on button hold
-			_playerInput.BasicControls.MouseLeftClick.canceled += ctx => OnLeftClickRelease?.Invoke(Button.LeftMouse);  // Cancelled is caled on button release
+        private void Update()
+        {
+            Vector2 currentMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+            _mouseDelta = _previousMousePos - currentMousePos;
 
-			_playerInput.BasicControls.MouseRightClick.started += ctx => OnRightClickPress?.Invoke(Button.RightMouse);
-			_playerInput.BasicControls.MouseRightClick.performed += ctx => OnRightClickHold?.Invoke(Button.RightMouse);
-			_playerInput.BasicControls.MouseRightClick.canceled += ctx => OnRightClickRelease?.Invoke(Button.RightMouse);
+            while (_deferredInputQueue.Count > 0)
+            {
+                var action = _deferredInputQueue.Dequeue();
+                action?.Invoke();
+            }
+        }
 
-			_playerInput.BasicControls.MouseMiddleClick.started += ctx => OnMiddleClickPress?.Invoke(Button.MiddleMouse);
-			_playerInput.BasicControls.MouseMiddleClick.performed += ctx => OnMiddleClickHold?.Invoke(Button.MiddleMouse);
-			_playerInput.BasicControls.MouseMiddleClick.canceled += ctx => OnMiddleClickRelease?.Invoke(Button.MiddleMouse);
+        private void LateUpdate()
+        {
+            _previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+        }
 
-			_playerInput.BasicControls.MouseScroll.started += ctx => OnMouseScroll?.Invoke(ctx.ReadValue<Vector2>().y);
-			_playerInput.BasicControls.MouseScroll.canceled += ctx => OnMouseScroll?.Invoke(ctx.ReadValue<Vector2>().y);
+        private void SetClickPosition(Button button)
+        {
+            _mouseLastClickPosition = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+        }
 
-			_playerInput.BasicControls.MousePosition.performed += ctx => OnMousePosition?.Invoke(ctx.ReadValue<Vector2>());
+        private void OnEnable()
+        {
+            _playerInput?.Enable();
 
-			//_playerInput.BasicControls.Escape.started += ctx => OnEscape?.Invoke();
+            OnLeftClickPress += ButtonPressed;
+            OnLeftClickHold += ButtonHeld;
+            OnLeftClickRelease += ButtonRelease;
+            OnLeftClickPress += SetClickPosition;
 
-			_playerInput.BasicControls.BuildMenu.started += ctx => OnBuildMenu?.Invoke();
+            OnRightClickPress += ButtonPressed;
+            OnRightClickHold += ButtonHeld;
+            OnRightClickRelease += ButtonRelease;
 
-			_playerInput.BasicControls.TechTree.started += ctx => OnTechTree?.Invoke();
+            OnMiddleClickPress += ButtonPressed;
+            OnMiddleClickHold += ButtonHeld;
+            OnMiddleClickRelease += ButtonRelease;
+        }
 
-			_playerInput.BasicControls.Recruit.started += ctx => OnRecruit?.Invoke();
+        private void OnDisable()
+        {
+            _playerInput?.Disable();
 
-			_previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+            OnLeftClickPress -= ButtonPressed;
+            OnLeftClickHold -= ButtonHeld;
+            OnLeftClickRelease -= ButtonRelease;
+            OnLeftClickPress -= SetClickPosition;
 
-			// Temp
-			_playerInput.BasicControls.TempGenerateWorld.started += ctx => OnGenerateGame?.Invoke();
-			_playerInput.BasicControls.TempLoadWorld.started += ctx => OnLoadGame?.Invoke();
-			_playerInput.BasicControls.TempSaveWorld.started += ctx => OnSaveGame?.Invoke();
-			//
+            OnRightClickPress -= ButtonPressed;
+            OnRightClickHold -= ButtonHeld;
+            OnRightClickRelease -= ButtonRelease;
 
-			// Add all keys to dictionary
-			for (int i = 0; i < (int)Button.Count; i++)
-			{
-				Debug.Log("Add ");	
-				_heldKeys.Add((Button)i, false);
-			}
-		}
+            OnMiddleClickPress -= ButtonPressed;
+            OnMiddleClickHold -= ButtonHeld;
+            OnMiddleClickRelease -= ButtonRelease;
+        }
 
-		/// <summary>
-		/// Runs whenever a button is pressed
-		/// </summary>
-		/// <param name="button">The button that is being pressed</param>
-		private void ButtonPressed(Button button = Button.None)
-		{
-			//Debug.Log("Pressed:" + button.ToString());
-		}
+        private void OnDestroy()
+        {
+            _heldKeys.Clear();
+        }
 
-		/// <summary>
-		/// Runs whenever a buton is being held
-		/// </summary>
-		/// <param name="button">The button that is being held</param>
-		private void ButtonHeld(Button button = Button.None)
-		{
-			//Debug.Log("Holding: " + button.ToString());
-			_heldKeys[button] = true;
-		}
-
-		/// <summary>
-		/// Runs whenever a button is released
-		/// </summary>
-		/// <param name="button">The button that is being released</param>
-		private void ButtonRelease(Button button = Button.None)
-		{
-			//Debug.Log("Released: " + button.ToString());
-			_heldKeys[button] = false;
-		}
-
-		private void Update()
-		{
-			Vector2 currentMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-			_mouseDelta = _previousMousePos - currentMousePos;
-		}
-
-		private void LateUpdate()
-		{
-			_previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-		}
-
-		/// <summary>
-		/// Sets the click position
-		/// </summary>
-		/// <param name="button"></param>
-		private void SetClickPosition(Button button)
-		{
-			_mouseLastClickPosition = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-			//Debug.Log(_mouseLastClickPosition);
-		}
-
-		private void OnEnable()
-		{
-			_playerInput?.Enable();
-
-			PlayerInputManager.OnLeftClickPress += ButtonPressed;
-			PlayerInputManager.OnLeftClickHold += ButtonHeld;
-			PlayerInputManager.OnLeftClickRelease += ButtonRelease;
-			PlayerInputManager.OnLeftClickPress += SetClickPosition;
-
-			PlayerInputManager.OnRightClickPress += ButtonPressed;
-			PlayerInputManager.OnRightClickHold += ButtonHeld;
-			PlayerInputManager.OnRightClickRelease += ButtonRelease;
-
-			PlayerInputManager.OnMiddleClickPress += ButtonPressed;
-			PlayerInputManager.OnMiddleClickHold += ButtonHeld;
-			PlayerInputManager.OnMiddleClickRelease += ButtonRelease;
-		}
-
-		private void OnDestroy()
-		{
-			Debug.Log("Detroyed: " + this);
-			_heldKeys.Clear();
-		}
-		private void OnDisable()
-		{
-			_playerInput?.Disable();
-
-			PlayerInputManager.OnLeftClickPress -= ButtonPressed;
-			PlayerInputManager.OnLeftClickHold -= ButtonHeld;
-			PlayerInputManager.OnLeftClickRelease -= ButtonRelease;
-			PlayerInputManager.OnLeftClickPress -= SetClickPosition;
-
-			PlayerInputManager.OnRightClickPress -= ButtonPressed;
-			PlayerInputManager.OnRightClickHold -= ButtonHeld;
-			PlayerInputManager.OnRightClickRelease -= ButtonRelease;
-
-			PlayerInputManager.OnMiddleClickPress -= ButtonPressed;
-			PlayerInputManager.OnMiddleClickHold -= ButtonHeld;
-			PlayerInputManager.OnMiddleClickRelease -= ButtonRelease;
-		}
-	}
+        private void ButtonPressed(Button button = Button.None) => _heldKeys[button] = true;
+        private void ButtonHeld(Button button = Button.None) => _heldKeys[button] = true;
+        private void ButtonRelease(Button button = Button.None) => _heldKeys[button] = false;
+    }
 }

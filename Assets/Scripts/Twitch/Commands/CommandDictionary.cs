@@ -12,18 +12,18 @@ namespace Twitch.Commands
 	public static class CommandDictionary
 	{
 
-		private static Dictionary<string, Action<Player, string, string[]>> _commandsWithArgs;
+        private static Dictionary<string, Func<Player, string, string[], string>> _commandsWithArgs;
 
-		/// <summary>
-		/// Contains all Game Commands that require further arguments.
-		/// </summary>
-		public static Dictionary<string, Action<Player, string, string[]>> CommandsWithArgs
+        /// <summary>
+        /// Contains all Game Commands that require further arguments.
+        /// </summary>
+        public static Dictionary<string, Func<Player, string, string[], string>> CommandsWithArgs
 		{
 			get
 			{
 				if (_commandsWithArgs == null)
 				{
-					_commandsWithArgs = new Dictionary<string, Action<Player, string, string[]>>();
+					_commandsWithArgs = new Dictionary<string, Func<Player, string, string[], string>>();
 					_commandsWithArgs.Add("role", RoleCommands.TryChangeRole);
 					_commandsWithArgs.Add("build", BuildingCommands.StartBuild);
 					_commandsWithArgs.Add("move", BuildingCommands.AdjustBuildingPlacer);
@@ -71,18 +71,18 @@ namespace Twitch.Commands
 			}
 		}
 
-		private static Dictionary<string, Action<Player>> _commandsNoArgs;
+        private static Dictionary<string, Func<Player, string>> _commandsNoArgs;
 
-		/// <summary>
-		/// Contains all Game Commands that do NOT require arguments.
-		/// </summary>
-		public static Dictionary<string, Action<Player>> CommandsNoArgs
+        /// <summary>
+        /// Contains all Game Commands that do NOT require arguments.
+        /// </summary>
+        public static Dictionary<string, Func<Player, string>> CommandsNoArgs
 		{
 			get
 			{
 				if (_commandsNoArgs == null)
 				{
-					_commandsNoArgs = new Dictionary<string, Action<Player>>();
+					_commandsNoArgs = new Dictionary<string, Func<Player, string>>();
 					_commandsNoArgs.Add("role", RoleCommands.Experience);
 					_commandsNoArgs.Add("level", RoleCommands.Experience);
 					_commandsNoArgs.Add("health", RoleCommands.Health);
@@ -117,30 +117,30 @@ namespace Twitch.Commands
 			}
 		}
 
-		private static Dictionary<string, Action> _simpleCommands;
+        private static Dictionary<string, Func<string>> _simpleCommands;
 
-		/// <summary>
-		/// Contains all Game Commands that do not require a created character or arguments.
-		/// </summary>
-		public static Dictionary<string, Action> SimpleCommands
-		{
-			get
-			{
-				if (_simpleCommands == null)
-				{
-					_simpleCommands = new Dictionary<string, Action>();
-					_simpleCommands.Add("stdiscord", MiscCommands.Discord);
-					_simpleCommands.Add("help", MiscCommands.Help);
-					_simpleCommands.Add("townstats", MiscCommands.TownStats);
-				}
-				return _simpleCommands;
-			}
-		}
+        /// <summary>
+        /// Contains all Game Commands that do not require a created character or arguments.
+        /// </summary>
+        public static Dictionary<string, Func<string>> SimpleCommands
+        {
+            get
+            {
+                if (_simpleCommands == null)
+                {
+                    _simpleCommands = new Dictionary<string, Func<string>>();
+                    _simpleCommands.Add("stdiscord", MiscCommands.Discord);
+                    _simpleCommands.Add("help", MiscCommands.Help);
+                    _simpleCommands.Add("townstats", MiscCommands.TownStats);
+                }
+                return _simpleCommands;
+            }
+        }
 
-		/// <summary>
-		/// A list of acceptable variants for the word "create".
-		/// </summary>
-		public static List<string> CreateNameVariants = new List<string>
+        /// <summary>
+        /// A list of acceptable variants for the word "create".
+        /// </summary>
+        public static List<string> CreateNameVariants = new List<string>
 		{
 			"create","crate","crete","join","start","creta","ceate","cate","crtea", "ligma"
 		};

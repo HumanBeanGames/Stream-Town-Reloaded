@@ -1358,7 +1358,6 @@ namespace Settings
 
 		public void SetUpCamera()
 		{
-			_cameraData = new UniversalAdditionalCameraData();	
 			if (Camera.main)
 			{
 				_camera = Camera.main;

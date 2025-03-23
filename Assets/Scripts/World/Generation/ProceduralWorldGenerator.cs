@@ -311,6 +311,7 @@ namespace World.Generation
 		/// </summary>
 		public IEnumerator TryGenerateWorld()
 		{
+			int tries = 0;
 			if (_generateOnStart)
 			{
 				WorldUtils.GroundLayerMask = LayerMask.GetMask("Ground");
@@ -326,14 +327,22 @@ namespace World.Generation
 					GenerateTerrain();
 					yield return new WaitForEndOfFrame();
 
-				} while (!AcceptableTerrainCheck());
+				} while (!AcceptableTerrainCheck() || ++tries == 10);
 
-				yield return StartCoroutine(GeneratePooledObjects());
-				//Check that townhall is on ground, not above water.
+				if (tries != 10)
+				{
+					yield return StartCoroutine(GeneratePooledObjects());
+					//Check that townhall is on ground, not above water.
 
+					Debug.Log($"World generated in {tries} attempts!");
 
-				GameStateManager.NotifyWorldLoaded();
-			}
+                    GameStateManager.NotifyWorldLoaded();
+				}
+				else
+				{
+					Debug.Log("World failed generation!");
+				}
+            }
 		}
 
 		private bool AcceptableTerrainCheck()

@@ -19,13 +19,13 @@ namespace UserInterface
 			set => _thickness = value;
 		}
 
-		public Vector2 Start
+		public Vector2 StartVec
 		{
 			get => _start;
 			set => _start = value;
 		}
 
-		public Vector2 End
+		public Vector2 EndVec
 		{
 			get => _end;
 			set => _end = value;

@@ -50,6 +50,7 @@ namespace Audio
 
 		private void StartNextTrack(Season season, bool day)
 		{
+			/* DISABLED AS NO MUSIC AVAILABLE
 			StopCoroutine("StartMusic");
 			StartCoroutine(StartMusic(season, day));
 
@@ -61,7 +62,7 @@ namespace Audio
 				else
 					Debug.LogError($"Couldn't find ambience clip for season '{data.Season}'");
 				_ambienceSource.Play();
-			}
+			}*/
 		}
 
 		private IEnumerator StartMusic(Season season, bool day)

@@ -11,8 +11,6 @@ using Utils;
 using World;
 using World.Generation;
 using SavingAndLoading;
-using Character;
-using Utils;
 using GUIDSystem;
 using Enemies;
 using PlayerControls;
@@ -161,7 +159,9 @@ namespace Managers
 		private IEnumerator StartupSequence()
 		{
 			_code = Random.Range(100000, 999999).ToString();
-			_connectPanel.SetActive(true);
+            TwitchChatManager.SetExpectedConnectCode(_code);
+
+            _connectPanel.SetActive(true);
 			CodeDisplay.text = $"!CONNECT {_code}";
 			_buildingManager.Initialize();
 			_playerManager.Initialize();

@@ -15,7 +15,7 @@ namespace Managers
 
 		private void Awake()
 		{
-			_loadingManager = FindObjectOfType<LoadingManager>();
+			_loadingManager = FindAnyObjectByType<LoadingManager>();
 		}
 
 		private void Update()

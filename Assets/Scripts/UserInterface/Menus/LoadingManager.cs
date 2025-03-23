@@ -1,11 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.UI;
 using TMPro;
 using Managers;
-using System;
-using TMPro;
 
 namespace UserInterface.MainMenu
 {

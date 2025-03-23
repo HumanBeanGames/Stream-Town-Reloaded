@@ -4,51 +4,61 @@ using UnityEngine;
 
 namespace Twitch.Commands
 {
-	/// <summary>
-	/// Handles all Twitch chat commands related to Moderation.
-	/// </summary>
-	public static class ModeratorCommands
-	{
-		public static void StartKingVote(Player player)
-		{
-			if (!player.IsModerator())
-				return;
+    /// <summary>
+    /// Handles all Twitch chat commands related to Moderation.
+    /// </summary>
+    public static class ModeratorCommands
+    {
+        public static string StartKingVote(Player player)
+        {
+            if (!player.IsModerator())
+                return "You are not authorized to start a king vote.";
 
-			if (GameManager.Instance.PlayerManager.Ruler == null)
-				GameManager.Instance.GameEventManager.StartNewRulerVote();
-			else
-				GameManager.Instance.GameEventManager.StartKeepRulerVote();
-		}
+            if (GameManager.Instance.PlayerManager.Ruler == null)
+            {
+                GameManager.Instance.GameEventManager.StartNewRulerVote();
+                return "Ruler vote started!";
+            }
+            else
+            {
+                GameManager.Instance.GameEventManager.StartKeepRulerVote();
+                return "Keep current ruler vote started!";
+            }
+        }
 
-		public static void ChangePlayerRole(Player player, string command, params string[] args)
-		{
-			if (!player.IsModerator())
-				return;
+        public static string ChangePlayerRole(Player player, string command, params string[] args)
+        {
+            if (!player.IsModerator())
+                return "You are not authorized to change player roles.";
 
-			if (args.Length < 2)
-				return;
+            if (args.Length < 2)
+                return "Usage: !modrole <playername> <newrole>";
 
-			string playerNameArg = args[0].ToLower();
+            string playerNameArg = args[0].ToLower();
 
-			if (GameManager.Instance.PlayerManager.PlayerExistsByNameToLower(playerNameArg, out int index))
-			{
-				Player targetPlayer = GameManager.Instance.PlayerManager.GetPlayer(index);
-				string[] newArgs = new string[] { args[1] };
+            if (GameManager.Instance.PlayerManager.PlayerExistsByNameToLower(playerNameArg, out int index))
+            {
+                Player targetPlayer = GameManager.Instance.PlayerManager.GetPlayer(index);
+                string[] newArgs = new string[] { args[1] };
+                RoleCommands.TryChangeRole(targetPlayer, command, newArgs);
+                return $"{targetPlayer.TwitchUser.Username}'s role has been updated.";
+            }
+            else
+            {
+                return $"Player '{playerNameArg}' not found.";
+            }
+        }
 
-				RoleCommands.TryChangeRole(targetPlayer, command, newArgs);
-			}
-		}
+        public static bool IsModerator(this Player player)
+        {
+            if (player.TwitchUser.TwitchUserType == TwitchLib.Client.Enums.UserType.Moderator)
+                return true;
+            if (player.TwitchUser.TwitchUserType == TwitchLib.Client.Enums.UserType.Broadcaster)
+                return true;
+            if (player.TwitchUser.GameUserType == Utils.GameUserType.GameMaster)
+                return true;
 
-		public static bool IsModerator(this Player player)
-		{
-			if (player.TwitchUser.TwitchUserType == TwitchLib.Client.Enums.UserType.Moderator)
-				return true;
-			if (player.TwitchUser.TwitchUserType == TwitchLib.Client.Enums.UserType.Broadcaster)
-				return true;
-			if (player.TwitchUser.GameUserType == Utils.GameUserType.GameMaster)
-				return true;
-
-			return false;
-		}
-	}
+            return false;
+        }
+    }
 }

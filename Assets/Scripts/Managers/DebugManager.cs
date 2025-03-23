@@ -34,7 +34,7 @@ namespace Managers
 
 			Debug.Log($"Object Selected: {selected.gameObject.transform.parent.name}, {selected.SelectableType}");
 
-			switch (selected.SelectableType)
+			/*switch (selected.SelectableType)
 			{
 				//case Selectable.Player:
 				//	_debugUI.OnCharacterContext((RoleHandler)data);
@@ -48,7 +48,7 @@ namespace Managers
 				//case Selectable.Resource:
 				//	_debugUI.OnBuildingContext((BuildingBase)data);
 				//	break;
-			}
+			}*/
 		}
 
 		// Unity Events.
