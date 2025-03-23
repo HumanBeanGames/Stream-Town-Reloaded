@@ -41,16 +41,18 @@ namespace Buildings
 			SetDamageByPercentage(obj.HealthPercentage);
 		}
 
-		private void SetDamageByPercentage(float percentage)
-		{
-			//percentage *= 2;
-			if (_renderer == null)
-				_renderer = GetComponent<Renderer>();
-			_renderer.GetPropertyBlock(_materialPropertyBlock);
+        private void SetDamageByPercentage(float percentage)
+        {
+            if (_materialPropertyBlock == null)
+                _materialPropertyBlock = new MaterialPropertyBlock();
 
-			_materialPropertyBlock.SetFloat("_DestructionValue", percentage);
+            if (_renderer == null)
+                _renderer = GetComponent<Renderer>();
 
-			_renderer.SetPropertyBlock(_materialPropertyBlock);
-		}
+            _renderer.GetPropertyBlock(_materialPropertyBlock);
+            _materialPropertyBlock.SetFloat("_DestructionValue", percentage);
+            _renderer.SetPropertyBlock(_materialPropertyBlock);
+        }
+
     }
 }

@@ -166,9 +166,15 @@ namespace Twitch.Commands
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "Unauthorized.";
             GameManager.Instance.GameEventManager.StartNewRulerVote();
-            player.RoleHandler.TrySetRole(player.RoleHandler.PreviousRole);
-            GameManager.Instance.PlayerManager.SetRuler(null);
-            return $"{player.TwitchUser.Username} you have been successfully resigned!";
+            if (player.RoleHandler.TrySetRole(player.RoleHandler.PreviousRole, out string reason))
+            {
+                GameManager.Instance.PlayerManager.SetRuler(null);
+                return $"{player.TwitchUser.Username} you have been successfully resigned!";
+            }
+            else
+            {
+                return $"Could not resign: {reason}";
+            }
         }
     }
 }

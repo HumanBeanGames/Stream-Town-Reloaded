@@ -22,7 +22,7 @@ namespace Audio
 				return;
 			}
 
-			PlayClip(roleData.ActionClips[Random.Range(0, roleData.ActionClips.Length)]);
+			//PlayClip(roleData.ActionClips[Random.Range(0, roleData.ActionClips.Length)]);
 		}
 
 	}

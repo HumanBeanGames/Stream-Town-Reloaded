@@ -21,11 +21,12 @@ namespace Twitch.Commands
                 if (role == PlayerRole.Ruler && GameManager.Instance.PlayerManager.Ruler != player)
                     return "You cannot switch to Ruler unless you're the current ruler.";
 
-                if (player.RoleHandler.TrySetRole(role))
+                if (player.RoleHandler.TrySetRole(role, out string failureReason))
                     return $"{player.TwitchUser.Username}, your role was successfully changed to {role}.";
                 else
-                    return $"{player.TwitchUser.Username}, role switch failed.";
+                    return $"{player.TwitchUser.Username}, role switch failed: {failureReason}";
             }
+
             return $"{player.TwitchUser.Username}, unknown role '{args[0]}'";
         }
 

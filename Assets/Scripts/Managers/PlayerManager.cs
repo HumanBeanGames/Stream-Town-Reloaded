@@ -10,6 +10,7 @@ using Pets;
 using GUIDSystem;
 using Utils.Pooling;
 using Target;
+using System.Linq;
 
 namespace Managers
 {
@@ -41,7 +42,12 @@ namespace Managers
 			}
 		}
 
-		public Player GetRecruitByIndex(int index)
+        public bool PlayerExistsByUserID(string userID)
+        {
+            return _players.Any(p => p.TwitchUser.UserID == userID) || _recruits.Any(r => r.TwitchUser.UserID == userID);
+        }
+
+        public Player GetRecruitByIndex(int index)
 		{
 			int adjusteIndex = index - 1;
 			if (adjusteIndex <= _recruits.Count - 1)
@@ -63,7 +69,8 @@ namespace Managers
 
 		public void SwapRecruitRole(Player player, PlayerRole role)
 		{
-			player.RoleHandler.TrySetRole(role);
+			if (!player.RoleHandler.TrySetRole(role, out string reason))
+				Debug.Log(reason);
 		}
 
 		public void Initialize()
@@ -213,7 +220,8 @@ namespace Managers
 		public void SetRuler(Player player)
 		{
 			if (_ruler != null)
-				_ruler.RoleHandler.TrySetRole(_ruler.RoleHandler.PreviousRole);
+				if (!_ruler.RoleHandler.TrySetRole(_ruler.RoleHandler.PreviousRole, out string reason))
+					Debug.Log(reason);
 
 			_ruler = player;
 			OnRulerChanged?.Invoke(player);

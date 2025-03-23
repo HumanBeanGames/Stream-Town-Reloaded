@@ -21,8 +21,12 @@ namespace PlayerControls.ObjectSelection
 		public void RecruitChange(int index)
 		{
 			RoleHandler roleHandler = ((RoleHandler)_selectedObject);
-			roleHandler.TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index));
-			UpdateExperience(roleHandler);
+			if (roleHandler.TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index), out string reason))
+			{
+				UpdateExperience(roleHandler);
+			}
+			else
+				Debug.Log(reason);
 		}
 
 		protected override void AttachEvents()

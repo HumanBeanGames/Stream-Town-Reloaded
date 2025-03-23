@@ -96,7 +96,7 @@ namespace Twitch
                     args[i] = args[i].ToLower();
 
                 return withArgsCmd.Invoke(player, command, args);
-            }
+            }   
 
             if (CommandDictionary.CommandsNoArgs.TryGetValue(command, out var noArgsCmd))
                 return noArgsCmd.Invoke(player);

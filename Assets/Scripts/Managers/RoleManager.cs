@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Utils;
 using UnityEngine;
 using Character;
@@ -116,48 +116,57 @@ namespace Managers
 		{
 			return !_roleSlotsDictionary[role].Full;
 		}
-		/// <summary>
-		/// Called when a character unit attempts to change it's role.
-		/// </summary>
-		/// <param name="previousRole"></param>
-		/// <param name="newRole"></param>
-		/// <param name="decrement"></param>
-		/// <returns>true if the role can be switched too.</returns>
-		public bool TryChangeRole(PlayerRole previousRole, PlayerRole newRole, bool decrement = true)
-		{
-			if (!_roleSlotsDictionary.ContainsKey(newRole))
-			{
-				Debug.LogError($"Attempted to change to a role that is not stored: {newRole}");
-				return false;
-			}
+        /// <summary>
+        /// Called when a character unit attempts to change it's role.
+        /// </summary>
+        /// <param name="previousRole"></param>
+        /// <param name="newRole"></param>
+        /// <param name="decrement"></param>
+        /// <returns>true if the role can be switched too.</returns>
+        public bool TryChangeRole(PlayerRole previousRole, PlayerRole newRole, out string failureReason, bool decrement = true)
+        {
+            failureReason = null;
 
-			if (_roleSlotsDictionary[newRole].Full && GameManager.Instance.PlayerRoleLimits)
-			{
-				if (TryReplaceInactivePlayer(newRole, out Player player))
-				{
-					player.RoleHandler.TrySetRole(PlayerRole.Builder);
-				}
-				else
-					return false;
-			}
+            if (!_roleSlotsDictionary.ContainsKey(newRole))
+            {
+                failureReason = $"⚠️ Role '{newRole}' does not exist in role slot dictionary.";
+                Debug.LogError(failureReason);
+                return false;
+            }
 
-			if (decrement)
-				_roleSlotsDictionary[previousRole].OnSlotRemoved();
+            if (_roleSlotsDictionary[newRole].Full && GameManager.Instance.PlayerRoleLimits)
+            {
+                // Slot is full, try replacing an inactive player
+                if (!TryReplaceInactivePlayer(newRole, out Player player))
+                {
+                    failureReason = $"❌ No available slots for role '{newRole}' and no inactive player could be replaced.";
+                    return false;
+                }
 
-			_roleSlotsDictionary[newRole].OnSlotTaken();
+                if (!player.RoleHandler.TrySetRole(PlayerRole.Builder, out string swapReason, decrement))
+                {
+                    failureReason = $"❌ Replacing inactive player failed: {swapReason}";
+                    return false;
+                }
+            }
 
-			_onRoleSlotsChangedEvent.Invoke(previousRole);
-			_onRoleSlotsChangedEvent.Invoke(newRole);
 
-			return true;
-		}
+            if (decrement)
+                _roleSlotsDictionary[previousRole].OnSlotRemoved();
 
-		/// <summary>
-		/// Adds more total slots to the specified PlayerRole.
-		/// </summary>
-		/// <param name="role"></param>
-		/// <param name="amount"></param>
-		public void AddSlots(PlayerRole role, int amount)
+            _roleSlotsDictionary[newRole].OnSlotTaken();
+            _onRoleSlotsChangedEvent.Invoke(previousRole);
+            _onRoleSlotsChangedEvent.Invoke(newRole);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Adds more total slots to the specified PlayerRole.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="amount"></param>
+        public void AddSlots(PlayerRole role, int amount)
 		{
 			_roleSlotsDictionary[role].IncreaseMaxSlots(amount);
 			_onRoleSlotsChangedEvent.Invoke(role);

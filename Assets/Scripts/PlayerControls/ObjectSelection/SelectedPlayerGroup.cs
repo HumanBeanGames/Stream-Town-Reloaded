@@ -24,7 +24,11 @@ namespace PlayerControls.ObjectSelection
 			List<RoleHandler> players = ((List<RoleHandler>)_selectedObject);
 			for (int i = 0; i < players.Count; i++)
 				if (players[i] != null)
-					players[i].TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index));
+				{
+					players[i].TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index), out string reason);
+					if (reason != "")
+						Debug.Log(reason);
+				}
 		}
 
 		protected override void AttachEvents()

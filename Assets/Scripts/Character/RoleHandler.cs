@@ -63,37 +63,37 @@ namespace Character
 
 		public event Action<RoleHandler> OnRoleChanged;
 
-		/// <summary>
-		/// Attempts to set the role of the character if it is available.
-		/// </summary>
-		/// <param name="role"></param>
-		/// <param name="decrement"></param>
-		/// <returns></returns>
-		public bool TrySetRole(PlayerRole role, bool decrement = true)
-		{
-			if (!_roleManager.TryChangeRole(_currentRole, role, decrement))
-				return false;
+        /// <summary>
+        /// Attempts to set the role of the character if it is available.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="decrement"></param>
+        /// <returns></returns>
+        public bool TrySetRole(PlayerRole role, out string failureReason, bool decrement = true)
+        {
+            if (!_roleManager.TryChangeRole(_currentRole, role, out failureReason, decrement))
+                return false;
 
-			_onRoleChanged.Invoke(_currentRole, role, _equipmentHandler.CurrentBodyType);
-			_currentRoleData_SO = _roleManager.GetRoleData(role);
-			_targetSensor.TargetMask = _currentRoleData_SO.TargetFlags;
-			_stationSensor.StationMask = _currentRoleData_SO.StationFlags;
-			_roleType = _currentRoleData_SO.RoleFlags;
+            _onRoleChanged.Invoke(_currentRole, role, _equipmentHandler.CurrentBodyType);
+            _currentRoleData_SO = _roleManager.GetRoleData(role);
+            _targetSensor.TargetMask = _currentRoleData_SO.TargetFlags;
+            _stationSensor.StationMask = _currentRoleData_SO.StationFlags;
+            _roleType = _currentRoleData_SO.RoleFlags;
 
-			_prevRole = (CurrentRole == PlayerRole.Ruler ? role : _currentRole); 
+            _prevRole = (CurrentRole == PlayerRole.Ruler ? role : _currentRole);
 
-			_currentRole = role;
-			_currentPlayerRoleData = _playerRoleData[(int)_currentRole];
-			_aiPath.maxSpeed = _currentPlayerRoleData.MoveSpeed;
-			OnRoleChanged?.Invoke(this);
-			return true;
-		}
+            _currentRole = role;
+            _currentPlayerRoleData = _playerRoleData[(int)_currentRole];
+            _aiPath.maxSpeed = _currentPlayerRoleData.MoveSpeed;
+            OnRoleChanged?.Invoke(this);
+            return true;
+        }
 
-		/// <summary>
-		/// Sets the starter role that the character will spawn in as.
-		/// </summary>
-		/// <param name="role"></param>
-		public void SetStarterRole(PlayerRole role)
+        /// <summary>
+        /// Sets the starter role that the character will spawn in as.
+        /// </summary>
+        /// <param name="role"></param>
+        public void SetStarterRole(PlayerRole role)
 		{
 			if (_roleManager.SlotsFull(role) && GameManager.Instance.PlayerRoleLimits)
 				return;
@@ -168,7 +168,9 @@ namespace Character
 
 		private void Start()
 		{
-			TrySetRole(_starterRole, false);
+			TrySetRole(_starterRole, out string reason, false);
+			if (reason!="")
+				Debug.Log(reason);
 			_healthHandler.SetHealth(_healthHandler.MaxHealth);
 		}
 

@@ -84,7 +84,7 @@ namespace Twitch.Commands
         };
 
         public static string Discord() => "Join our Discord: https://discord.gg/yourserver";
-        public static string Help() => "Available commands: !help, !info <thing>, !level <building|role>";
+        public static string Help() => "How to play: https://github.com/HumanBeanGames/Stream-Town-Reloaded/wiki/Summary";
         public static string TownStats() => "(Town statistics to be implemented)";
 
         public static string ItemInfo(Player player, string command, params string[] args)
