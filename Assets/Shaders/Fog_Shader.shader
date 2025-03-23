@@ -259,7 +259,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Colour)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
@@ -712,7 +712,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
 				UNITY_DEFINE_INSTANCED_PROP(float, _StrongestAlpha)
@@ -978,7 +978,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Colour)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
@@ -1246,7 +1246,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Colour)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
@@ -1503,7 +1503,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
 				UNITY_DEFINE_INSTANCED_PROP(float, _StrongestAlpha)
@@ -1804,7 +1804,7 @@ Shader "Fog_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+			//uniform float4 _CameraDepthTexture_TexelSize;
 			UNITY_INSTANCING_BUFFER_START(Fog_Shader)
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Colour)
 				UNITY_DEFINE_INSTANCED_PROP(float, _Distance)
