@@ -153,36 +153,49 @@ namespace Units
 			OnHealthChange?.Invoke(this);
 		}
 
-		/// <summary>
-		/// Handles the Health Regen of the entity, accumulating Health Regen overtime.
-		/// </summary>
-		private void HandleHealthRegen()
-		{
-			if (!Dead)
-				_healthRegenAccumulated += _healthRegen * Time.deltaTime;
+        /// <summary>
+        /// Handles the Health Regen of the entity, accumulating Health Regen overtime.
+        /// </summary>
+        private void HandleHealthRegen()
+        {
+            if (Dead)
+                return;
 
-			// If enough health regen was accumulated, add it to the current health.
-			if (_healthRegenAccumulated >= 1)
-			{
+            _healthRegenAccumulated += _healthRegen * Time.deltaTime;
 
-				// Round the health regen so that any overflow remains.
-				int rounded = Mathf.FloorToInt(_healthRegenAccumulated);
-				_healthRegenAccumulated -= rounded;
+            // POSITIVE REGEN
+            if (_healthRegenAccumulated >= 1f)
+            {
+                int rounded = Mathf.FloorToInt(_healthRegenAccumulated);
+                _healthRegenAccumulated -= rounded;
 
-				if (!_regenRequiresFood)
-					ModHealth(rounded);
-				else
-				{
-					if (_resourceManager.MoreThanEqualComparison(Utils.Resource.Food, rounded))
-					{
-						ModHealth(rounded);
-						_resourceManager.RemoveResource(Utils.Resource.Food, rounded);
-					}
-				}
-			}
-		}
+                if (!_regenRequiresFood)
+                {
+                    ModHealth(rounded);
+                }
+                else
+                {
+                    if (_resourceManager.MoreThanEqualComparison(Utils.Resource.Food, rounded))
+                    {
+                        ModHealth(rounded);
+                        _resourceManager.RemoveResource(Utils.Resource.Food, rounded);
+                    }
+                }
+            }
 
-		private void Awake()
+            // NEGATIVE REGEN (Decay)
+            else if (_healthRegenAccumulated <= -1f)
+            {
+                int rounded = Mathf.FloorToInt(Mathf.Abs(_healthRegenAccumulated)); // always positive number
+                _healthRegenAccumulated += rounded; // bring it closer to 0
+
+                // Apply decay as damage
+                TakeDamage(rounded, null);
+            }
+        }
+
+
+        private void Awake()
 		{
 			_baseMaxHealth = _maxHealth;
 			_health = _maxHealth;
