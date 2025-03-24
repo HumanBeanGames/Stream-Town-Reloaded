@@ -18,6 +18,29 @@ Art Bible: https://docs.google.com/presentation/d/1VG11I8TGiMwpkelAd9ERPDhKpsiAk
 
 Contributors:
 
-JaydenHunter of Panda Belly
+## Panda Belly: 
+
+Jayden Hunter
+
+Andrew Nardi
+
+Ben Lindridge
+
+Ben Babicka
+
+Declan Doller
+
+William Trimble
+
+Isabella Kovac
+
+Aaron Hunter
+
+Lam Nguyen
+
+Francisco Inigo Garde
+
+## Other:
 
 Baron Von Scrub of Human Bean Games
+
