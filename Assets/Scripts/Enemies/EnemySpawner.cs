@@ -97,9 +97,15 @@ namespace Enemies
 			CalculateMaxEnemies();
 		}
 
-		private void CalculateMaxEnemies()
+		public int CalculateMaxEnemies()
 		{
 			_maxEnemies = Mathf.Max(Mathf.Min((int)(GameManager.Instance.TimeManager.DayCount + GameManager.Instance.PlayerManager.Players.Count * 0.1f), _maxTotalEnemies), _minTotalEnemies);
+			return _maxEnemies;
+		}
+
+		public int CurrentEnemies()
+		{
+			return _spawnedEnemies.Count;
 		}
 
 		// Unity Functions.

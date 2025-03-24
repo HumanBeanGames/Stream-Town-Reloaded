@@ -1,4 +1,4 @@
-using Buildings;
+﻿using Buildings;
 using Character;
 using GameResources;
 using Managers;
@@ -85,7 +85,14 @@ namespace Twitch.Commands
 
         public static string Discord() => "Join our Discord: https://discord.gg/yourserver";
         public static string Help() => "How to play: https://github.com/HumanBeanGames/Stream-Town-Reloaded/wiki/Summary";
-        public static string TownStats() => "(Town statistics to be implemented)";
+        public static string TownStats()
+        {
+            int maxEnemies = GameManager.Instance.EnemySpawner.CalculateMaxEnemies();
+            int curEnemies = GameManager.Instance.EnemySpawner.CurrentEnemies();
+            return $"🛡️ Town Stats:" +
+                $"\n- Max Enemies Allowed: {maxEnemies}" +
+                $"\n- Current Live Enemies: {curEnemies}";
+        }
 
         public static string ItemInfo(Player player, string command, params string[] args)
         {
