@@ -65,10 +65,11 @@ namespace UserInterface
 			_settingsManager.TogglingConnectionTab(true);
 			_loadingManager.LoadNonWorldScenes(1);
 		}
-
+		
 		public void ToggleIdleMode(bool toggle)
 		{
-			_cameraApplyChanges.gameObject.GetComponent<CameraController>().IsIdle = toggle;
+			GameManager.Instance.IdleMode = toggle;
+			//_cameraApplyChanges.gameObject.GetComponent<CameraController>().IsIdle = toggle;
 		}
 
 		private void Awake()

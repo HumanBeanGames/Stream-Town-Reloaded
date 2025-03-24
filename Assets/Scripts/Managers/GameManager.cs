@@ -141,7 +141,15 @@ namespace Managers
 			get { return _connectPanel; }
 		}
 
-		public void AddPathProbe(PathProbe probe) => _pathProbes.Add(probe);
+
+        private bool _idleMode = false;
+        public bool IdleMode
+        {
+            get => _idleMode;
+            set => _idleMode = value;
+        }
+
+        public void AddPathProbe(PathProbe probe) => _pathProbes.Add(probe);
 
 		public void SetUserPlayer(Player player)
 		{

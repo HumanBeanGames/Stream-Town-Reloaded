@@ -91,7 +91,6 @@ namespace PlayerControls
 		private bool _autofollow = false;
 		private bool _isPanning;
 		private bool _movingWithMouse;
-		private bool _isIdle = false;
 
 		private Vector2 _keyboardInput;
 
@@ -131,10 +130,9 @@ namespace PlayerControls
 			get { return _borderDetectionSenitivity; }
 			set { _borderDetectionSenitivity = value;}
 		}
-		public bool IsIdle
+		public bool IdleMode
 		{
-			get { return _isIdle; }
-			set { _isIdle = value; }
+			get { return GameManager.Instance.IdleMode; }
 		}
 
 		/// <summary>
@@ -142,7 +140,7 @@ namespace PlayerControls
 		/// </summary>
 		private void UpdateCamera()
 		{
-			if (!_isIdle)
+			if (!IdleMode)
 			{
 				Pan();
 				Move();
@@ -322,7 +320,7 @@ namespace PlayerControls
 
 		private void UpdateScrollWheelInput(float value)
 		{
-			if (!_isIdle && !WorldUtils.IsPointerOverUI(EventSystem.current) && _mouseControls)
+			if (!IdleMode && !WorldUtils.IsPointerOverUI(EventSystem.current) && _mouseControls)
 			{
 				_scrollWheelInput = -value;
 			}
@@ -353,7 +351,7 @@ namespace PlayerControls
 
 		public void MoveCamera(Vector3 moveVec)
 		{
-			if (_isIdle)
+			if (IdleMode)
 			{
 				_oldMovePosition = new Vector3(_newMovePosition.x, 0, _newMovePosition.z);
 				_newMovePosition = _oldMovePosition + moveVec;
@@ -370,7 +368,7 @@ namespace PlayerControls
 
 		public void ZoomCamera(int zoomFactor)
 		{
-			if (_isIdle)
+			if (IdleMode)
 			{
 				_scrollPosition += zoomFactor;
 				_scrollPosition = Mathf.Clamp(_scrollPosition, _minCameraHeight, _maxCameraHeight);
@@ -379,7 +377,7 @@ namespace PlayerControls
 
 		public void ResetCamera()
 		{
-			if (_isIdle)
+			if (IdleMode)
 			{
 				_newMovePosition = StartPosition;
 				_oldMovePosition = StartPosition;

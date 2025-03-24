@@ -75,3 +75,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 /[Aa]ssets/[Ss]treamingAssets/twitch_secrets.json
+Assets/StreamingAssets/twitch_secrets.json.meta

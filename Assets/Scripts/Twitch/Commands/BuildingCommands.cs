@@ -54,23 +54,45 @@ namespace Twitch.Commands
         {
             Vector3 moveVector = Vector3.zero;
             int rotationAmount = 0;
+
             string[] argsAppended = new string[args.Length + 1];
             argsAppended[0] = command;
             args.CopyTo(argsAppended, 1);
+
+            // Movement direction mapping for artificial cursor (UI space is Vector2)
+            Vector2 uiMove = Vector2.zero;
+
             for (int i = 0; i < argsAppended.Length; i += 2)
             {
                 int value = ((i + 1) < argsAppended.Length && int.TryParse(argsAppended[i + 1], out int v)) ? v : 1;
+
                 switch (argsAppended[i])
                 {
-                    case "up": moveVector += Vector3.right * value; break;
-                    case "down": moveVector += Vector3.left * value; break;
-                    case "left": moveVector += Vector3.forward * value; break;
-                    case "right": moveVector += Vector3.back * value; break;
-                    case "rotate": rotationAmount += value; break;
+                    case "up":
+                        moveVector += Vector3.right * value;
+                        uiMove += Vector2.up * value;
+                        break;
+                    case "down":
+                        moveVector += Vector3.left * value;
+                        uiMove += Vector2.down * value;
+                        break;
+                    case "left":
+                        moveVector += Vector3.forward * value;
+                        uiMove += Vector2.left * value;
+                        break;
+                    case "right":
+                        moveVector += Vector3.back * value;
+                        uiMove += Vector2.right * value;
+                        break;
+                    case "rotate":
+                        rotationAmount += value;
+                        break;
                 }
             }
+
             GameManager.Instance.BuildingManager.TryMoveBuilding(player, moveVector);
             GameManager.Instance.BuildingManager.TryRotateBuilding(player, rotationAmount);
+
             return "Adjusted building placer.";
         }
 
