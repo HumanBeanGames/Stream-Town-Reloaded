@@ -17,5 +17,7 @@ Technical Design Document: https://docs.google.com/document/d/12nDNNhhOYKf_gBjGF
 Art Bible: https://docs.google.com/presentation/d/1VG11I8TGiMwpkelAd9ERPDhKpsiAkukuqHoUEt8hr7E/edit?usp=share_link
 
 Contributors:
+
 JaydenHunter of Panda Belly
+
 Baron Von Scrub of Human Bean Games
