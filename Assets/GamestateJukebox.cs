@@ -36,17 +36,10 @@ public class GamestateJukebox : MonoBehaviour
         LoadSoundtracks();
     }
 
-    IEnumerator Start()
+    void Start()
     {
         SetVolume(_ambienceSource, _maxAmbienceVolume, false);
         SetVolume(_musicSource, 0.0f, true);
-
-        yield return new WaitUntil(() => GameManager.Instance != null);
-        yield return new WaitUntil(() => GameManager.Instance.SeasonManager != null);
-
-        GameManager.Instance.SeasonManager.OnSeasonChanging += _ => StartNextTrack();
-        GameManager.Instance.DayNightManager.OnDayStarting += () => StartCoroutine(DayTimeChangeRoutine(true));
-        GameManager.Instance.DayNightManager.OnNightStarting += () => StartCoroutine(DayTimeChangeRoutine(false));
     }
 
     void LoadSoundtracks()
