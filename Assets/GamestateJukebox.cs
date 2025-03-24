@@ -25,6 +25,7 @@ public class GamestateJukebox : MonoBehaviour
     [SerializeField] private float _fadeOutTime = 10;
     [SerializeField] private bool _playAmbienceDuringMusic = true;
 
+    bool _hasPlayedStartupTrack = false;
     private Dictionary<Vector3, AudioClip[]> soundtrackMap = new();
     private AudioClip lastPlayedClip;
     private float _timeUntilMusicPlays = 30;
@@ -46,20 +47,6 @@ public class GamestateJukebox : MonoBehaviour
         GameManager.Instance.SeasonManager.OnSeasonChanging += _ => StartNextTrack();
         GameManager.Instance.DayNightManager.OnDayStarting += () => StartCoroutine(DayTimeChangeRoutine(true));
         GameManager.Instance.DayNightManager.OnNightStarting += () => StartCoroutine(DayTimeChangeRoutine(false));
-    }
-
-    void Update()
-    {
-        if (_timeUntilMusicPlays > 0)
-        {
-            _timeUntilMusicPlays -= Time.deltaTime;
-        }
-        else
-        {
-            StartNextTrack();
-            _ambienceSource.Play();
-            _musicSource.Play();
-        }
     }
 
     void LoadSoundtracks()
@@ -101,7 +88,7 @@ public class GamestateJukebox : MonoBehaviour
         Debug.Log($"Loaded {totalClips} soundtrack clips from '{resourceFolder}'.");
 
         // ✅ Now that loading is done, start music
-        StartCoroutine(StartMusic());
+        StartCoroutine(MusicLoopCoroutine());
     }
 
 
@@ -135,7 +122,7 @@ public class GamestateJukebox : MonoBehaviour
         return chosen;
     }
 
-    private void StartNextTrack() => StartCoroutine(StartMusic());
+    private void StartNextTrack() => StartCoroutine(MusicLoopCoroutine());
 
     private IEnumerator DayTimeChangeRoutine(bool day)
     {
@@ -143,36 +130,45 @@ public class GamestateJukebox : MonoBehaviour
         StartNextTrack();
     }
 
-    private IEnumerator StartMusic()
+    private IEnumerator MusicLoopCoroutine()
     {
-        if (!_playAmbienceDuringMusic)
-            yield return VolumeToZero(_ambienceSource);
-
-        AudioClip clip = GetStartupClip();
-
-        if (clip == null)
+        while (true)
         {
-            Debug.LogError("No suitable music track found.");
-            yield break;
-        }
+            if (!_playAmbienceDuringMusic)
+                yield return VolumeToZero(_ambienceSource);
 
-        _musicSource.clip = clip;
-        SetVolume(_musicSource, 0f, true); // ✅ Start silent
-        _musicSource.Play();
+            AudioClip clip = _hasPlayedStartupTrack
+                ? GetClipFromGamestate()
+                : GetStartupClip();
 
-        float fadeInDelay = 5.0f;
-        // Force a short delay to wait for Unity to properly start audible output
-        yield return new WaitForSeconds(fadeInDelay);
+            _hasPlayedStartupTrack = true;
 
-        UpdateTimeUntilMusicPlays();
-        yield return VolumeToFull(_musicSource, true); // ✅ Fade in to max
-        yield return new WaitForSeconds(_musicSource.clip.length - _fadeOutTime);
-        yield return VolumeToZero(_musicSource);
+            if (clip == null)
+            {
+                Debug.LogError("No suitable music track found.");
+                yield return new WaitForSeconds(5f); // Avoid tight loop
+                continue;
+            }
 
-        if (!_playAmbienceDuringMusic)
-        {
-            _ambienceSource.Play();
-            yield return VolumeToFull(_ambienceSource, false);
+            _musicSource.clip = clip;
+            SetVolume(_musicSource, 0f, true);
+            _musicSource.Play();
+
+            yield return new WaitForSeconds(0.25f); // Small delay before fade-in
+            yield return VolumeToFull(_musicSource, true);
+
+            float playDuration = clip.length - _fadeOutTime;
+            yield return new WaitForSeconds(playDuration);
+            yield return VolumeToZero(_musicSource);
+
+            if (!_playAmbienceDuringMusic)
+            {
+                _ambienceSource.Play();
+                yield return VolumeToFull(_ambienceSource, false);
+            }
+
+            float wait = Random.Range(_minTimeBetweenMusic, _maxTimeBetweenMusic);
+            yield return new WaitForSeconds(wait);
         }
     }
 
