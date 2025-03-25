@@ -30,6 +30,8 @@ MonoBehaviour:
     <NextTech>k__BackingField: {fileID: 11400000, guid: 880d7f7bb7ae9644890ebfd248d05439, type: 2}
   - <NodeID>k__BackingField: 064d94f5-4d00-4a12-aee7-85653e19a5ea
     <NextTech>k__BackingField: {fileID: 11400000, guid: 73e0e285dfca3f14eb00d0ca7d5be4b8, type: 2}
+  - <NodeID>k__BackingField: 8d9460b7-4f4b-4c04-915e-651a464aa823
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 46eb8599f932ecb48a88a2c1e475cf41, type: 2}
   <Unlocks>k__BackingField: []
   <Objectives>k__BackingField: []
   <IsUnlocked>k__BackingField: 1

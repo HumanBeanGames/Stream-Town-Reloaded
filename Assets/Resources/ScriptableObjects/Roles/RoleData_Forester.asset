@@ -47,7 +47,7 @@ MonoBehaviour:
   GlobalResourceCarryPerLevel: 0
   GlobalDamageReductionPerLevel: 0
   HasUserLimit: 1
-  BaseMaxUserLimit: 1
+  BaseMaxUserLimit: 0
   ExpModifier: 5
   DisplayIcon: {fileID: 21300000, guid: 249b56713c41a9441a7e577522b22d64, type: 3}
   ActionClips:

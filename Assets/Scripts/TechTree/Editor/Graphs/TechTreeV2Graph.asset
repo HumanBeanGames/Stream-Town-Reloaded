@@ -16,22 +16,22 @@ MonoBehaviour:
   <Groups>k__BackingField:
   - <ID>k__BackingField: e47fc319-24c7-443d-8eda-dd5af847e364
     <Name>k__BackingField: FoodStorage
-    <Position>k__BackingField: {x: 489, y: -13135}
+    <Position>k__BackingField: {x: 488.99985, y: -13135}
   - <ID>k__BackingField: 95d9e18b-996d-4b15-8b43-fe4515da881c
     <Name>k__BackingField: WindmillAndGatherer
-    <Position>k__BackingField: {x: 98, y: -11602}
+    <Position>k__BackingField: {x: 97.99983, y: -11602}
   - <ID>k__BackingField: b2810b6f-7503-4252-b052-2dbe196a7242
     <Name>k__BackingField: OreStorage
-    <Position>k__BackingField: {x: 322, y: -16901}
+    <Position>k__BackingField: {x: 321.99988, y: -16901}
   - <ID>k__BackingField: a99ff810-239d-4b78-b128-623c1bfe7dd4
     <Name>k__BackingField: StoneMasonAndMiner
-    <Position>k__BackingField: {x: -80, y: -15472}
+    <Position>k__BackingField: {x: -80, y: -15472.001}
   - <ID>k__BackingField: cb379800-725c-4f21-954b-1a71441cc2b8
     <Name>k__BackingField: FishingHutAndFisher
-    <Position>k__BackingField: {x: 2913, y: -9292}
+    <Position>k__BackingField: {x: 2913, y: -9291.999}
   - <ID>k__BackingField: 4aeef78d-e104-4634-90b8-c9267f1b9d8e
     <Name>k__BackingField: FarmAndFarmer
-    <Position>k__BackingField: {x: 5194, y: -7018}
+    <Position>k__BackingField: {x: 5194.0005, y: -7018}
   - <ID>k__BackingField: a4e05d9b-f34c-41ee-acfe-0356a2c0cc14
     <Name>k__BackingField: WoodStorage
     <Position>k__BackingField: {x: -449, y: -4204}
@@ -43,37 +43,37 @@ MonoBehaviour:
     <Position>k__BackingField: {x: -4182, y: 97}
   - <ID>k__BackingField: 06ca16d0-e781-409f-9cf1-6b836b133588
     <Name>k__BackingField: Decoration
-    <Position>k__BackingField: {x: -1129, y: 2587}
+    <Position>k__BackingField: {x: -1129.0001, y: 2587}
   - <ID>k__BackingField: c972674d-9681-4fb5-b979-13617664b748
     <Name>k__BackingField: Marketplace
-    <Position>k__BackingField: {x: -241, y: 1197}
+    <Position>k__BackingField: {x: -241.00012, y: 1197}
   - <ID>k__BackingField: 84196bf3-bb76-4480-9f05-950298f43b36
     <Name>k__BackingField: Housing
     <Position>k__BackingField: {x: -2665, y: 3490}
   - <ID>k__BackingField: 0887cd03-eae2-474e-9bc0-bd56d9fba215
     <Name>k__BackingField: WallsAndGates
-    <Position>k__BackingField: {x: -2272, y: 5774}
+    <Position>k__BackingField: {x: -2272, y: 5774.0005}
   - <ID>k__BackingField: 87cb907d-6c0e-4e49-adb0-9c28eb60b31a
     <Name>k__BackingField: TowerAndDefender
-    <Position>k__BackingField: {x: -2741, y: 7500}
+    <Position>k__BackingField: {x: -2741, y: 7500.0005}
   - <ID>k__BackingField: 216bce54-8c84-42c6-ad78-124267d6672c
     <Name>k__BackingField: BowyardAndRanger
-    <Position>k__BackingField: {x: -190, y: 9770}
+    <Position>k__BackingField: {x: -190.00012, y: 9770}
   - <ID>k__BackingField: 207a7449-9d79-4acd-8ba0-47b4499fcd19
     <Name>k__BackingField: BarracksAndSoldier
     <Position>k__BackingField: {x: -208, y: 11867}
   - <ID>k__BackingField: e9110b18-d5e0-4e06-8f16-bf18fb24e30c
     <Name>k__BackingField: CastleAndPaladin
-    <Position>k__BackingField: {x: 1915, y: 14115}
+    <Position>k__BackingField: {x: 1914.9999, y: 14115.001}
   - <ID>k__BackingField: 61cd1418-7b06-4463-99af-31695e84e421
     <Name>k__BackingField: MonasteryAndPriest
     <Position>k__BackingField: {x: -2388, y: 16594}
   - <ID>k__BackingField: a52167aa-0e39-433e-9faa-c91b1aefba2b
     <Name>k__BackingField: WizardTowerAndWizard
-    <Position>k__BackingField: {x: -195, y: 19177}
+    <Position>k__BackingField: {x: -195.00012, y: 19177}
   - <ID>k__BackingField: faa8950f-51f5-4d42-a5f8-5ab8a93c2d4e
     <Name>k__BackingField: NecroTowerAndNecromancer
-    <Position>k__BackingField: {x: 2171, y: 21853}
+    <Position>k__BackingField: {x: 2171.0002, y: 21853.002}
   <Nodes>k__BackingField:
   - <ID>k__BackingField: 5e1c2d9a-9de8-4b26-8e21-f0ff833b4260
     <Name>k__BackingField: Level3FishingHut
@@ -13268,6 +13268,7 @@ MonoBehaviour:
     - <NodeID>k__BackingField: 5ff5abd8-7533-4fda-b589-02456265f9fd
     - <NodeID>k__BackingField: ef3fd6a3-c67b-4bcd-9c85-6838146b4dca
     - <NodeID>k__BackingField: 064d94f5-4d00-4a12-aee7-85653e19a5ea
+    - <NodeID>k__BackingField: 8d9460b7-4f4b-4c04-915e-651a464aa823
     <Unlocks>k__BackingField: []
     <Objectives>k__BackingField: []
     <GroupID>k__BackingField: 9cb8e4f8-527f-47a3-896e-8e5d6afbd547
@@ -13279,6 +13280,40 @@ MonoBehaviour:
     <ObjectivesFoldoutCollapsed>k__BackingField: 1
     <DescriptionFoldoutCollapsed>k__BackingField: 1
     <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_TownHall.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: 8d9460b7-4f4b-4c04-915e-651a464aa823
+    <Name>k__BackingField: Forestry
+    <NodeTitle>k__BackingField: Forestry
+    <Description>k__BackingField: Unlocks Forester Hut + Forester
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 1
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 0
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 26
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 6
+      <IntValue>k__BackingField: 3000
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 3
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 2c5eeaea-7de3-4f22-8d90-ec6a5275c73b
+    <Position>k__BackingField: {x: -854, y: -1978}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 1
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Textures/TempLeaves.png
     <Unavailable>k__BackingField: 0
   <OldGroupNames>k__BackingField:
   - FoodStorage
@@ -13392,6 +13427,7 @@ MonoBehaviour:
       - Upgrade7Logger
       - Upgrade8Logger
       - Upgrade4Lumbermill
+      - Forestry
     - Key: TownHall
       Value:
       - Level5TownHall

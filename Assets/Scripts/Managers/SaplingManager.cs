@@ -173,7 +173,6 @@ namespace Environment
             sapling.transform.position = spawnPoint;
             sapling.transform.rotation = Quaternion.identity;
             sapling.SetActive(true);
-            Debug.Log("[SaplingManager] Spawned SaplingLocation at: " + spawnPoint);
             return true;
         }
     }
