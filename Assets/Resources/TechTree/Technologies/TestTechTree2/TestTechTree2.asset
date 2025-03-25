@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8165373e5f145f942936577f7a99d193, type: 3}
+  m_Name: TestTechTree2
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TestTechTree2
+  <NodeGroups>k__BackingField:
+    list: []
+  <UngroupedNodes>k__BackingField:
+  - {fileID: 11400000, guid: 6171097413b3c3943bbba0c203dd3739, type: 2}
+  - {fileID: 11400000, guid: fd5d4ad564433ea4b8d76686f3efffba, type: 2}
+  - {fileID: 11400000, guid: 3f327981f888de747b4f2a120cfb8423, type: 2}
+  - {fileID: 11400000, guid: 074f599b12c53f649a34f1f3c40142fd, type: 2}

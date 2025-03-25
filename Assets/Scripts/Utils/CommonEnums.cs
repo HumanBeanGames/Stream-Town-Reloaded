@@ -74,6 +74,7 @@ namespace Utils
 		Necromancer,
 		Paladin,
 		Blacksmith,
+		Forester,
 		Count
 	}
 
@@ -132,6 +133,7 @@ namespace Utils
 		Wizardtower,
 		Castle,
 		Statue3,
+		Foresterhut,
 		Count
 	}
 
@@ -331,7 +333,8 @@ namespace Utils
 		Statue1,
 		Statue2,
 		Fountain,
-		Count
+        ForesterHut,
+        Count
 	}
 
 	[Serializable]

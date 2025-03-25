@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896eee04fd576634e844735d914b7744, type: 3}
+  m_Name: TestTechTree2Graph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: TestTechTree2
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 8c2a4dea-e24f-4a12-9e18-bd03d0af5f6d
+    <Name>k__BackingField: Hamlet
+    <NodeTitle>k__BackingField: Hamlet
+    <Description>k__BackingField: Unlock Town Hall
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: da810b1f-4473-4f41-95b7-75752309f3e8
+    - <NodeID>k__BackingField: d151f6be-45fc-48bc-b27a-6b54604d9850
+    - <NodeID>k__BackingField: 2deed079-2d20-4a58-a896-03c1189b503f
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField: []
+    <Objectives>k__BackingField: []
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: -419, y: 4943}
+    <Unlocked>k__BackingField: 1
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_TownHall.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: d151f6be-45fc-48bc-b27a-6b54604d9850
+    <Name>k__BackingField: WizardTower
+    <NodeTitle>k__BackingField: Wizard Tower
+    <Description>k__BackingField: Unlock Wizard Tower and Wizard role
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 1
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 0
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 23
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 50000
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 5
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 103, y: 5531}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_WizardTower.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: da810b1f-4473-4f41-95b7-75752309f3e8
+    <Name>k__BackingField: IncreasedRange3
+    <NodeTitle>k__BackingField: Projectile Motion 3
+    <Description>k__BackingField: Tech Text.
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField: []
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 2
+      <IntValue>k__BackingField: 75000
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 4
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 105, y: 4918}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age02_Tower.png
+    <Unavailable>k__BackingField: 0
+  - <ID>k__BackingField: 2deed079-2d20-4a58-a896-03c1189b503f
+    <Name>k__BackingField: Forester
+    <NodeTitle>k__BackingField: Forestry
+    <Description>k__BackingField: Unlocks Forester Hut
+    <ChildTech>k__BackingField:
+    - <NodeID>k__BackingField: 
+    <Unlocks>k__BackingField:
+    - <TechType>k__BackingField: 1
+      <IntValue>k__BackingField: 0
+      <FloatValue>k__BackingField: 0
+      <StringValue>k__BackingField: 
+      <CharValue>k__BackingField: 0
+      <BoolValue>k__BackingField: 0
+      <PlayerRole>k__BackingField: 0
+      <BuildingType>k__BackingField: 26
+      <StatType>k__BackingField: 0
+      <ResourceType>k__BackingField: 0
+    <Objectives>k__BackingField:
+    - <ObjectiveType>k__BackingField: 6
+      <IntValue>k__BackingField: 500
+      <FloatValue>k__BackingField: 0
+      <BuildingType>k__BackingField: 0
+      <ResourceType>k__BackingField: 3
+      <EnemyType>k__BackingField: 0
+    <GroupID>k__BackingField: 
+    <Position>k__BackingField: {x: 131, y: 4292}
+    <Unlocked>k__BackingField: 0
+    <Age>k__BackingField: 0
+    <Tier>k__BackingField: 1
+    <UnlocksFoldoutCollapsed>k__BackingField: 1
+    <ObjectivesFoldoutCollapsed>k__BackingField: 1
+    <DescriptionFoldoutCollapsed>k__BackingField: 1
+    <IconPath>k__BackingField: Assets/Textures/TempLeaves.png
+    <Unavailable>k__BackingField: 0
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - Hamlet
+  - WizardTower
+  - IncreasedRange3
+  - Forester
+  <OldGroupedNodeNames>k__BackingField:
+    list: []

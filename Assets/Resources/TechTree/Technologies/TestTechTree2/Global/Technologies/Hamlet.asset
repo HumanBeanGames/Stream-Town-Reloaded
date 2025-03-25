@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2378095b9566248a7d316d47c58df8, type: 3}
+  m_Name: Hamlet
+  m_EditorClassIdentifier: 
+  <TechName>k__BackingField: Hamlet
+  <NodeTitle>k__BackingField: Hamlet
+  <Description>k__BackingField: Unlock Town Hall
+  <Children>k__BackingField:
+  - <NodeID>k__BackingField: da810b1f-4473-4f41-95b7-75752309f3e8
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 3f327981f888de747b4f2a120cfb8423, type: 2}
+  - <NodeID>k__BackingField: d151f6be-45fc-48bc-b27a-6b54604d9850
+    <NextTech>k__BackingField: {fileID: 11400000, guid: fd5d4ad564433ea4b8d76686f3efffba, type: 2}
+  - <NodeID>k__BackingField: 2deed079-2d20-4a58-a896-03c1189b503f
+    <NextTech>k__BackingField: {fileID: 11400000, guid: 074f599b12c53f649a34f1f3c40142fd, type: 2}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  - <NodeID>k__BackingField: 
+    <NextTech>k__BackingField: {fileID: 0}
+  <Unlocks>k__BackingField: []
+  <Objectives>k__BackingField: []
+  <IsUnlocked>k__BackingField: 1
+  <Age>k__BackingField: 0
+  <Tier>k__BackingField: 1
+  <Parent>k__BackingField: {fileID: 0}
+  <IconPath>k__BackingField: Assets/Resources/Icons/Buildings/UI_Icon_Building_Age01_TownHall.png
+  <Unavailable>k__BackingField: 0

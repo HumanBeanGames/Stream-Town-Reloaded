@@ -41,6 +41,7 @@ namespace Twitch.Commands
             { BuildingType.Townhall, "TownHall: The spawn point. Type !stuck to return here. "},
             { BuildingType.Wall, "Wall: Provides defense from enemies. "},
             { BuildingType.Windmill, "Windmill: Unlocks Gatherer slots. "},
+            { BuildingType.Foresterhut, "ForesterHut: Unlocks Forester slots. "},
             { BuildingType.Wizardtower, "WizardTower: Unlocks Wizard slots. "},
             { BuildingType.Woodstorage, "WoodStorage: Increases Town's wood storage. "}
         };
@@ -60,7 +61,8 @@ namespace Twitch.Commands
             { PlayerRole.Ranger, "Ranger: Ranged combat unit. "},
             { PlayerRole.Ruler, "Ruler: Controls the camera, recruits NPCs, buys and sells resources and fights enemies. "},
             { PlayerRole.Soldier, "Soldier: Strong melee combat unit. "},
-            { PlayerRole.Wizard, "Wizard: Ranged combat unit. "}
+            { PlayerRole.Wizard, "Wizard: Ranged combat unit. "},
+            { PlayerRole.Forester, "Forester: Replants trees. "}
         };
 
         public static readonly Dictionary<Resource, string> ResourceDescriptions = new Dictionary<Resource, string>

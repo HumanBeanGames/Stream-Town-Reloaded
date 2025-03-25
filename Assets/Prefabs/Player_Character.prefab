@@ -520,6 +520,17 @@ MonoBehaviour:
     HasCarryAnimation: 0
     CarryAnimation: 0
     LeftHandPermanent: 0
+  - RoleName: Forester
+    PlayerRole: 15
+    BodieSlim: {fileID: 2903950351672334967}
+    BodieBulk: {fileID: 5190013879100036444}
+    BodieFeminine: {fileID: 6613766518907172563}
+    LeftHand: {fileID: 0}
+    RightHand: {fileID: 7883286037154098966}
+    Helmet: {fileID: 0}
+    HasCarryAnimation: 0
+    CarryAnimation: 0
+    LeftHandPermanent: 0
   _skinColors:
   - {r: 0.8509804, g: 0.6784314, b: 0.50980395, a: 0}
   - {r: 0.8113208, g: 0.69712704, b: 0.5855287, a: 0}
