@@ -33,7 +33,7 @@ namespace Environment
 
         private void Start()
         {
-            CacheTreeList();
+            //CacheTreeList();
             CacheTreeGenerationSettings();
             _poolingManager = GameManager.Instance.PoolingManager;
         }
@@ -64,7 +64,7 @@ namespace Environment
         /// <summary>
         /// Caches a direct reference to the list of trees tracked by the TargetManager.
         /// </summary>
-        private void CacheTreeList()
+        public void CacheTreeList()
         {
             if (GameManager.Instance != null && GameManager.Instance.TargetManager != null)
             {

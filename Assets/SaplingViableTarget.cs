@@ -8,11 +8,21 @@ public class SaplingViableTarget : MonoBehaviour
 {
     private ResourceHolder _resourceHolder;
     [SerializeField] private string treePoolName = "Tree"; // Matches name in Object Pool
+    [SerializeField] private float lifespan = 60.0f;
+
+    private float timer = 0;
 
     private void OnEnable()
     {
         _resourceHolder = GetComponent<ResourceHolder>();
         _resourceHolder.OnAmountChange += HandleResourceChanged;
+        timer = 0;
+    }
+
+    private void Update()
+    {
+        if ((timer+=Time.deltaTime)>lifespan)
+            gameObject.SetActive(false);
     }
 
     private void HandleResourceChanged(ResourceHolder rh)

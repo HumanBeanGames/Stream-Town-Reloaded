@@ -1,4 +1,5 @@
-using Enemies;
+﻿using Enemies;
+using Environment;
 using Managers;
 using Pathfinding;
 using SavingAndLoading.SavableObjects;
@@ -189,7 +190,13 @@ namespace World.Generation
 					yield return new WaitForEndOfFrame();
 				}
 
-			}
+                // ✅ Tell the SaplingManager the trees exist now
+                var saplingManager = FindAnyObjectByType<SaplingManager>();
+                if (saplingManager != null)
+                {
+                    saplingManager.CacheTreeList();
+                }
+            }
 
 			// Generate all resources for water on the shore line (fish).
 			if (_waterResourceGenerationSettings != null)
