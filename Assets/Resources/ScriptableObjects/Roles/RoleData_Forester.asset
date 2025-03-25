@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: RoleData_Forester
   m_EditorClassIdentifier: 
   Role: 15
-  RoleFlags: 2
-  TargetFlags: 0
-  Resource: 0
-  ActionAnimationName: 2
+  RoleFlags: 1
+  TargetFlags: 8192
+  Resource: 6
+  ActionAnimationName: 5
   ActionAnimationVariants: 1
-  StationFlags: 0
-  BaseActionAmount: 5
+  StationFlags: 32
+  BaseActionAmount: 1
   BaseActionSpeed: 1
-  BaseActionRange: 12
+  BaseActionRange: 1
   BaseRoleLevel: 1
   BaseFoodUpkeep: 0.5
   BaseGoldUpkeep: 0.5
@@ -29,11 +29,11 @@ MonoBehaviour:
   BaseHealthRegen: 0
   BaseDamageReduction: 0
   BaseMovementSpeed: 3
-  BaseMaxResource: 0
+  BaseMaxResource: 10
   MaxResourcePerLevel: 0
   MovementSpeedPerLevel: 0.05
   ActionAmountPerLevel: 0.33
-  ActionSpeedPerLevel: 0.005
+  ActionSpeedPerLevel: 0.01
   ActionRangePerLevel: 0
   HealthPerLevel: 0
   HealthRegenPerLevel: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   GlobalResourceCarryPerLevel: 0
   GlobalDamageReductionPerLevel: 0
   HasUserLimit: 1
-  BaseMaxUserLimit: 0
+  BaseMaxUserLimit: 1
   ExpModifier: 5
   DisplayIcon: {fileID: 21300000, guid: 249b56713c41a9441a7e577522b22d64, type: 3}
   ActionClips:

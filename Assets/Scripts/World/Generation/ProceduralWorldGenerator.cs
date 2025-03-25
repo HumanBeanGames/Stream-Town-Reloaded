@@ -47,8 +47,13 @@ namespace World.Generation
 		private LayerMask _terrainMask;
 		public Mesh GeneratedMesh => _generatedMesh;
 
+        public List<ResourceGenerationSettings> GetResourceGenerationSettings()
+        {
+            return _resourceGenerationSettings;
+        }
+
 #if UNITY_EDITOR
-		[SerializeField]
+        [SerializeField]
 		private bool _regen = false;
 		[SerializeField]
 		private bool _previewTreePlacements = false;

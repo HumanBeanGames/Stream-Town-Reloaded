@@ -216,24 +216,28 @@ namespace Managers
 			_resources.Add(Resource.Ore, new ResourceInventory(5000, 15000));
 			_resources.Add(Resource.Wood, new ResourceInventory(5000, 15000));
 			_resources.Add(Resource.Gold, new ResourceInventory(5000, 0, true));
+			_resources.Add(Resource.SaplingCounter, new ResourceInventory(0, 0, true));
 			_resources.Add(Resource.Recruit, new ResourceInventory(0, 5));
 
 			_resourceRatesOfChange.Add(Resource.Food, new ResourceRateOfChange(Resource.Food, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
 			_resourceRatesOfChange.Add(Resource.Ore, new ResourceRateOfChange(Resource.Ore, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
 			_resourceRatesOfChange.Add(Resource.Wood, new ResourceRateOfChange(Resource.Wood, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
 			_resourceRatesOfChange.Add(Resource.Gold, new ResourceRateOfChange(Resource.Gold, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-			_resourceRatesOfChange.Add(Resource.Recruit, new ResourceRateOfChange(Resource.Recruit, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
+            _resourceRatesOfChange.Add(Resource.SaplingCounter, new ResourceRateOfChange(Resource.SaplingCounter, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
+            _resourceRatesOfChange.Add(Resource.Recruit, new ResourceRateOfChange(Resource.Recruit, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
 
 			_onResourceChangeEventDict.Add(Resource.Food, new UnityEvent<StorageStatus>());
 			_onResourceChangeEventDict.Add(Resource.Ore, new UnityEvent<StorageStatus>());
 			_onResourceChangeEventDict.Add(Resource.Wood, new UnityEvent<StorageStatus>());
 			_onResourceChangeEventDict.Add(Resource.Gold, new UnityEvent<StorageStatus>());
-			_onResourceChangeEventDict.Add(Resource.Recruit, new UnityEvent<StorageStatus>());
+            _onResourceChangeEventDict.Add(Resource.SaplingCounter, new UnityEvent<StorageStatus>());
+            _onResourceChangeEventDict.Add(Resource.Recruit, new UnityEvent<StorageStatus>());
 
 			ResourceBoostValues.Add(Resource.Food, 0);
 			ResourceBoostValues.Add(Resource.Ore, 0);
 			ResourceBoostValues.Add(Resource.Wood, 0);
-			ResourceBoostValues.Add(Resource.Recruit, 0);
+            ResourceBoostValues.Add(Resource.SaplingCounter, 0);
+            ResourceBoostValues.Add(Resource.Recruit, 0);
 		}
 
 		public bool TryTakeReviveCost(Utils.ReviveType type)

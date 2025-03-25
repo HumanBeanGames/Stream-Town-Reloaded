@@ -19,12 +19,24 @@ namespace Managers
 			return _targetableData[TargetFlagHelper.GetIndexByFlag(type)].UpdateType;
 		}
 
-		/// <summary>
-		/// Gets all targets defined by the flag into one list.
-		/// </summary>
-		/// <param name="flag"></param>
-		/// <returns></returns>
-		public List<Targetable> GetTargetsByFlag(TargetMask flag)
+        public List<Targetable> GetSingleTargetList(TargetMask type)
+        {
+            if (_targetDictionary.TryGetValue(type, out var list))
+            {
+                return list;
+            }
+
+            Debug.LogWarning($"[TargetManager] No list found for TargetMask: {type}");
+            return new List<Targetable>();
+        }
+
+
+        /// <summary>
+        /// Gets all targets defined by the flag into one list.
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public List<Targetable> GetTargetsByFlag(TargetMask flag)
 		{
 			List<Targetable> targets = new List<Targetable>();
 

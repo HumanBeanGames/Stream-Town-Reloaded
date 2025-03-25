@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8356327203997690087}
   - component: {fileID: 4676259276595234824}
   - component: {fileID: 1765598635829304837}
+  - component: {fileID: 6206431876674455829}
   - component: {fileID: 7711166102543110085}
   - component: {fileID: 6768214198997421552}
   - component: {fileID: 4123777355994552013}
@@ -30,7 +31,6 @@ GameObject:
   - component: {fileID: 4297318372752560618}
   - component: {fileID: 1663623434117325580}
   - component: {fileID: 8444733496641021938}
-  - component: {fileID: 6206431876674455829}
   - component: {fileID: 8524042000473611827}
   - component: {fileID: 7834492647329878108}
   - component: {fileID: 7942735372721111558}
@@ -191,6 +191,23 @@ MonoBehaviour:
   _useStationTargets: 1
   _attackAttacker: 0
   _targetSearchRange: 100
+--- !u!114 &6206431876674455829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274655305257698699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdee62b7ede71c4889a9cfc98da9424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stationMask: 0
+  _currentStation: {fileID: 0}
+  _onStationChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7711166102543110085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,10 +543,10 @@ MonoBehaviour:
     BodieBulk: {fileID: 5190013879100036444}
     BodieFeminine: {fileID: 6613766518907172563}
     LeftHand: {fileID: 0}
-    RightHand: {fileID: 7883286037154098966}
+    RightHand: {fileID: 0}
     Helmet: {fileID: 0}
     HasCarryAnimation: 0
-    CarryAnimation: 0
+    CarryAnimation: 5
     LeftHandPermanent: 0
   _skinColors:
   - {r: 0.8509804, g: 0.6784314, b: 0.50980395, a: 0}
@@ -745,23 +762,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 1
---- !u!114 &6206431876674455829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2274655305257698699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fdee62b7ede71c4889a9cfc98da9424, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stationMask: 0
-  _currentStation: {fileID: 0}
-  _onStationChange:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8524042000473611827
 MonoBehaviour:
   m_ObjectHideFlags: 0

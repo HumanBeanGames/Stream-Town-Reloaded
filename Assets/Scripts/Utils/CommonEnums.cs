@@ -15,6 +15,7 @@ namespace Utils
 		Food,
 		Gold,
 		Recruit,
+		SaplingCounter,
 		Count
 	}
 
@@ -53,7 +54,8 @@ namespace Utils
 		DamagedBuilding = 512,
 		Construction = 1024,
 		InjuredPlayer = 2048,
-		DeadPlayer = 4096
+		DeadPlayer = 4096,
+		SaplingLocation = 8192,
 	}
 
 	[Serializable]
