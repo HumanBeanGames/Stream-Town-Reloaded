@@ -1,5 +1,5 @@
 using UnityEngine;
-using Managers;
+
 using Scriptables;
 using UnityEngine.Rendering.Universal;
 using PlayerControls;
@@ -7,9 +7,6 @@ namespace Settings
 {
     public class CameraApplyChanges : MonoBehaviour 
 	{
-		//Settings data information
-		private SettingsScriptable _settingsData;
-		
 		//Camera Components
 		private Camera _camera;
 		private UniversalAdditionalCameraData _cameraData;
@@ -18,31 +15,24 @@ namespace Settings
 		public Camera Cam => _camera;
 		public UniversalAdditionalCameraData CameraData => _cameraData;
 
-		public void UpdateCameraSettings()
+		public void UpdateCameraSettings(Camera camera)
 		{
-			_camera.fieldOfView = _settingsData.fov;
-			
-			switch (_settingsData.camAA)
-			{
-				case 1:
-					_cameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
-					break;
-				case 2:
-					_cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-					break;
-				default:
-					_cameraData.antialiasing = AntialiasingMode.None;
-					break;
-			}
-			_cameraData.antialiasingQuality = AntialiasingQuality.High;
-			
-			_cameraController.PanSensitivity = _settingsData.panSensitivity;
-			_cameraController.ZoomSensitivity = _settingsData.zoomSensitivity;
-			_cameraController.WasdSensitivity = _settingsData.wasdSensitivity;
-			_cameraController.BorderDetectionSensitivity = _settingsData.borderDetectionSensitivity;
+			camera.fieldOfView = SettingsManager.CurrentSettings.fov;
 
-			_cameraController.BorderDetection = _settingsData.borderDetection;
-			_cameraController.MouseControls = _settingsData.mouseControls;
+			var cameraData = camera.GetComponent<UniversalAdditionalCameraData>();
+
+			cameraData.antialiasing = SettingsManager.CurrentSettings.camAA;
+
+			cameraData.antialiasingQuality = AntialiasingQuality.High;
+
+			var cameraController = camera.GetComponent<CameraController>();
+			cameraController.PanSensitivity = SettingsManager.CurrentSettings.panSensitivity;
+			cameraController.ZoomSensitivity = SettingsManager.CurrentSettings.zoomSensitivity;
+			cameraController.WasdSensitivity = SettingsManager.CurrentSettings.wasdSensitivity;
+			cameraController.BorderDetectionSensitivity = SettingsManager.CurrentSettings.borderDetectionSensitivity;
+
+			cameraController.BorderDetection = SettingsManager.CurrentSettings.borderDetection;
+			cameraController.MouseControls = SettingsManager.CurrentSettings.mouseControls;
 		}
 
 		private void EnableCamera()
@@ -53,12 +43,11 @@ namespace Settings
 
 		private void Awake()
 		{
-			_settingsData = GameManager.Instance.SettingsData;
 			_camera = this.GetComponent<Camera>();
 			_cameraData = this.GetComponent<UniversalAdditionalCameraData>();
 			_cameraController = this.GetComponent<CameraController>();
 			GameStateManager.ReadiedPlayer += EnableCamera;
-			UpdateCameraSettings();
+			UpdateCameraSettings(_camera);
 		}
 	}
 }

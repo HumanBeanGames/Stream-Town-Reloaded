@@ -1,5 +1,5 @@
 using Character.Enumerations;
-using Managers;
+
 using Twitch.Utils;
 using TwitchLib.Client.Enums;
 

@@ -1,4 +1,4 @@
-using Managers;
+
 using Pathfinding;
 using Scriptables;
 using System;
@@ -49,7 +49,7 @@ namespace Character
 		public int CurrentLevel => _level;
 		public int CurrentExp => _experience;
 		public int RequiredExp => _requiredExp;
-		public bool IsMaxLevel => (_level >= RoleManager.MAX_ROLE_LEVEl);
+		public bool IsMaxLevel => (_level >= RoleManager.MAX_ROLE_LEVEL);
 		public AudioClip[] ActionClips => _actionClips;
 
 		public event Action<RoleHandler> OnExperienceChange;

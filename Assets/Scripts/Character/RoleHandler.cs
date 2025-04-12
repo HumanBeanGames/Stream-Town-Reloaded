@@ -1,6 +1,6 @@
 using Animation;
 using Behaviours;
-using Managers;
+
 using Pathfinding;
 using Scriptables;
 using Sensors;

@@ -1,6 +1,6 @@
 using UnityEngine;
 using GameResources;
-using Managers;
+
 using Utils.Pooling;
 
 [RequireComponent(typeof(ResourceHolder))]

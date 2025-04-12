@@ -1,5 +1,5 @@
 using Character;
-using Managers;
+
 using System;
 using Twitch.Utils;
 using UnityEngine;
@@ -157,7 +157,7 @@ namespace Twitch.Commands
             if (int.TryParse(args[0], out int id))
             {
                 Player recruit = GameManager.Instance.PlayerManager.GetRecruitByIndex(id);
-                return $"{player.TwitchUser.Username} ----- Recruit {id} | Current role {recruit.RoleHandler.CurrentRole} | Health: {recruit.HealthHandler.Health}/{recruit.HealthHandler.MaxHealth} | Level: {recruit.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEl} | Experience: {recruit.RoleHandler.PlayerRoleData.CurrentExp}/{recruit.RoleHandler.PlayerRoleData.RequiredExp}";
+                return $"{player.TwitchUser.Username} ----- Recruit {id} | Current role {recruit.RoleHandler.CurrentRole} | Health: {recruit.HealthHandler.Health}/{recruit.HealthHandler.MaxHealth} | Level: {recruit.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEL} | Experience: {recruit.RoleHandler.PlayerRoleData.CurrentExp}/{recruit.RoleHandler.PlayerRoleData.RequiredExp}";
             }
             return $"{args[0]} is not a valid id";
         }

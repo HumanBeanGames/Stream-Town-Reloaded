@@ -1,6 +1,6 @@
 using GridSystem.Partitioning;
 using GUIDSystem;
-using Managers;
+
 using UnityEngine;
 using UserInterface;
 using Utils;
@@ -179,14 +179,14 @@ namespace Target
 			_wasPooled = true;
 			AddThisTargetToCell();
 
-			GameManager.Instance.TargetManager.AddTarget(this);
+			TargetManager.AddTarget(this);
 		}
 
 		protected void OnDisable()
 		{
 			RemoveThisTarget();
 
-			GameManager.Instance.TargetManager.RemoveTarget(this);
+			TargetManager.RemoveTarget(this);
 		}
 
 		private void Awake()

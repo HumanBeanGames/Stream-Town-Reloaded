@@ -3,7 +3,7 @@ using Target;
 using UnityEngine;
 using Utils;
 using System;
-using Managers;
+
 using UnityEngine.Profiling;
 using Pathfinding;
 using UserInterface;
@@ -72,7 +72,6 @@ namespace Buildings
 		// Required Components.
 		private Transform _transform;
 		private StationManager _manager;
-		private TargetManager _targetManager;
 		private Targetable _targetable;
 		private GUIDComponent _gUIDComponent;
 		//private UnitTextDisplay _displayText;
@@ -140,7 +139,7 @@ namespace Buildings
 					continue;
 
 				// If Targets update type is Clear, reset the list
-				if (_targetManager.GetUpdateType(key) == StationUpdate.Clear || _targetDictionary[key] == null)
+				if (TargetManager.GetUpdateType(key) == StationUpdate.Clear || _targetDictionary[key] == null)
 				{
 					_targetDictionary[key] = new List<Targetable>(_maxListSize);
 				}
@@ -427,7 +426,6 @@ namespace Buildings
 		private void Start()
 		{
 			_manager = GameManager.Instance.StationManager;
-			_targetManager = GameManager.Instance.TargetManager;
 
 			// Add this station to the Station Manager.
 			_manager.AddStation(this);

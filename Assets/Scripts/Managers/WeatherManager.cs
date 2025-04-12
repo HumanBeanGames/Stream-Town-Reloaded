@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.VFX;
 using Utils;
 
-namespace Managers
-{
 	public class WeatherManager : MonoBehaviour
 	{
 		private SeasonManager _seasonManager;
@@ -70,4 +68,3 @@ namespace Managers
 			SetDataVFX();
 		}
 	}
-}

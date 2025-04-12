@@ -1,4 +1,4 @@
-﻿using MetaData;
+using MetaData;
 using SavingAndLoading;
 using Scriptables;
 using Settings;
@@ -13,13 +13,11 @@ namespace UserInterface.MainMenu
         [SerializeField] private int _sceneIndex = 0;
 
         [SerializeField] private Button _loadButton;
-        [SerializeField] private SettingsScriptable _settingsScriptable;
         [SerializeField] private GameObject _channelNameUI;
 
         private GameObject _loadingScreen;
         private bool _loading = false;
 
-        private SettingsManager _settingsManager;
         private LoadingManager _loadingManager;
         private MetaData.MetaData _metaData;
         private LoadType _loadType;
@@ -29,13 +27,12 @@ namespace UserInterface.MainMenu
         {
             if (!string.IsNullOrEmpty(_channelName))
             {
-                _settingsManager.SetChannelName(_channelName);
-                _settingsScriptable.channelName = _channelName;
-                _settingsManager.SaveSettings();
+                SettingsManager.SetChannelName(_channelName);
+                SettingsManager.SaveSettings();
 
                 _loading = true;
                 _metaData.LoadType = _loadType;
-                _settingsManager.TogglingConnectionTab(false);
+                SettingsManager.TogglingConnectionTab(false);
 
                 ShowLoadingScreen();
                 _loadingManager.LoadWorldScene(_sceneIndex);
@@ -56,12 +53,12 @@ namespace UserInterface.MainMenu
         {
             if (_loading) return;
 
-            if (!string.IsNullOrEmpty(_settingsScriptable.channelName))
+            if (!string.IsNullOrEmpty(SettingsManager.CurrentSettings.channelName))
             {
                 _loading = true;
                 _metaData.LoadType = LoadType.Generate;
                 Debug.Log("Generating World");
-                _settingsManager.TogglingConnectionTab(false);
+                SettingsManager.TogglingConnectionTab(false);
 
                 ShowLoadingScreen();
                 _loadingManager.LoadWorldScene(_sceneIndex);
@@ -77,12 +74,12 @@ namespace UserInterface.MainMenu
         {
             if (_loading) return;
 
-            if (!string.IsNullOrEmpty(_settingsScriptable.channelName))
+            if (!string.IsNullOrEmpty(SettingsManager.CurrentSettings.channelName))
             {
                 _loading = true;
                 _metaData.LoadType = LoadType.Load;
                 Debug.Log("Loading World");
-                _settingsManager.TogglingConnectionTab(false);
+                SettingsManager.TogglingConnectionTab(false);
 
                 ShowLoadingScreen();
                 _loadingManager.LoadWorldScene(_sceneIndex);
@@ -101,7 +98,7 @@ namespace UserInterface.MainMenu
 
         public void OptionMenuToggle()
         {
-            _settingsManager.SettingsPanel.SetActive(!_settingsManager.SettingsPanel.activeSelf);
+            SettingsManager.SettingsPanel.SetActive(!SettingsManager.SettingsPanel.activeSelf);
         }
 
         public void QuitGame()
@@ -111,7 +108,6 @@ namespace UserInterface.MainMenu
 
         private void Awake()
         {
-            _settingsManager = FindAnyObjectByType<SettingsManager>();
             _loadingManager = FindAnyObjectByType<LoadingManager>();
             _metaData = MetaData.MetaData.Instance;
 
@@ -126,7 +122,7 @@ namespace UserInterface.MainMenu
                 Debug.LogWarning("Loading screen GameObject not found. Make sure it's tagged 'LoadingScreen' and present in the scene.");
             }
 
-            _settingsManager.LoadSettings();
+            SettingsManager.LoadSettings();
         }
 
         private void Start()
@@ -142,9 +138,9 @@ namespace UserInterface.MainMenu
         {
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
-                if (_settingsManager.SettingsPanel.activeSelf)
+                if (SettingsManager.SettingsPanel.activeSelf)
                 {
-                    _settingsManager.ToggleSettingsPanel();
+                    SettingsManager.ToggleSettingsPanel();
                 }
             }
         }

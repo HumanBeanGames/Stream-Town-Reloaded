@@ -1,9 +1,10 @@
-using Managers;
+
 using UnityEngine;
 using Utils;
 using System.Collections;
 using World;
 using UnityEngine.EventSystems;
+using Settings;
 
 namespace PlayerControls
 {
@@ -410,14 +411,9 @@ namespace PlayerControls
 
 			StartPosition = transform.position;
 
-			if (_gameManager)
-			{
-				_panSensitivity = _gameManager.SettingsData.panSensitivity;
-				_zoomSenitivity = _gameManager.SettingsData.zoomSensitivity;
-				_wasdSenitivity = _gameManager.SettingsData.wasdSensitivity;
-			}
-			else
-				Debug.LogError("No game manager presetned in scene");
+			_panSensitivity = SettingsManager.CurrentSettings.panSensitivity;
+			_zoomSenitivity = SettingsManager.CurrentSettings.zoomSensitivity;
+			_wasdSenitivity = SettingsManager.CurrentSettings.wasdSensitivity;
 
 			_playerInput.BasicControls.KeyboardMovement.performed += ctx => _keyboardInput = ctx.ReadValue<Vector2>();
 			_playerInput.BasicControls.KeyboardMovement.canceled += ctx => _keyboardInput = Vector2.zero;

@@ -1,7 +1,7 @@
 using Character;
 using GameEventSystem;
 using GameEventSystem.Events;
-using Managers;
+
 using Pets.Enumerations;
 using System;
 using System.Linq;

@@ -1,5 +1,5 @@
 using Character;
-using Managers;
+
 using System;
 using TwitchLib.Client.Events;
 

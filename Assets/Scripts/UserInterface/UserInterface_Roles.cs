@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 using TMPro;
-using Managers;
+
 using System.Collections.Generic;
 using Scriptables;
 using Character;

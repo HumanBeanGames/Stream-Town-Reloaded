@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using PlayerControls;
 using UserInterface.MainMenu;
-using Managers;
+
 
 namespace UserInterface 
 {
@@ -24,7 +24,6 @@ namespace UserInterface
 		private GameObject _mainMenuPanel;
 		
 		private GameObject _settingsPanel;
-		private SettingsManager _settingsManager;
 		private CameraApplyChanges _cameraApplyChanges;
 		private LoadingManager _loadingManager;
 		private bool _savedGame;
@@ -62,7 +61,7 @@ namespace UserInterface
 
 		public void QuitToMainMenu()
         {
-			_settingsManager.TogglingConnectionTab(true);
+			SettingsManager.TogglingConnectionTab(true);
 			_loadingManager.LoadNonWorldScenes(1);
 		}
 		
@@ -74,17 +73,11 @@ namespace UserInterface
 
 		private void Awake()
 		{
-			_cameraApplyChanges = FindAnyObjectByType<CameraApplyChanges>();
-			_loadingManager = FindAnyObjectByType<LoadingManager>();
-			if (FindAnyObjectByType<SettingsManager>())
-			{
-				_settingsManager = FindAnyObjectByType<SettingsManager>();
-				_settingsPanel = _settingsManager.SettingsPanel;
-				_settingsManager.SetUpCamera();
-				_settingsManager.GameSettingData(_cameraApplyChanges);
-				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_settingsManager.AutosaveTimeIntervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);
-			}
+            _cameraApplyChanges = FindFirstObjectByType<CameraApplyChanges>();
+			_settingsPanel = SettingsManager.SettingsPanel;
+			SettingsManager.SetUpCamera();
+			SettingsManager.GameSettingData(_cameraApplyChanges.UpdateCameraSettings);
+			SaveManager.SetAutosaveTime(SettingsManager.AutosaveTimeIntervals[SettingsManager.CurrentSettings.autosaveTime] * 60.0f);
 		}
 
 		private void Update()
@@ -97,7 +90,7 @@ namespace UserInterface
 				}
 				if (_settingsPanel.activeSelf)
 				{
-					_settingsManager.ToggleSettingsPanel();
+					SettingsManager.ToggleSettingsPanel();
 				}
 				if (_mainMenuPanel.activeSelf)
 				{

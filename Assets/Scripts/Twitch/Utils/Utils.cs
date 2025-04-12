@@ -1,6 +1,6 @@
 using Character;
 using GameEventSystem;
-using Managers;
+
 using Pets;
 using Pets.Enumerations;
 using UnityEngine;
