@@ -8,7 +8,6 @@ namespace Managers
 {
 	public class WeatherManager : MonoBehaviour
 	{
-		private SeasonManager _seasonManager;
 		private VisualEffect _currentVFX;
 
 		[SerializeField]
@@ -21,7 +20,7 @@ namespace Managers
 		private VisualEffect _springVFX;
 		public void StartWeather(Season season)
 		{
-			StartCoroutine(RunWeather(_seasonManager.AllSeasonsData.GetSeasonData(season)));
+			StartCoroutine(RunWeather(SeasonManager.AllSeasonsData.GetSeasonData(season)));
 		}
 
 		public void StopWeather()
@@ -58,15 +57,14 @@ namespace Managers
 
 		private void SetDataVFX()
 		{
-			_seasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Summer).VFX = _summerVFX;
-			_seasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Autumn).VFX = _autumnVFX;
-			_seasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Winter).VFX = _winterVFX;
-			_seasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Spring).VFX = _springVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Summer).VFX = _summerVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Autumn).VFX = _autumnVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Winter).VFX = _winterVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Spring).VFX = _springVFX;
 		}
 
 		private void Start()
 		{
-			_seasonManager = GameManager.Instance.SeasonManager;
 			SetDataVFX();
 		}
 	}

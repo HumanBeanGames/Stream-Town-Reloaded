@@ -7,76 +7,80 @@ using Managers;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
 namespace Managers
 {
-	public class SeasonManager : MonoBehaviour
+	[GameManager]
+	public static class SeasonManager
 	{
-		private const float _winterTint = 0.42f;
-		private const float _restTint = -0.08f;
+		private static readonly float _winterTint = 0.42f;
+		private static readonly float _restTint = -0.08f;
 
 		[SerializeField]
-		private Season _startingSeason = Season.Summer;
+		private static Season _startingSeason = Season.Summer;
 		[SerializeField]
-		private int _daysPerSeason = 3;
+		private static int _daysPerSeason = 3;
 		[SerializeField]
-		private float _seasonTransitionTime = 10;
+		private static float _seasonTransitionTime = 10;
 		[SerializeField]
-		private AllSeasonsScriptable _allSeasonsData;
+		private static AllSeasonsScriptable _allSeasonsData;
 		[SerializeField]
-		private Material _grassMaterial;
+		private static Material _grassMaterial;
 		[SerializeField]
-		private Material _terrainMaterial;
+		private static Material _terrainMaterial;
 		[SerializeField]
-		private Material _treeMaterial;
+		private static Material _treeMaterial;
 		[SerializeField]
-		private Material _buildingMaterial;
+		private static Material _buildingMaterial;
 		[SerializeField]
-		private Material _waterMaterial;
+		private static Material _waterMaterial;
 
-		private Season _currentSeason;
-		private bool _seasonChanging = false;
+		private static Season _currentSeason;
+		private static bool _seasonChanging = false;
 
-		public event Action<Season> OnSeasonChanged;
-		public event Action<Season> OnSeasonChanging;
+		public static event Action<Season> OnSeasonChanged;
+		public static event Action<Season> OnSeasonChanging;
 
-		public bool SeasonChanging => _seasonChanging;
-		public int DaysPerSeason => _daysPerSeason;
-		public Season CurrentSeason => _currentSeason;
+		public static bool SeasonChanging => _seasonChanging;
+		public static int DaysPerSeason => _daysPerSeason;
+		public static Season CurrentSeason => _currentSeason;
 
-		public AllSeasonsScriptable AllSeasonsData => _allSeasonsData;
+		public static AllSeasonsScriptable AllSeasonsData => _allSeasonsData;
 
+        private class Runner : MonoBehaviour { }
+		private static Runner runner;
 
 #if UNITY_EDITOR
-		[Header("EDITOR SETTINGS")]
+        [Header("EDITOR SETTINGS")]
 		[Tooltip("If set to true, seasons will be driven by the game's time manager.")]
-		public bool DriveSeasonsByTime = false;
-		public void CallNextSeason()
+		public static bool DriveSeasonsByTime = false;
+		public static void CallNextSeason()
 		{
 			NextSeason(0);
 		}
 
-		public void UpdateCurrentSeason()
+		public static void UpdateCurrentSeason()
 		{
-			StartCoroutine(TransitionSeason(_currentSeason, 0));
+			runner.StartCoroutine(TransitionSeason(_currentSeason, 0));
 		}
 #endif
 
 		/// <summary>
 		/// Called when a day has passed.
 		/// </summary>
-		private void OnDayPassed()
+		private static void OnDayPassed()
 		{
 #if UNITY_EDITOR
 			if (DriveSeasonsByTime)
 #endif
-				if ((GameManager.Instance.TimeManager.DayCount) % _daysPerSeason == 0)
+				if ((TimeManager.DayCount) % _daysPerSeason == 0)
 					NextSeason();
 		}
 
 		/// <summary>
 		/// Starts transition to next season.
 		/// </summary>
-		private void NextSeason(float _transitionTime = -1)
+		private static void NextSeason(float _transitionTime = -1)
 		{
 			Debug.Log("Next Season Called");
 			Season nextSeason = _currentSeason + 1;
@@ -85,7 +89,7 @@ namespace Managers
 				nextSeason = 0;
 
 			if (!_seasonChanging)
-				StartCoroutine(TransitionSeason(nextSeason, _transitionTime == -1 ? _seasonTransitionTime : _transitionTime));
+				runner.StartCoroutine(TransitionSeason(nextSeason, _transitionTime == -1 ? _seasonTransitionTime : _transitionTime));
 		}
 
 		/// <summary>
@@ -95,7 +99,7 @@ namespace Managers
 		/// <param name="transitionTime"></param>
 		/// <param name="triggerEvent"></param>
 		/// <returns></returns>
-		private IEnumerator TransitionSeason(Season nextSeason, float transitionTime, bool triggerEvent = true)
+		private static IEnumerator TransitionSeason(Season nextSeason, float transitionTime, bool triggerEvent = true)
 		{
 			GameManager.Instance.WeatherManager.StopWeather();
 			yield return new WaitForEndOfFrame();
@@ -148,7 +152,7 @@ namespace Managers
 			_seasonChanging = false;
 		}
 
-		public void ForceSetNextSeason()
+		public static void ForceSetNextSeason()
 		{
 
 			Season nextSeason = _currentSeason + 1;
@@ -180,7 +184,7 @@ namespace Managers
 			_currentSeason = nextSeason;
 		}
 
-		public void SetSeason(Season selectedSeason)
+		public static void SetSeason(Season selectedSeason)
 		{
 			SeasonScriptable selectedSeasonData = _allSeasonsData.GetSeasonData(selectedSeason);
 			// Grass Values.
@@ -205,7 +209,7 @@ namespace Managers
 			// Note: Much Pog
 		}
 
-		private void SetSeasonMaterial(Season season, float transition)
+		private static void SetSeasonMaterial(Season season, float transition)
 		{
 			if (season == Season.Autumn)
 			{
@@ -245,25 +249,25 @@ namespace Managers
 			}
 		}
 
-		public void SetSeasonByTimePassed()
+		public static void SetSeasonByTimePassed()
 		{
-			_currentSeason = (Season)(GameManager.Instance.TimeManager.DayCount % _daysPerSeason);
+			_currentSeason = (Season)(TimeManager.DayCount % _daysPerSeason);
 			SetSeasonMaterial(_currentSeason, 1.0f);
 		}
 
-		private void Awake()
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+		private static void InitializeRunner()
 		{
-			_currentSeason = _startingSeason;
-			StartCoroutine(TransitionSeason(_currentSeason, 0));
-		}
-
-		private void Start()
-		{
-			GameManager.Instance.TimeManager.DayPassed += OnDayPassed;
-		}
+			GameObject runnerObject = new GameObject("SeasonManagerRunner");
+			Runner runner = runnerObject.AddComponent<Runner>();
+			UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+            _currentSeason = _startingSeason;
+            runner.StartCoroutine(TransitionSeason(_currentSeason, 0));
+            TimeManager.DayPassed += OnDayPassed;
+        }
 	}
 }
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
 [CustomEditor(typeof(SeasonManager))]
 public class SeasonManagerEditor : Editor
 {
@@ -303,4 +307,4 @@ public class SeasonManagerEditor : Editor
 		GUILayout.Label($"Current Season: {_t.CurrentSeason}");
 	}
 }
-#endif
+#endif*/

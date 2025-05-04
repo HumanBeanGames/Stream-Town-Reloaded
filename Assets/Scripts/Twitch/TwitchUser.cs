@@ -26,7 +26,7 @@ namespace Twitch
 
 		public void UpdateActivity()
 		{
-			float time = GameManager.Instance.TimeManager.WorldTimePassed - TimeSinceLastMessage;
+			float time = TimeManager.WorldTimePassed - TimeSinceLastMessage;
 
 			if (time < 300)
 				ActivityStatus = ActivityStatus.Active;

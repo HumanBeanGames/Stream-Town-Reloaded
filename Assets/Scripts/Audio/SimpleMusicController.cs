@@ -27,7 +27,7 @@ namespace Audio
 		private void Start()
 		{
 			_audioSource = GetComponent<AudioSource>();
-			GameManager.Instance.SeasonManager.OnSeasonChanging += OnSeasonChange;
+			SeasonManager.OnSeasonChanging += OnSeasonChange;
 		}
 
 		private void OnSeasonChange(Season season)

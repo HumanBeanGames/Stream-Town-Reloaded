@@ -87,7 +87,7 @@ namespace Twitch
             if (player == null)
                 return null;
 
-            player.TwitchUser.TimeSinceLastMessage = GameManager.Instance.TimeManager.WorldTimePassed;
+            player.TwitchUser.TimeSinceLastMessage = TimeManager.WorldTimePassed;
             UpdateUserType(player, e);
 
             if (args.Length > 0 && CommandDictionary.CommandsWithArgs.TryGetValue(command, out var withArgsCmd))

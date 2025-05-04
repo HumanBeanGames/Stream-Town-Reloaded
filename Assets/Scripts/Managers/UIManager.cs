@@ -87,14 +87,14 @@ namespace Managers
 
 		private void UpdateSeasonSlider()
 		{
-			float newValue = ((_gm.TimeManager.WorldTimePassed + _seaonSliderStartOffset) / (float)_gm.TimeManager.SecondsPerDay / (float)_gm.SeasonManager.DaysPerSeason) / 4f;
+			float newValue = ((TimeManager.WorldTimePassed + _seaonSliderStartOffset) / (float)TimeManager.SecondsPerDay / (float)SeasonManager.DaysPerSeason) / 4f;
 			int roundedDown = (int)Mathf.Floor(newValue);
 			_seasonalSlider.value = newValue - roundedDown;
 		}
 
 		private void UpdateTimeOfDay()
 		{
-			TimeSpan t = TimeSpan.FromSeconds(_gm.TimeManager.WorldTimePassed);
+			TimeSpan t = TimeSpan.FromSeconds(TimeManager.WorldTimePassed);
 			string newString = "";
 			string formatted = string.Format("{0:D1}", t.Days);
 			newString += $"<size=48>{formatted}</size><size=32><color=#958450>D</color></size> ";

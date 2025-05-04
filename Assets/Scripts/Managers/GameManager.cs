@@ -53,8 +53,6 @@ namespace Managers
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
 		private SaveManager _saveManager = null;
 		private MetaData.MetaData _metaData = null;
-		private TimeManager _timeManager = null;
-		private SeasonManager _seasonManager = null;
 		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
@@ -125,8 +123,6 @@ namespace Managers
 		private Player _fakePlayer;
 		private BuildingType _lastBuilding = BuildingType.Barracks;
 		//END TEMP
-		public TimeManager TimeManager => _timeManager;
-		public SeasonManager SeasonManager => _seasonManager;
 		public TechTreeManager TechTreeManager => _techTreeManager;
 		public GameEventManager GameEventManager => _gameEventManager;
 		public TownGoalManager TownGoalManager => _townGoalManager;
@@ -203,12 +199,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _timeManager))
-				Debug.LogError("TimeManager not found on GameManager", this);
-
-			if (!TryGetComponent(out _seasonManager))
-				Debug.LogError("SeasonManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _targetManager))
 				Debug.LogError("TargetManager not found on GameManager", this);
 

@@ -145,8 +145,8 @@ namespace Environment
 
 		private void Start()
 		{
-			_dayLength = GameManager.Instance.TimeManager.SecondsPerDay * _DAY_PERCENTAGE - _transitionLength;
-			_nightLength = GameManager.Instance.TimeManager.SecondsPerDay * (1-_DAY_PERCENTAGE) - _transitionLength;
+			_dayLength = TimeManager.SecondsPerDay * _DAY_PERCENTAGE - _transitionLength;
+			_nightLength = TimeManager.SecondsPerDay * (1-_DAY_PERCENTAGE) - _transitionLength;
 		}
 
 		private void Update()
