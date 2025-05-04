@@ -2,7 +2,6 @@ using Units;
 using UnityEngine;
 using UnityEngine.UI;
 using Scriptables;
-using Settings;
 namespace UserInterface
 {
 	public class UserInterface_BuildingHealthBar : MonoBehaviour
@@ -17,6 +16,9 @@ namespace UserInterface
 
 		private BuildingHealthDisplayOption _displayOption;
 
+		[SerializeField]
+		private SettingsScriptable _settingsScriptable;
+
 		/// <summary>
 		/// Checks and changes the display option
 		/// </summary>
@@ -25,7 +27,7 @@ namespace UserInterface
 			if (!_initialized)
 				return;
 
-			switch (SettingsManager.CurrentSettings.displayBuildings)
+			switch (_settingsScriptable.displayBuildings)
 			{
 				case 1:
 					_displayOption = BuildingHealthDisplayOption.Damaged;

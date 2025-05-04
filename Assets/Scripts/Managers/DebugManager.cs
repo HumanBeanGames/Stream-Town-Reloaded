@@ -6,61 +6,64 @@ using UnityEngine.InputSystem;
 using UserInterface;
 using Utils;
 
-/// <summary>
-/// Manages debug objects and user interface.
-/// </summary>
-public class DebugManager : MonoBehaviour
+namespace Managers
 {
-	[SerializeField]
-	private UserInterface_Debug _debugUI;
-
-	private UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
-
-	private (SelectableObject, object) _selectedObject;
-
-	public UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
-
 	/// <summary>
-	/// Called when SelectableObject is selected by the mouse and displays it's data.
+	/// Manages debug objects and user interface.
 	/// </summary>
-	/// <param name="selected"></param>
-	/// <param name="data"></param>
-	private void ObjectSelected(SelectableObject selected, object data)
+	public class DebugManager : MonoBehaviour
 	{
-		_selectedObject.Item1 = selected;
-		_selectedObject.Item2 = data;
+		[SerializeField]
+		private UserInterface_Debug _debugUI;
 
-		Debug.Log($"Object Selected: {selected.gameObject.transform.parent.name}, {selected.SelectableType}");
+		private UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
 
-		/*switch (selected.SelectableType)
+		private (SelectableObject, object) _selectedObject;
+
+		public UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
+
+		/// <summary>
+		/// Called when SelectableObject is selected by the mouse and displays it's data.
+		/// </summary>
+		/// <param name="selected"></param>
+		/// <param name="data"></param>
+		private void ObjectSelected(SelectableObject selected, object data)
 		{
-			//case Selectable.Player:
-			//	_debugUI.OnCharacterContext((RoleHandler)data);
-			//	break;
-			//case Selectable.Building:
-			//	_debugUI.OnBuildingContext((BuildingBase)data);
-			//	break;
-			//case Selectable.Enemy:
-			//	_debugUI.GetComponent((BuildingBase)data);
-			//	break;
-			//case Selectable.Resource:
-			//	_debugUI.OnBuildingContext((BuildingBase)data);
-			//	break;
-		}*/
-	}
+			_selectedObject.Item1 = selected;
+			_selectedObject.Item2 = data;
 
-	// Unity Events.
-	private void Awake()
-	{
-		_onObjectSelected.AddListener(ObjectSelected);
-	}
+			Debug.Log($"Object Selected: {selected.gameObject.transform.parent.name}, {selected.SelectableType}");
 
-	private void Update()
-	{
-		if (Keyboard.current.escapeKey.wasReleasedThisFrame)
+			/*switch (selected.SelectableType)
+			{
+				//case Selectable.Player:
+				//	_debugUI.OnCharacterContext((RoleHandler)data);
+				//	break;
+				//case Selectable.Building:
+				//	_debugUI.OnBuildingContext((BuildingBase)data);
+				//	break;
+				//case Selectable.Enemy:
+				//	_debugUI.GetComponent((BuildingBase)data);
+				//	break;
+				//case Selectable.Resource:
+				//	_debugUI.OnBuildingContext((BuildingBase)data);
+				//	break;
+			}*/
+		}
+
+		// Unity Events.
+		private void Awake()
 		{
-			_debugUI.HideBuildingContext();
-			_debugUI.HideCharacterContext();
+			_onObjectSelected.AddListener(ObjectSelected);
+		}
+
+		private void Update()
+		{
+			if (Keyboard.current.escapeKey.wasReleasedThisFrame)
+			{
+				_debugUI.HideBuildingContext();
+				_debugUI.HideCharacterContext();
+			}
 		}
 	}
 }

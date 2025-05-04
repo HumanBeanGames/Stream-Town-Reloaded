@@ -4,13 +4,12 @@ using TwitchLib.Unity;
 using TwitchLib.Client.Events;
 using System.Collections;
 using Character;
-
+using Managers;
 using Pets;
 using Pets.Enumerations;
 using System;
 using UnityEngine.InputSystem;
 using GameEventSystem.Events;
-using Settings;
 
 namespace Twitch
 {
@@ -34,7 +33,7 @@ namespace Twitch
 			ConnectionCredentials credentials = new ConnectionCredentials(TL_Secrets.BotName, TL_Secrets.BotAccessToken);
 			Client = new Client();
 
-            _channelName = SettingsManager.CurrentSettings.channelName.ToLower();
+            _channelName = GameManager.Instance.SettingsData.channelName.ToLower();
 
 			Client.Initialize(credentials, _channelName);
 			Client.AddChatCommandIdentifier('!');

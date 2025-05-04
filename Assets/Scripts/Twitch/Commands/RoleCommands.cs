@@ -1,5 +1,5 @@
 using Character;
-
+using Managers;
 using System;
 using Utils;
 
@@ -42,14 +42,14 @@ namespace Twitch.Commands
 
         public static string Experience(Player player)
         {
-            return $"{player.TwitchUser.Username}, you are a level ({player.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEL}) {player.RoleHandler.CurrentRole}. Current Exp: ({player.RoleHandler.PlayerRoleData.CurrentExp}/{player.RoleHandler.PlayerRoleData.RequiredExp}).";
+            return $"{player.TwitchUser.Username}, you are a level ({player.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEl}) {player.RoleHandler.CurrentRole}. Current Exp: ({player.RoleHandler.PlayerRoleData.CurrentExp}/{player.RoleHandler.PlayerRoleData.RequiredExp}).";
         }
 
         public static string ExperienceForRole(Player player, PlayerRole role)
         {
             if (player.RoleHandler.TryGetRoleData(role, out PlayerRoleData data))
             {
-                return $"{player.TwitchUser.Username}, you are a level ({data.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEL}) {data.Role}. Current Exp: ({data.CurrentExp}/{data.RequiredExp}).";
+                return $"{player.TwitchUser.Username}, you are a level ({data.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEl}) {data.Role}. Current Exp: ({data.CurrentExp}/{data.RequiredExp}).";
             }
             return $"{player.TwitchUser.Username}, you currently don't have data for {role}.";
         }

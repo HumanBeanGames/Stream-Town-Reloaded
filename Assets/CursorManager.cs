@@ -1,4 +1,4 @@
-
+using Managers;
 using UnityEngine;
 
 public class CursorManager : MonoBehaviour

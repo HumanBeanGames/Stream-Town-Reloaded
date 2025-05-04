@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Target;
 using Utils;
-
+using Managers;
 using World.Generation;
 using Utils.Pooling;
 using World;
@@ -66,8 +66,11 @@ namespace Environment
         /// </summary>
         public void CacheTreeList()
         {
-            _treeTargets = TargetManager.GetSingleTargetList(TargetMask.Tree);
-            Debug.Log($"[SaplingManager] Cached {_treeTargets.Count} tracked trees.");
+            if (GameManager.Instance != null && GameManager.Instance.TargetManager != null)
+            {
+                _treeTargets = GameManager.Instance.TargetManager.GetSingleTargetList(TargetMask.Tree);
+                Debug.Log($"[SaplingManager] Cached {_treeTargets.Count} tracked trees.");
+            }
         }
 
         /// <summary>

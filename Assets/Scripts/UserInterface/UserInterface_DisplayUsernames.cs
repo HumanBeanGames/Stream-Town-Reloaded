@@ -1,6 +1,5 @@
 using Character;
 using Scriptables;
-using Settings;
 using UnityEngine;
 
 namespace UserInterface 
@@ -9,7 +8,9 @@ namespace UserInterface
 	{
 		[SerializeField]
 		private GameObject _displayUI;
-
+		
+		[SerializeField]
+		private SettingsScriptable _settingsScriptable;
 
 		private bool _initialized = false;
 
@@ -27,7 +28,20 @@ namespace UserInterface
 			if (_player == null)
 				return;
 			
-			switch (SettingsManager.CurrentSettings.displayName)
+			switch (_settingsScriptable.displayName)
+			{
+				case 1:
+					_displaySettingOption = UsernameDisplayOption.Subscribers;
+					break;
+				case 2:
+					_displaySettingOption = UsernameDisplayOption.All;
+					break;
+				default:
+					_displaySettingOption = UsernameDisplayOption.None;
+					break;
+			}
+			
+			switch (_displaySettingOption)
 			{
 				case UsernameDisplayOption.Subscribers:
 					if(_player.TwitchUser.GameUserType != Twitch.Utils.GameUserType.Normal)

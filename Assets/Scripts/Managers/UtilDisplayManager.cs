@@ -5,80 +5,80 @@ using UnityEngine;
 using UserInterface;
 using VFX;
 
-[Manager]
-public static class UtilDisplayManager
+namespace Managers
 {
-    private static Dictionary<Targetable, UnitTextDisplay> _activeTextDisplays = new Dictionary<Targetable, UnitTextDisplay>();
-    private static Dictionary<Player, GameObject> _pingObjects = new Dictionary<Player, GameObject>();
+	/// <summary>
+	/// Used to manage the display text over targetable objects.
+	/// This used as the game will run poorly if everything has it's own text component.
+	/// </summary>
+	public static class UtilDisplayManager
+	{
+		private static Dictionary<Targetable, UnitTextDisplay> _activeTextDisplays = new Dictionary<Targetable, UnitTextDisplay>();
+		private static Dictionary<Player, GameObject> _pingObjects = new Dictionary<Player, GameObject>();
+		/// <summary>
+		/// Adds a target and it's display to the dictionary.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="text"></param>
+		/// <param name="time"></param>
+		public static void AddTextDisplay(Targetable target, string text, float time = 15.0f)
+		{
+			UnitTextDisplay display = default;
 
-    [ManagerInitialization]
-    public static void InitializeManager()
-    {
-    }
+			if (!_activeTextDisplays.ContainsKey(target))
+			{
+				var textDisplay = GameManager.Instance.PoolingManager.GetPooledObject("TextDisplay");
+				textDisplay.gameObject.SetActive(true);
+				var rectTransform = textDisplay.GetComponent<RectTransform>();
+				rectTransform.SetParent(target.TextDisplayTransform, false);
+				rectTransform.localPosition = target.TextDisplayTransform.localPosition;
 
-    /// <summary>
-    /// Adds a target and it's display to the dictionary.
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="text"></param>
-    /// <param name="time"></param>
-    public static void AddTextDisplay(Targetable target, string text, float time = 15.0f)
-    {
-        UnitTextDisplay display = default;
+				display = textDisplay.GetComponent<UnitTextDisplay>();
+				display.Targetable = target;
 
-        if (!_activeTextDisplays.ContainsKey(target))
-        {
-            var textDisplay = GameManager.Instance.PoolingManager.GetPooledObject("TextDisplay");
-            textDisplay.gameObject.SetActive(true);
-            var rectTransform = textDisplay.GetComponent<RectTransform>();
-            rectTransform.SetParent(target.TextDisplayTransform, false);
-            rectTransform.localPosition = target.TextDisplayTransform.localPosition;
+				_activeTextDisplays.Add(target, display);
+			}
+			else
+				display = _activeTextDisplays[target];
 
-            display = textDisplay.GetComponent<UnitTextDisplay>();
-            display.Targetable = target;
+			if (!display.gameObject.activeInHierarchy)
+				display.gameObject.SetActive(true);
 
-            _activeTextDisplays.Add(target, display);
-        }
-        else
-            display = _activeTextDisplays[target];
+			display.SetDisplayText(text);
+			display.SetDisplayTextAfterTime($"", time);
+		}
 
-        if (!display.gameObject.activeInHierarchy)
-            display.gameObject.SetActive(true);
+		/// <summary>
+		/// Removes the target and its display from the dictionary.
+		/// </summary>
+		/// <param name="target"></param>
+		public static void RemoveTextDisplay(Targetable target)
+		{
+			if (target != null && _activeTextDisplays.ContainsKey(target))
+				_activeTextDisplays.Remove(target);
+		}
 
-        display.SetDisplayText(text);
-        display.SetDisplayTextAfterTime($"", time);
-    }
+		public static void AddPingObject(Player player)
+		{
+			if (_pingObjects.ContainsKey(player))
+				return;
 
-    /// <summary>
-    /// Removes the target and its display from the dictionary.
-    /// </summary>
-    /// <param name="target"></param>
-    public static void RemoveTextDisplay(Targetable target)
-    {
-        if (target != null && _activeTextDisplays.ContainsKey(target))
-            _activeTextDisplays.Remove(target);
-    }
+			VFXArrowPointer pingObject = GameManager.Instance.PoolingManager.GetPooledObject("VFXPing").GetComponent<VFXArrowPointer>();
 
-    public static void AddPingObject(Player player)
-    {
-        if (_pingObjects.ContainsKey(player))
-            return;
+			pingObject.transform.parent = player.Character.transform;
+			pingObject.transform.localPosition = Vector3.zero;
+			pingObject.SetPlayer(player);
+			pingObject.gameObject.SetActive(true);
 
-        VFXArrowPointer pingObject = GameManager.Instance.PoolingManager.GetPooledObject("VFXPing").GetComponent<VFXArrowPointer>();
+			_pingObjects.Add(player, pingObject.gameObject);
+		}
 
-        pingObject.transform.parent = player.Character.transform;
-        pingObject.transform.localPosition = Vector3.zero;
-        pingObject.SetPlayer(player);
-        pingObject.gameObject.SetActive(true);
+		public static void RemovePingObject(Player player)
+		{
+			if (player != null && !_pingObjects.ContainsKey(player))
+				return;
 
-        _pingObjects.Add(player, pingObject.gameObject);
-    }
-
-    public static void RemovePingObject(Player player)
-    {
-        if (player != null && !_pingObjects.ContainsKey(player))
-            return;
-
-        _pingObjects.Remove(player);
-    }
+			_pingObjects.Remove(player);
+		}
+	}
 }

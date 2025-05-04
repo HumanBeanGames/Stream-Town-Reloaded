@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Character;
-
+using Managers;
 using Units;
 using UnityEngine.Events;
 using System.Collections.Generic;
@@ -155,7 +155,7 @@ namespace PlayerControls.ObjectSelection
 
 		public void UpdateExperience(RoleHandler roleHandler)
 		{
-			_selectedObjectTypeUI.Description.text = "Lvl. " + roleHandler.PlayerRoleData.CurrentLevel + " /  Lvl. " + RoleManager.MAX_ROLE_LEVEL;
+			_selectedObjectTypeUI.Description.text = "Lvl. " + roleHandler.PlayerRoleData.CurrentLevel + " /  Lvl. " + RoleManager.MAX_ROLE_LEVEl;
 			_selectedObjectTypeUI.GreenSliderValue.text = roleHandler.PlayerRoleData.CurrentExp + " / " + roleHandler.PlayerRoleData.RequiredExp;
 			if (roleHandler.PlayerRoleData.CurrentExp != 0.0f)
 				_selectedObjectTypeUI.GreenSlider.value = ((float)roleHandler.PlayerRoleData.CurrentExp / roleHandler.PlayerRoleData.RequiredExp);
