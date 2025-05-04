@@ -6,7 +6,7 @@ namespace Target
 	/// Holds Targetable Object data.
 	/// </summary>
 	[System.Serializable]
-	public struct TargetableData
+	public class TargetableData
 	{
 		public TargetMask TargetType;
 		public StationUpdate UpdateType;

@@ -6,142 +6,144 @@ using UnityEngine;
 using Utils;
 
 //TODO:: Check if this is still required after BSP implementation
-[Manager]
-public class TargetManager
+public static class TargetManager
 {
-    private static Dictionary<TargetMask, List<Targetable>> _targetDictionary = new Dictionary<TargetMask, List<Targetable>>();
-    [ManagedField]
-    private static TargetableData[] _targetableData = new TargetableData[0];
+	[ManagedField]
+	private static Dictionary<TargetMask, List<Targetable>> _targetDictionary = new Dictionary<TargetMask, List<Targetable>>();
+	[ManagedField]
+	private static TargetableData[] _targetableData;
 
-    [ManagerInitialization]
-    public static void Initialize()
-    {
-        string path = "Assets/Editor/ManagerDefaults/TargetManager.json";
-        if (System.IO.File.Exists(path))
-        {
-            string json = System.IO.File.ReadAllText(path);
-            _targetableData = JsonConvert.DeserializeObject<TargetableData[]>(json);
-        }
-        else
-        {
-            Debug.LogWarning("TargetManager default data file not found.");
-        }
-    }
+	[ManagerInitializationAttribute]
+	public static void Initialize()
+	{
+		string path = "Assets/Editor/ManagerDefaults/TargetManager.json";
+		if (System.IO.File.Exists(path))
+		{
+			string json = System.IO.File.ReadAllText(path);
+			_targetableData = JsonConvert.DeserializeObject<TargetableData[]>(json);
+		}
+		else
+		{
+			Debug.LogWarning("TargetManager default data file not found.");
+			_targetableData = new TargetableData[0];
+		}
+	}
 
-    public static StationUpdate GetUpdateType(TargetMask type)
-    {
-        return _targetableData[TargetFlagHelper.GetIndexByFlag(type)].UpdateType;
-    }
+	public static StationUpdate GetUpdateType(TargetMask type)
+	{
+		return _targetableData[TargetFlagHelper.GetIndexByFlag(type)].UpdateType;
+	}
 
-    public static List<Targetable> GetSingleTargetList(TargetMask type)
-    {
-        if (_targetDictionary.TryGetValue(type, out var list))
-        {
-            return list;
-        }
+	public static List<Targetable> GetSingleTargetList(TargetMask type)
+	{
+		if (_targetDictionary.TryGetValue(type, out var list))
+		{
+			return list;
+		}
 
-        Debug.LogWarning($"[TargetManager] No list found for TargetMask: {type}");
-        return new List<Targetable>();
-    }
+		Debug.LogWarning($"[TargetManager] No list found for TargetMask: {type}");
+		return new List<Targetable>();
+	}
 
-    /// <summary>
-    /// Gets all targets defined by the flag into one list.
-    /// </summary>
-    /// <param name="flag"></param>
-    /// <returns></returns>
-    public static List<Targetable> GetTargetsByFlag(TargetMask flag)
-    {
-        List<Targetable> targets = new List<Targetable>();
 
-        foreach (int i in Enum.GetValues(typeof(TargetMask)))
-        {
+	/// <summary>
+	/// Gets all targets defined by the flag into one list.
+	/// </summary>
+	/// <param name="flag"></param>
+	/// <returns></returns>
+	public static List<Targetable> GetTargetsByFlag(TargetMask flag)
+	{
+		List<Targetable> targets = new List<Targetable>();
 
-            TargetMask t = (TargetMask)i;
+		foreach (int i in Enum.GetValues(typeof(TargetMask)))
+		{
 
-            if (t == TargetMask.Nothing)
-                continue;
+			TargetMask t = (TargetMask)i;
 
-            if (!flag.HasFlag(t) || !_targetDictionary.ContainsKey(t))
-                continue;
+			if (t == TargetMask.Nothing)
+				continue;
 
-            targets.AddRange(_targetDictionary[t]);
+			if (!flag.HasFlag(t) || !_targetDictionary.ContainsKey(t))
+				continue;
 
-        }
+			targets.AddRange(_targetDictionary[t]);
 
-        return targets;
-    }
+		}
 
-    /// <summary>
-    /// Adds a target to the target dictionary
-    /// </summary>
-    /// <param name="target"></param>
-    public static void AddTarget(Targetable target)
-    {
-        // Add to each flag type
-        foreach (int i in Enum.GetValues(typeof(TargetMask)))
-        {
+		return targets;
+	}
 
-            TargetMask t = (TargetMask)i;
+	/// <summary>
+	/// Adds a target to the target dictionary
+	/// </summary>
+	/// <param name="target"></param>
+	public static void AddTarget(Targetable target)
+	{
+		// Add to each flag type
+		foreach (int i in Enum.GetValues(typeof(TargetMask)))
+		{
 
-            if (t == TargetMask.Nothing)
-                continue;
+			TargetMask t = (TargetMask)i;
 
-            if (target.TargetType.HasFlag(t))
-            {
-                AddTarget(t, target);
-            }
-        }
-    }
+			if (t == TargetMask.Nothing)
+				continue;
 
-    /// <summary>
-    /// Removes a target from the target dictionary
-    /// </summary>
-    /// <param name="target"></param>
-    public static void RemoveTarget(Targetable target)
-    {
-        foreach (int i in Enum.GetValues(typeof(TargetMask)))
-        {
-            TargetMask t = (TargetMask)i;
+			if (target.TargetType.HasFlag(t))
+			{
+				AddTarget(t, target);
+			}
+		}
+	}
 
-            if (t == TargetMask.Nothing)
-                continue;
+	/// <summary>
+	/// Removes a target from the target dictionary
+	/// </summary>
+	/// <param name="target"></param>
+	public static void RemoveTarget(Targetable target)
+	{
+		foreach (int i in Enum.GetValues(typeof(TargetMask)))
+		{
+			TargetMask t = (TargetMask)i;
 
-            if (target.TargetType.HasFlag(t))
-            {
-                RemoveTarget(t, target);
-            }
-        }
-    }
+			if (t == TargetMask.Nothing)
+				continue;
 
-    /// <summary>
-    /// Adds a Targetable object to the target dictionary.
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="target"></param>
-    private static void AddTarget(TargetMask type, Targetable target)
-    {
-        if (!_targetDictionary.ContainsKey(type))
-            _targetDictionary[type] = new List<Targetable>();
+			if (target.TargetType.HasFlag(t))
+			{
+				RemoveTarget(t, target);
+			}
+		}
+	}
 
-        if (_targetDictionary[type].Contains(target))
-            return;
+	/// <summary>
+	/// Adds a Targetable object to the target dictionary.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="target"></param>
+	private static void AddTarget(TargetMask type, Targetable target)
+	{
+		if (!_targetDictionary.ContainsKey(type))
+			_targetDictionary[type] = new List<Targetable>();
 
-        _targetDictionary[type].Add(target);
-    }
+		if (_targetDictionary[type].Contains(target))
+			return;
 
-    /// <summary>
-    /// Removes a Targetable object from the target dictionary.
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="target"></param>
-    private static void RemoveTarget(TargetMask type, Targetable target)
-    {
-        if (!_targetDictionary.ContainsKey(type))
-            return;
+		_targetDictionary[type].Add(target);
+	}
 
-        if (!_targetDictionary[type].Contains(target))
-            return;
+	/// <summary>
+	/// Removes a Targetable object from the target dictionary.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="target"></param>
+	private static void RemoveTarget(TargetMask type, Targetable target)
+	{
+		if (!_targetDictionary.ContainsKey(type))
+			return;
 
-        _targetDictionary[type].Remove(target);
-    }
+		if (!_targetDictionary[type].Contains(target))
+			return;
+
+		_targetDictionary[type].Remove(target);
+	}
 }
