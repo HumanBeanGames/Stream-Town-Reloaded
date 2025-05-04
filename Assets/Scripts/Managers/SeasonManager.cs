@@ -48,6 +48,7 @@ namespace Managers
 		public static AllSeasonsScriptable AllSeasonsData => _allSeasonsData;
 
         private class Runner : MonoBehaviour { }
+		[HideInInspector]
 		private static Runner runner;
 
 #if UNITY_EDITOR
