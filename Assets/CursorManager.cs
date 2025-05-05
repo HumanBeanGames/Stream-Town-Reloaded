@@ -1,6 +1,7 @@
 using Managers;
 using UnityEngine;
 
+
 public class CursorManager : MonoBehaviour
 {
     [SerializeField] private Texture2D cursorTexture;
@@ -9,7 +10,9 @@ public class CursorManager : MonoBehaviour
 
     private GameObject _uiGameMenu;
     private GameObject _loadingScreen;
-    private bool cursorSet = false;
+
+    private bool _lastShouldShowCursor = false;
+    private bool _wasIdleLastFrame = false;
 
     void Start()
     {
@@ -19,30 +22,31 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
-        // Refresh reference to UI_GameMenu if it was dynamically instantiated
         if (_uiGameMenu == null)
-            _uiGameMenu = GameObject.Find("UI_GameMenu");
+        {
+            _uiGameMenu = GameObject.FindWithTag("GameMenu");
+            if (_uiGameMenu == null)
+                return; // still not ready, skip this frame
+        }
 
         bool isIdle = GameManager.Instance != null && GameManager.Instance.IdleMode;
         bool loadingScreenActive = _loadingScreen != null && _loadingScreen.activeInHierarchy;
-
-        // If we can't find UI_GameMenu yet, assume it's active
-        bool uiMenuActive = _uiGameMenu == null || _uiGameMenu.activeSelf;
+        bool uiMenuActive = _uiGameMenu.activeSelf;
 
         bool shouldShowCursor = (!isIdle || uiMenuActive) && !loadingScreenActive;
 
-        Cursor.visible = shouldShowCursor;
-        Cursor.lockState = shouldShowCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        // Only change if state actually changed
+        if (shouldShowCursor != _lastShouldShowCursor)
+        {
+            Cursor.visible = shouldShowCursor;
+            Cursor.lockState = shouldShowCursor ? CursorLockMode.None : CursorLockMode.Locked;
 
-        if (shouldShowCursor && !cursorSet)
-        {
-            Cursor.SetCursor(cursorTexture, cursorHotspot, cursorMode);
-            cursorSet = true;
-        }
-        else if (!shouldShowCursor && cursorSet)
-        {
-            Cursor.SetCursor(null, Vector2.zero, cursorMode);
-            cursorSet = false;
+            if (shouldShowCursor)
+                Cursor.SetCursor(cursorTexture, cursorHotspot, cursorMode);
+            else
+                Cursor.SetCursor(null, Vector2.zero, cursorMode);
+
+            _lastShouldShowCursor = shouldShowCursor;
         }
     }
 }
