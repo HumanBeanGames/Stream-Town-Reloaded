@@ -1,5 +1,6 @@
 using Buildings;
 using Character;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -11,23 +12,29 @@ namespace Managers
 	/// <summary>
 	/// Manages debug objects and user interface.
 	/// </summary>
-	public class DebugManager : MonoBehaviour
+	[GameManager]
+	public static class DebugManager
 	{
-		[SerializeField]
-		private UserInterface_Debug _debugUI;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static DebugConfig Config = DebugConfig.Instance;
 
-		private UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
+		[HideInInspector]
+        private static UserInterface_Debug _debugUI;
 
-		private (SelectableObject, object) _selectedObject;
+        [HideInInspector]
+        private static UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
 
-		public UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
+        [HideInInspector]
+        private static (SelectableObject, object) _selectedObject;
 
-		/// <summary>
-		/// Called when SelectableObject is selected by the mouse and displays it's data.
-		/// </summary>
-		/// <param name="selected"></param>
-		/// <param name="data"></param>
-		private void ObjectSelected(SelectableObject selected, object data)
+        public static UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
+
+        /// <summary>
+        /// Called when SelectableObject is selected by the mouse and displays it's data.
+        /// </summary>
+        /// <param name="selected"></param>
+        /// <param name="data"></param>
+        private static void ObjectSelected(SelectableObject selected, object data)
 		{
 			_selectedObject.Item1 = selected;
 			_selectedObject.Item2 = data;
@@ -51,14 +58,18 @@ namespace Managers
 			}*/
 		}
 
-		// Unity Events.
-		private void Awake()
+        // Unity Events.
+        private static void Awake()
 		{
 			_onObjectSelected.AddListener(ObjectSelected);
 		}
 
-		private void Update()
+        private static void Update()
 		{
+			if (_debugUI == null)
+				if ((_debugUI = GameObject.FindWithTag("UI_Main")?.GetComponent<UserInterface_Debug>()) == null)
+					return;
+
 			if (Keyboard.current.escapeKey.wasReleasedThisFrame)
 			{
 				_debugUI.HideBuildingContext();

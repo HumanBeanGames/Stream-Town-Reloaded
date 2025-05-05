@@ -8,6 +8,7 @@ TagManager:
   - LoadingScreen
   - Tree
   - GameMenu
+  - UI_Main
   layers:
   - Default
   - TransparentFX

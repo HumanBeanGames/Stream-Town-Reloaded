@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private DebugManager _debugManager = null;
 		private PlayerManager _playerManager = null;
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
 		private SaveManager _saveManager = null;
@@ -90,7 +89,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public DebugManager DebugManager => _debugManager;
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
 		public PlayerManager PlayerManager => _playerManager;
 		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
@@ -185,9 +183,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _debugManager))
-				Debug.LogError("DebugManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _playerManager))
 				Debug.LogError("PlayerManager not found on GameManager", this);
 
