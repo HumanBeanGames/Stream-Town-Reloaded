@@ -14,7 +14,7 @@ namespace Managers
     [GameManager]
     public static class SeasonManager
     {
-                [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         private static SeasonConfig Config = SeasonConfig.Instance;
 
         public static event Action<Season> OnSeasonChanged;

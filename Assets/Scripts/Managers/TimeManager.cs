@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -10,42 +11,48 @@ namespace Managers
 	[GameManager]
 	public static class TimeManager
 	{
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static TimeConfig Config = TimeConfig.Instance;
+
 		/// <summary>
 		/// The number of seconds in a day.
 		/// </summary>
-		private static int _secondsPerDay = 3600;
+		public static int SecondsPerDay => Config.secondsPerDay;
 		[HideInInspector]
-		private static int _dayCount = 0;
-		[HideInInspector]
-		private static float _worldTimePassed = 0;
+        public static int DayCount
+        {
+            get => Config?.dayCount ?? 0;
+            set
+            {
+                if (Config != null)
+                    Config.dayCount = value;
+            }
+        }
+        [HideInInspector]
+        public static float WorldTimePassed
+        {
+            get => Config?.worldTimePassed ?? 0;
+            set
+            {
+                if (Config != null)
+                    Config.worldTimePassed = value;
+            }
+        }
 
-		/// <summary>
-		/// The current day count.
-		/// </summary>
-		public static int DayCount => _dayCount;
-		/// <summary>
-		/// How much time has passed since the world started.
-		/// </summary>
-		public static float WorldTimePassed { get { return _worldTimePassed; } set { _worldTimePassed = value; } }
-		/// <summary>
-		/// The number of seconds in a day.
-		/// </summary>
-		public static int SecondsPerDay => _secondsPerDay;
-
-		/// <summary>
-		/// Called when a day has passed.
-		/// </summary>
-		public static event Action DayPassed;
+        /// <summary>
+        /// Called when a day has passed.
+        /// </summary>
+        public static event Action DayPassed;
 
 		/// <summary>
 		/// Calculates how many days have passed.
 		/// </summary>
 		public static void CalculateDayCount()
 		{
-			int prevDayCount = _dayCount;
-			_dayCount = Mathf.FloorToInt((int)_worldTimePassed / _secondsPerDay);
+			int prevDayCount = DayCount;
+			DayCount = Mathf.FloorToInt((int)WorldTimePassed / SecondsPerDay);
 
-			if (prevDayCount < _dayCount)
+			if (prevDayCount < DayCount)
 			{
 				Debug.Log("Day Passed");
 				DayPassed?.Invoke();
@@ -65,7 +72,7 @@ namespace Managers
         {
             while (true)
             {
-                _worldTimePassed += Time.deltaTime;
+                WorldTimePassed += Time.deltaTime;
                 yield return null; // Wait for the next frame
             }
         }
