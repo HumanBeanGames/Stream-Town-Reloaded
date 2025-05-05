@@ -56,7 +56,7 @@ namespace Twitch.Commands
 
         public static string DisplayStationIDs(Player player)
         {
-            GameManager.Instance.StationManager.DisplayStationIdByType(player.StationSensor.StationMask);
+            StationManager.DisplayStationIdByType(player.StationSensor.StationMask);
             return "Station IDs displayed on screen.";
         }
 
@@ -65,7 +65,7 @@ namespace Twitch.Commands
             if (args.Length == 0 || !int.TryParse(args[0], out int index))
                 return "Usage: !station <id>";
 
-            var station = GameManager.Instance.StationManager.GetStationByFlaggedIndex(player.StationSensor.StationMask, index - 1);
+            var station = StationManager.GetStationByFlaggedIndex(player.StationSensor.StationMask, index - 1);
             player.StationSensor.UpdateStation = false;
             player.StationSensor.TrySetStation(station);
             return $"{player.TwitchUser.Username}, station switched!";

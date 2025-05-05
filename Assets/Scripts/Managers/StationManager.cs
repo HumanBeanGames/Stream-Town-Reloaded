@@ -1,4 +1,5 @@
 using Buildings;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,25 +11,29 @@ namespace Managers
 	/// <summary>
 	/// Manages all stations in the game.
 	/// </summary>
-	public class StationManager : MonoBehaviour
+	[GameManager]
+	public static class StationManager
 	{
-		private Dictionary<StationMask, List<Station>> _stationsDictionary = new Dictionary<StationMask, List<Station>>();
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static StationConfig Config = StationConfig.Instance;
+
+		private static Dictionary<StationMask, List<Station>> _stationsDictionary => Config.stationsDictionary;
 
 		/// <summary>
 		/// Queue of stations that need to have their targets updated.
 		/// </summary>
-		private Queue<Station> _stationUpdateQueue = new Queue<Station>();
+		private static Queue<Station> _stationUpdateQueue => Config.stationUpdateQueue;
 
 		/// <summary>
 		/// Queue of stations that need to check if their targets are disabled.
 		/// </summary>
-		private Queue<Station> _clearDisabledQueue = new Queue<Station>();
+		private static Queue<Station> _clearDisabledQueue => Config.clearDisabledQueue;
 
 		/// <summary>
 		/// Adds the station to the update queue so that it's targets will be updated.
 		/// </summary>
 		/// <param name="station"></param>
-		public void UpdateStation(Station station)
+		public static void UpdateStation(Station station)
 		{
 			if (_stationUpdateQueue.Contains(station))
 				return;
@@ -36,11 +41,11 @@ namespace Managers
 			_stationUpdateQueue.Enqueue(station);
 		}
 
-		/// <summary>
-		/// Adds a station to the station dictionary.
-		/// </summary>
-		/// <param name="station"></param>
-		public void AddStation(Station station)
+        /// <summary>
+        /// Adds a station to the station dictionary.
+        /// </summary>
+        /// <param name="station"></param>
+        public static void AddStation(Station station)
 		{
 			foreach (int i in Enum.GetValues(typeof(StationMask)))
 			{
@@ -56,11 +61,11 @@ namespace Managers
 			}
 		}
 
-		/// <summary>
-		/// Removes station from station dictionary.
-		/// </summary>
-		/// <param name="station"></param>
-		public void RemoveStation(Station station)
+        /// <summary>
+        /// Removes station from station dictionary.
+        /// </summary>
+        /// <param name="station"></param>
+        public static void RemoveStation(Station station)
 		{
 			foreach (int i in Enum.GetValues(typeof(StationMask)))
 			{
@@ -76,12 +81,12 @@ namespace Managers
 			}
 		}
 
-		/// <summary>
-		/// Uses StationFlags flag to get list of available stations.
-		/// </summary>
-		/// <param name="flag"></param>
-		/// <returns></returns>
-		public List<Station> GetStationsByFlag(StationMask flag)
+        /// <summary>
+        /// Uses StationFlags flag to get list of available stations.
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public static List<Station> GetStationsByFlag(StationMask flag)
 		{
 			List<Station> stations = new List<Station>();
 
@@ -101,12 +106,12 @@ namespace Managers
 			return stations;
 		}
 
-		/// <summary>
-		/// Displays the stations ID for a given amount of time.
-		/// </summary>
-		/// <param name="flags"></param>
-		/// <returns></returns>
-		public bool DisplayStationIdByType(StationMask flags)
+        /// <summary>
+        /// Displays the stations ID for a given amount of time.
+        /// </summary>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        public static bool DisplayStationIdByType(StationMask flags)
 		{
 			List<Station> _validStations = GetStationsByFlag(flags);
 
@@ -123,13 +128,13 @@ namespace Managers
 			return true;
 		}
 
-		/// <summary>
-		/// Attempts to get a Station based on flags and given index.
-		/// </summary>
-		/// <param name="flags"></param>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		public Station GetStationByFlaggedIndex(StationMask flags, int index)
+        /// <summary>
+        /// Attempts to get a Station based on flags and given index.
+        /// </summary>
+        /// <param name="flags"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static Station GetStationByFlaggedIndex(StationMask flags, int index)
 		{
 			List<Station> _validStations = GetStationsByFlag(flags);
 
@@ -139,12 +144,12 @@ namespace Managers
 			return _validStations[index];
 		}
 
-		/// <summary>
-		/// Adds a new station to the dictionary based on it's mask.
-		/// </summary>
-		/// <param name="mask"></param>
-		/// <param name="station"></param>
-		private void AddStation(StationMask mask, Station station)
+        /// <summary>
+        /// Adds a new station to the dictionary based on it's mask.
+        /// </summary>
+        /// <param name="mask"></param>
+        /// <param name="station"></param>
+        private static void AddStation(StationMask mask, Station station)
 		{
 			// Check that the dictionary contains the key, otherwise create it.
 			if (!_stationsDictionary.ContainsKey(mask))
@@ -159,12 +164,12 @@ namespace Managers
 			_clearDisabledQueue.Enqueue(station);
 		}
 
-		/// <summary>
-		/// Removes an existing station from the dictionary based on it's flag.
-		/// </summary>
-		/// <param name="mask"></param>
-		/// <param name="station"></param>
-		private void RemoveStation(StationMask mask, Station station)
+        /// <summary>
+        /// Removes an existing station from the dictionary based on it's flag.
+        /// </summary>
+        /// <param name="mask"></param>
+        /// <param name="station"></param>
+        private static void RemoveStation(StationMask mask, Station station)
 		{
 			// Check that the key existed in the dictionary.
 			if (!_stationsDictionary.ContainsKey(mask))
@@ -178,8 +183,8 @@ namespace Managers
 			_stationsDictionary[mask].Remove(station);
 		}
 
-		// Unity Functions.
-		private void Update()
+        // Unity Functions.
+        private static void Update()
 		{
 			if (_stationUpdateQueue.Count > 0)
 			{

@@ -24,8 +24,6 @@ namespace Sensors
 		[SerializeField]
 		private UnityEvent _onStationChange;
 
-		private StationManager _stationManager;
-
 		public Station CurrentStation => _currentStation;
 		public bool HasStation => _currentStation == null ? false : true;
 		public bool UpdateStation { get; set; }
@@ -89,11 +87,8 @@ namespace Sensors
 		/// </summary>
 		private void GetNearestStation()
 		{
-			if (!_stationManager)
-				return;
-
 			//TODO: Implement BSP, also doesnt need to be called so often
-			List<Station> stations = _stationManager.GetStationsByFlag(_stationMask);
+			List<Station> stations = StationManager.GetStationsByFlag(_stationMask);
 
 			if (stations == null || stations.Count == 0)
 			{
@@ -139,7 +134,6 @@ namespace Sensors
 		// Unity Functions.
 		private void Start()
 		{
-			_stationManager = GameManager.Instance.StationManager;
 			UpdateStation = true;
 		}
 

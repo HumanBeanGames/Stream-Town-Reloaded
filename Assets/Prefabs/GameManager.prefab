@@ -323,7 +323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2863939470258754367}
   - component: {fileID: 2863939470258754366}
-  - component: {fileID: 2863939470258754363}
   - component: {fileID: 4743046362108062370}
   - component: {fileID: 3554142829688672216}
   - component: {fileID: 6757679220092370436}
@@ -393,18 +392,6 @@ MonoBehaviour:
   <BuildingsCostResources>k__BackingField: 1
   <PlayerRoleLimits>k__BackingField: 1
   <IgnoreTechUnlocks>k__BackingField: 0
---- !u!114 &2863939470258754363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863939470258754337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3632ee1e9ff62b409834021a55d6c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4743046362108062370
 MonoBehaviour:
   m_ObjectHideFlags: 0

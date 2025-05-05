@@ -71,7 +71,6 @@ namespace Buildings
 
 		// Required Components.
 		private Transform _transform;
-		private StationManager _manager;
 		private Targetable _targetable;
 		private GUIDComponent _gUIDComponent;
 		//private UnitTextDisplay _displayText;
@@ -425,10 +424,8 @@ namespace Buildings
 
 		private void Start()
 		{
-			_manager = GameManager.Instance.StationManager;
-
 			// Add this station to the Station Manager.
-			_manager.AddStation(this);
+			StationManager.AddStation(this);
 			PopulateDictionary();
 
 			_updateTimer = UnityEngine.Random.Range(0, _updateRate);
@@ -442,7 +439,7 @@ namespace Buildings
 			if (_updateTimer >= _updateRate)
 			{
 				_updateTimer -= _updateRate;
-				_manager.UpdateStation(this);
+				StationManager.UpdateStation(this);
 			}
 
 			UpdateQueueTarget();
@@ -451,14 +448,12 @@ namespace Buildings
 
 		private void OnEnable()
 		{
-			if (_manager != null)
-				_manager.AddStation(this);
+				StationManager.AddStation(this);
 		}
 
 		private void OnDisable()
 		{
-			if (_manager != null)
-				_manager.RemoveStation(this);
+				StationManager.RemoveStation(this);
 		}
 
 		private void OnDrawGizmosSelected()
