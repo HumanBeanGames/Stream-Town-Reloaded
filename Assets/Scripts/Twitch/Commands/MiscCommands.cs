@@ -128,13 +128,12 @@ namespace Twitch.Commands
 
         public static string GetBuildingInfo(BuildingType building, string[] args)
         {
-            BuildingManager manager = GameManager.Instance.BuildingManager;
             if (args.Length == 1 || building == BuildingType.Townhall)
                 return BuildingDescriptions[building];
             if (int.TryParse(args[1], out int id))
             {
                 int index = id - 1;
-                if (manager.TryGetBuilding(building, index, out BuildingBase buildingBase, out string errorMessage))
+                if (BuildingManager.TryGetBuilding(building, index, out BuildingBase buildingBase, out string errorMessage))
                 {
                     string extraInfo = building == BuildingType.Marketplace ? buildingBase.GetComponent<PassiveResourceIncrementer>().GetInformation() : "";
                     return $"{building} {id} | {extraInfo} Health: {buildingBase.HealthHandler.Health}/{buildingBase.HealthHandler.MaxHealth} | Level: {buildingBase.LevelHandler.Level}/{buildingBase.LevelHandler.MaxLevel} | Can level up: {buildingBase.LevelHandler.CanLevel()}";

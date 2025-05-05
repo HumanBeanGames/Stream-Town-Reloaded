@@ -129,7 +129,7 @@ namespace Buildings
             UpdateCollision();
         }
 
-        public bool CanAfford() => GameManager.Instance.BuildingManager.CanAffordToBuild(_currentBuilding.BuildingType);
+        public bool CanAfford() => BuildingManager.CanAffordToBuild(_currentBuilding.BuildingType);
 
         public bool TrySpawnBuilding(out Vector3 placementPos, out string errorMessage, bool disableOnSpawn = true)
         {
@@ -145,7 +145,7 @@ namespace Buildings
             obj.transform.rotation = transform.rotation;
             obj.gameObject.SetActive(true);
 
-            GameManager.Instance.BuildingManager.OnBuiltNewBuilding(obj.GetComponent<BuildingBase>());
+            BuildingManager.OnBuiltNewBuilding(obj.GetComponent<BuildingBase>());
             placementPos = obj.transform.position;
 
             gameObject.SetActive(false);

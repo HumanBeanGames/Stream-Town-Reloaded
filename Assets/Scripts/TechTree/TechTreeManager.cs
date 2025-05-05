@@ -37,7 +37,6 @@ namespace TechTree
 		private int _techsUnlocked = 0;
 
 		private PlayerManager _playerManager;
-		private BuildingManager _buildingManager;
 		private UserInterface_TownGoal _townGoalInterface;
 
 		public int MinTimeBetweenVotes => _minTimeBetweenVotes;
@@ -56,7 +55,6 @@ namespace TechTree
 			_techTree = new TechnologyTree(_techTreeSO, this);
 			_goalsFollowed = new Dictionary<Goal, Node_SO>();
 
-			_buildingManager = GameManager.Instance.BuildingManager;
 			_playerManager = GameManager.Instance.PlayerManager;
 			//PrintAvailableNodes();
 
@@ -80,7 +78,7 @@ namespace TechTree
 					continue;
 
 				bool canAdd = false;
-				if (GameManager.Instance.BuildingManager.BuildingAges[BuildingType.Townhall] != Age.Age2)
+				if (BuildingManager.BuildingAges[BuildingType.Townhall] != Age.Age2)
 					if (_techTree.AvailableNodes[i].Age == Age.Age2)
 						for (int j = 0; j < _techTree.AvailableNodes[i].Unlocks.Count; j++)
 						{
@@ -275,10 +273,7 @@ namespace TechTree
 		/// <param name="data"></param>
 		private void UnlockBuilding(NodeUnlockData data)
 		{
-			if (_buildingManager == null)
-				_buildingManager = GameManager.Instance.BuildingManager;
-
-			_buildingManager.UnlockBuilding(data.BuildingType);
+			BuildingManager.UnlockBuilding(data.BuildingType);
 
 			OnBuildingUnlocked?.Invoke(data.BuildingType);
 		}
@@ -288,9 +283,9 @@ namespace TechTree
 			BuildingType buildingType = data.BuildingType;
 
 			if (buildingType == BuildingType.Count)
-				_buildingManager.GlobalBuildCostModifier += data.IntValue;
+				BuildingManager.GlobalBuildCostModifier += data.IntValue;
 			else
-				_buildingManager.BuildingCostModifiers[buildingType] += data.IntValue;
+				BuildingManager.BuildingCostModifiers[buildingType] += data.IntValue;
 
 			OnBuildingCostReduction?.Invoke(buildingType);
 		}
@@ -315,7 +310,7 @@ namespace TechTree
 		/// <param name="data"></param>
 		private void BuildingMaxLevelIncreased(NodeUnlockData data)
 		{
-			_buildingManager.BuildingsMaxLevel[data.BuildingType] = data.IntValue;
+			BuildingManager.BuildingsMaxLevel[data.BuildingType] = data.IntValue;
 
 			OnBuildingLevelIncreased?.Invoke(data.BuildingType);
 		}
@@ -326,8 +321,8 @@ namespace TechTree
 		/// <param name="data"></param>
 		private void AgeBuilding(NodeUnlockData data)
 		{
-			if ((int)_buildingManager.BuildingAges[data.BuildingType] < 1)
-				_buildingManager.BuildingAges[data.BuildingType]++;
+			if ((int)BuildingManager.BuildingAges[data.BuildingType] < 1)
+				BuildingManager.BuildingAges[data.BuildingType]++;
 
 			Age age = (Age)data.IntValue;
 			OnBuildingAgedUp?.Invoke(data.BuildingType);

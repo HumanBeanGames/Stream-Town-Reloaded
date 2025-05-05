@@ -9,7 +9,6 @@ namespace Level
 	/// </summary>
 	public class BuildingLevelHandler : LevelHandler
 	{
-		protected BuildingManager _buildingManager;
 		protected BuildingBase _buildingBase;
 
 		public event Action<LevelHandler> OnLeveledUp;
@@ -25,7 +24,7 @@ namespace Level
 		/// <returns></returns>
 		public bool CanLevel(bool skipCostCheck = false)
 		{
-			if (base.CanLevel() && (skipCostCheck || _buildingManager.CanAffordToLevel(_buildingBase.BuildingType, _currentLevel)))
+			if (base.CanLevel() && (skipCostCheck || BuildingManager.CanAffordToLevel(_buildingBase.BuildingType, _currentLevel)))
 			{
 				return true;
 			}
@@ -38,7 +37,7 @@ namespace Level
 		/// </summary>
 		public override void OnLevelUp()
 		{
-			_buildingManager.OnLevelBuilding(_buildingBase.BuildingType, _currentLevel);
+			BuildingManager.OnLevelBuilding(_buildingBase.BuildingType, _currentLevel);
 			base.OnLevelUp();
 			OnLeveledUp?.Invoke(this);
 		}
@@ -50,7 +49,6 @@ namespace Level
 		{
 			base.Init();
 
-			_buildingManager = GameManager.Instance.BuildingManager;
 			_buildingBase = GetComponent<BuildingBase>();
 		}
 	}

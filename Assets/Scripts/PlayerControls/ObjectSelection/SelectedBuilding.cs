@@ -121,14 +121,14 @@ namespace PlayerControls.ObjectSelection
 		public void RemoveBuilding()
 		{
 			BuildingBase building = (BuildingBase)_selectedObject;
-			if (GameManager.Instance.BuildingManager.TryRemoveBuilding(building))
+			if (BuildingManager.TryRemoveBuilding(building))
 				_selectedObjectTypeUI.HideContext();
 		}
 
 		public void OnBuildingLevelUp()
 		{
 			BuildingBase building = (BuildingBase)_selectedObject;
-			if (!GameManager.Instance.BuildingManager.CanLevelBuilding(building))
+			if (!BuildingManager.CanLevelBuilding(building))
 				_selectedObjectTypeUI.SelectionButtonTwo.interactable = false;
 			else if (building.LevelHandler.Level == building.LevelHandler.MaxLevel)
 			{

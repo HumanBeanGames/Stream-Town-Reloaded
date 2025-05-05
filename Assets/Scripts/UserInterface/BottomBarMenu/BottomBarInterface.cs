@@ -158,16 +158,14 @@ namespace UserInterface.BottomBarMenu
 
 		private static void ShowBuildMenu()
 		{
-			BuildingManager bm = GameManager.Instance.BuildingManager;
-
 			List<GameObject> availableButtons = new List<GameObject>();
 
 			for (int i = 0; i < _buildButtons.Count; i++)
 			{
-				if (bm.IsBuildingUnlocked(_buildButtons[i].Item1))
+				if (BuildingManager.IsBuildingUnlocked(_buildButtons[i].Item1))
 					availableButtons.Add(_buildButtons[i].Item2);
 
-				if (bm.CanAffordToBuild(_buildButtons[i].Item1))
+				if (BuildingManager.CanAffordToBuild(_buildButtons[i].Item1))
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = true;
 				else
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = false;
@@ -290,8 +288,6 @@ namespace UserInterface.BottomBarMenu
 			// Escape to cancel building
 			Player player = GameManager.Instance.UserPlayer;
 
-			BuildingManager bm = GameManager.Instance.BuildingManager;
-
 			// This is terrible lmao
 			List<Button> buttonList = new List<Button>();
 			for (int i = 0; i < _buildButtons.Count; i++)
@@ -301,19 +297,19 @@ namespace UserInterface.BottomBarMenu
 
 			for (int i = 0; i < _buildButtons.Count; i++)
 			{
-				if (bm.CanAffordToBuild(_buildButtons[i].Item1))
+				if (BuildingManager.CanAffordToBuild(_buildButtons[i].Item1))
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = true;
 				else
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = false;
 			}
 
-			bm.TryCancelBuilding(player);
-			bm.TryStartNewBuildingPlacer(player, buildingType, out string msg);
+			BuildingManager.TryCancelBuilding(player);
+			BuildingManager.TryStartNewBuildingPlacer(player, buildingType, out string msg);
 
 			GameManager.Instance.LastBuildingType = buildingType;
 			for (int i = 0; i < _buildButtons.Count; i++)
 			{
-				if (bm.CanAffordToBuild(_buildButtons[i].Item1))
+				if (BuildingManager.CanAffordToBuild(_buildButtons[i].Item1))
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = true;
 				else
 					_buildButtons[i].Item2.GetComponentInChildren<Button>().interactable = false;

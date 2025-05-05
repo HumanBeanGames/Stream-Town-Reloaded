@@ -8,6 +8,8 @@ using SavingAndLoading;
 using Utils.Pooling;
 using SavingAndLoading.SavableObjects;
 using SavingAndLoading.Structs;
+using Sirenix.OdinInspector;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,34 +21,47 @@ namespace Managers
 	/// Manages all of the buildings in the game.
 	/// </summary>
 	[System.Serializable]
-	public class BuildingManager : MonoBehaviour
+	[GameManager]
+	public static class BuildingManager
 	{
-		// Make these 3 dictionaries into a class?
-		public Dictionary<BuildingType, int> BuildingCostModifiers = new Dictionary<BuildingType, int>();
-		public int GlobalBuildCostModifier;
-		public Dictionary<BuildingType, int> BuildingsMaxLevel = new Dictionary<BuildingType, int>();
-		public Dictionary<BuildingType, Age> BuildingAges = new Dictionary<BuildingType, Age>();
+		[InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+		private static BuildingConfig Config = BuildingConfig.Instance;
 
-		private static Dictionary<BuildingType, BuildingDataScriptable> _buildingDataDictionary;
+		public static int GlobalBuildCostModifier
+			{
+			get=> Config.globalBuildCostModifier;
+            set=> Config.globalBuildCostModifier = value;
+            }
 
-		[SerializeField]
-		private AllBuildingDataScriptable _allBuildingData;
 
-		private Dictionary<Player, BuildingPlacer> _placers = new Dictionary<Player, BuildingPlacer>();
+        // Make these 3 dictionaries into a SO?
+        [HideInInspector]
+        public static Dictionary<BuildingType, int> BuildingCostModifiers = new Dictionary<BuildingType, int>();
+        [HideInInspector]
+        public static Dictionary<BuildingType, int> BuildingsMaxLevel = new Dictionary<BuildingType, int>();
+        [HideInInspector]
+        public static Dictionary<BuildingType, Age> BuildingAges = new Dictionary<BuildingType, Age>();
+        [HideInInspector]
+        private static Dictionary<BuildingType, BuildingDataScriptable> _buildingDataDictionary;
 
-		private Dictionary<BuildingType, List<BuildingBase>> _buildings = new Dictionary<BuildingType, List<BuildingBase>>();
+		[SerializeField] //THIS ONE
+		private static AllBuildingDataScriptable _allBuildingData => Config.allBuildingData;
+        [HideInInspector]
+        private static Dictionary<Player, BuildingPlacer> _placers = new Dictionary<Player, BuildingPlacer>();
+        [HideInInspector]
+        private static Dictionary<BuildingType, List<BuildingBase>> _buildings = new Dictionary<BuildingType, List<BuildingBase>>();
+        [HideInInspector]
+        private static int _numOfBuildings = 1;
+        [HideInInspector]
+        private static Dictionary<BuildingType, int> _buildingCounts = new Dictionary<BuildingType, int>();
+        [HideInInspector]
+        private static Dictionary<BuildingType, bool> _buildingsUnlocked = new Dictionary<BuildingType, bool>();
 
-		private int _numOfBuildings = 1;
+		public static int NumberOfBuildings => _numOfBuildings;
+		public static Dictionary<BuildingType, int> BuildingCounts => _buildingCounts;
+		public static Dictionary<BuildingType, bool> BuildingsUnlocked => _buildingsUnlocked;
 
-		private Dictionary<BuildingType, int> _buildingCounts = new Dictionary<BuildingType, int>();
-
-		private Dictionary<BuildingType, bool> _buildingsUnlocked = new Dictionary<BuildingType, bool>();
-
-		public int NumberOfBuildings => _numOfBuildings;
-		public Dictionary<BuildingType, int> BuildingCounts => _buildingCounts;
-		public Dictionary<BuildingType, bool> BuildingsUnlocked => _buildingsUnlocked;
-
-		public void Initialize()
+		public static void Initialize()
 		{
 			InitializeBuildingData();
 		}
@@ -64,7 +79,7 @@ namespace Managers
 			return _buildingDataDictionary[type];
 		}
 
-		public bool GetPlacerBuildingType(Player player, out BuildingType type)
+		public static bool GetPlacerBuildingType(Player player, out BuildingType type)
 		{
 			type = BuildingType.Count;
 
@@ -80,7 +95,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool CanAffordToBuild(BuildingType type)
+		public static bool CanAffordToBuild(BuildingType type)
 		{
 			if (!GameManager.Instance.BuildingsCostResources)
 				return true;
@@ -99,7 +114,7 @@ namespace Managers
 				return false;
 		}
 
-		public int CalculateCostReduction(BuildingType type, int baseValue)
+		public static int CalculateCostReduction(BuildingType type, int baseValue)
 		{
 			return (int)(BuildingCostModifiers[type] * (baseValue / 100.0f));
 		}
@@ -108,7 +123,7 @@ namespace Managers
 		/// Called when a new building has been built.
 		/// </summary>
 		/// <param name="building"></param>
-		public void OnBuiltNewBuilding(BuildingBase building)
+		public static void OnBuiltNewBuilding(BuildingBase building)
 		{
 			BuildingDataScriptable data = _buildingDataDictionary[building.BuildingType];
 
@@ -136,7 +151,7 @@ namespace Managers
 			_buildingCounts[building.BuildingType]++;
 		}
 
-		public void AddLoadedBuilding(BuildingBase building)
+		public static void AddLoadedBuilding(BuildingBase building)
 		{
 			if (!_buildings.ContainsKey(building.BuildingType))
 			{
@@ -154,7 +169,7 @@ namespace Managers
 		/// Called when a building has been removed.
 		/// </summary>
 		/// <param name="building"></param>
-		public void OnBuildingRemoved(BuildingBase building)
+		public static void OnBuildingRemoved(BuildingBase building)
 		{
 			if (_buildings[building.BuildingType].Contains(building))
 				_buildings[building.BuildingType].Remove(building);
@@ -169,7 +184,7 @@ namespace Managers
 		/// <param name="type"></param>
 		/// <param name="currentLevel"></param>
 		/// <returns></returns>
-		public bool CanAffordToLevel(BuildingType type, int currentLevel)
+		public static bool CanAffordToLevel(BuildingType type, int currentLevel)
 		{
 			if (!GameManager.Instance.BuildingsCostResources)
 				return true;
@@ -201,7 +216,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="currentLevel"></param>
-		public void OnLevelBuilding(BuildingType type, int currentLevel)
+		public static void OnLevelBuilding(BuildingType type, int currentLevel)
 		{
 			if (!GameManager.Instance.BuildingsCostResources)
 				return;
@@ -227,7 +242,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool CheckBuildingTypeExists(BuildingType type)
+		public static bool CheckBuildingTypeExists(BuildingType type)
 		{
 			return _buildingDataDictionary.ContainsKey(type);
 		}
@@ -237,7 +252,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool CheckBuildingIsPlaceable(BuildingType type)
+		public static bool CheckBuildingIsPlaceable(BuildingType type)
 		{
 			//TODO:: Add check for build permissions as well as building requirements
 			if (!CheckBuildingTypeExists(type))
@@ -253,7 +268,7 @@ namespace Managers
 		/// <param name="player"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool TryStartNewBuildingPlacer(Player player, BuildingType type, out string errorMessage)
+		public static bool TryStartNewBuildingPlacer(Player player, BuildingType type, out string errorMessage)
 		{
 			// Check if player is already placing a building.
 			if (_placers.ContainsKey(player))
@@ -305,7 +320,7 @@ namespace Managers
 		/// <param name="player"></param>
 		/// <param name="moveInput"></param>
 		/// <returns></returns>
-		public bool TryMoveBuilding(Player player, Vector3 moveInput)
+		public static bool TryMoveBuilding(Player player, Vector3 moveInput)
 		{
 			if (!_placers.ContainsKey(player))
 				return false;
@@ -320,7 +335,7 @@ namespace Managers
 		/// <param name="player"></param>
 		/// <param name="rotationAmount"></param>
 		/// <returns></returns>
-		public bool TryRotateBuilding(Player player, int rotationAmount)
+		public static bool TryRotateBuilding(Player player, int rotationAmount)
 		{
 			if (!_placers.ContainsKey(player))
 				return false;
@@ -330,7 +345,7 @@ namespace Managers
 			return true;
 		}
 
-		public void UpdatePlacerCollision(Player player)
+		public static void UpdatePlacerCollision(Player player)
 		{
 			if (!_placers.ContainsKey(player))
 				return;
@@ -344,7 +359,7 @@ namespace Managers
 		/// <param name="player"></param>
 		/// <param name="errorMessage"></param>
 		/// <returns></returns>
-		public bool TryPlaceBuilding(Player player, out string errorMessage)
+		public static bool TryPlaceBuilding(Player player, out string errorMessage)
 		{
 			// Check that the player is in build mode and has a building placer down.
 			if (!_placers.ContainsKey(player))
@@ -371,7 +386,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="player"></param>
 		/// <returns></returns>
-		public bool TryCancelBuilding(Player player)
+		public static bool TryCancelBuilding(Player player)
 		{
 			// If the player does not have a building placer active, then there is nothing to cancel.
 			if (player != null)
@@ -387,17 +402,17 @@ namespace Managers
 			return false;
 		}
 
-		public void TryCancelBuilding(object obj)
+		public static void TryCancelBuilding(object obj)
 		{
 			TryCancelBuilding((Player)obj);
 		}
 
-		public bool IsBuildingUnlocked(BuildingType buildingType)
+		public static bool IsBuildingUnlocked(BuildingType buildingType)
 		{
 			return _buildingsUnlocked[buildingType];
 		}
 
-		public bool TryLevelBuilding(BuildingBase building, out string errorMessage)
+		public static bool TryLevelBuilding(BuildingBase building, out string errorMessage)
 		{
 
 			// Check if the building can be leveled up.
@@ -433,7 +448,7 @@ namespace Managers
 			return false;
 		}
 
-		public bool CanLevelBuilding(BuildingBase building)
+		public static bool CanLevelBuilding(BuildingBase building)
 		{
 			// Check if the building can be leveled up.
 			if (!building.BuildingData.CanLevel || building.LevelHandler == null || building.BuildingState == BuildingState.Construction)
@@ -463,7 +478,7 @@ namespace Managers
 		/// <param name="index"></param>
 		/// <param name="errorMessage"></param>
 		/// <returns></returns>
-		public bool TryLevelBuilding(BuildingType type, int index, out string errorMessage)
+		public static bool TryLevelBuilding(BuildingType type, int index, out string errorMessage)
 		{
 			// Check that this type of building exists.
 			if (!_buildings.ContainsKey(type))
@@ -492,7 +507,7 @@ namespace Managers
 		/// <param name="index"></param>
 		/// <param name="errorMessage"></param>
 		/// <returns></returns>
-		public bool TryRemoveBuilding(BuildingType type, int index, out string errorMessage)
+		public static bool TryRemoveBuilding(BuildingType type, int index, out string errorMessage)
 		{
 			// Check that the type of building exists already.
 			if (!_buildings.ContainsKey(type))
@@ -517,7 +532,7 @@ namespace Managers
 			return true;
 		}
 
-		public bool TryGetBuilding(BuildingType type, int index, out BuildingBase buildingBase, out string errorMessage)
+		public static bool TryGetBuilding(BuildingType type, int index, out BuildingBase buildingBase, out string errorMessage)
 		{
 			// Check that the type of building exists already.
 			if (!_buildings.ContainsKey(type))
@@ -541,7 +556,7 @@ namespace Managers
 			return true;
 		}
 
-		public bool TryRemoveBuilding(BuildingBase building)
+		public static bool TryRemoveBuilding(BuildingBase building)
 		{
 			building.RemoveBuilding();
 			_buildings[building.BuildingType].Remove(building);
@@ -554,7 +569,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool DisplayBuildingIdsOfType(BuildingType type)
+		public static bool DisplayBuildingIdsOfType(BuildingType type)
 		{
 			if (!_buildings.ContainsKey(type))
 			{
@@ -574,7 +589,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public BuildingBase[] GetAllBuildingsOfType(BuildingType type)
+		public static BuildingBase[] GetAllBuildingsOfType(BuildingType type)
 		{
 			return _buildings[type].ToArray();
 		}
@@ -583,25 +598,25 @@ namespace Managers
 		/// Returns the dictionary of all the buildings.
 		/// </summary>
 		/// <returns></returns>
-		public Dictionary<BuildingType, List<BuildingBase>> GetAllBuildingsDictionary()
+		public static Dictionary<BuildingType, List<BuildingBase>> GetAllBuildingsDictionary()
 		{
 			return _buildings;
 		}
 
-		public List<BuildingBase> GetBuildingsByType(BuildingType type)
+		public static List<BuildingBase> GetBuildingsByType(BuildingType type)
 		{
 			return _buildings[type];
 		}
 
-		public void UnlockBuilding(BuildingType type)
+		public static void UnlockBuilding(BuildingType type)
 		{
 			_buildingsUnlocked[type] = true;
 		}
 
-		public int GetBuildCostModifier(BuildingType type) => BuildingCostModifiers[type];
+		public static int GetBuildCostModifier(BuildingType type) => BuildingCostModifiers[type];
 
 
-		private void InitializeBuildingData()
+		private static void InitializeBuildingData()
 		{
 			_buildingDataDictionary = new Dictionary<BuildingType, BuildingDataScriptable>();
 			_buildingsUnlocked = new Dictionary<BuildingType, bool>();
@@ -623,7 +638,7 @@ namespace Managers
 			GlobalBuildCostModifier = 0;
 		}
 
-		public void ResetBuilding(BuildingType type)
+		public static void ResetBuilding(BuildingType type)
 		{
 			List<BuildingSaveData> buildings = new List<BuildingSaveData>();
 

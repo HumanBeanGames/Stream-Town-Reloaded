@@ -33,7 +33,7 @@ namespace Utils
 
 			if (_timer <= 0)
 			{
-				GameManager.Instance.BuildingManager.TryCancelBuilding(_player);
+				BuildingManager.TryCancelBuilding(_player);
 				ResetTimer();
 			}
 		}

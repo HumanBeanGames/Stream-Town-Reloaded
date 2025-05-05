@@ -81,7 +81,7 @@ namespace Managers
 
 		private void UpdateCountTexts()
 		{
-			_buildingCountText.text = _gm.BuildingManager.NumberOfBuildings.ToString();
+			_buildingCountText.text = BuildingManager.NumberOfBuildings.ToString();
 			_playerCountText.text = _gm.PlayerManager.PlayerCount().ToString();
 		}
 

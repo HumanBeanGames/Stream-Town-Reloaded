@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
 
@@ -5,8 +6,9 @@ namespace Scriptables
 {
 	[CreateAssetMenu(fileName = "AllBuildingDataScriptableData", menuName = "ScriptableObjects/AllBuildingDataScriptable", order = 1)]
 	public class AllBuildingDataScriptable : ScriptableObject
-	{
-		public BuildingDataScriptable[] BuildingData;
+    {
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public BuildingDataScriptable[] BuildingData;
 
 		public BuildingDataScriptable GetDataByBuildingType(BuildingType building)
 		{

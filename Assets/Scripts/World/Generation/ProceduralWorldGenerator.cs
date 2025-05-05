@@ -174,7 +174,7 @@ namespace World.Generation
 			GameObject thObj = ((SaveableBuilding)th.SaveableObject).BuildingBase.gameObject;
 			thObj.transform.position = Vector3.zero;
 			thObj.SetActive(true);
-			GameManager.Instance.BuildingManager.AddLoadedBuilding(((SaveableBuilding)th.SaveableObject).BuildingBase);
+			BuildingManager.AddLoadedBuilding(((SaveableBuilding)th.SaveableObject).BuildingBase);
 
 			// Generate all normal resources (trees, ore, etc).
 			if (_resourceGenerationSettings != null)

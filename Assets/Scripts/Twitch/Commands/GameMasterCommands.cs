@@ -202,7 +202,7 @@ namespace Twitch.Commands
             if (args.Length != 2) return "Usage: !resetid <type> <name>";
             if (args[0] == "building" && Enum.TryParse(args[1], true, out BuildingType building))
             {
-                GameManager.Instance.BuildingManager.ResetBuilding(building);
+                BuildingManager.ResetBuilding(building);
                 return $"Reset ID for building {args[1]}.";
             }
             return "Invalid reset command.";

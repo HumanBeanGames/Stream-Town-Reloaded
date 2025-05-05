@@ -195,7 +195,7 @@ namespace Buildings
 
 			_buildingData = BuildingManager.GetBuildingData(_buildingType);
 			if (_levelHandler != null)
-				_levelHandler.MaxLevel = GameManager.Instance.BuildingManager.BuildingsMaxLevel[_buildingType];
+				_levelHandler.MaxLevel = BuildingManager.BuildingsMaxLevel[_buildingType];
 
 			GameManager.Instance.TechTreeManager.OnBuildingLevelIncreased += OnBuildingLevelIncreased;
 			GameManager.Instance.TechTreeManager.OnBuildingAgedUp += OnBuildingAged;
@@ -291,7 +291,7 @@ namespace Buildings
 		public virtual void SetModelHandlerIndex(int index)
 		{
 			if (_buildingType == BuildingType.Wall)
-				index += (4 * (int)GameManager.Instance.BuildingManager.BuildingAges[_buildingType]);
+				index += (4 * (int)BuildingManager.BuildingAges[_buildingType]);
 			if (index >= _modelHandler.Length)
 				index = _modelHandler.Length - 1;
 
@@ -307,7 +307,7 @@ namespace Buildings
 		/// </summary>
 		public void OnBuildingDestroyed()
 		{
-			GameManager.Instance.BuildingManager.OnBuildingRemoved(this);
+			BuildingManager.OnBuildingRemoved(this);
 		}
 
 		/// <summary>
@@ -355,7 +355,7 @@ namespace Buildings
 			if (type != _buildingType)
 				return;
 
-			_levelHandler.MaxLevel = GameManager.Instance.BuildingManager.BuildingsMaxLevel[_buildingType];
+			_levelHandler.MaxLevel = BuildingManager.BuildingsMaxLevel[_buildingType];
 		}
 
 		private void OnBuildingAged(BuildingType type)
@@ -363,7 +363,7 @@ namespace Buildings
 			if (type != _buildingType)
 				return;
 
-			_age = GameManager.Instance.BuildingManager.BuildingAges[_buildingType];
+			_age = BuildingManager.BuildingAges[_buildingType];
 
 			if (_buildingType == BuildingType.Wall)
 				return;

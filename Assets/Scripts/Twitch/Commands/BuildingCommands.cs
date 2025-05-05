@@ -24,7 +24,7 @@ namespace Twitch.Commands
             string buildType = GetBuildingTypeFromArg(args[0]);
             if (Enum.TryParse(buildType, out BuildingType type))
             {
-                if (!GameManager.Instance.BuildingManager.TryStartNewBuildingPlacer(player, type, out string errorMessage))
+                if (!BuildingManager.TryStartNewBuildingPlacer(player, type, out string errorMessage))
                     return $"Failed - {errorMessage}";
                 return "Building placer initiated.";
             }
@@ -38,7 +38,7 @@ namespace Twitch.Commands
 
             for (int i = 0; i < iterations; i++)
             {
-                if (!GameManager.Instance.BuildingManager.TryLevelBuilding(type, id - 1, out errorMessage))
+                if (!BuildingManager.TryLevelBuilding(type, id - 1, out errorMessage))
                     break;
                 successfulLevels++;
             }
@@ -90,22 +90,22 @@ namespace Twitch.Commands
                 }
             }
 
-            GameManager.Instance.BuildingManager.TryMoveBuilding(player, moveVector);
-            GameManager.Instance.BuildingManager.TryRotateBuilding(player, rotationAmount);
+            BuildingManager.TryMoveBuilding(player, moveVector);
+            BuildingManager.TryRotateBuilding(player, rotationAmount);
 
             return "Adjusted building placer.";
         }
 
         public static string ConfirmBuildingPlacement(Player player)
         {
-            if (!GameManager.Instance.BuildingManager.TryPlaceBuilding(player, out string errorMessage))
+            if (!BuildingManager.TryPlaceBuilding(player, out string errorMessage))
                 return $"Failed - {errorMessage}";
             return "Building successfully placed.";
         }
 
         public static string CancelBuildingPlacement(Player player)
         {
-            GameManager.Instance.BuildingManager.TryCancelBuilding(player);
+            BuildingManager.TryCancelBuilding(player);
             return "Building placement cancelled.";
         }
 
@@ -116,7 +116,7 @@ namespace Twitch.Commands
             int successfulAttempts = 0;
             if (Enum.TryParse(buildType, out BuildingType type) && int.TryParse(args[1], out int levelTo))
             {
-                var buildingsOfType = GameManager.Instance.BuildingManager.GetBuildingsByType(type);
+                var buildingsOfType = BuildingManager.GetBuildingsByType(type);
                 if (buildingsOfType.Count == 0) return "No buildings of this type.";
                 buildingsOfType = buildingsOfType.OrderByDescending(x => x.LevelHandler.Level).ToList();
                 for (int i = 0; i < levelTo; i++)
@@ -125,7 +125,7 @@ namespace Twitch.Commands
                     foreach (var building in buildingsOfType)
                     {
                         if (building.LevelHandler.Level >= levelTo) continue;
-                        if (GameManager.Instance.BuildingManager.TryLevelBuilding(building, out string _))
+                        if (BuildingManager.TryLevelBuilding(building, out string _))
                         {
                             successfulAttempts++;
                             successfulLevel = true;
@@ -143,7 +143,7 @@ namespace Twitch.Commands
             string buildType = GetBuildingTypeFromArg(args[0]);
             if (Enum.TryParse(buildType, out BuildingType type) && int.TryParse(args[1], out int index))
             {
-                if (GameManager.Instance.BuildingManager.TryRemoveBuilding(type, index - 1, out string errorMessage))
+                if (BuildingManager.TryRemoveBuilding(type, index - 1, out string errorMessage))
                     return "Successfully removed building.";
                 else return $"Failed to remove building - {errorMessage}";
             }
@@ -157,7 +157,7 @@ namespace Twitch.Commands
             for (int i = 0; i < (int)BuildingType.Count; i++)
             {
                 BuildingType type = (BuildingType)i;
-                if (GameManager.Instance.BuildingManager.BuildingsUnlocked.TryGetValue(type, out bool unlocked) && unlocked && type != BuildingType.Townhall)
+                if (BuildingManager.BuildingsUnlocked.TryGetValue(type, out bool unlocked) && unlocked && type != BuildingType.Townhall)
                 {
                     hasBuildings = true;
                     buildingList += $"{type}, ";
@@ -173,7 +173,7 @@ namespace Twitch.Commands
             string buildType = GetBuildingTypeFromArg(args[0]);
             if (Enum.TryParse(buildType, out BuildingType type))
             {
-                GameManager.Instance.BuildingManager.DisplayBuildingIdsOfType(type);
+                BuildingManager.DisplayBuildingIdsOfType(type);
                 return $"Displayed building IDs for {type}.";
             }
             return "Invalid building type.";

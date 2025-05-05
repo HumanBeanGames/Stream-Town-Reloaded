@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private BuildingManager _buildingManager = null;
 		private RoleManager _roleManager = null;
 		private DebugManager _debugManager = null;
 		private PlayerManager _playerManager = null;
@@ -92,7 +91,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public BuildingManager BuildingManager => _buildingManager;
 		public RoleManager RoleManager => _roleManager;
 		public DebugManager DebugManager => _debugManager;
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
@@ -157,7 +155,7 @@ namespace Managers
 
             _connectPanel.SetActive(true);
 			CodeDisplay.text = $"!CONNECT {_code}";
-			_buildingManager.Initialize();
+			BuildingManager.Initialize();
 			_playerManager.Initialize();
 			_townGoalManager.Initialize();
 			_roleManager.Initialize();
@@ -189,9 +187,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _buildingManager))
-				Debug.LogError("BuildingManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _roleManager))
 				Debug.LogError("RoleManager not found on GameManager", this);
 
