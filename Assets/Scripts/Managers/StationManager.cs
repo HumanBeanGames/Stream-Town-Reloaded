@@ -17,17 +17,20 @@ namespace Managers
         [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         private static StationConfig Config = StationConfig.Instance;
 
-		private static Dictionary<StationMask, List<Station>> _stationsDictionary => Config.stationsDictionary;
+        [HideInInspector]
+        private static Dictionary<StationMask, List<Station>> _stationsDictionary = new Dictionary<StationMask, List<Station>>();
 
 		/// <summary>
 		/// Queue of stations that need to have their targets updated.
-		/// </summary>
-		private static Queue<Station> _stationUpdateQueue => Config.stationUpdateQueue;
+		/// </summary> 
+		[HideInInspector]
+		private static Queue<Station> _stationUpdateQueue = new Queue<Station>();
 
-		/// <summary>
-		/// Queue of stations that need to check if their targets are disabled.
-		/// </summary>
-		private static Queue<Station> _clearDisabledQueue => Config.clearDisabledQueue;
+        /// <summary>
+        /// Queue of stations that need to check if their targets are disabled.
+        /// </summary>
+        [HideInInspector]
+        private static Queue<Station> _clearDisabledQueue = new Queue<Station>();
 
 		/// <summary>
 		/// Adds the station to the update queue so that it's targets will be updated.

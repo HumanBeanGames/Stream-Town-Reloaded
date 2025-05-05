@@ -8,6 +8,7 @@ using UnityEngine.Profiling;
 using Pathfinding;
 using UserInterface;
 using GUIDSystem;
+using GridSystem.Partitioning;
 
 namespace Buildings
 {
@@ -120,7 +121,7 @@ namespace Buildings
 
 			//Clear the list of cached targets and get a new list of targets.
 			_cachedTargetsList.Clear();
-			GameManager.Instance.CellPartitionGrid.GetTargetablesInRange(_targetMask, _transform.position, _targetSearchRange, ref _cachedTargetsList);
+			CSPManager.GetTargetablesInRange(_targetMask, _transform.position, _targetSearchRange, ref _cachedTargetsList);
 
 			// Set up for use in the sort.
 			float closestDistSqr = float.MaxValue;

@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private CellSpacePartitioning _cellPartitionGrid = null;
 		private ObjectPoolingManager _poolingManager = null;
 		private BuildingManager _buildingManager = null;
 		private RoleManager _roleManager = null;
@@ -94,7 +93,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public CellSpacePartitioning CellPartitionGrid => _cellPartitionGrid;
 		public ObjectPoolingManager PoolingManager => _poolingManager;
 		public BuildingManager BuildingManager => _buildingManager;
 		public RoleManager RoleManager => _roleManager;
@@ -193,9 +191,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _cellPartitionGrid))
-				Debug.LogError("CellSpacePartitioning not found on GameManager", this);
-
 			if (!TryGetComponent(out _poolingManager))
 				Debug.LogError("ObjectPoolingManager not found on GameManager", this);
 

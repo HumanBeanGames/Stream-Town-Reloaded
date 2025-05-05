@@ -1,4 +1,5 @@
 using Character;
+using GridSystem.Partitioning;
 using GUIDSystem;
 using Managers;
 using System;
@@ -156,7 +157,7 @@ namespace Sensors
 		{
 			List<Targetable> validTargets = new List<Targetable>();
 
-			GameManager.Instance.CellPartitionGrid.GetTargetablesInRange(_targetMask, transform.position, _targetSearchRange, ref validTargets);
+			CSPManager.GetTargetablesInRange(_targetMask, transform.position, _targetSearchRange, ref validTargets);
 
 			// Get closest target
 			float closestDistSqr = float.MaxValue;

@@ -19,7 +19,6 @@ namespace Target
 		[SerializeField]
 		protected float _partitionUpdateRate = 3f;
 		protected float _partitionUpdateTime = 0;
-		protected CellSpacePartitioning _cellSpacePartition;
 		protected int _cellIndex = -1;
 
 		[SerializeField, Tooltip("If false, use the box colliders bounds. This is used for determining how close a unit should get to the target.")]
@@ -97,10 +96,10 @@ namespace Target
 		/// </summary>
 		protected void AddThisTargetToCell()
 		{
-			if (_cellSpacePartition == null || _cellIndex == -1)
+			if (_cellIndex == -1)
 				return;
 
-			_cellSpacePartition.GetCellAtIndex(_cellIndex).AddTarget(this);
+			CSPManager.GetCellAtIndex(_cellIndex).AddTarget(this);
 		}
 
 		/// <summary>
@@ -108,10 +107,10 @@ namespace Target
 		/// </summary>
 		protected void RemoveThisTarget()
 		{
-			if (_cellSpacePartition == null || _cellIndex == -1)
+			if ( _cellIndex == -1)
 				return;
 
-			_cellSpacePartition.GetCellAtIndex(_cellIndex).RemoveTarget(this);
+			CSPManager.GetCellAtIndex(_cellIndex).RemoveTarget(this);
 		}
 
 		/// <summary>
@@ -141,7 +140,7 @@ namespace Target
 		/// </summary>
 		protected void UpdateIndex()
 		{
-			int newCellIndex = _cellSpacePartition.PositionToIndex(transform.position);
+			int newCellIndex = CSPManager.PositionToIndex(transform.position);
 
 			if (newCellIndex != _cellIndex)
 			{
@@ -200,8 +199,7 @@ namespace Target
 		protected void Start()
 		{
 			_transform = transform;
-			_cellSpacePartition = GameManager.Instance.CellPartitionGrid;
-			_cellIndex = _cellSpacePartition.PositionToIndex(transform.position); ;
+			_cellIndex = CSPManager.PositionToIndex(transform.position); ;
 			AddThisTargetToCell();
 		}
 	}

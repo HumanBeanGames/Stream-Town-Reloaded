@@ -1,3 +1,5 @@
+using Managers;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Target;
 using UnityEngine;
@@ -9,31 +11,34 @@ namespace GridSystem.Partitioning
 	/// <summary>
 	/// Uses cells to partition a world for more efficient lookup of objects and cells.
 	/// </summary>
-	public class CellSpacePartitioning : MonoBehaviour
+	[GameManager]
+	public static class CSPManager
 	{
-		[SerializeField]
-		private Vector2 _originOffset;
-		[SerializeField]
-		private float _width = 100;
-		[SerializeField]
-		private float _length = 100;
-		[SerializeField]
-		private float _cellWidth = 10;
-		[SerializeField]
-		private float _cellLength = 10;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static CSPConfig Config = CSPConfig.Instance;
+
+		private static Vector2 _originOffset => Config.originOffset;
+		private static float _width => Config.width;
+		private static float _length => Config.length;
+		private static float _cellWidth => Config.cellWidth;
+		private static float _cellLength => Config.cellLength;
 
 		[SerializeField, HideInInspector]
-		private List<BSPCell> _cells = new List<BSPCell>();
+		private static List<BSPCell> _cells = new List<BSPCell>();
 
-		private int _numCellsX = 0;
-		private int _numCellsZ = 0;
-		private float _offSetX = 0;
-		private float _offSetZ = 0;
+		[HideInInspector]
+		private static int _numCellsX = 0;
+        [HideInInspector]
+        private static int _numCellsZ = 0;
+        [HideInInspector]
+        private static float _offSetX = 0;
+        [HideInInspector]
+        private static float _offSetZ = 0;
 
 		/// <summary>
 		/// Generates the cells to partition the world.
 		/// </summary>
-		public void GeneratePartitions()
+		public static void GeneratePartitions()
 		{
 			_cells = new List<BSPCell>();
 
@@ -41,8 +46,8 @@ namespace GridSystem.Partitioning
 			_numCellsX = (int)(_width / _cellWidth);
 			_numCellsZ = (int)(_length / _cellLength);
 
-			_offSetX = _numCellsX * _cellWidth / 2 + _originOffset.x - transform.position.x;
-			_offSetZ = _numCellsZ * _cellLength / 2 + _originOffset.y - transform.position.z;
+			_offSetX = _numCellsX * _cellWidth / 2 + _originOffset.x;
+			_offSetZ = _numCellsZ * _cellLength / 2 + _originOffset.y;
 
 			// Create the Cells.
 			for (int z = 0; z < _numCellsZ; z++)
@@ -64,7 +69,7 @@ namespace GridSystem.Partitioning
 		/// </summary>
 		/// <param name="position"></param>
 		/// <returns></returns>
-		public int PositionToIndex(Vector3 position)
+		public static int PositionToIndex(Vector3 position)
 		{
 			Vector2 v2Pos = new Vector2(position.x + _offSetX, position.z + _offSetZ);
 
@@ -76,7 +81,7 @@ namespace GridSystem.Partitioning
 		/// </summary>
 		/// <param name="position"></param>
 		/// <returns></returns>
-		public int PositionToIndex(Vector2 position)
+		public static int PositionToIndex(Vector2 position)
 		{
 			int index = (int)(_numCellsX * position.x / _width);
 			index += (int)(_numCellsZ * position.y / _length) * _numCellsX;
@@ -93,7 +98,7 @@ namespace GridSystem.Partitioning
 		/// <param name="position"></param>
 		/// <param name="radius"></param>
 		/// <param name="cells"></param>
-		public void GetCellsInRange(Vector3 position, float radius, ref List<BSPCell> cells)
+		public static void GetCellsInRange(Vector3 position, float radius, ref List<BSPCell> cells)
 		{
 			GetCellsInRange(new Vector2(position.x, position.z), radius, ref cells);
 		}
@@ -104,7 +109,7 @@ namespace GridSystem.Partitioning
 		/// <param name="position"></param>
 		/// <param name="radius"></param>
 		/// <param name="cells"></param>
-		public void GetCellsInRange(Vector2 position, float radius, ref List<BSPCell> cells)
+		public static void GetCellsInRange(Vector2 position, float radius, ref List<BSPCell> cells)
 		{
 			Profiler.BeginSample("Get Cells In Range");
 			//List<BSPCell> cells = new List<BSPCell>(1500);
@@ -128,7 +133,7 @@ namespace GridSystem.Partitioning
 		/// <param name="position"></param>
 		/// <param name="radius"></param>
 		/// <param name="targetables"></param>
-		public void GetTargetablesInRange(TargetMask flag, Vector3 position, float radius, ref List<Targetable> targetables)
+		public static void GetTargetablesInRange(TargetMask flag, Vector3 position, float radius, ref List<Targetable> targetables)
 		{
 			List<BSPCell> cells = new List<BSPCell>(1500);
 			Profiler.BeginSample("Get Targetables In Range");
@@ -143,7 +148,7 @@ namespace GridSystem.Partitioning
 		/// <param name="flag"></param>
 		/// <param name="cells"></param>
 		/// <param name="targetables"></param>
-		public void GetTargetablesInCells(TargetMask flag, ref List<BSPCell> cells, ref List<Targetable> targetables)
+		public static void GetTargetablesInCells(TargetMask flag, ref List<BSPCell> cells, ref List<Targetable> targetables)
 		{
 			Profiler.BeginSample("Get Targetables In Cell");
 
@@ -161,29 +166,29 @@ namespace GridSystem.Partitioning
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public BSPCell GetCellAtIndex(int index) => _cells[index];
+		public static BSPCell GetCellAtIndex(int index) => _cells[index];
 
 		/// <summary>
 		/// Returns the amount of cells in the world.
 		/// </summary>
 		/// <returns></returns>
-		public int CellCount() => _cells == null ? 0 : _cells.Count;
+		public static int CellCount() => _cells == null ? 0 : _cells.Count;
 
 		/// <summary>
 		/// returns all cells as an array.
 		/// </summary>
 		/// <returns></returns>
-		public BSPCell[] GetCells() { return _cells.ToArray(); }
+		public static BSPCell[] GetCells() { return _cells.ToArray(); }
 
 		// Unity Functions.
-		private void Awake()
+		private static void Awake()
 		{
 			//Call to initialize targetflags
 			if (TargetFlagHelper.TargetFlags != null) { }
 			GeneratePartitions();
 		}
 
-		private void OnDrawGizmosSelected()
+		private static void OnDrawGizmosSelected()
 		{
 			if (_cells == null)
 				return;
