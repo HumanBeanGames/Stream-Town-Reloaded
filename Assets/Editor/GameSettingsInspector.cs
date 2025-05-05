@@ -199,9 +199,16 @@ namespace Sirenix.OdinInspector.Editor
             btnStyle = btnStyle ?? new GUIStyle(EditorStyles.toolbarDropDown);
             btnStyle.fixedHeight = 21f;
             btnStyle.stretchHeight = false;
-            //DrawFirstToolbar();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginVertical(GUILayout.Width(150)); // Adjust width as needed
             DrawTypeButtons();
+            EditorGUILayout.EndVertical();
+
+            EditorGUILayout.BeginVertical();
             base.OnImGUI();
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawTypeButtons()
