@@ -21,7 +21,7 @@ namespace Managers
 	[GameManager]
 	public static class PlayerManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static PlayerConfig Config = PlayerConfig.Instance;
 
 		[HideInInspector]

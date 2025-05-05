@@ -13,52 +13,91 @@ using UnityEngine.InputSystem;
 using Utils;
 using UserInterface;
 using System.Collections;
+using Sirenix.OdinInspector;
 
-namespace TechTree
+namespace Managers
 {
-	public class TechTreeManager : MonoBehaviour
+	[GameManager]
+	public static class TechTreeManager
 	{
-		private static int TECH_COUNT_REQ_AGE_2 = 50;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static TechTreeConfig Config = TechTreeConfig.Instance;
 
-		/// <summary>
-		/// Minimum time after a technology was unlocked can the auto-vote start.
-		/// </summary>
-		[SerializeField]
-		private int _minTimeBetweenVotes;
-		private int _timeSinceLastUnlock;
+		private static TechTree_SO _techTreeSO => Config.techTreeSO;
 
-		[SerializeField]
-		private TechTree_SO _techTreeSO;
+		[HideInInspector]
+        private static int TECH_COUNT_REQ_AGE_2 = 50;
 
-		private TechnologyTree _techTree;
+        /// <summary>
+        /// Minimum time after a technology was unlocked can the auto-vote start.
+        /// </summary>
+		/// 
+		[HideInInspector]
+        private static int _minTimeBetweenVotes;
 
-		private Dictionary<Goal, Node_SO> _goalsFollowed;
+        [HideInInspector]
+        private static int _timeSinceLastUnlock;
 
-		private int _techsUnlocked = 0;
 
-		private UserInterface_TownGoal _townGoalInterface;
+        [HideInInspector]
+        private static TechnologyTree _techTree;
 
-		public int MinTimeBetweenVotes => _minTimeBetweenVotes;
-		public TechnologyTree TechTree => _techTree;
+        [HideInInspector]
+        private static Dictionary<Goal, Node_SO> _goalsFollowed;
 
-		public Node_SO CurrentTech = null;
-		public Action<Resource> OnStorageBoostUnlocked;
-		public Action<PlayerRole, StatType> OnStatBoostUnlocked;
-		public Action<BuildingType> OnBuildingUnlocked;
-		public Action<BuildingType> OnBuildingLevelIncreased;
-		public Action<BuildingType> OnBuildingCostReduction;
-		public Action<BuildingType> OnBuildingAgedUp;
+        [HideInInspector]
+        private static int _techsUnlocked = 0;
 
-		public void InitializeTree()
+        [HideInInspector]
+        private static UserInterface_TownGoal _townGoalInterface;
+
+        public static int MinTimeBetweenVotes => _minTimeBetweenVotes;
+		public static TechnologyTree TechTree => _techTree;
+
+		[HideInInspector]
+		public static Node_SO CurrentTech = null;
+
+        [HideInInspector]
+        public static Action<Resource> OnStorageBoostUnlocked;
+
+        [HideInInspector]
+        public static Action<PlayerRole, StatType> OnStatBoostUnlocked;
+
+        [HideInInspector]
+        public static Action<BuildingType> OnBuildingUnlocked;
+
+        [HideInInspector]
+        public static Action<BuildingType> OnBuildingLevelIncreased;
+
+        [HideInInspector]
+        public static Action<BuildingType> OnBuildingCostReduction;
+
+        [HideInInspector]
+        public static Action<BuildingType> OnBuildingAgedUp;
+
+		public static void InitializeTree()
 		{
-			_techTree = new TechnologyTree(_techTreeSO, this);
+			_techTree = new TechnologyTree(_techTreeSO);
 			_goalsFollowed = new Dictionary<Goal, Node_SO>();
 
 			//PrintAvailableNodes();
 
 		}
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
 
-		public void PrintAvailableNodes()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            GameObject runnerObject = new GameObject("TimeManagerRunner");
+            runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+        }
+
+        public static void StartCoroutine(IEnumerator routine) => runner.StartCoroutine(routine);
+
+		public static void PrintAvailableNodes()
 		{
 			var availableNodes = _techTree.AvailableNodes;
 
@@ -66,7 +105,7 @@ namespace TechTree
 				Debug.Log(availableNodes[i].TechName);
 		}
 
-		public Node_SO[] GetRandomAvailableTechs(int count = 3)
+		public static Node_SO[] GetRandomAvailableTechs(int count = 3)
 		{
 			List<Node_SO> nodes = new List<Node_SO>(_techTree.AvailableNodes.Count);
 
@@ -101,7 +140,7 @@ namespace TechTree
 			return randomNodes;
 		}
 
-		private void GoalCompleted(Goal goal)
+		private static void GoalCompleted(Goal goal)
 		{
 
 			if (_goalsFollowed.ContainsKey(goal))
@@ -115,7 +154,7 @@ namespace TechTree
 			StartNewTechVote();
 		}
 
-		public void StartNewRandomTech()
+		public static void StartNewRandomTech()
 		{
 			var nodes = GetRandomAvailableTechs();
 
@@ -133,7 +172,7 @@ namespace TechTree
 			StartGoalFromNode(nodes[0]);
 		}
 
-		public void StartNewTechVote(float delay = 0)
+		public static void StartNewTechVote(float delay = 0)
 		{
 			var nodes = GetRandomAvailableTechs();
 
@@ -148,7 +187,7 @@ namespace TechTree
 			GameManager.Instance.GameEventManager.AddEvent(voteEvent);
 		}
 
-		private void OnTechVoteEnded(bool success, GameEvent.EventType type, object data)
+		private static void OnTechVoteEnded(bool success, GameEvent.EventType type, object data)
 		{
 			if (data == null)
 				return;
@@ -156,7 +195,7 @@ namespace TechTree
 			StartGoalFromNode(((VoteOption)data).OptionData as Node_SO);
 		}
 
-		private Node_SO GetRandomTechFromList(List<Node_SO> values)
+		private static Node_SO GetRandomTechFromList(List<Node_SO> values)
 		{
 			if (values.Count == 0)
 				return null;
@@ -169,7 +208,7 @@ namespace TechTree
 			return node;
 		}
 
-		public Goal StartGoalFromNode(Node_SO node)
+		public static Goal StartGoalFromNode(Node_SO node)
 		{
 			Goal goal = new Goal(node.Objectives);
 			GameManager.Instance.TownGoalManager.StartNewGoal(goal);
@@ -184,13 +223,13 @@ namespace TechTree
 			return goal;
 		}
 
-		public void SetCurrentTech(Node_SO node)
+		public static void SetCurrentTech(Node_SO node)
 		{
 			CurrentTech = node;
 			// do stuff to make sure it works here
 		}
 
-		public void UnlockAllTech()
+		public static void UnlockAllTech()
 		{
 			var availableTechs = GetRandomAvailableTechs();
 			do
@@ -200,7 +239,7 @@ namespace TechTree
 			} while (availableTechs.Length > 0 && availableTechs[0] != null);
 		}
 
-		public void UnlockToAge2Tech()
+		public static void UnlockToAge2Tech()
 		{
 			var availableTechs = GetRandomAvailableTechs();
 			do
@@ -210,12 +249,12 @@ namespace TechTree
 			} while (availableTechs.Length > 0 && availableTechs[0] != null && availableTechs[0].Age == Age.Age1);
 		}
 
-		public void UnlockTech(Node_SO techNode)
+		public static void UnlockTech(Node_SO techNode)
 		{
 			OnTechUnlocked(techNode);
 		}
 
-		public void OnTechUnlocked(Node_SO techNode)
+		public static void OnTechUnlocked(Node_SO techNode)
 		{
 			_techsUnlocked++;
 			for (int i = 0; i < techNode.Unlocks.Count; i++)
@@ -249,7 +288,7 @@ namespace TechTree
 		/// Called when the node unlock data boosts a stat.
 		/// </summary>
 		/// <param name="data"></param>
-		private void StatBoostUnlocked(NodeUnlockData data)
+		private static void StatBoostUnlocked(NodeUnlockData data)
 		{
 			StatType statType = data.StatType;
 
@@ -269,14 +308,14 @@ namespace TechTree
 		/// Called when a node unlock unlocks a building.
 		/// </summary>
 		/// <param name="data"></param>
-		private void UnlockBuilding(NodeUnlockData data)
+		private static void UnlockBuilding(NodeUnlockData data)
 		{
 			BuildingManager.UnlockBuilding(data.BuildingType);
 
 			OnBuildingUnlocked?.Invoke(data.BuildingType);
 		}
 
-		private void BuildingCostReduction(NodeUnlockData data)
+		private static void BuildingCostReduction(NodeUnlockData data)
 		{
 			BuildingType buildingType = data.BuildingType;
 
@@ -292,7 +331,7 @@ namespace TechTree
 		/// Triggered when a node Unlock boosts the storage.
 		/// </summary>
 		/// <param name="data"></param>
-		private void StorageBoostUpgrade(NodeUnlockData data)
+		private static void StorageBoostUpgrade(NodeUnlockData data)
 		{
 			Resource resourceType = data.ResourceType;
 
@@ -306,7 +345,7 @@ namespace TechTree
 		/// Called when a node unlock upgrades a building.
 		/// </summary>
 		/// <param name="data"></param>
-		private void BuildingMaxLevelIncreased(NodeUnlockData data)
+		private static void BuildingMaxLevelIncreased(NodeUnlockData data)
 		{
 			BuildingManager.BuildingsMaxLevel[data.BuildingType] = data.IntValue;
 
@@ -317,7 +356,7 @@ namespace TechTree
 		/// Called when a node unlock Ages up a building.
 		/// </summary>
 		/// <param name="data"></param>
-		private void AgeBuilding(NodeUnlockData data)
+		private static void AgeBuilding(NodeUnlockData data)
 		{
 			if ((int)BuildingManager.BuildingAges[data.BuildingType] < 1)
 				BuildingManager.BuildingAges[data.BuildingType]++;
@@ -326,12 +365,12 @@ namespace TechTree
 			OnBuildingAgedUp?.Invoke(data.BuildingType);
 		}
 
-		private void Start()
+		private static void Start()
 		{
 			//StartNewRandomTech();
 		}
 
-		public IEnumerator DelayedSetup()
+		public static IEnumerator DelayedSetup()
 		{
 			yield return new WaitForSeconds(0.01f);
 			_townGoalInterface = GameManager.Instance.UIManager.TownGoalInterface;

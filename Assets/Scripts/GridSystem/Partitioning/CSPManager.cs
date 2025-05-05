@@ -14,7 +14,7 @@ namespace GridSystem.Partitioning
 	[GameManager]
 	public static class CSPManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static CSPConfig Config = CSPConfig.Instance;
 
 		private static Vector2 _originOffset => Config.originOffset;

@@ -15,7 +15,7 @@ namespace Managers
 	[GameManager]
 	public static class DebugManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static DebugConfig Config = DebugConfig.Instance;
 
 		[HideInInspector]

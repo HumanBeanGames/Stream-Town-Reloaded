@@ -266,13 +266,13 @@ namespace SavingAndLoading
 
 			// Tech Tree
 			TechTreeSaveData techTree = new TechTreeSaveData();
-			techTree.UnlockedTechs = GameManager.Instance.TechTreeManager.TechTree.GetUnlockedNodes();
+			techTree.UnlockedTechs = TechTreeManager.TechTree.GetUnlockedNodes();
 
-			if (GameManager.Instance.TechTreeManager.CurrentTech != null)
+			if (TechTreeManager.CurrentTech != null)
 			{
-				techTree.CurrentTechName = GameManager.Instance.TechTreeManager.CurrentTech.name;
+				techTree.CurrentTechName = TechTreeManager.CurrentTech.name;
 				List<ObjectiveSaveData> objectives = new List<ObjectiveSaveData>();
-				Node_SO currentNode = GameManager.Instance.TechTreeManager.CurrentTech;
+				Node_SO currentNode = TechTreeManager.CurrentTech;
 				Goal goal = GameManager.Instance.TownGoalManager.CurrentGoals[0];
 				List<Objective> objs = new List<Objective>();
 
@@ -405,14 +405,14 @@ namespace SavingAndLoading
 			TimeManager.worldTimePassed = worldData.WorldAgeInSeconds;
 			TimeManager.CalculateDayCount();
 			SeasonManager.SetSeasonByTimePassed();
-			GameManager.Instance.TechTreeManager.TechTree.SetUnlockedNodes(worldData.TechTree.UnlockedTechs);
+			TechTreeManager.TechTree.SetUnlockedNodes(worldData.TechTree.UnlockedTechs);
 			if (worldData.TechTree.TechAvailable)
 			{
-				Goal goal = GameManager.Instance.TechTreeManager.StartGoalFromNode(GameManager.Instance.TechTreeManager.TechTree.GetNodeFromName(worldData.TechTree.CurrentTechName));
+				Goal goal = TechTreeManager.StartGoalFromNode(TechTreeManager.TechTree.GetNodeFromName(worldData.TechTree.CurrentTechName));
 				goal.SetobjectivesFromSave(worldData.TechTree.CurrentTechData);
 			}
 			else
-				GameManager.Instance.TechTreeManager.StartNewTechVote(20);
+				TechTreeManager.StartNewTechVote(20);
 
 			GameManager.Instance.GameEventManager.TimeTillRulerVote = worldData.TimeUntillNextRulerVote;
 

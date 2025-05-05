@@ -6,8 +6,9 @@ using TownGoal.Data;
 namespace TechTree.ScriptableObjects
 {
 	using Data;
-	using Utils;
-
+    using System;
+    using Utils;
+	
 	public class Node_SO : ScriptableObject
 	{
 		[field: SerializeField]

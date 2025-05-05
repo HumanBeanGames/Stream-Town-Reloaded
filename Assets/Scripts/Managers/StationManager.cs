@@ -15,7 +15,7 @@ namespace Managers
 	[GameManager]
 	public static class StationManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static StationConfig Config = StationConfig.Instance;
 
         [HideInInspector]

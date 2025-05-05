@@ -14,7 +14,7 @@ namespace Managers
 	[GameManager]
 	public static class ObjectPoolingManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static ObjectPoolingConfig Config = ObjectPoolingConfig.Instance;
 
         private static List<PooledObjectData> _objectsToPool => Config.objectsToPool;

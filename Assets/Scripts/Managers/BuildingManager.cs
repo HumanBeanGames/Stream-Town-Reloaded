@@ -24,8 +24,8 @@ namespace Managers
 	[GameManager]
 	public static class BuildingManager
 	{
-		[InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-		private static BuildingConfig Config = BuildingConfig.Instance;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static BuildingConfig Config = BuildingConfig.Instance;
 
 		public static int GlobalBuildCostModifier
 			{

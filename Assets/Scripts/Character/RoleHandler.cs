@@ -174,7 +174,7 @@ namespace Character
 
 		private void OnEnable()
 		{
-			GameManager.Instance.TechTreeManager.OnStatBoostUnlocked += OnStatBoostUnlocked;
+			TechTreeManager.OnStatBoostUnlocked += OnStatBoostUnlocked;
 		}
 
 		private void OnStatBoostUnlocked(PlayerRole role, StatType type)

@@ -11,7 +11,7 @@ namespace Managers
 	[GameManager]
 	public static class TimeManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static TimeConfig Config = TimeConfig.Instance;
 
 		/// <summary>

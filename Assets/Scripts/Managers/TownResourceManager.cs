@@ -17,7 +17,7 @@ namespace Managers
 	[GameManager]
 	public static class TownResourceManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static TownResourceConfig Config = TownResourceConfig.Instance;
 
         /// <summary>

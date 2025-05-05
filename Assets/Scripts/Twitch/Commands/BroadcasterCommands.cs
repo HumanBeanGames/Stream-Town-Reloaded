@@ -19,7 +19,7 @@ namespace Twitch.Commands
 #endif
 			GameManager.Instance.CodeDisplay.text = "";
 			GameManager.Instance.ConnectPanel.SetActive(false);
-			GameManager.Instance.TechTreeManager.StartCoroutine(GameManager.Instance.TechTreeManager.DelayedSetup());
+			TechTreeManager.StartCoroutine(TechTreeManager.DelayedSetup());
 			GameManager.Instance.GameEventManager.CanStartNewRulerVote = true;
 			if (GameManager.Instance.MetaDatas.LoadType == MetaData.LoadType.Generate || GameManager.Instance.MetaDatas.LoadType == MetaData.LoadType.Load && GameManager.Instance.UserPlayer == null)
 			{

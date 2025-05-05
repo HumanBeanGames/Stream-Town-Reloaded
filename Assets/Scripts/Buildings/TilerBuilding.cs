@@ -20,7 +20,7 @@ namespace Buildings
 			_buildingBase = GetComponent<BuildingBase>();
 			base.Init();
 
-			GameManager.Instance.TechTreeManager.OnBuildingAgedUp += OnBuildingAged;
+			TechTreeManager.OnBuildingAgedUp += OnBuildingAged;
 		}
 
 		private void OnBuildingAged(BuildingType type)

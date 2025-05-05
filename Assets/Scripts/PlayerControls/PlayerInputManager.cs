@@ -10,7 +10,7 @@ namespace PlayerControls
     [GameManager]
     public static class PlayerInputManager
     {
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static PlayerInputConfig Config = PlayerInputConfig.Instance;
 
         public enum Button

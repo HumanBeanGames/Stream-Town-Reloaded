@@ -104,12 +104,12 @@ namespace Buildings
 		{
 			RemoveTotalStorage();
 
-			GameManager.Instance.TechTreeManager.OnStorageBoostUnlocked -= OnResourceStorageIncreased;
+			TechTreeManager.OnStorageBoostUnlocked -= OnResourceStorageIncreased;
 		}
 
 		private void OnEnable()
 		{
-			GameManager.Instance.TechTreeManager.OnStorageBoostUnlocked += OnResourceStorageIncreased;
+			TechTreeManager.OnStorageBoostUnlocked += OnResourceStorageIncreased;
 		}
 	}
 }

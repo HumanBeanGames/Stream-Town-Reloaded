@@ -1,4 +1,5 @@
 using DataStructures;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ namespace TechTree.ScriptableObjects
 		[field: SerializeField]
 		public string FileName { get; set; }
 		[field: SerializeField]
-		public SerializableDictionary<NodeGroup_SO, List<Node_SO>> NodeGroups { get; set; }
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public SerializableDictionary<NodeGroup_SO, List<Node_SO>> NodeGroups { get; set; }
 		[field: SerializeField]
 		public List<Node_SO> UngroupedNodes { get; set; }
 

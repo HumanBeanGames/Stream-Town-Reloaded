@@ -197,8 +197,8 @@ namespace Buildings
 			if (_levelHandler != null)
 				_levelHandler.MaxLevel = BuildingManager.BuildingsMaxLevel[_buildingType];
 
-			GameManager.Instance.TechTreeManager.OnBuildingLevelIncreased += OnBuildingLevelIncreased;
-			GameManager.Instance.TechTreeManager.OnBuildingAgedUp += OnBuildingAged;
+			TechTreeManager.OnBuildingLevelIncreased += OnBuildingLevelIncreased;
+			TechTreeManager.OnBuildingAgedUp += OnBuildingAged;
 			OnBuildingAged(_buildingType);
 			FoliageRemoved = new List<PoolableObject>();
 		}

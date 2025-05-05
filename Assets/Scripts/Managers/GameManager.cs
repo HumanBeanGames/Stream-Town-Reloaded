@@ -47,7 +47,6 @@ namespace Managers
 		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
-		private TechTreeManager _techTreeManager = null;
 		private GameEventManager _gameEventManager = null;
 		private TownGoalManager _townGoalManager = null;
 		private ObjectSelectionManager _selectionManager = null;
@@ -105,7 +104,6 @@ namespace Managers
 		private Player _fakePlayer;
 		private BuildingType _lastBuilding = BuildingType.Barracks;
 		//END TEMP
-		public TechTreeManager TechTreeManager => _techTreeManager;
 		public GameEventManager GameEventManager => _gameEventManager;
 		public TownGoalManager TownGoalManager => _townGoalManager;
 		public ObjectSelectionManager SelectionManager => _selectionManager;
@@ -154,7 +152,7 @@ namespace Managers
 			_townGoalManager.Initialize();
 			RoleManager.Initialize();
 			yield return new WaitForEndOfFrame();
-			_techTreeManager.InitializeTree();
+			TechTreeManager.InitializeTree();
 			GUIDManager.Initialize();   // Must happen before pooling manager
 			yield return StartCoroutine(ObjectPoolingManager.InitializePooling());
 			if (_metaData != null)
@@ -186,9 +184,6 @@ namespace Managers
 
 			if (!TryGetComponent(out _gUIDManager))
 				Debug.LogError("GUIDManager not found on GameManager", this);
-
-			if (!TryGetComponent(out _techTreeManager))
-				Debug.LogError("TechTreeManager not found on GameManager", this);
 
 			if (!TryGetComponent(out _gameEventManager))
 				Debug.LogError("GameEventManager not found on GameManager", this);

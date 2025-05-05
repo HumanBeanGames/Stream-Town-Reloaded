@@ -20,14 +20,14 @@ namespace TechTree.Data
 
 		public Dictionary<Node_SO, bool> _unlockedNodes;
 
-		public TechnologyTree(TechTree_SO tree, TechTreeManager manager)
+		public TechnologyTree(TechTree_SO tree)
 		{
 			Profiler.BeginSample("Initialize Tech Tree");
 			_tree = tree;
 			_availableNodes = new List<Node_SO>();
 			_unlockedNodes = new Dictionary<Node_SO, bool>();
 			Profiler.EndSample();
-			TechUnlocked += manager.OnTechUnlocked;
+			TechUnlocked += TechTreeManager.OnTechUnlocked;
 			InitializeData();
 			Debug.Log($"Root Node Result: {_rootNode.TechName}");
 		}
@@ -79,7 +79,7 @@ namespace TechTree.Data
 
 			foreach (Node_SO node in _unlockedNodes.Keys)
 			{
-				if (node == GameManager.Instance.TechTreeManager.CurrentTech)
+				if (node == TechTreeManager.CurrentTech)
 					break;
 				i++;
 			}

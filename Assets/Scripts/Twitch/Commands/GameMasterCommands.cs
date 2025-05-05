@@ -5,6 +5,7 @@ using Managers;
 using Pets.Enumerations;
 using System;
 using System.Linq;
+using TechTree;
 using Twitch.Utils;
 using Utils;
 
@@ -157,14 +158,14 @@ namespace Twitch.Commands
         public static string StartRandomTech(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            GameManager.Instance.TechTreeManager.StartNewRandomTech();
+            TechTreeManager.StartNewRandomTech();
             return "Started new random tech.";
         }
 
         public static string StartVoteTech(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            GameManager.Instance.TechTreeManager.StartNewTechVote();
+            TechTreeManager.StartNewTechVote();
             return "Started tech vote.";
         }
 
@@ -180,14 +181,14 @@ namespace Twitch.Commands
         public static string UnlockAllTech(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            GameManager.Instance.TechTreeManager.UnlockAllTech();
+            TechTreeManager.UnlockAllTech();
             return "All tech unlocked.";
         }
 
         public static string UnlockToAge2(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            GameManager.Instance.TechTreeManager.UnlockToAge2Tech();
+            TechTreeManager.UnlockToAge2Tech();
             return "Unlocked to Age 2.";
         }
 

@@ -20,7 +20,7 @@ namespace Managers
 	[GameManager]
 	public static class RoleManager
 	{
-        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static RoleConfig Config = RoleConfig.Instance;
 
 		public static int MaxRoleLevel => RoleConfig.maxRoleLevel;

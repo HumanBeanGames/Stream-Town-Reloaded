@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using TechTree.ScriptableObjects;
 using TechTree.Utilities;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -20,9 +21,17 @@ namespace TechTree.Windows
 		private Button _miniMapButton;
 
 		[MenuItem("Tools/Tech Tree Editor")]
-		public static void ShowExample()
+		public static void StartWindow()
 		{
 			TechTreeEditorWindow wnd = GetWindow<TechTreeEditorWindow>("Tech Tree Graph");
+		}
+
+		public static void StartWindowLoad(TechTree_SO techTree = null)
+		{
+			TechTreeEditorWindow wnd = GetWindow<TechTreeEditorWindow>("Tech Tree Graph");
+
+			if (techTree != null)
+				wnd.LoadTechTree(techTree);
 		}
 
 		public void EnableSaving()
@@ -96,8 +105,38 @@ namespace TechTree.Windows
 
 			TechTreeIOUtility.Load();
 		}
+        public void LoadTechTree(TechTree_SO techTree)
+        {
+            if (techTree == null)
+            {
+                Debug.LogError("TechTree_SO is null. Cannot load tech tree.");
+                return;
+            }
 
-		private void Clear()
+            // Convert the TechTree_SO to a path
+            string assetPath = AssetDatabase.GetAssetPath(techTree);
+
+            if (string.IsNullOrEmpty(assetPath))
+            {
+                Debug.LogError("Could not find asset path for TechTree_SO.");
+                return;
+            }
+
+            // Construct the full path with the expected format
+            string directoryPath = Path.Combine(Application.dataPath, "Scripts/TechTree/Editor/Graphs");
+            string fullPath = Path.Combine(directoryPath, Path.GetFileNameWithoutExtension(assetPath) + "Graph.asset");
+
+            // Normalize the path to use forward slashes
+            fullPath = fullPath.Replace("\\", "/");
+
+            Clear();
+
+            TechTreeIOUtility.Initialize(_graphView, Path.GetFileNameWithoutExtension(fullPath));
+
+            TechTreeIOUtility.Load();
+        }
+
+        private void Clear()
 		{
 			_graphView.ClearGraph();
 		}
