@@ -17,11 +17,13 @@ namespace Managers
 	[SerializeField, System.Serializable]
 	public class RoleManager : MonoBehaviour
 	{
+		//YES
 		public const int MAX_ROLE_LEVEl = 99;
 
 		/// <summary>
 		/// The amount of exp used for the last level. EXP table is calculated using this value.
 		/// </summary>
+		//YES but debugging ReadOnly
 		private const int MAX_LEVEL_EXP = 100000;
 
 		//[SerializeField]
@@ -29,10 +31,17 @@ namespace Managers
 		[SerializeField]
 		private AllRoleDataScriptable _allRoleData;
 
-		private Dictionary<PlayerRole, RoleDataScriptable> _roleDataDictionary;
+		/// YES YES YES
+        const float ER = 1.2f;
+        const float RT = 0.5f;
+        const float RM = 100f;
 
-		[SerializeField]
+        private Dictionary<PlayerRole, RoleDataScriptable> _roleDataDictionary;
+
+        //YES but debugging ReadOnly
+        [SerializeField]
 		private int[] _expTableLookup = new int[MAX_ROLE_LEVEl];
+		private int expMultiplier = 10;
 
 		private Dictionary<PlayerRole, RoleSlot> _roleSlotsDictionary;
 
@@ -41,12 +50,12 @@ namespace Managers
 		public AllRoleDataScriptable AllRoleData => _allRoleData;
 		public UnityEvent<PlayerRole> OnRoleSlotsChangedEvent => _onRoleSlotsChangedEvent;
 
-		/// <summary>
-		/// Returns the required amount of experience to level up.
-		/// </summary>
-		/// <param name="level"></param>
-		/// <returns></returns>
-		public int GetRequiredExperience(int level)
+        /// <summary>
+        /// Returns the required amount of experience to level up.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public int GetRequiredExperience(int level)
 		{
 			return _expTableLookup[level - 1];
 		}
@@ -248,23 +257,31 @@ namespace Managers
 			}
 		}
 
-		private void CalculateEXPTable()
+        //Max role level = 99
+        //Expon rate = ER = 1.2
+		//Rate temper = RT = 0.5
+		//Rate multiplier = RM = 100
+        //((ER^(level-1))^RT-(ER^(-1))^RT)*RM
+		//This formula starts at zero and increases at a high but reasonable rate, controllable by 3 parameters
+		//The expon rate combined with the rate multiplier will determine the overall rate of change of the EXP table
+		//The rate multiplier simply scales all the EXP values by a factor
+        private void CalculateEXPTable()
 		{
 			for (int i = 0; i < MAX_ROLE_LEVEl; i++)
 			{
-				float t = ((float)i + 2) / 100;
-				float pow = (t * t);
-				float sqrt = 1 - Mathf.Sqrt(1 - pow);
-				_expTableLookup[i] = (int)(sqrt * MAX_LEVEL_EXP);
-			}
+
+				//float t = ((float)i + 2) / 100;
+				//float pow = (t * t);
+				//float sqrt = 1 - Mathf.Sqrt(1 - pow);
+				_expTableLookup[i] = Mathf.RoundToInt(RM * (Mathf.Pow(Mathf.Pow(ER, i - 1),RT) - Mathf.Pow(Mathf.Pow(ER, -1),RT)));
+
+            }
 		}
 
 		public void Initialize()
 		{
 			Debug.Log("Init: " + this);
 			InitializeRoleData();
-
-			CalculateEXPTable();
 		}
 	}
 }
