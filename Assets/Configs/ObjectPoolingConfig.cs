@@ -12,6 +12,6 @@ namespace Managers
     public class ObjectPoolingConfig : Config<ObjectPoolingConfig>
     {
         [SerializeField]
-        public List<PooledObjectData> objectsToPool = new List<PooledObjectData>();
+        public List<PooledObjectData> objectsToPool;
     }
 }   

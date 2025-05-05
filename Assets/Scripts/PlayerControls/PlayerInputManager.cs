@@ -1,11 +1,18 @@
+using Managers;
+using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerControls
 {
-    public class PlayerInputManager : MonoBehaviour
+    [GameManager]
+    public static class PlayerInputManager
     {
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static PlayerInputConfig Config = PlayerInputConfig.Instance;
+
         public enum Button
         {
             None,
@@ -15,7 +22,9 @@ namespace PlayerControls
             Count
         }
 
-        private static PlayerInput _playerInput;
+        [HideInInspector]
+        private static PlayerInput _playerInput = new PlayerInput();
+        [HideInInspector]
         private static Dictionary<Button, bool> _heldKeys = new Dictionary<Button, bool>();
         public static bool IsButtonHeld(Button button) => _heldKeys[button];
 
@@ -43,23 +52,56 @@ namespace PlayerControls
         public static event Action OnLoadGame;
         public static event Action OnGenerateGame;
         //
-
+        [HideInInspector]
         private static Vector2 _mouseLastClickPosition = Vector2.zero;
+        [HideInInspector]
         private static Vector2 _previousMousePos = Vector2.zero;
+        [HideInInspector]
         private static Vector2 _mouseDelta = Vector2.zero;
+        [HideInInspector]
         private static Vector2 _mousePosition = Vector2.zero;
 
-        private readonly Queue<Action> _deferredInputQueue = new();
+        [HideInInspector]
+        private static readonly Queue<Action> _deferredInputQueue = new();
 
         public static Vector2 MousePosition => _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
         public static Vector2 MousePositionDelta => _mouseDelta;
         public static Vector2 MouseLastClickPosition => _mouseLastClickPosition;
         public static bool EscapePressed => _playerInput.BasicControls.Escape.ReadValue<float>() > 0.01f;
 
-        private void Awake()
-        {
-            _playerInput = new PlayerInput();
+        private class Runner : MonoBehaviour {
+            private void OnDestroy()
+            {
+                _heldKeys.Clear();
+            }
 
+            private void OnEnable()
+            {
+                EnableFunctionality();
+            }
+
+            private void OnDisable()
+            {
+                DisableFunctionality();
+            }
+        }
+        [HideInInspector]
+        private static Runner runner;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void Initialize()
+        {
+            Awake();
+
+            GameObject runnerObject = new GameObject("PlayerInputManagerRunner");
+            runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+            runner.StartCoroutine(UpdateEachFrame());
+        }
+
+        //MUST DO SOMETHING HERE
+        private static void Awake()
+        {
             _playerInput.BasicControls.MouseLeftClick.started += ctx =>
                 _deferredInputQueue.Enqueue(() => OnLeftClickPress?.Invoke(Button.LeftMouse));
             _playerInput.BasicControls.MouseLeftClick.performed += ctx =>
@@ -105,29 +147,34 @@ namespace PlayerControls
                 _heldKeys.Add((Button)i, false);
         }
 
-        private void Update()
+        //MUST DO A RUNNER HERE
+        private static IEnumerator UpdateEachFrame()
         {
-            Vector2 currentMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-            _mouseDelta = _previousMousePos - currentMousePos;
-
-            while (_deferredInputQueue.Count > 0)
+            while (true)
             {
-                var action = _deferredInputQueue.Dequeue();
-                action?.Invoke();
+                Vector2 currentMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+                _mouseDelta = _previousMousePos - currentMousePos;
+
+                while (_deferredInputQueue.Count > 0)
+                {
+                    var action = _deferredInputQueue.Dequeue();
+                    action?.Invoke();
+                }
+
+                //THIS WAS ORIGINALLY IN LATEUPDATE; WORRIED IT MAY NOT WORK PROPERLY.
+                _previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
+                yield return new WaitForEndOfFrame();
             }
         }
 
-        private void LateUpdate()
-        {
-            _previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-        }
-
-        private void SetClickPosition(Button button)
+        private static void SetClickPosition(Button button)
         {
             _mouseLastClickPosition = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
         }
 
-        private void OnEnable()
+        //Hoping this loads everything after each scene loads
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void EnableFunctionality()
         {
             _playerInput?.Enable();
 
@@ -145,7 +192,9 @@ namespace PlayerControls
             OnMiddleClickRelease += ButtonRelease;
         }
 
-        private void OnDisable()
+        //And this clears it after each scene finishes
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void DisableFunctionality()
         {
             _playerInput?.Disable();
 
@@ -163,13 +212,8 @@ namespace PlayerControls
             OnMiddleClickRelease -= ButtonRelease;
         }
 
-        private void OnDestroy()
-        {
-            _heldKeys.Clear();
-        }
-
-        private void ButtonPressed(Button button = Button.None) => _heldKeys[button] = true;
-        private void ButtonHeld(Button button = Button.None) => _heldKeys[button] = true;
-        private void ButtonRelease(Button button = Button.None) => _heldKeys[button] = false;
+        private static void ButtonPressed(Button button = Button.None) => _heldKeys[button] = true;
+        private static void ButtonHeld(Button button = Button.None) => _heldKeys[button] = true;
+        private static void ButtonRelease(Button button = Button.None) => _heldKeys[button] = false;
     }
 }

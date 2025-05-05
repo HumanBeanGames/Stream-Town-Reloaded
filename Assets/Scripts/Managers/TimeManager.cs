@@ -52,7 +52,7 @@ namespace Managers
         private static void InitializeRunner()
         {
             GameObject runnerObject = new GameObject("TimeManagerRunner");
-            Runner runner = runnerObject.AddComponent<Runner>();
+            runner = runnerObject.AddComponent<Runner>();
             UnityEngine.Object.DontDestroyOnLoad(runnerObject);
 			runner.StartCoroutine(UpdateWorldTimeCoroutine());
         }

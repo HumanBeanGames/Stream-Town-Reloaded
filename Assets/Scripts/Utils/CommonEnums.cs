@@ -459,7 +459,7 @@ namespace Utils
 		private static List<TargetMask> _targetFlags;
 
 		//Cached Index Data
-		private static Dictionary<TargetMask, int> _cachedIndices;
+		private static Dictionary<TargetMask, int> _cachedIndices = new Dictionary<TargetMask, int>();
 
 		public static List<TargetMask> TargetFlags
 		{
@@ -500,6 +500,8 @@ namespace Utils
 
 		public static int GetIndexByFlag(TargetMask flag)
 		{
+			if (!_cachedIndices.ContainsKey(flag))
+				TargetFlags.Add(flag);
 			return _cachedIndices[flag];
 		}
 

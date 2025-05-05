@@ -1,6 +1,7 @@
 using Buildings;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UserInterface;
@@ -186,23 +187,40 @@ namespace Managers
 			_stationsDictionary[mask].Remove(station);
 		}
 
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            GameObject runnerObject = new GameObject("TimeManagerRunner");
+            runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+            runner.StartCoroutine(UpdateEachFrame());
+        }
+
         // Unity Functions.
-        private static void Update()
+        private static IEnumerator UpdateEachFrame()
 		{
-			if (_stationUpdateQueue.Count > 0)
+			while (true)
 			{
-				_stationUpdateQueue.Dequeue().PopulateDictionary();
-			}
-
-			if (_clearDisabledQueue.Count > 0)
-			{
-				var station = _clearDisabledQueue.Dequeue();
-
-				if (station != null && station.gameObject.activeInHierarchy)
+				if (_stationUpdateQueue.Count > 0)
 				{
-					_clearDisabledQueue.Enqueue(station);
-					station.CheckDisabledTargets();
+					_stationUpdateQueue.Dequeue().PopulateDictionary();
 				}
+
+				if (_clearDisabledQueue.Count > 0)
+				{
+					var station = _clearDisabledQueue.Dequeue();
+
+					if (station != null && station.gameObject.activeInHierarchy)
+					{
+						_clearDisabledQueue.Enqueue(station);
+						station.CheckDisabledTargets();
+					}
+				}
+				yield return new WaitForEndOfFrame();
 			}
 		}
 	}

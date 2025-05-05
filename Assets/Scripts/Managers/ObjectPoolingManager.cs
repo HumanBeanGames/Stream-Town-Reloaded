@@ -21,11 +21,13 @@ namespace Managers
 
         public static void AddToPool(string poolName, PoolableObject go)
 		{
+            if (!_pooledObjects.ContainsKey(poolName))
+                _pooledObjects.Add(poolName, new Queue<PoolableObject>());
 			_pooledObjects[poolName].Enqueue(go);
 		}
 
 		[HideInInspector]
-        private static Dictionary<string, Queue<PoolableObject>> _pooledObjects;
+        private static Dictionary<string, Queue<PoolableObject>> _pooledObjects = new Dictionary<string, Queue<PoolableObject>>();
         [HideInInspector]
         private static Dictionary<string, List<PoolableObject>> _allObjects;
         [HideInInspector]
@@ -38,13 +40,12 @@ namespace Managers
 
         private class Runner : MonoBehaviour { }
         [HideInInspector]
-        private static Runner runner;
+        private static Runner _runner;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeRunner()
         {
             GameObject runnerObject = new GameObject("ObjectPoolingRunner");
-            Runner runner = runnerObject.AddComponent<Runner>();
+            _runner = runnerObject.AddComponent<Runner>();
             UnityEngine.Object.DontDestroyOnLoad(runnerObject);
         }
 
@@ -53,8 +54,9 @@ namespace Managers
         /// </summary>
         public static IEnumerator InitializePooling()
 		{
+			InitializeRunner();
 			DateTime before = DateTime.Now;
-			yield return runner.StartCoroutine(PoolObjectsCoroutine());
+			yield return _runner.StartCoroutine(PoolObjectsCoroutine());
 			//PoolObjects();
 			DateTime after = DateTime.Now;
 			_poolingDuration = after.Subtract(before);
@@ -185,7 +187,6 @@ namespace Managers
 
         private static IEnumerator PoolObjectsCoroutine()
 		{
-			_pooledObjects = new Dictionary<string, Queue<PoolableObject>>();
 			_poolParents = new Dictionary<string, GameObject>();
 			_allObjects = new Dictionary<string, List<PoolableObject>>();
 
@@ -224,7 +225,6 @@ namespace Managers
 
         public static void SimplePoolObjects()
 		{
-			_pooledObjects = new Dictionary<string, Queue<PoolableObject>>();
 			_poolParents = new Dictionary<string, GameObject>();
 			_allObjects = new Dictionary<string, List<PoolableObject>>();
 
