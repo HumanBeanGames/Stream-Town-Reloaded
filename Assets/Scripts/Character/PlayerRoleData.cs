@@ -141,7 +141,7 @@ namespace Character
 		public void RecalculateStats()
 		{
 			RoleDataScriptable data = RoleManager.GetRoleData(_role);
-			StatModifiers statMod = GameManager.Instance.PlayerManager.GetStatModifiers(_role);
+			StatModifiers statMod = PlayerManager.GetStatModifiers(_role);
 
 			_actionAmount = data.BaseActionAmount + (int)(data.ActionAmountPerLevel * (_level - 1));
 			_actionAmount += AddStatModifiersInt(statMod, StatType.ActionAmount, _actionAmount);

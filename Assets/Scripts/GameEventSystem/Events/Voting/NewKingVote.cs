@@ -24,7 +24,7 @@ namespace GameEventSystem.Events.Voting
 
 			if (!_options.ContainsKey(vote.VoteOption.OptionName))
 			{
-				if (GameManager.Instance.PlayerManager.PlayerExistsByNameToLower(optionName, out int index))
+				if (PlayerManager.PlayerExistsByNameToLower(optionName, out int index))
 				{
 					vote.VoteOption.Votes = 0;
 					_options.Add(optionName, vote.VoteOption);

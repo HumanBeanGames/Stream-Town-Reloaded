@@ -329,7 +329,7 @@ namespace UserInterface.BottomBarMenu
 				return;
 
 			Player recruit = new Player(new TwitchUser($"{-UnityEngine.Random.Range(int.MinValue, 0)}", $""), true);
-			GameManager.Instance.PlayerManager.AddNewPlayer(recruit, role);
+			PlayerManager.AddNewPlayer(recruit, role);
 
 			if (TownResourceManager.ResourceFull(Resource.Recruit))
 			{

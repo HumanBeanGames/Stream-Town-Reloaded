@@ -49,9 +49,9 @@ namespace Twitch.Utils
 		public static bool TryGetPlayer(string nameArg, out Player player)
 		{
 			player = null;
-			if (GameManager.Instance.PlayerManager.PlayerExistsByNameToLower(nameArg.ToLower(), out int index))
+			if (PlayerManager.PlayerExistsByNameToLower(nameArg.ToLower(), out int index))
 			{
-				player = GameManager.Instance.PlayerManager.GetPlayer(index);
+				player = PlayerManager.GetPlayer(index);
 				return true;
 			}
 

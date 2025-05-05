@@ -210,11 +210,9 @@ namespace Managers
 		{
 			player = null;
 
-			PlayerManager playerManager = GameManager.Instance.PlayerManager;
-
-			for (int i = 0; i < playerManager.PlayerCount(); i++)
+			for (int i = 0; i < PlayerManager.PlayerCount(); i++)
 			{
-				Player targetPlayer = playerManager.GetPlayer(i);
+				Player targetPlayer = PlayerManager.GetPlayer(i);
 
 				if (targetPlayer.RoleHandler.CurrentRole != role)
 					continue;

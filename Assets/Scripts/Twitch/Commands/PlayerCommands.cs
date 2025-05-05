@@ -48,11 +48,11 @@ namespace Twitch.Commands
 
             user.TwitchUserType = e.Command.ChatMessage.UserType;
 
-            if (GameManager.Instance.PlayerManager.PlayerExistsByUserID(user.UserID))
+            if (PlayerManager.PlayerExistsByUserID(user.UserID))
                 return $"⚠️ {user.Username}, you already have a character!";
 
             player = new Player(user);
-            GameManager.Instance.PlayerManager.AddNewPlayer(player, role);
+            PlayerManager.AddNewPlayer(player, role);
 
             if (isSub)
                 TL_Client.UserIsSubscribed(player.TwitchUser.UserID);

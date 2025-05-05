@@ -33,7 +33,6 @@ namespace GameEventSystem
 		private GameEvent _currentEvent = null;
 		private bool _eventActive = false;
 		private GameManager _gameManager;
-		private PlayerManager _playerManager;
 		
 		private bool _canStartNewRulerVote = false;
 
@@ -230,7 +229,7 @@ namespace GameEventSystem
 
 				if (_timeUntilRulerVote <= 0)
 				{
-					if (_playerManager.Ruler != null)
+					if (PlayerManager.Ruler != null)
 					{
 						StartKeepRulerVote();
 					}
@@ -278,7 +277,7 @@ namespace GameEventSystem
 			else
 			{
 				// Remove Ruler.
-				_playerManager.SetRuler(null);
+				PlayerManager.SetRuler(null);
 				// Start new Ruler vote event
 				StartNewRulerVote();
 			}
@@ -293,9 +292,9 @@ namespace GameEventSystem
 			}
 
 			VoteOption option = data as VoteOption;
-			if (_playerManager.PlayerExistsByNameToLower(option.OptionName, out int index))
+			if (PlayerManager.PlayerExistsByNameToLower(option.OptionName, out int index))
 			{
-				_playerManager.SetRuler(_playerManager.GetPlayer(index));
+				PlayerManager.SetRuler(PlayerManager.GetPlayer(index));
 				Debug.Log($"Winner Was {option.OptionName}");
 			}
 			else
@@ -305,7 +304,6 @@ namespace GameEventSystem
 		private void Start()
 		{
 			_gameManager = GameManager.Instance;
-			_playerManager = _gameManager.PlayerManager;
 			_timeUntilRulerVote = 30;
 		}
 

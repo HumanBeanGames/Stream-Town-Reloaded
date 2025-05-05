@@ -129,9 +129,9 @@ namespace Twitch
 
 		public static void UserIsSubscribed(string userId)
 		{
-			if (GameManager.Instance.PlayerManager.PlayerExistsByID(userId, out int playerIndex))
+			if (PlayerManager.PlayerExistsByID(userId, out int playerIndex))
 			{
-				Player player = GameManager.Instance.PlayerManager.GetPlayer(playerIndex);
+				Player player = PlayerManager.GetPlayer(playerIndex);
 				player.PetsUnlocked[PetType.RedPanda] = true;
 
 				if (player.Pet.ActivePet == null)

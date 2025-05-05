@@ -11,29 +11,42 @@ using GUIDSystem;
 using Utils.Pooling;
 using Target;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace Managers
 {
 	/// <summary>
 	/// Manages all players currently in the game.
 	/// </summary>
-	public class PlayerManager : MonoBehaviour
+	[GameManager]
+	public static class PlayerManager
 	{
-		private List<Player> _players = new List<Player>();
-		private List<Player> _recruits = new List<Player>();
-		private Player _ruler;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static PlayerConfig Config = PlayerConfig.Instance;
 
-		private Dictionary<PlayerRole, StatModifiers> _roleStatModifiers;
-		private StatModifiers _globalStatModifier;
+		[HideInInspector]
+        private static List<Player> _players = new List<Player>();
+        [HideInInspector]
+        private static List<Player> _recruits = new List<Player>();
+        [HideInInspector]
+        private static Player _ruler;
 
-		public StatModifiers GlobalStatModifiers => _globalStatModifier;
-		public Player Ruler => _ruler;
-		public Action<Player> OnRulerChanged;
+        [HideInInspector]
+        private static Dictionary<PlayerRole, StatModifiers> _roleStatModifiers;
+        [HideInInspector]
+        private static StatModifiers _globalStatModifier;
 
-		private Queue<Player> _playerUpdateQueue;
+		public static StatModifiers GlobalStatModifiers => _globalStatModifier;
+		public static Player Ruler => _ruler;
 
-		public bool CanAddRecruit => _recruits.Count < 200 ? true : false;
-		public void ShowRecruitIDs()
+        [HideInInspector]
+        public static Action<Player> OnRulerChanged;
+
+        [HideInInspector]
+        private static Queue<Player> _playerUpdateQueue;
+
+		public static bool CanAddRecruit => _recruits.Count < 200 ? true : false;
+		public static void ShowRecruitIDs()
 		{
 			for (int i = 0; i < _recruits.Count; i++)
 			{
@@ -41,12 +54,12 @@ namespace Managers
 			}
 		}
 
-        public bool PlayerExistsByUserID(string userID)
+        public static bool PlayerExistsByUserID(string userID)
         {
             return _players.Any(p => p.TwitchUser.UserID == userID) || _recruits.Any(r => r.TwitchUser.UserID == userID);
         }
 
-        public Player GetRecruitByIndex(int index)
+        public static Player GetRecruitByIndex(int index)
 		{
 			int adjusteIndex = index - 1;
 			if (adjusteIndex <= _recruits.Count - 1)
@@ -55,7 +68,7 @@ namespace Managers
 				return null;
 		}
 
-		public void DismissRecruit(Player player)
+		public static void DismissRecruit(Player player)
 		{
 			if (_recruits.Contains(player))
 			{
@@ -66,13 +79,13 @@ namespace Managers
 			}
 		}
 
-		public void SwapRecruitRole(Player player, PlayerRole role)
+		public static void SwapRecruitRole(Player player, PlayerRole role)
 		{
 			if (!player.RoleHandler.TrySetRole(role, out string reason))
 				Debug.Log(reason);
 		}
 
-		public void Initialize()
+		public static void Initialize()
 		{
 			_globalStatModifier = new StatModifiers();
 			_roleStatModifiers = new Dictionary<PlayerRole, StatModifiers>();
@@ -85,7 +98,7 @@ namespace Managers
 			_playerUpdateQueue = new Queue<Player>();
 		}
 
-		public List<Player> Players => _players;
+		public static List<Player> Players => _players;
 
 
 		/// <summary>
@@ -93,7 +106,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="data"></param>
 		/// <param name="startingRole"></param>
-		public void AddNewPlayer(Player data, PlayerRole startingRole = PlayerRole.Builder)
+		public static void AddNewPlayer(Player data, PlayerRole startingRole = PlayerRole.Builder)
 		{
 			if (_players.Contains(data))
 				return;
@@ -152,7 +165,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="data"></param>
 		/// <param name="startingRole"></param>
-		public Player AddExistingPlayer(Player data, PlayerRole startingRole = PlayerRole.Builder)
+		public static Player AddExistingPlayer(Player data, PlayerRole startingRole = PlayerRole.Builder)
 		{
 				if (_players.Contains(data))
 				return null;
@@ -184,7 +197,7 @@ namespace Managers
 		/// Removes a player from the game.
 		/// </summary>
 		/// <param name="data"></param>
-		public void RemovePlayer(Player data)
+		public static void RemovePlayer(Player data)
 		{
 			if (!_players.Contains(data))
 				return;
@@ -197,7 +210,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns>Player</returns>
-		public Player GetPlayer(int index)
+		public static Player GetPlayer(int index)
 		{
 			if (_players.Count <= index)
 				return null;
@@ -210,12 +223,12 @@ namespace Managers
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns>Player</returns>
-		public bool PlayerExists(Player data)
+		public static bool PlayerExists(Player data)
 		{
 			return _players.Contains(data);
 		}
 
-		public void SetRuler(Player player)
+		public static void SetRuler(Player player)
 		{
 			if (_ruler != null)
 				if (!_ruler.RoleHandler.TrySetRole(_ruler.RoleHandler.PreviousRole, out string reason))
@@ -231,7 +244,7 @@ namespace Managers
 		/// <param name="userID"></param>
 		/// <param name="index"></param>
 		/// <returns>bool</returns>
-		public bool PlayerExistsByID(string userID, out int index)
+		public static bool PlayerExistsByID(string userID, out int index)
 		{
 			index = -1;
 
@@ -246,7 +259,7 @@ namespace Managers
 			return false;
 		}
 
-		public bool PlayerExistsByNameToLower(string playerName, out int index)
+		public static bool PlayerExistsByNameToLower(string playerName, out int index)
 		{
 			index = -1;
 
@@ -265,12 +278,12 @@ namespace Managers
 		/// Returns the current number of Players.
 		/// </summary>
 		/// <returns></returns>
-		public int PlayerCount()
+		public static int PlayerCount()
 		{
 			return _players.Count;
 		}
 
-		public int RecruitCount()
+		public static int RecruitCount()
 		{
 			return _recruits.Count;
 		}
@@ -280,7 +293,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public string GetPlayerTwitchName(int index)
+		public static string GetPlayerTwitchName(int index)
 		{
 			if (_players.Count <= index)
 				return "";
@@ -288,12 +301,12 @@ namespace Managers
 			return _players[index].TwitchUser.Username;
 		}
 
-		public StatModifiers GetStatModifiers(PlayerRole role)
+		public static StatModifiers GetStatModifiers(PlayerRole role)
 		{
 			return _roleStatModifiers[role];
 		}
 
-		private void Update()
+		private static void Update()
 		{
 			if (_playerUpdateQueue.Count > 0)
 			{

@@ -139,7 +139,7 @@ namespace GameEventSystem.Events
 				Enemy enemy = go.GetComponent<Enemy>();
 				enemy.OnDied += OnEnemyDeath;
 				_trackedEnemies.Add(enemy);
-				enemy.HealthHandler.SetMaxHealth(Mathf.Max(1000, 50 * (GameManager.Instance.PlayerManager.PlayerCount() + GameManager.Instance.PlayerManager.RecruitCount())));
+				enemy.HealthHandler.SetMaxHealth(Mathf.Max(1000, 50 * (PlayerManager.PlayerCount() + PlayerManager.RecruitCount())));
 				enemy.gameObject.SetActive(true);
 				enemy.transform.position = GameManager.Instance.EnemySpawner.GetRandomSpawnLocation().position;
 			}

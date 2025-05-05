@@ -1,8 +1,4 @@
 using UnityEngine;
-using Scriptables;
-using Sirenix.OdinInspector;
-using Utils;
-using Target;
 
 namespace Managers
 {

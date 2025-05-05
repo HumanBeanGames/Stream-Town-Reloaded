@@ -36,7 +36,6 @@ namespace TechTree
 
 		private int _techsUnlocked = 0;
 
-		private PlayerManager _playerManager;
 		private UserInterface_TownGoal _townGoalInterface;
 
 		public int MinTimeBetweenVotes => _minTimeBetweenVotes;
@@ -55,7 +54,6 @@ namespace TechTree
 			_techTree = new TechnologyTree(_techTreeSO, this);
 			_goalsFollowed = new Dictionary<Goal, Node_SO>();
 
-			_playerManager = GameManager.Instance.PlayerManager;
 			//PrintAvailableNodes();
 
 		}
@@ -259,10 +257,10 @@ namespace TechTree
 
 			if (playerRole == PlayerRole.Count)
 			{
-				_playerManager.GlobalStatModifiers.AddToModifier(statType, data.IntValue);
+				PlayerManager.GlobalStatModifiers.AddToModifier(statType, data.IntValue);
 			}
 			else
-				_playerManager.GetStatModifiers(playerRole).AddToModifier(statType, data.IntValue);
+				PlayerManager.GetStatModifiers(playerRole).AddToModifier(statType, data.IntValue);
 
 			OnStatBoostUnlocked?.Invoke(playerRole, statType);
 		}

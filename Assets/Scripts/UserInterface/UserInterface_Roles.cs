@@ -80,7 +80,7 @@ namespace UserInterface
 
 			// Ruler
 			AddNewRoleDataUI(_ruler, new Color32(255, 242, 197, 255));
-			GameManager.Instance.PlayerManager.OnRulerChanged += OnRulerChanged;
+			PlayerManager.OnRulerChanged += OnRulerChanged;
 			AddNewRoleDataUI(_builder, Color.white);
 			for (int i = 0; i < _resourceRoles.Count; i++)
 				AddNewRoleDataUI(_resourceRoles[i], new Color32(230, 255, 210, 255));

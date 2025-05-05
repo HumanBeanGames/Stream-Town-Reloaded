@@ -61,7 +61,7 @@ namespace PlayerControls.ObjectSelection
 			List<RoleHandler> players = ((List<RoleHandler>)_selectedObject);
 			for (int i = 0; i < players.Count; i++)
 				if (players[i] != null)
-					GameManager.Instance.PlayerManager.DismissRecruit(players[i].Player);
+					PlayerManager.DismissRecruit(players[i].Player);
 			_selectedObjectTypeUI.HideContext();
 		}
 

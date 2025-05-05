@@ -70,7 +70,7 @@ namespace Enemies
 			if (_healthHandler.BaseMaxHealth <= 0)
 				return;
 
-			_healthHandler.SetMaxHealth(_healthHandler.BaseMaxHealth + (int)(_additionalHealthPerPlayer * (GameManager.Instance.PlayerManager.PlayerCount() + GameManager.Instance.PlayerManager.RecruitCount())));
+			_healthHandler.SetMaxHealth(_healthHandler.BaseMaxHealth + (int)(_additionalHealthPerPlayer * (PlayerManager.PlayerCount() + PlayerManager.RecruitCount())));
 			_healthHandler.SetHealth(_healthHandler.MaxHealth);
 		}
 

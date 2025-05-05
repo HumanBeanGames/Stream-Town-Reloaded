@@ -9,9 +9,6 @@ namespace Twitch.Commands
 {
     public static class RulerCommands
     {
-        private static PlayerManager _playerManager;
-        public static PlayerManager PlayerManager => _playerManager ??= GameManager.Instance.PlayerManager;
-
         public static string SellResource(Player player, string command, params string[] args)
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "You are not authorized to sell resources.";
@@ -102,13 +99,13 @@ namespace Twitch.Commands
         public static string RecruitCount(Player player)
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "Unauthorized.";
-            return $"{player.TwitchUser.Username} The town has {GameManager.Instance.PlayerManager.RecruitCount()} recruits!";
+            return $"{player.TwitchUser.Username} The town has {PlayerManager.RecruitCount()} recruits!";
         }
 
         public static string ShowRecruitIds(Player player)
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "Unauthorized.";
-            GameManager.Instance.PlayerManager.ShowRecruitIDs();
+            PlayerManager.ShowRecruitIDs();
             return "Recruit IDs displayed.";
         }
 
@@ -118,8 +115,8 @@ namespace Twitch.Commands
             if (args.Length == 0) return "Usage: !rdismiss <id>";
             if (int.TryParse(args[0], out int id))
             {
-                Player recruit = GameManager.Instance.PlayerManager.GetRecruitByIndex(id);
-                GameManager.Instance.PlayerManager.DismissRecruit(recruit);
+                Player recruit = PlayerManager.GetRecruitByIndex(id);
+                PlayerManager.DismissRecruit(recruit);
                 return $"{player.TwitchUser.Username} Successfully Dismissed recruit {id}!";
             }
             return $"{args[0]} is not a valid id";
@@ -131,13 +128,13 @@ namespace Twitch.Commands
             if (args.Length < 2) return "Usage: !rswap <id> <role>";
             if (int.TryParse(args[0], out int id))
             {
-                Player recruit = GameManager.Instance.PlayerManager.GetRecruitByIndex(id);
+                Player recruit = PlayerManager.GetRecruitByIndex(id);
                 string r = char.ToUpper(args[1][0]) + args[1].Substring(1);
                 if (Enum.TryParse(r, out PlayerRole role))
                 {
                     if (RoleManager.IsRoleAvailabe(role))
                     {
-                        GameManager.Instance.PlayerManager.SwapRecruitRole(recruit, role);
+                        PlayerManager.SwapRecruitRole(recruit, role);
                         return $"{player.TwitchUser.Username} Successfully changed recruit {id} to {role}!";
                     }
                     return $"{role} is full";
@@ -153,7 +150,7 @@ namespace Twitch.Commands
             if (args.Length == 0) return "Usage: !rinfo <id>";
             if (int.TryParse(args[0], out int id))
             {
-                Player recruit = GameManager.Instance.PlayerManager.GetRecruitByIndex(id);
+                Player recruit = PlayerManager.GetRecruitByIndex(id);
                 return $"{player.TwitchUser.Username} ----- Recruit {id} | Current role {recruit.RoleHandler.CurrentRole} | Health: {recruit.HealthHandler.Health}/{recruit.HealthHandler.MaxHealth} | Level: {recruit.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MaxRoleLevel} | Experience: {recruit.RoleHandler.PlayerRoleData.CurrentExp}/{recruit.RoleHandler.PlayerRoleData.RequiredExp}";
             }
             return $"{args[0]} is not a valid id";
@@ -165,7 +162,7 @@ namespace Twitch.Commands
             GameManager.Instance.GameEventManager.StartNewRulerVote();
             if (player.RoleHandler.TrySetRole(player.RoleHandler.PreviousRole, out string reason))
             {
-                GameManager.Instance.PlayerManager.SetRuler(null);
+                PlayerManager.SetRuler(null);
                 return $"{player.TwitchUser.Username} you have been successfully resigned!";
             }
             else

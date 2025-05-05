@@ -49,8 +49,7 @@ namespace GameEventSystem.Events
 
 				if (roll < 70)
 				{
-					PlayerManager playerManager = GameManager.Instance.PlayerManager;
-					if (playerManager.PlayerCount() <= 0)
+					if (PlayerManager.PlayerCount() <= 0)
 						return;
 					
 					Player player = null;
@@ -61,8 +60,8 @@ namespace GameEventSystem.Events
 						if (iters >= 50)
 							break;
 
-						int playerIndex = Random.Range(0, GameManager.Instance.PlayerManager.PlayerCount());
-						player = playerManager.GetPlayer(playerIndex);
+						int playerIndex = Random.Range(0, PlayerManager.PlayerCount());
+						player = PlayerManager.GetPlayer(playerIndex);
 						if (player.IsNPC)
 							continue;
 					}

@@ -18,7 +18,7 @@ namespace Twitch.Commands
             string r = char.ToUpper(args[0][0]) + args[0].Substring(1);
             if (Enum.TryParse(r, out PlayerRole role))
             {
-                if (role == PlayerRole.Ruler && GameManager.Instance.PlayerManager.Ruler != player)
+                if (role == PlayerRole.Ruler && PlayerManager.Ruler != player)
                     return "You cannot switch to Ruler unless you're the current ruler.";
 
                 if (player.RoleHandler.TrySetRole(role, out string failureReason))

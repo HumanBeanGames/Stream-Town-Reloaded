@@ -98,8 +98,8 @@ namespace Twitch.Commands
         {
             if (!player.IsGameMaster()) return null;
             if (!int.TryParse(args[0], out int amount) || amount <= 0) return "Invalid amount.";
-            for (int i = 0; i < GameManager.Instance.PlayerManager.PlayerCount(); i++)
-                GameManager.Instance.PlayerManager.GetPlayer(i).RoleHandler.PlayerRoleData.IncreaseExperience(amount);
+            for (int i = 0; i < PlayerManager.PlayerCount(); i++)
+                PlayerManager.GetPlayer(i).RoleHandler.PlayerRoleData.IncreaseExperience(amount);
             return $"Gave {amount} exp to all players.";
         }
 

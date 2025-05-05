@@ -80,10 +80,10 @@ namespace Twitch
 
         private static string TryHandlePlayerCommand(string command, string[] args, OnChatCommandReceivedArgs e)
         {
-            if (!GameManager.Instance.PlayerManager.PlayerExistsByID(e.Command.ChatMessage.UserId, out int index))
+            if (!PlayerManager.PlayerExistsByID(e.Command.ChatMessage.UserId, out int index))
                 return null;
 
-            var player = GameManager.Instance.PlayerManager.GetPlayer(index);
+            var player = PlayerManager.GetPlayer(index);
             if (player == null)
                 return null;
 

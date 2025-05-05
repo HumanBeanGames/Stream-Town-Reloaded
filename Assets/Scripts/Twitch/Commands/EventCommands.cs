@@ -28,7 +28,7 @@ namespace Twitch.Commands
 
 		private static void ProcessReward(string[] split, OnMessageReceivedArgs e)
 		{
-			if (!GameManager.Instance.PlayerManager.PlayerExistsByID(e.ChatMessage.UserId, out int index))
+			if (!PlayerManager.PlayerExistsByID(e.ChatMessage.UserId, out int index))
 				return;
 
 			switch(split[1])

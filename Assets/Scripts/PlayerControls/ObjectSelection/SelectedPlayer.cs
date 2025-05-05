@@ -74,7 +74,7 @@ namespace PlayerControls.ObjectSelection
 		{
 			RoleHandler roleHandler = ((RoleHandler)_selectedObject);
 			OnPlayerDeathOrRemove(true);
-			GameManager.Instance.PlayerManager.DismissRecruit(roleHandler.Player);
+			PlayerManager.DismissRecruit(roleHandler.Player);
 		}
 
 		public void OnPlayerDeathOrRemove(bool died)

@@ -287,11 +287,11 @@ namespace SavingAndLoading
 			else
 				techTree.TechAvailable = false;
 
-			worldSaveData.IsCurrentRuler = GameManager.Instance.PlayerManager.Ruler == null ? false : true;
+			worldSaveData.IsCurrentRuler = PlayerManager.Ruler == null ? false : true;
 
 			worldSaveData.TimeUntillNextRulerVote = GameManager.Instance.GameEventManager.TimeTillRulerVote;
 			if (worldSaveData.IsCurrentRuler)
-				worldSaveData.RulerName = GameManager.Instance.PlayerManager.Ruler.TwitchUser.Username;
+				worldSaveData.RulerName = PlayerManager.Ruler.TwitchUser.Username;
 
 			worldSaveData.TechTree = techTree;
 			return worldSaveData;
@@ -373,7 +373,7 @@ namespace SavingAndLoading
 																		  // Create players
 			for (int i = 0; i < playerSaveDatas.Count; i++)
 			{
-				playerObjs.Add(GameManager.Instance.PlayerManager.AddExistingPlayer(playerSaveDatas[i].ToPlayer(playerSaveDatas[i].GUID, playerSaveDatas[i].TargetGUID, playerSaveDatas[i].StationGUID), playerSaveDatas[i].CurrentRole).PoolableObject);
+				playerObjs.Add(PlayerManager.AddExistingPlayer(playerSaveDatas[i].ToPlayer(playerSaveDatas[i].GUID, playerSaveDatas[i].TargetGUID, playerSaveDatas[i].StationGUID), playerSaveDatas[i].CurrentRole).PoolableObject);
 				//GameManager.Instance.GUIDManager.AddToDictionary(playerObjs[playerObjs.Count - 1]);
 			}
 
@@ -417,8 +417,8 @@ namespace SavingAndLoading
 			GameManager.Instance.GameEventManager.TimeTillRulerVote = worldData.TimeUntillNextRulerVote;
 
 			// Sets ruler
-			if (worldData.IsCurrentRuler && GameManager.Instance.PlayerManager.PlayerExistsByNameToLower(worldData.RulerName, out int index))
-				GameManager.Instance.PlayerManager.SetRuler(GameManager.Instance.PlayerManager.GetPlayer(index));
+			if (worldData.IsCurrentRuler && PlayerManager.PlayerExistsByNameToLower(worldData.RulerName, out int index))
+				PlayerManager.SetRuler(PlayerManager.GetPlayer(index));
 			else
 				GameManager.Instance.GameEventManager.StartNewRulerVote();
 

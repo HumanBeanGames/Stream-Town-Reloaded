@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private PlayerManager _playerManager = null;
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
 		private SaveManager _saveManager = null;
 		private MetaData.MetaData _metaData = null;
@@ -90,7 +89,6 @@ namespace Managers
 
 		// Properties
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
-		public PlayerManager PlayerManager => _playerManager;
 		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
 		public SaveManager SaveManager => _saveManager;
 		public GUIDManager GUIDManager => _gUIDManager;
@@ -152,7 +150,7 @@ namespace Managers
             _connectPanel.SetActive(true);
 			CodeDisplay.text = $"!CONNECT {_code}";
 			BuildingManager.Initialize();
-			_playerManager.Initialize();
+			PlayerManager.Initialize();
 			_townGoalManager.Initialize();
 			RoleManager.Initialize();
 			yield return new WaitForEndOfFrame();
@@ -183,9 +181,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _playerManager))
-				Debug.LogError("PlayerManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _saveManager))
 				Debug.LogError("SaveManager not found on GameManager", this);
 

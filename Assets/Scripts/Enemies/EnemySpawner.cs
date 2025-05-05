@@ -99,7 +99,7 @@ namespace Enemies
 
 		public int CalculateMaxEnemies()
 		{
-			_maxEnemies = Mathf.Max(Mathf.Min((int)(TimeManager.dayCount + GameManager.Instance.PlayerManager.Players.Count * 0.1f), _maxTotalEnemies), _minTotalEnemies);
+			_maxEnemies = Mathf.Max(Mathf.Min((int)(TimeManager.dayCount + PlayerManager.Players.Count * 0.1f), _maxTotalEnemies), _minTotalEnemies);
 			return _maxEnemies;
 		}
 
