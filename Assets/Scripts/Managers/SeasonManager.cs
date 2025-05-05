@@ -3,309 +3,229 @@ using System.Collections;
 using UnityEngine;
 using Utils;
 using Scriptables;
-using Managers;
+using Sirenix.OdinInspector;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace Managers
 {
-	[GameManager]
-	public static class SeasonManager
-	{
-		private static readonly float _winterTint = 0.42f;
-		private static readonly float _restTint = -0.08f;
+    [GameManager]
+    public static class SeasonManager
+    {
+                [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static SeasonConfig Config = SeasonConfig.Instance;
 
-		[SerializeField]
-		private static Season _startingSeason = Season.Summer;
-		[SerializeField]
-		private static int _daysPerSeason = 3;
-		[SerializeField]
-		private static float _seasonTransitionTime = 10;
-		[SerializeField]
-		private static AllSeasonsScriptable _allSeasonsData;
-		[SerializeField]
-		private static Material _grassMaterial;
-		[SerializeField]
-		private static Material _terrainMaterial;
-		[SerializeField]
-		private static Material _treeMaterial;
-		[SerializeField]
-		private static Material _buildingMaterial;
-		[SerializeField]
-		private static Material _waterMaterial;
+        public static event Action<Season> OnSeasonChanged;
+        public static event Action<Season> OnSeasonChanging;
 
-		private static Season _currentSeason;
-		private static bool _seasonChanging = false;
+        public static bool SeasonChanging
+        {
+            get => Config?.seasonChanging ?? false;
+            set
+            {
+                if (Config != null)
+                    Config.seasonChanging = value;
+            }
+        }
 
-		public static event Action<Season> OnSeasonChanged;
-		public static event Action<Season> OnSeasonChanging;
+        public static int DaysPerSeason => Config?.daysPerSeason ?? 0;
+        public static float SeasonTransitionTime => Config?.seasonTransitionTime ?? 0;
+        public static Season StartingSeason => Config?.startingSeason ?? Season.Summer;
 
-		public static bool SeasonChanging => _seasonChanging;
-		public static int DaysPerSeason => _daysPerSeason;
-		public static Season CurrentSeason => _currentSeason;
+        public static Season CurrentSeason
+        {
+            get => Config?.currentSeason ?? Season.Summer;
+            set
+            {
+                if (Config != null)
+                    Config.currentSeason = value;
+            }
+        }
 
-		public static AllSeasonsScriptable AllSeasonsData => _allSeasonsData;
+        public static AllSeasonsScriptable AllSeasonsData => Config?.allSeasonsData;
+        public static Material GrassMaterial => Config?.grassMaterial;
+        public static Material TerrainMaterial => Config?.terrainMaterial;
+        public static Material TreeMaterial => Config?.treeMaterial;
+        public static Material BuildingMaterial => Config?.buildingMaterial;
+        public static Material WaterMaterial => Config?.waterMaterial;
+
+#if UNITY_EDITOR
+        public static bool DriveSeasonsByTime => Config?.driveSeasonsByTime ?? false;
+
+        public static void CallNextSeason() => NextSeason(0);
+        public static void UpdateCurrentSeason() => runner.StartCoroutine(TransitionSeason(CurrentSeason, 0));
+#endif
 
         private class Runner : MonoBehaviour { }
-		[HideInInspector]
-		private static Runner runner;
+        [HideInInspector]
+        private static Runner runner;
 
+        private static void OnDayPassed()
+        {
 #if UNITY_EDITOR
-        [Header("EDITOR SETTINGS")]
-		[Tooltip("If set to true, seasons will be driven by the game's time manager.")]
-		public static bool DriveSeasonsByTime = false;
-		public static void CallNextSeason()
-		{
-			NextSeason(0);
-		}
-
-		public static void UpdateCurrentSeason()
-		{
-			runner.StartCoroutine(TransitionSeason(_currentSeason, 0));
-		}
+            if (DriveSeasonsByTime)
 #endif
+                if (TimeManager.DayCount % DaysPerSeason == 0)
+                    NextSeason();
+        }
 
-		/// <summary>
-		/// Called when a day has passed.
-		/// </summary>
-		private static void OnDayPassed()
-		{
-#if UNITY_EDITOR
-			if (DriveSeasonsByTime)
-#endif
-				if ((TimeManager.DayCount) % _daysPerSeason == 0)
-					NextSeason();
-		}
+        private static void NextSeason(float transitionTime = -1)
+        {
+            Debug.Log("Next Season Called");
+            Season nextSeason = CurrentSeason + 1;
+            if (nextSeason == Season.Count) nextSeason = 0;
 
-		/// <summary>
-		/// Starts transition to next season.
-		/// </summary>
-		private static void NextSeason(float _transitionTime = -1)
-		{
-			Debug.Log("Next Season Called");
-			Season nextSeason = _currentSeason + 1;
+            if (!SeasonChanging)
+                runner.StartCoroutine(TransitionSeason(nextSeason, transitionTime == -1 ? SeasonTransitionTime : transitionTime));
+        }
 
-			if (nextSeason == Season.Count)
-				nextSeason = 0;
+        private static IEnumerator TransitionSeason(Season nextSeason, float transitionTime, bool triggerEvent = true)
+        {
+            yield return new WaitUntil(()=>GameManager.Instance != null);
+            GameManager.Instance.WeatherManager.StopWeather();
+            yield return new WaitForEndOfFrame();
 
-			if (!_seasonChanging)
-				runner.StartCoroutine(TransitionSeason(nextSeason, _transitionTime == -1 ? _seasonTransitionTime : _transitionTime));
-		}
+            OnSeasonChanging?.Invoke(nextSeason);
+            SeasonChanging = true;
 
-		/// <summary>
-		/// Transitions from current season to the next season.
-		/// </summary>
-		/// <param name="nextSeason"></param>
-		/// <param name="transitionTime"></param>
-		/// <param name="triggerEvent"></param>
-		/// <returns></returns>
-		private static IEnumerator TransitionSeason(Season nextSeason, float transitionTime, bool triggerEvent = true)
-		{
-			GameManager.Instance.WeatherManager.StopWeather();
-			yield return new WaitForEndOfFrame();
-			OnSeasonChanging?.Invoke(nextSeason);
-			_seasonChanging = true;
+            var currentSeasonData = AllSeasonsData?.GetSeasonData(CurrentSeason);
+            var nextSeasonData = AllSeasonsData?.GetSeasonData(nextSeason);
 
-			SeasonScriptable currentSeasonData = _allSeasonsData.GetSeasonData(_currentSeason);
-			SeasonScriptable nextSeasonData = _allSeasonsData.GetSeasonData(nextSeason);
+            float transition = 0;
+            GameManager.Instance.WeatherManager.StartWeather(nextSeason);
+            while (transition < 1)
+            {
+                transition += (transitionTime == 0) ? 1 : Time.deltaTime / transitionTime;
+                transition = Mathf.Min(transition, 1);
 
-			float transition = 0;
-			GameManager.Instance.WeatherManager.StartWeather(nextSeason);
-			while (transition < 1)
-			{
-				if (transitionTime == 0)
-					transition = 1;
-				else
-				{
-					transition += Time.deltaTime / transitionTime;
-					if (transition > 1)
-						transition = 1;
-				}
-				// Lerp all season colors and set the materials.
+                if (GrassMaterial)
+                {
+                    GrassMaterial.SetColor("_GridColor1", Color.Lerp(currentSeasonData.GrassGridColor1, nextSeasonData.GrassGridColor1, transition));
+                    GrassMaterial.SetColor("_GridColor2", Color.Lerp(currentSeasonData.GrassGridColor2, nextSeasonData.GrassGridColor2, transition));
+                    GrassMaterial.SetColor("_TopColor", Color.Lerp(currentSeasonData.GrassTopColor, nextSeasonData.GrassTopColor, transition));
+                    GrassMaterial.SetColor("_WindColor", Color.Lerp(currentSeasonData.GrassWindColor, nextSeasonData.GrassWindColor, transition));
+                }
 
-				// Grass Values.
-				if (_grassMaterial)
-				{
-					_grassMaterial.SetColor("_GridColor1", Color.Lerp(currentSeasonData.GrassGridColor1, nextSeasonData.GrassGridColor1, transition));
-					_grassMaterial.SetColor("_GridColor2", Color.Lerp(currentSeasonData.GrassGridColor2, nextSeasonData.GrassGridColor2, transition));
-					_grassMaterial.SetColor("_TopColor", Color.Lerp(currentSeasonData.GrassTopColor, nextSeasonData.GrassTopColor, transition));
-					_grassMaterial.SetColor("_WindColor", Color.Lerp(currentSeasonData.GrassWindColor, nextSeasonData.GrassWindColor, transition));
-				}
+                if (TerrainMaterial)
+                {
+                    TerrainMaterial.SetColor("_color1", Color.Lerp(currentSeasonData.TerrainColor1, nextSeasonData.TerrainColor1, transition));
+                    TerrainMaterial.SetColor("_color2", Color.Lerp(currentSeasonData.TerrainColor2, nextSeasonData.TerrainColor2, transition));
+                }
 
-				// Terrain Values.
-				if (_terrainMaterial)
-				{
-					_terrainMaterial.SetColor("_color1", Color.Lerp(currentSeasonData.TerrainColor1, nextSeasonData.TerrainColor1, transition));
-					_terrainMaterial.SetColor("_color2", Color.Lerp(currentSeasonData.TerrainColor2, nextSeasonData.TerrainColor2, transition));
-				}
+                SetSeasonMaterial(nextSeason, transition);
+                yield return new WaitForEndOfFrame();
+            }
 
-				// Tree Values.
-				// Uhh yeah this is gonna need some thinkin' aye.
-				// Possibly need to store 2 gradients in at the same time, Current/Next, use transition to lerp in shader. pog.
-				SetSeasonMaterial(nextSeason, transition);
+            CurrentSeason = nextSeason;
+            OnSeasonChanged?.Invoke(nextSeason);
+            SeasonChanging = false;
+        }
 
-				yield return new WaitForEndOfFrame();
-			}
+        public static void ForceSetNextSeason()
+        {
+            Season nextSeason = CurrentSeason + 1;
+            if (nextSeason == Season.Count) nextSeason = 0;
 
-			_currentSeason = nextSeason;
-			OnSeasonChanged?.Invoke(nextSeason);
-			_seasonChanging = false;
-		}
+            var currentSeasonData = AllSeasonsData?.GetSeasonData(CurrentSeason);
+            var nextSeasonData = AllSeasonsData?.GetSeasonData(nextSeason);
 
-		public static void ForceSetNextSeason()
-		{
+            if (GrassMaterial)
+            {
+                GrassMaterial.SetColor("_GridColor1", nextSeasonData.GrassGridColor1);
+                GrassMaterial.SetColor("_GridColor2", nextSeasonData.GrassGridColor2);
+                GrassMaterial.SetColor("_TopColor", nextSeasonData.GrassTopColor);
+                GrassMaterial.SetColor("_WindColor", nextSeasonData.GrassWindColor);
+            }
 
-			Season nextSeason = _currentSeason + 1;
+            if (TerrainMaterial)
+            {
+                TerrainMaterial.SetColor("_color1", nextSeasonData.TerrainColor1);
+                TerrainMaterial.SetColor("_color2", nextSeasonData.TerrainColor2);
+            }
 
-			if (nextSeason == Season.Count)
-				nextSeason = 0;
-			SeasonScriptable currentSeasonData = _allSeasonsData.GetSeasonData(_currentSeason);
-			SeasonScriptable nextSeasonData = _allSeasonsData.GetSeasonData(nextSeason);
-			// Grass Values.
-			if (_grassMaterial)
-			{
-				_grassMaterial.SetColor("_GridColor1", Color.Lerp(currentSeasonData.GrassGridColor1, nextSeasonData.GrassGridColor1, 1));
-				_grassMaterial.SetColor("_GridColor2", Color.Lerp(currentSeasonData.GrassGridColor2, nextSeasonData.GrassGridColor2, 1));
-				_grassMaterial.SetColor("_TopColor", Color.Lerp(currentSeasonData.GrassTopColor, nextSeasonData.GrassTopColor, 1));
-				_grassMaterial.SetColor("_WindColor", Color.Lerp(currentSeasonData.GrassWindColor, nextSeasonData.GrassWindColor, 1));
-			}
+            SetSeasonMaterial(nextSeason, 1);
+            CurrentSeason = nextSeason;
+        }
 
-			// Terrain Values.
-			if (_terrainMaterial)
-			{
-				_terrainMaterial.SetColor("_color1", Color.Lerp(currentSeasonData.TerrainColor1, nextSeasonData.TerrainColor1, 1));
-				_terrainMaterial.SetColor("_color2", Color.Lerp(currentSeasonData.TerrainColor2, nextSeasonData.TerrainColor2, 1));
-			}
+        public static void SetSeason(Season selectedSeason)
+        {
+            var data = AllSeasonsData?.GetSeasonData(selectedSeason);
+            if (GrassMaterial)
+            {
+                GrassMaterial.SetColor("_GridColor1", data.GrassGridColor1);
+                GrassMaterial.SetColor("_GridColor2", data.GrassGridColor2);
+                GrassMaterial.SetColor("_TopColor", data.GrassTopColor);
+                GrassMaterial.SetColor("_WindColor", data.GrassWindColor);
+            }
+            if (TerrainMaterial)
+            {
+                TerrainMaterial.SetColor("_color1", data.TerrainColor1);
+                TerrainMaterial.SetColor("_color2", data.TerrainColor2);
+            }
+        }
 
-			// Tree Values.
-			// Uhh yeah this is gonna need some thinkin' aye.
-			// Possibly need to store 2 gradients in at the same time, Current/Next, use transition to lerp in shader. pog.
-			SetSeasonMaterial(nextSeason, 1);
-			_currentSeason = nextSeason;
-		}
+        private static void SetSeasonMaterial(Season season, float transition)
+        {
+            float winterTint = Config?.winterTint ?? 0.42f;
+            float restTint = Config?.restTint ?? -0.08f;
 
-		public static void SetSeason(Season selectedSeason)
-		{
-			SeasonScriptable selectedSeasonData = _allSeasonsData.GetSeasonData(selectedSeason);
-			// Grass Values.
-			if (_grassMaterial)
-			{
-				_grassMaterial.SetColor("_GridColor1", selectedSeasonData.GrassGridColor1);
-				_grassMaterial.SetColor("_GridColor2", selectedSeasonData.GrassGridColor2);
-				_grassMaterial.SetColor("_TopColor", selectedSeasonData.GrassTopColor);
-				_grassMaterial.SetColor("_WindColor", selectedSeasonData.GrassWindColor);
-			}
+            if (season == Season.Autumn)
+            {
+                TreeMaterial?.SetFloat("_AutumnPower", transition * 0.3f);
+                TreeMaterial?.SetFloat("_SnowPower", 0);
+                BuildingMaterial?.SetFloat("_SnowPower", 0);
+                BuildingMaterial?.SetFloat("_SnowNoiseLevels", 0);
+            }
+            else if (season == Season.Winter)
+            {
+                TreeMaterial?.SetFloat("_AutumnPower", (1 - transition) * 0.5f);
+                TreeMaterial?.SetFloat("_SnowPower", transition * 0.5f);
+                BuildingMaterial?.SetFloat("_SnowPower", transition);
+                BuildingMaterial?.SetFloat("_SnowNoiseLevels", transition);
+                WaterMaterial?.SetFloat("_IceStrength", transition);
+                TerrainMaterial?.SetFloat("_Tint", transition * winterTint);
+                GrassMaterial?.SetFloat("_Tint", transition * winterTint);
+            }
+            else if (season == Season.Spring)
+            {
+                TreeMaterial?.SetFloat("_SnowPower", (1 - transition) * 0.5f);
+                BuildingMaterial?.SetFloat("_SnowPower", (1 - transition) * 0.5f);
+                TreeMaterial?.SetFloat("_Spring", transition * 0.1f);
+                TreeMaterial?.SetFloat("_AutumnPower", 0);
+                BuildingMaterial?.SetFloat("_SnowNoiseLevels", (1 - transition));
+                WaterMaterial?.SetFloat("_IceStrength", 1 - transition);
+                TerrainMaterial?.SetFloat("_Tint", (1 - transition) * restTint);
+                GrassMaterial?.SetFloat("_Tint", (1 - transition) * restTint);
+            }
+            else
+            {
+                TreeMaterial?.SetFloat("_Spring", (1 - transition) * 0.1f);
+                TreeMaterial?.SetFloat("_SnowPower", 0);
+                TreeMaterial?.SetFloat("_AutumnPower", 0);
+                BuildingMaterial?.SetFloat("_SnowPower", 0);
+                BuildingMaterial?.SetFloat("_SnowNoiseLevels", 0);
+            }
+        }
 
-			// Terrain Values.
-			if (_terrainMaterial)
-			{
-				_terrainMaterial.SetColor("_color1", selectedSeasonData.TerrainColor1);
-				_terrainMaterial.SetColor("_color2", selectedSeasonData.TerrainColor2);
-			}
+        public static void SetSeasonByTimePassed()
+        {
+            CurrentSeason = (Season)(TimeManager.DayCount % DaysPerSeason);
+            SetSeasonMaterial(CurrentSeason, 1.0f);
+        }
 
-			// Tree Values.
-			// Uhh yeah this is gonna need some thinkin' aye.
-			// Possibly need to store 2 gradients in at the same time, Current/Next, use transition to lerp in shader. pog.
-			// Note: Much Pog
-		}
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            Debug.Log(Config);
+            GameObject runnerObject = new GameObject("SeasonManagerRunner");
+            runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
 
-		private static void SetSeasonMaterial(Season season, float transition)
-		{
-			if (season == Season.Autumn)
-			{
-				_treeMaterial.SetFloat("_AutumnPower", transition * 0.3f);
-				_treeMaterial.SetFloat("_SnowPower", 0);
-				_buildingMaterial.SetFloat("_SnowPower", 0);
-				_buildingMaterial.SetFloat("_SnowNoiseLevels", 0);
-			}
-			else if (season == Season.Winter)
-			{
-				_treeMaterial.SetFloat("_AutumnPower", (1 - transition) * 0.5f);
-				_treeMaterial.SetFloat("_SnowPower", transition * 0.5f);
-				_buildingMaterial.SetFloat("_SnowPower", transition * 1f);
-				_buildingMaterial.SetFloat("_SnowNoiseLevels", transition);
-				_waterMaterial.SetFloat("_IceStrength", transition);
-				_terrainMaterial.SetFloat("_Tint", transition * _winterTint);
-				_grassMaterial.SetFloat("_Tint", transition * _winterTint);
-			}
-			else if (season == Season.Spring)
-			{
-				_treeMaterial.SetFloat("_SnowPower", (1 - transition) * 0.5f);
-				_buildingMaterial.SetFloat("_SnowPower", (1 - transition) * 0.5f);
-				_treeMaterial.SetFloat("_Spring", transition * 0.1f);
-				_treeMaterial.SetFloat("_AutumnPower", 0);
-				_buildingMaterial.SetFloat("_SnowNoiseLevels", (1 - transition));
-				_waterMaterial.SetFloat("_IceStrength", 1 - transition);
-				_terrainMaterial.SetFloat("_Tint", (1 - transition) * _restTint);
-				_grassMaterial.SetFloat("_Tint", (1 - transition) * _restTint);
-			}
-			else
-			{
-				_treeMaterial.SetFloat("_Spring", (1 - transition) * 0.1f);
-				_treeMaterial.SetFloat("_SnowPower", 0);
-				_treeMaterial.SetFloat("_AutumnPower", 0);
-				_buildingMaterial.SetFloat("_SnowPower", 0);
-				_buildingMaterial.SetFloat("_SnowNoiseLevels", 0);
-			}
-		}
-
-		public static void SetSeasonByTimePassed()
-		{
-			_currentSeason = (Season)(TimeManager.DayCount % _daysPerSeason);
-			SetSeasonMaterial(_currentSeason, 1.0f);
-		}
-
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		private static void InitializeRunner()
-		{
-			GameObject runnerObject = new GameObject("SeasonManagerRunner");
-			Runner runner = runnerObject.AddComponent<Runner>();
-			UnityEngine.Object.DontDestroyOnLoad(runnerObject);
-            _currentSeason = _startingSeason;
-            runner.StartCoroutine(TransitionSeason(_currentSeason, 0));
+            CurrentSeason = StartingSeason;
+            runner.StartCoroutine(TransitionSeason(CurrentSeason, 0));
             TimeManager.DayPassed += OnDayPassed;
         }
-	}
+    }
 }
-/*#if UNITY_EDITOR
-[CustomEditor(typeof(SeasonManager))]
-public class SeasonManagerEditor : Editor
-{
-	private SeasonManager _t;
-
-	private void OnEnable()
-	{
-		_t = (SeasonManager)target;
-	}
-
-	public override void OnInspectorGUI()
-	{
-		base.OnInspectorGUI();
-		GUILayout.Space(10);
-		GUILayout.BeginHorizontal();
-		{
-			GUILayout.FlexibleSpace();
-			if (GUILayout.Button("Next Season"))
-			{
-				_t.ForceSetNextSeason();
-			}
-			if (GUILayout.Button("Update Current"))
-			{
-				_t.UpdateCurrentSeason();
-			}
-			GUILayout.FlexibleSpace();
-		}
-		GUILayout.EndHorizontal();
-
-		GUILayout.BeginHorizontal();
-		{
-			GUILayout.FlexibleSpace();
-
-			GUILayout.FlexibleSpace();
-		}
-		GUILayout.EndHorizontal();
-		GUILayout.Label($"Current Season: {_t.CurrentSeason}");
-	}
-}
-#endif*/

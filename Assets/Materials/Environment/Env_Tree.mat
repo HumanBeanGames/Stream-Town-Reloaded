@@ -118,7 +118,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SnowPower: 0
     - _SpecularHighlights: 1
-    - _Spring: 0.1
+    - _Spring: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _Sync: 0.7

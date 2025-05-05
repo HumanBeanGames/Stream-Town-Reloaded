@@ -211,7 +211,34 @@ namespace Sirenix.OdinInspector.Editor
                 if (GUILayout.Button(type.Name))
                 {
                     targetType = type;
-                    titleContent = new GUIContent(targetType.GetNiceName());
+                    titleContent = new GUIContent(targetType.GetNiceName()); 
+
+                    // Try to find and inspect corresponding config
+                    var configTypeName = type.Name.Replace("Manager", "Config"); // e.g. SeasonManager -> SeasonConfig
+                    var configType = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(asm => asm.GetTypes())
+                        .FirstOrDefault(t => t.Name == configTypeName && typeof(ScriptableObject).IsAssignableFrom(t));
+
+                    if (configType != null)
+                    {
+                        var configAsset = AssetDatabase.FindAssets($"t:{configType.Name}")
+                            .Select(guid => AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid)))
+                            .FirstOrDefault();
+
+                        if (configAsset != null)
+                        {
+                            Selection.activeObject = configAsset;
+                            EditorGUIUtility.PingObject(configAsset);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Could not find any asset of type {configType.Name} in the project.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Could not resolve config type for manager {type.Name}");
+                    }
                 }
             }
         }
@@ -341,7 +368,7 @@ namespace Sirenix.OdinInspector.Editor
 
         private bool DrawProperty(InspectorProperty property)
         {
-            if (!string.IsNullOrEmpty(searchFilter) && !StringExtensions.Contains(property.NiceName.Replace(" ", ""), searchFilter.Replace(" ", ""), StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(searchFilter) && !Utilities.StringExtensions.Contains(property.NiceName.Replace(" ", ""), searchFilter.Replace(" ", ""), StringComparison.InvariantCultureIgnoreCase))
             {
                 return false;
             }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
 
@@ -6,7 +7,8 @@ namespace Scriptables
 	[CreateAssetMenu(fileName = "AllSeasonsScriptableData", menuName = "ScriptableObjects/AllSeasonsScriptable", order = 1)]
 	public class AllSeasonsScriptable : ScriptableObject
 	{
-		public SeasonScriptable[] AllSeasons;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public SeasonScriptable[] AllSeasons;
 
 		public SeasonScriptable GetSeasonData(Season season)
 		{
