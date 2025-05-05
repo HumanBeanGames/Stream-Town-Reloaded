@@ -67,7 +67,7 @@ namespace Managers
 #if UNITY_EDITOR
             if (DriveSeasonsByTime)
 #endif
-                if (TimeManager.DayCount % DaysPerSeason == 0)
+                if (TimeManager.dayCount % DaysPerSeason == 0)
                     NextSeason();
         }
 
@@ -211,7 +211,7 @@ namespace Managers
 
         public static void SetSeasonByTimePassed()
         {
-            CurrentSeason = (Season)(TimeManager.DayCount % DaysPerSeason);
+            CurrentSeason = (Season)(TimeManager.dayCount % DaysPerSeason);
             SetSeasonMaterial(CurrentSeason, 1.0f);
         }
 

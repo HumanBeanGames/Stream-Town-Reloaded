@@ -15,29 +15,14 @@ namespace Managers
         private static TimeConfig Config = TimeConfig.Instance;
 
 		/// <summary>
-		/// The number of seconds in a day.
+		/// The number of seconds in a day  
 		/// </summary>
 		public static int SecondsPerDay => Config.secondsPerDay;
-		[HideInInspector]
-        public static int DayCount
-        {
-            get => Config?.dayCount ?? 0;
-            set
-            {
-                if (Config != null)
-                    Config.dayCount = value;
-            }
-        }
         [HideInInspector]
-        public static float WorldTimePassed
-        {
-            get => Config?.worldTimePassed ?? 0;
-            set
-            {
-                if (Config != null)
-                    Config.worldTimePassed = value;
-            }
-        }
+        public static int dayCount = 0;
+
+        [HideInInspector]
+        public static float worldTimePassed = 0;
 
         /// <summary>
         /// Called when a day has passed.
@@ -49,10 +34,10 @@ namespace Managers
 		/// </summary>
 		public static void CalculateDayCount()
 		{
-			int prevDayCount = DayCount;
-			DayCount = Mathf.FloorToInt((int)WorldTimePassed / SecondsPerDay);
+			int prevDayCount = dayCount;
+			dayCount = Mathf.FloorToInt((int)worldTimePassed / SecondsPerDay);
 
-			if (prevDayCount < DayCount)
+			if (prevDayCount < dayCount)
 			{
 				Debug.Log("Day Passed");
 				DayPassed?.Invoke();
@@ -72,7 +57,7 @@ namespace Managers
         {
             while (true)
             {
-                WorldTimePassed += Time.deltaTime;
+                worldTimePassed += Time.deltaTime;
                 yield return null; // Wait for the next frame
             }
         }

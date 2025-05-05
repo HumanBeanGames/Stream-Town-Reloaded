@@ -1,13 +1,9 @@
 using UnityEngine;
-using Scriptables;
-using Sirenix.OdinInspector;
 using Utils;
-using Target;
 using Character;
 using System.Collections.Generic;
 using GameResources;
 using Events;
-using UnityEngine.Events;
 
 namespace Managers
 {

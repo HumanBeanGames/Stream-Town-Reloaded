@@ -109,6 +109,6 @@ namespace World
 			return eventSystem.IsPointerOverGameObject() || eventSystem.currentSelectedGameObject != null;
 		}
 
-		public static double CurrentTime => TimeManager.WorldTimePassed;
+		public static double CurrentTime => TimeManager.worldTimePassed;
 	}
 }

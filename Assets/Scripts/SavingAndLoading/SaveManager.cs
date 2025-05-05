@@ -261,7 +261,7 @@ namespace SavingAndLoading
 			worldSaveData.OreResourceAmount = TownResourceManager.GetResourceAmount(Resource.Ore);
 			worldSaveData.GoldResourceAmount = TownResourceManager.GetResourceAmount(Resource.Gold);
 			worldSaveData.FoodResourceAmount = TownResourceManager.GetResourceAmount(Resource.Food);
-			worldSaveData.WorldAgeInSeconds = TimeManager.WorldTimePassed;
+			worldSaveData.WorldAgeInSeconds = TimeManager.worldTimePassed;
 
 
 			// Tech Tree
@@ -402,7 +402,7 @@ namespace SavingAndLoading
 			TownResourceManager.SetResourceAmount(Resource.Ore, worldData.OreResourceAmount);
 			TownResourceManager.SetResourceAmount(Resource.Food, worldData.FoodResourceAmount);
 			TownResourceManager.SetResourceAmount(Resource.Gold, worldData.GoldResourceAmount);
-			TimeManager.WorldTimePassed = worldData.WorldAgeInSeconds;
+			TimeManager.worldTimePassed = worldData.WorldAgeInSeconds;
 			TimeManager.CalculateDayCount();
 			SeasonManager.SetSeasonByTimePassed();
 			GameManager.Instance.TechTreeManager.TechTree.SetUnlockedNodes(worldData.TechTree.UnlockedTechs);

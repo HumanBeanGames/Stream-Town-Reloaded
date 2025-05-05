@@ -9,9 +9,5 @@ namespace Managers
     public class TimeConfig : Config<TimeConfig>
     {
         public int secondsPerDay = 3600;
-        [HideInInspector]
-        public int dayCount = 0;
-        [HideInInspector]
-        public float worldTimePassed = 0;
     }
 }
