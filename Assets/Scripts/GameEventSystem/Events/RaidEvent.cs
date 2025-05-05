@@ -21,7 +21,6 @@ namespace GameEventSystem.Events
 		protected int _enemiesPerWave = 50;
 		protected List<Enemy> _trackedEnemies;
 
-		protected ObjectPoolingManager _poolingManager;
 		private UserInterface_Event _eventInterface;
 
 		protected StationMask _prevEnemyStationMask;
@@ -44,7 +43,6 @@ namespace GameEventSystem.Events
 
 			}
 
-			_poolingManager = GameManager.Instance.PoolingManager;
 			_eventInterface = GameManager.Instance.UIManager.EventInterface;
 			_eventManager = GameManager.Instance.GameEventManager;
 
@@ -127,7 +125,7 @@ namespace GameEventSystem.Events
 				for (int i = 0; i < _enemiesPerWave; i++)
 				{
 					string enemyName = _pooledEnemyNames[Random.Range(0, _pooledEnemyNames.Length)];
-					PoolableObject go = _poolingManager.GetPooledObject(enemyName);
+					PoolableObject go = ObjectPoolingManager.GetPooledObject(enemyName);
 					Enemy enemy = go.GetComponent<Enemy>();
 					enemy.OnDied += OnEnemyDeath;
 					_trackedEnemies.Add(enemy);
@@ -137,7 +135,7 @@ namespace GameEventSystem.Events
 			}
 			else // On Last Wave and Should spawn boss.
 			{
-				PoolableObject go = _poolingManager.GetPooledObject(_bossName);
+				PoolableObject go = ObjectPoolingManager.GetPooledObject(_bossName);
 				Enemy enemy = go.GetComponent<Enemy>();
 				enemy.OnDied += OnEnemyDeath;
 				_trackedEnemies.Add(enemy);

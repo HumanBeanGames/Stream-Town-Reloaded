@@ -103,7 +103,7 @@ namespace PlayerControls.ObjectSelection
 			_outlines = new List<GameObject>();
 			for (int i = 0; i < players.Count; i++)
 			{
-				_outlines.Add(GameManager.Instance.PoolingManager.GetPooledObject("UI_Selection_Outline").gameObject);
+				_outlines.Add(ObjectPoolingManager.GetPooledObject("UI_Selection_Outline").gameObject);
 				BoxCollider collider = players[i].GetComponent<BoxCollider>();
 				_outlines[i].transform.position = new Vector3(collider.transform.position.x, 0.15f, collider.transform.position.z);
 				_outlines[i].transform.rotation = collider.transform.rotation;

@@ -21,7 +21,6 @@ namespace Managers
 	{
 		private List<Player> _players = new List<Player>();
 		private List<Player> _recruits = new List<Player>();
-		private ObjectPoolingManager _poolingManager;
 		private Player _ruler;
 
 		private Dictionary<PlayerRole, StatModifiers> _roleStatModifiers;
@@ -75,7 +74,6 @@ namespace Managers
 
 		public void Initialize()
 		{
-			_poolingManager = GameManager.Instance.PoolingManager;
 			_globalStatModifier = new StatModifiers();
 			_roleStatModifiers = new Dictionary<PlayerRole, StatModifiers>();
 
@@ -105,7 +103,7 @@ namespace Managers
 
 
 			// TODO: Optimize this, store it when objects are pooled.
-			PoolableObject obj = _poolingManager.GetPooledObject("Player");
+			PoolableObject obj = ObjectPoolingManager.GetPooledObject("Player");
 			obj.gameObject.SetActive(true);
 			obj.transform.position = GameManager.Instance.PlayerSpawnPosition;
 			data.RoleHandler = obj.GetComponent<RoleHandler>();
@@ -127,7 +125,7 @@ namespace Managers
 			unitText.SetDisplayText(data.TwitchUser.Username);
 			unitText.SetTextColor(Twitch.Utils.UserColours.GetColourByUserType(data.TwitchUser.GameUserType));
 			data.UnitTextDisplay = unitText;
-			PoolableObject petObj = _poolingManager.GetPooledObject("Pet");
+			PoolableObject petObj = ObjectPoolingManager.GetPooledObject("Pet");
 			Pet pet = petObj.GetComponent<Pet>();
 
 			pet.SetOwner(obj.transform, data);

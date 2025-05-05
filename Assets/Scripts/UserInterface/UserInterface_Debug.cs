@@ -140,7 +140,7 @@ namespace UserInterface
 		/// </summary>
 		public void SpawnCharacter()
 		{
-			PoolableObject obj = GameManager.Instance.PoolingManager.GetPooledObject("Player");
+			PoolableObject obj = ObjectPoolingManager.GetPooledObject("Player");
 			obj.gameObject.SetActive(true);
 			obj.transform.position = GameManager.Instance.PlayerSpawnPosition;
 			obj.GetComponent<RoleHandler>().SetStarterRole((PlayerRole)_roleDropdownDebug.value);

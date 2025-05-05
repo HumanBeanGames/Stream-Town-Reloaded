@@ -283,7 +283,7 @@ namespace Managers
 			}
 
 			// Get Building Placer from pool and set it's position to the player's last succesful building position;
-			BuildingPlacer obj = GameManager.Instance.PoolingManager.GetPooledObject("BuildingPlacer").GetComponent<BuildingPlacer>();
+			BuildingPlacer obj = ObjectPoolingManager.GetPooledObject("BuildingPlacer").GetComponent<BuildingPlacer>();
 			obj.OnPooled(player);
 			obj.transform.position = player.LastBuildingPlacement;
 			obj.RotatePlacer(amount: player.TotalBuildingRotation);
@@ -627,17 +627,17 @@ namespace Managers
 		{
 			List<BuildingSaveData> buildings = new List<BuildingSaveData>();
 
-			List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(type.ToString());
+			List<PoolableObject> objs = ObjectPoolingManager.GetAllActivePooledObjectsOfType(type.ToString());
 			if (objs != null)
 				for (int o = 0; o < objs.Count; o++)
 					buildings.Add((BuildingSaveData)((SavingAndLoading.SavableObjects.SaveableBuilding)objs[o].SaveableObject).SaveData());
 
 			_buildings[type].Clear();
-			GameManager.Instance.PoolingManager.DisableObjectsInPool(type.ToString());
+			ObjectPoolingManager.DisableObjectsInPool(type.ToString());
 
 			for(int i = 0; i < buildings.Count; i++)
 			{
-				var building = GameManager.Instance.PoolingManager.GetPooledObject(buildings[i].BuildingType, false);
+				var building = ObjectPoolingManager.GetPooledObject(buildings[i].BuildingType, false);
 				((SaveableBuilding)((building).SaveableObject)).LoadData((object)buildings[i]);
 			}
 		}

@@ -44,6 +44,10 @@ namespace Managers
 			}
 		}
 
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeRunner()
         {

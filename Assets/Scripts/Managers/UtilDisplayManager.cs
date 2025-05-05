@@ -27,7 +27,7 @@ namespace Managers
 
 			if (!_activeTextDisplays.ContainsKey(target))
 			{
-				var textDisplay = GameManager.Instance.PoolingManager.GetPooledObject("TextDisplay");
+				var textDisplay = ObjectPoolingManager.GetPooledObject("TextDisplay");
 				textDisplay.gameObject.SetActive(true);
 				var rectTransform = textDisplay.GetComponent<RectTransform>();
 				rectTransform.SetParent(target.TextDisplayTransform, false);
@@ -63,7 +63,7 @@ namespace Managers
 			if (_pingObjects.ContainsKey(player))
 				return;
 
-			VFXArrowPointer pingObject = GameManager.Instance.PoolingManager.GetPooledObject("VFXPing").GetComponent<VFXArrowPointer>();
+			VFXArrowPointer pingObject = ObjectPoolingManager.GetPooledObject("VFXPing").GetComponent<VFXArrowPointer>();
 
 			pingObject.transform.parent = player.Character.transform;
 			pingObject.transform.localPosition = Vector3.zero;

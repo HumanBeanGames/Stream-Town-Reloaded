@@ -147,7 +147,7 @@ namespace Buildings
 			List<PoolableObject> removedFoliage = new List<PoolableObject>();
 			for (int i = 0; i < data.Count; i++)
 			{
-				PoolableObject obj = GameManager.Instance.PoolingManager.GetPooledObject(data[i].FoliageType, false);
+				PoolableObject obj = ObjectPoolingManager.GetPooledObject(data[i].FoliageType, false);
 				((SaveablFoliage)(obj.SaveableObject)).LoadData((object)data[i]);
 				removedFoliage.Add(obj);
 				obj.gameObject.SetActive(false);

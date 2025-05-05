@@ -146,7 +146,7 @@ namespace SavingAndLoading
 			_enemies = new List<Enemy>();
 			for (int i = 0; i < (int)EnemyType.Count; i++)
 			{
-				List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(((EnemyType)i).ToString());
+				List<PoolableObject> objs = ObjectPoolingManager.GetAllActivePooledObjectsOfType(((EnemyType)i).ToString());
 				for (int o = 0; o < objs.Count; o++)
 				{
 					enemySaveData.Add((EnemySaveData)((SaveableEnemy)objs[o].SaveableObject).SaveData());
@@ -164,7 +164,7 @@ namespace SavingAndLoading
 		{
 			List<PlayerSaveData> playerSaveDatas = new List<PlayerSaveData>();
 
-			List<PoolableObject> players = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType("Player");
+			List<PoolableObject> players = ObjectPoolingManager.GetAllActivePooledObjectsOfType("Player");
 			_players = new List<Player>();
 
 			for (int i = 0; i < players.Count; i++)
@@ -194,7 +194,7 @@ namespace SavingAndLoading
 			{
 				if ((ResourceType)i != ResourceType.Fish)
 				{
-					List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(((ResourceType)i).ToString());
+					List<PoolableObject> objs = ObjectPoolingManager.GetAllActivePooledObjectsOfType(((ResourceType)i).ToString());
 					for (int o = 0; o < objs.Count; o++)
 					{
 						resources.Add((ResourceSaveData)((SaveableResource)objs[o].SaveableObject).SaveData());
@@ -208,7 +208,7 @@ namespace SavingAndLoading
 
 			for (int i = 0; i < (int)FoliageSaveType.Count; i++)
 			{
-				List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(((FoliageSaveType)i).ToString());
+				List<PoolableObject> objs = ObjectPoolingManager.GetAllActivePooledObjectsOfType(((FoliageSaveType)i).ToString());
 
 				for (int o = 0; o < objs.Count; o++)
 				{
@@ -221,7 +221,7 @@ namespace SavingAndLoading
 			// The generated enemy camps
 			List<EnemyCampSaveData> camps = new List<EnemyCampSaveData>();
 
-			List<PoolableObject> campObjects = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(SaveItem.EnemyCamp_Goblin);
+			List<PoolableObject> campObjects = ObjectPoolingManager.GetAllActivePooledObjectsOfType(SaveItem.EnemyCamp_Goblin);
 			for (int i = 0; i < campObjects.Count; i++)
 			{
 				EnemyCampSaveData enemyCampSaveData = new EnemyCampSaveData(campObjects[i].transform, ((SaveableEnemyCamp)campObjects[i].SaveableObject).HealthHandler.Health, GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(campObjects[i]));
@@ -241,7 +241,7 @@ namespace SavingAndLoading
 			List<BuildingSaveData> buildings = new List<BuildingSaveData>();
 			for (int i = 0; i < (int)BuildingType.Count; i++)
 			{
-				List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActivePooledObjectsOfType(((BuildingType)i).ToString());
+				List<PoolableObject> objs = ObjectPoolingManager.GetAllActivePooledObjectsOfType(((BuildingType)i).ToString());
 				if (objs != null)
 					for (int o = 0; o < objs.Count; o++)
 						buildings.Add((BuildingSaveData)((SaveableBuilding)objs[o].SaveableObject).SaveData());
@@ -332,26 +332,26 @@ namespace SavingAndLoading
 			// Resources
 			for (int i = 0; i < genData.Resources.Count; i++)
 			{
-				((SaveableResource)((GameManager.Instance.PoolingManager.GetPooledObject(genData.Resources[i].ResourceType, false)).SaveableObject)).LoadData((object)genData.Resources[i]);
+				((SaveableResource)((ObjectPoolingManager.GetPooledObject(genData.Resources[i].ResourceType, false)).SaveableObject)).LoadData((object)genData.Resources[i]);
 			}
 
 			// Foliage
 			for (int i = 0; i < genData.Foliage.Count; i++)
 			{
-				((SaveablFoliage)((GameManager.Instance.PoolingManager.GetPooledObject(genData.Foliage[i].FoliageType, false)).SaveableObject)).LoadData((object)genData.Foliage[i]);
+				((SaveablFoliage)((ObjectPoolingManager.GetPooledObject(genData.Foliage[i].FoliageType, false)).SaveableObject)).LoadData((object)genData.Foliage[i]);
 			}
 
 			// Enemy camps
 			for (int i = 0; i < genData.EnemyCamps.Count; i++)
 			{
-				((SaveableEnemyCamp)((GameManager.Instance.PoolingManager.GetPooledObject("EnemyCamp_Goblin", false)).SaveableObject)).LoadData((object)genData.EnemyCamps[i]);
+				((SaveableEnemyCamp)((ObjectPoolingManager.GetPooledObject("EnemyCamp_Goblin", false)).SaveableObject)).LoadData((object)genData.EnemyCamps[i]);
 			}
 
 			//  Buildings
 			List<UpdateGraphBounds> buildingsToUpdate = new List<UpdateGraphBounds>();
 			for (int i = 0; i < buildings.Count; i++)
 			{
-				var building = GameManager.Instance.PoolingManager.GetPooledObject(buildings[i].BuildingType, false);
+				var building = ObjectPoolingManager.GetPooledObject(buildings[i].BuildingType, false);
 				 ((SaveableBuilding)((building).SaveableObject)).LoadData((object)buildings[i]);
 
 				UpdateGraphBounds ugb = building.GetComponent<UpdateGraphBounds>();
@@ -363,7 +363,7 @@ namespace SavingAndLoading
 			List<PoolableObject> enemyObjs = new List<PoolableObject>();// fill list with enemy objs
 			for (int i = 0; i < enemies.Count; i++)
 			{
-				PoolableObject temp = GameManager.Instance.PoolingManager.GetPooledObject((enemies[i].EnemyType.ToString()), false);
+				PoolableObject temp = ObjectPoolingManager.GetPooledObject((enemies[i].EnemyType.ToString()), false);
 				((SaveableEnemy)temp.SaveableObject).LoadData((object)enemies[i]);
 				enemyObjs.Add(temp);
 			}

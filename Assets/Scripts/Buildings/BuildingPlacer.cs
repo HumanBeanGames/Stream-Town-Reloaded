@@ -140,7 +140,7 @@ namespace Buildings
                 return false;
             }
 
-            PoolableObject obj = GameManager.Instance.PoolingManager.GetPooledObject(_currentBuilding.BuildingType.ToString());
+            PoolableObject obj = ObjectPoolingManager.GetPooledObject(_currentBuilding.BuildingType.ToString());
             obj.transform.position = transform.position;
             obj.transform.rotation = transform.rotation;
             obj.gameObject.SetActive(true);
@@ -157,7 +157,7 @@ namespace Buildings
 
             for (int i = 0; i < (int)FoliageType.Count; i++)
             {
-                List<PoolableObject> foliageObjects = GameManager.Instance.PoolingManager.GetAllActiveObjectsOfTypeWithinBoxCollider(collider, center, ((FoliageType)i).ToString());
+                List<PoolableObject> foliageObjects = ObjectPoolingManager.GetAllActiveObjectsOfTypeWithinBoxCollider(collider, center, ((FoliageType)i).ToString());
                 foreach (var objFoliage in foliageObjects)
                 {
                     objFoliage.gameObject.SetActive(false);

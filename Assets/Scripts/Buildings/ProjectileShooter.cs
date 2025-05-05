@@ -49,7 +49,7 @@ namespace Buildings
 					return;
 				}
 
-				Projectile proj = GameManager.Instance.PoolingManager.GetPooledObject(ProjectilePoolName, true).GetComponent<Projectile>();
+				Projectile proj = ObjectPoolingManager.GetPooledObject(ProjectilePoolName, true).GetComponent<Projectile>();
 				proj.gameObject.transform.position = transform.position;
 				proj.Damage = _damage;
 				proj.MoveSpeed = _moveSpeed;

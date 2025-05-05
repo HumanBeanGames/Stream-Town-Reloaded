@@ -137,7 +137,7 @@ namespace Managers
 				else
 					Debug.LogError("This should not be happening" + this);
 
-				List<PoolableObject> objs = GameManager.Instance.PoolingManager.GetAllActiveObjectsOfTypeWithinAABB(_startedSelectionPosition, _endedSelectionPosition, "Player");
+				List<PoolableObject> objs = ObjectPoolingManager.GetAllActiveObjectsOfTypeWithinAABB(_startedSelectionPosition, _endedSelectionPosition, "Player");
 				List<RoleHandler> roleHandlers = new List<RoleHandler>();
 				for (int i = 0; i < objs.Count; i++)
 				{

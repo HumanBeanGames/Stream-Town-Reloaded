@@ -4,49 +4,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils.Pooling;
 using Utils;
+using Sirenix.OdinInspector;
 
 namespace Managers
 {
 	/// <summary>
 	/// Manages the object pooling of all PooledObjects in the game.
 	/// </summary>
-	public class ObjectPoolingManager : MonoBehaviour
+	[GameManager]
+	public static class ObjectPoolingManager
 	{
-		[SerializeField]
-		private List<PooledObjectData> _objectsToPool;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static ObjectPoolingConfig Config = ObjectPoolingConfig.Instance;
 
-		public void AddToPool(string poolName, PoolableObject go)
+        private static List<PooledObjectData> _objectsToPool => Config.objectsToPool;
+
+        public static void AddToPool(string poolName, PoolableObject go)
 		{
 			_pooledObjects[poolName].Enqueue(go);
 		}
 
-		private Dictionary<string, Queue<PoolableObject>> _pooledObjects;
-		private Dictionary<string, List<PoolableObject>> _allObjects;
-		private Dictionary<string, GameObject> _poolParents;
-		private TimeSpan _poolingDuration;
+		[HideInInspector]
+        private static Dictionary<string, Queue<PoolableObject>> _pooledObjects;
+        [HideInInspector]
+        private static Dictionary<string, List<PoolableObject>> _allObjects;
+        [HideInInspector]
+        private static Dictionary<string, GameObject> _poolParents;
+        [HideInInspector]
+        private static TimeSpan _poolingDuration;
 
-		public TimeSpan PoolingDuration => _poolingDuration;
+        public static TimeSpan PoolingDuration => _poolingDuration;
 
-		/// <summary>
-		/// Starts the pooling process.
-		/// </summary>
-		public IEnumerator InitializePooling()
+
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            GameObject runnerObject = new GameObject("ObjectPoolingRunner");
+            Runner runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+        }
+
+        /// <summary>
+        /// Starts the pooling process.
+        /// </summary>
+        public static IEnumerator InitializePooling()
 		{
 			DateTime before = DateTime.Now;
-			yield return StartCoroutine(PoolObjectsCoroutine());
+			yield return runner.StartCoroutine(PoolObjectsCoroutine());
 			//PoolObjects();
 			DateTime after = DateTime.Now;
 			_poolingDuration = after.Subtract(before);
 			GameStateManager.NotifyObjectsPooled();
 		}
 
-		/// <summary>
-		/// Returns a pooled object by name
-		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="printWarning"></param>
-		/// <returns></returns>
-		public PoolableObject GetPooledObject(string name, bool printWarning = true)
+        /// <summary>
+        /// Returns a pooled object by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="printWarning"></param>
+        /// <returns></returns>
+        public static PoolableObject GetPooledObject(string name, bool printWarning = true)
 		{
 			if (!_pooledObjects.ContainsKey(name))
 			{
@@ -72,12 +93,12 @@ namespace Managers
 			return InstantiateNewObjectToPool(name);
 		}
 
-		/// <summary>
-		/// Returns a list of all active game objects of a given type.
-		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		public List<PoolableObject> GetAllActivePooledObjectsOfType(string name)
+        /// <summary>
+        /// Returns a list of all active game objects of a given type.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static List<PoolableObject> GetAllActivePooledObjectsOfType(string name)
 		{
 			if (!_allObjects.ContainsKey(name))
 			{
@@ -98,14 +119,14 @@ namespace Managers
 			return activeObjects;
 		}
 
-		public List<PoolableObject> GetAllActiveObjectsOfTypeWithinBoxCollider(BoxCollider collider, Vector3 center, string type)
+        public static List<PoolableObject> GetAllActiveObjectsOfTypeWithinBoxCollider(BoxCollider collider, Vector3 center, string type)
 		{
 			Vector3 startPosition = center + new Vector3(collider.size.x * 0.5f + 1, 0, collider.size.z * 0.5f + 1);
 			Vector3 endPosition = center - new Vector3(collider.size.x * 0.5f + 1, 0, collider.size.z * 0.5f + 1);
 			return GetAllActiveObjectsOfTypeWithinAABB(startPosition, endPosition, type);
 		}
 
-		public List<PoolableObject> GetAllActiveObjectsOfTypeWithinAABB(Vector3 startPosition, Vector3 endPosition, string type)
+        public static List<PoolableObject> GetAllActiveObjectsOfTypeWithinAABB(Vector3 startPosition, Vector3 endPosition, string type)
 		{
 			List<PoolableObject> activeObjects = new List<PoolableObject>();
 
@@ -122,28 +143,28 @@ namespace Managers
 		}
 
 
-		public List<PoolableObject> GetAllActivePooledObjectsOfType(SaveItem item)
+        public static List<PoolableObject> GetAllActivePooledObjectsOfType(SaveItem item)
 		{
 			return GetAllActivePooledObjectsOfType(item.ToString());
 		}
 
-		/// <summary>
-		/// Creates a new object by name and adds it to the existing pool.
-		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		private PoolableObject InstantiateNewObjectToPool(string name)
+        /// <summary>
+        /// Creates a new object by name and adds it to the existing pool.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        private static PoolableObject InstantiateNewObjectToPool(string name)
 		{
 			for (int i = 0; i < _objectsToPool.Count; i++)
 			{
 				if (_objectsToPool[i].Name == name)
 				{
-					GameObject obj = Instantiate(_objectsToPool[i].Prefab);
+					GameObject obj = GameObject.Instantiate(_objectsToPool[i].Prefab);
 					PoolableObject poolObj = null;
 					if (!obj.TryGetComponent(out poolObj))
 						poolObj = obj.AddComponent<PoolableObject>();
 
-					poolObj.Initialize(name, this);
+					poolObj.Initialize(name);
 					if (obj.TryGetComponent<RectTransform>(out RectTransform rt))
 					{
 						rt.SetParent(_poolParents[name].transform, false);
@@ -162,7 +183,7 @@ namespace Managers
 			return null;
 		}
 
-		private IEnumerator PoolObjectsCoroutine()
+        private static IEnumerator PoolObjectsCoroutine()
 		{
 			_pooledObjects = new Dictionary<string, Queue<PoolableObject>>();
 			_poolParents = new Dictionary<string, GameObject>();
@@ -183,14 +204,14 @@ namespace Managers
 
 				for (int j = 0; j < _objectsToPool[i].PoolAmount; j++)
 				{
-					GameObject obj = Instantiate(_objectsToPool[i].Prefab, new Vector3(-500, 0, -500), Quaternion.identity, parentObject.transform);
+					GameObject obj = GameObject.Instantiate(_objectsToPool[i].Prefab, new Vector3(-500, 0, -500), Quaternion.identity, parentObject.transform);
 					PoolableObject poolObj = obj.GetComponent<PoolableObject>();
 					if (poolObj == null)
 						poolObj = obj.AddComponent<PoolableObject>();
 					obj.name = objName + j;
 					//_pooledObjects[objName].Enqueue(poolObj);
 					_allObjects[objName].Add(poolObj);
-					poolObj.Initialize(objName, this);
+					poolObj.Initialize(objName);
 					obj.SetActive(false);
 
 				}
@@ -201,7 +222,7 @@ namespace Managers
 			}
 		}
 
-		public void SimplePoolObjects()
+        public static void SimplePoolObjects()
 		{
 			_pooledObjects = new Dictionary<string, Queue<PoolableObject>>();
 			_poolParents = new Dictionary<string, GameObject>();
@@ -221,21 +242,21 @@ namespace Managers
 
 				for (int j = 0; j < _objectsToPool[i].PoolAmount; j++)
 				{
-					GameObject obj = Instantiate(_objectsToPool[i].Prefab, new Vector3(-500, 0, -500), Quaternion.identity, parentObject.transform);
+					GameObject obj = GameObject.Instantiate(_objectsToPool[i].Prefab, new Vector3(-500, 0, -500), Quaternion.identity, parentObject.transform);
 					PoolableObject poolObj = obj.GetComponent<PoolableObject>();
 					if (poolObj == null)
 						poolObj = obj.AddComponent<PoolableObject>();
 					obj.name = objName + j;
 					//_pooledObjects[objName].Enqueue(poolObj);
 					_allObjects[objName].Add(poolObj);
-					poolObj.Initialize(objName, this);
+					poolObj.Initialize(objName);
 					obj.SetActive(false);
 
 				}
 			}
 		}
 
-		public void DisableObjectsInPool(string name)
+        public static void DisableObjectsInPool(string name)
 		{
 			List<PoolableObject> objects = GetAllActivePooledObjectsOfType(name);
 

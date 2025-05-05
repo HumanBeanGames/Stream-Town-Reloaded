@@ -33,8 +33,7 @@ public class SaplingViableTarget : MonoBehaviour
 
     private void SpawnTree()
     {
-        var pool = GameManager.Instance.PoolingManager;
-        GameObject tree = pool.GetPooledObject(treePoolName, false).gameObject;
+        GameObject tree = ObjectPoolingManager.GetPooledObject(treePoolName, false).gameObject;
         tree.transform.position = transform.position;
         tree.transform.rotation = Quaternion.identity;
         tree.SetActive(true);

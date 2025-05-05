@@ -24,8 +24,6 @@ namespace Utils.Pooling
 
 	public class PoolableObject : MonoBehaviour
 	{
-		private ObjectPoolingManager _poolingManager;
-
 		[SerializeField]
 		private string _poolName;
 		private object _saveableObject;
@@ -44,10 +42,9 @@ namespace Utils.Pooling
 			set { _poolName = value; }
 		}
 
-		public void Initialize(string name, ObjectPoolingManager poolingManager)
+		public void Initialize(string name)
 		{
 			_poolName = name;
-			_poolingManager = poolingManager;
 			SetupSaveableObject();
 		}
 
@@ -91,8 +88,7 @@ namespace Utils.Pooling
 			if (GameManager.Instance != null && GameManager.Instance.GUIDManager != null && _saveableObject != null && ((SaveableObject)_saveableObject).GUIDComponent !=null)
 				GameManager.Instance.GUIDManager.RemoveFromGUID(PoolType, ((SaveableObject)_saveableObject).GUIDComponent.GUID);
 
-			if (_poolingManager != null)
-				_poolingManager.AddToPool(_poolName, this);
+			ObjectPoolingManager.AddToPool(_poolName, this);
 		}
 	}
 }

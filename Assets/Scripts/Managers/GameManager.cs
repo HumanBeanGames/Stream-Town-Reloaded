@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private ObjectPoolingManager _poolingManager = null;
 		private BuildingManager _buildingManager = null;
 		private RoleManager _roleManager = null;
 		private DebugManager _debugManager = null;
@@ -93,7 +92,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public ObjectPoolingManager PoolingManager => _poolingManager;
 		public BuildingManager BuildingManager => _buildingManager;
 		public RoleManager RoleManager => _roleManager;
 		public DebugManager DebugManager => _debugManager;
@@ -166,7 +164,7 @@ namespace Managers
 			yield return new WaitForEndOfFrame();
 			_techTreeManager.InitializeTree();
 			GUIDManager.Initialize();   // Must happen before pooling manager
-			yield return StartCoroutine(PoolingManager.InitializePooling());
+			yield return StartCoroutine(ObjectPoolingManager.InitializePooling());
 			if (_metaData != null)
 			{
 				if (_metaData.LoadType == MetaData.LoadType.Generate)
@@ -191,9 +189,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _poolingManager))
-				Debug.LogError("ObjectPoolingManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _buildingManager))
 				Debug.LogError("BuildingManager not found on GameManager", this);
 
@@ -311,7 +306,7 @@ namespace Managers
 
 		private IEnumerator WorldStart()
 		{
-			yield return StartCoroutine(PoolingManager.InitializePooling());
+			yield return StartCoroutine(ObjectPoolingManager.InitializePooling());
 			yield return StartCoroutine(_proceduralWorldGen.TryGenerateWorld());
 		}
 

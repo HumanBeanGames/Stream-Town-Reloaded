@@ -48,7 +48,7 @@ namespace Enemies
 
 			Transform spawnTransform = GetRandomSpawnLocation();
 
-			PoolableObject obj = GameManager.Instance.PoolingManager.GetPooledObject(enemyName);
+			PoolableObject obj = ObjectPoolingManager.GetPooledObject(enemyName);
 			obj.transform.position = spawnTransform.position;
 			obj.transform.rotation = spawnTransform.rotation;
 			obj.gameObject.SetActive(true);

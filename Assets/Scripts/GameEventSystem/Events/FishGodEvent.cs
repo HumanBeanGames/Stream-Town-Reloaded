@@ -96,7 +96,7 @@ namespace GameEventSystem.Events
 
 		private void GetFishGodGameObject()
 		{
-			_fishGod = GameManager.Instance.PoolingManager.GetPooledObject("FishGod").gameObject;
+			_fishGod = ObjectPoolingManager.GetPooledObject("FishGod").gameObject;
 			_animator = _fishGod.GetComponentInChildren<Animator>();
 			_fishGod.transform.position = GameManager.Instance.GameEventManager.FishGodSpawn.position;
 			_fishGod.SetActive(true);

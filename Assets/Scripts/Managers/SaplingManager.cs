@@ -29,13 +29,11 @@ namespace Environment
 
         private List<Targetable> _treeTargets;
         private ResourceGenerationSettings _treeGenerationSettings;
-        private ObjectPoolingManager _poolingManager;
 
         private void Start()
         {
             //CacheTreeList();
             CacheTreeGenerationSettings();
-            _poolingManager = GameManager.Instance.PoolingManager;
         }
 
         private void Update()
@@ -166,7 +164,7 @@ namespace Environment
                 }
             }
 
-            GameObject sapling = _poolingManager.GetPooledObject(saplingLocationPrefab.name, false).gameObject;
+            GameObject sapling = ObjectPoolingManager.GetPooledObject(saplingLocationPrefab.name, false).gameObject;
             sapling.transform.position = spawnPoint;
             sapling.transform.rotation = Quaternion.identity;
             sapling.SetActive(true);

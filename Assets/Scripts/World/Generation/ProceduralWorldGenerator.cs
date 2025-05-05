@@ -164,14 +164,13 @@ namespace World.Generation
 		/// </summary>
 		private IEnumerator GeneratePooledObjects()
 		{
-			ObjectPoolingManager poolManager = GameManager.Instance.PoolingManager;
 			int seed = _generationSettings.Seed;
 			DateTime before = DateTime.Now;
 			DateTime after;
 			TimeSpan duration;
 
 			// Create townhall
-			PoolableObject th = GameManager.Instance.PoolingManager.GetPooledObject("Townhall");
+			PoolableObject th = ObjectPoolingManager.GetPooledObject("Townhall");
 			GameObject thObj = ((SaveableBuilding)th.SaveableObject).BuildingBase.gameObject;
 			thObj.transform.position = Vector3.zero;
 			thObj.SetActive(true);
@@ -183,7 +182,7 @@ namespace World.Generation
 				foreach (ResourceGenerationSettings settings in _resourceGenerationSettings)
 				{
 					before = DateTime.Now;
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.OnGroundCheckHeight);
+					GenerateFromSettings(settings, ref seed, WorldUtils.OnGroundCheckHeight);
 					after = DateTime.Now;
 					duration = after.Subtract(before);
 					Debug.Log($"Generating {settings.PoolName} took {duration.TotalMilliseconds}ms");
@@ -203,7 +202,7 @@ namespace World.Generation
 				foreach (ResourceGenerationSettings settings in _waterResourceGenerationSettings)
 				{
 					before = DateTime.Now;
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.OnShoreLineCheckHeight);
+					GenerateFromSettings(settings, ref seed, WorldUtils.OnShoreLineCheckHeight);
 					after = DateTime.Now;
 					duration = after.Subtract(before);
 					Debug.Log($"Generating {settings.PoolName} took {duration.TotalMilliseconds}ms");
@@ -215,7 +214,7 @@ namespace World.Generation
 				foreach (FoliageGenerationSettings settings in _foliageGenerationSettings)
 				{
 					before = DateTime.Now;
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.OnGroundCheckHeight);
+					GenerateFromSettings(settings, ref seed, WorldUtils.OnGroundCheckHeight);
 					after = DateTime.Now;
 					duration = after.Subtract(before);
 					Debug.Log($"Generating {settings.PoolNames[0]} took {duration.TotalMilliseconds}ms");
@@ -227,7 +226,7 @@ namespace World.Generation
 				foreach (FoliageGenerationSettings settings in _waterFoliageGenerationSettings)
 				{
 					before = DateTime.Now;
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.UnderWaterCheckHeight, false);
+					GenerateFromSettings(settings, ref seed, WorldUtils.UnderWaterCheckHeight, false);
 					after = DateTime.Now;
 					duration = after.Subtract(before);
 					Debug.Log($"Generating {settings.PoolNames[0]} took {duration.TotalMilliseconds}ms");
@@ -238,8 +237,7 @@ namespace World.Generation
 		public void MainMenuGenerateWorld()
 		{
 			WorldUtils.GroundLayerMask = LayerMask.GetMask("Ground");
-			ObjectPoolingManager poolManager = GetComponent<ObjectPoolingManager>();
-			poolManager.SimplePoolObjects();
+			ObjectPoolingManager.SimplePoolObjects();
 			int seed = _generationSettings.Seed;
 
 			// Generate all normal resources (trees, ore, etc).
@@ -247,7 +245,7 @@ namespace World.Generation
 			{
 				foreach (ResourceGenerationSettings settings in _resourceGenerationSettings)
 				{
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.OnGroundCheckHeight);
+					GenerateFromSettings(settings, ref seed, WorldUtils.OnGroundCheckHeight);
 				}
 			}
 
@@ -255,14 +253,14 @@ namespace World.Generation
 			if (_foliageGenerationSettings != null)
 				foreach (FoliageGenerationSettings settings in _foliageGenerationSettings)
 				{
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.OnGroundCheckHeight);
+					GenerateFromSettings(settings, ref seed, WorldUtils.OnGroundCheckHeight);
 				}
 
 			// Generate the underwater foliage (seaweed, corals, etc.).
 			if (_waterFoliageGenerationSettings != null)
 				foreach (FoliageGenerationSettings settings in _waterFoliageGenerationSettings)
 				{
-					GenerateFromSettings(settings, ref seed, poolManager, WorldUtils.UnderWaterCheckHeight, false);
+					GenerateFromSettings(settings, ref seed, WorldUtils.UnderWaterCheckHeight, false);
 				}
 		}
 
@@ -273,7 +271,7 @@ namespace World.Generation
 		/// <param name="seed"></param>
 		/// <param name="poolManager"></param>
 		/// <param name="comparisonLambda"></param>
-		private void GenerateFromSettings(GenerationSettings settings, ref int seed, ObjectPoolingManager poolManager, Func<Vector3, (bool, float)> comparisonLambda, bool useCollision = true)
+		private void GenerateFromSettings(GenerationSettings settings, ref int seed, Func<Vector3, (bool, float)> comparisonLambda, bool useCollision = true)
 		{
 			settings.Size = (_generationSettings.Size * (int)_xScale);
 			settings.Seed = ++seed;
@@ -307,7 +305,7 @@ namespace World.Generation
 								if (Physics.BoxCast(position + Vector3.up * 5, colSize, Vector3.down, Quaternion.identity, 10, _collisionMask))
 									continue;
 
-							PoolableObject obj = poolManager.GetPooledObject(settings.GetPoolName(), false);
+							PoolableObject obj = ObjectPoolingManager.GetPooledObject(settings.GetPoolName(), false);
 							obj.transform.position = position;
 							float randomRotation = UnityEngine.Random.Range(0, 4) * 90;
 							obj.transform.Rotate(Vector3.up, randomRotation);

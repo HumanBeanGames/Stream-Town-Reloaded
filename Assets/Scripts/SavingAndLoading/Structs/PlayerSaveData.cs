@@ -107,7 +107,7 @@ namespace SavingAndLoading.Structs
 			player.TwitchUser.GameUserType = GameUserType;
 			player.TwitchUser.IsBroadcaster = IsBroadcaster;
 
-			player.Character = manager.PoolingManager.GetPooledObject("Player").gameObject;
+			player.Character = ObjectPoolingManager.GetPooledObject("Player").gameObject;
 			player.HealthHandler = player.Character.GetComponent<HealthHandler>();
 			player.StationSensor = player.Character.GetComponent<StationSensor>();
 			player.TargetSensor = player.Character.GetComponent<TargetSensor>();
@@ -133,7 +133,7 @@ namespace SavingAndLoading.Structs
 					unlockedPets.Add((PetType)i, false);
 			}
 
-			PoolableObject petObj = GameManager.Instance.PoolingManager.GetPooledObject("Pet");
+			PoolableObject petObj = ObjectPoolingManager.GetPooledObject("Pet");
 			Pet pet = petObj.GetComponent<Pet>();
 
 			player.Pet = pet;
