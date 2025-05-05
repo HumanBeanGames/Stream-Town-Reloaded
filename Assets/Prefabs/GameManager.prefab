@@ -323,7 +323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2863939470258754367}
   - component: {fileID: 2863939470258754366}
-  - component: {fileID: 338911099239174879}
   - component: {fileID: 5537437500117303756}
   - component: {fileID: 4408755588161183605}
   - component: {fileID: 7816970333928150510}
@@ -384,21 +383,6 @@ MonoBehaviour:
   <BuildingsCostResources>k__BackingField: 1
   <PlayerRoleLimits>k__BackingField: 1
   <IgnoreTechUnlocks>k__BackingField: 0
---- !u!114 &338911099239174879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863939470258754337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 294bd42861e5afe499983d770546f7c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fishGodSpawn: {fileID: 842965844930578837}
-  _fallingFishVFX: {fileID: 0}
-  _logEvents: 1
 --- !u!114 &5537437500117303756
 MonoBehaviour:
   m_ObjectHideFlags: 0

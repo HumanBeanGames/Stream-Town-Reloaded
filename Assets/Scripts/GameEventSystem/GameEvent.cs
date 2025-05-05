@@ -66,8 +66,6 @@ namespace GameEventSystem
 		private bool _success;
 		private bool _active;
 
-		private GameEventManager _manager;
-
 		public double StartTime => _eventStartTime;
 		public double EventDuration => _eventDuration;
 		public EventType Event => _eventType;
@@ -86,7 +84,6 @@ namespace GameEventSystem
 			_data = data;
 			_overrideCurrentEvent = overrideCurrentEvent;
 			_timeout = timeout;
-			_manager = GameManager.Instance.GameEventManager;
 		}
 
 		/// <summary>

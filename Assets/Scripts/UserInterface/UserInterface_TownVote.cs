@@ -1,3 +1,4 @@
+using GameEventSystem;
 using GameEventSystem.Events.Voting;
 using Managers;
 using System;
@@ -48,7 +49,7 @@ namespace UserInterface
 
 		public void BroadcasterVote(int voteId)
 		{
-			((VoteEvent)GameManager.Instance.GameEventManager.CurrentEvent).Action(new PlayerVote(GameManager.Instance.UserPlayer, new VoteOption(voteId.ToString(), null)));
+			((VoteEvent)GameEventManager.CurrentEvent).Action(new PlayerVote(GameManager.Instance.UserPlayer, new VoteOption(voteId.ToString(), null)));
 			for (int i = 0; i < _techOptions.Count; i ++)
 			{
 				_techOptions[i].TechButton.onClick.RemoveAllListeners();

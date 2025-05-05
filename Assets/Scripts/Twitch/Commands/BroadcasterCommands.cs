@@ -1,4 +1,5 @@
 using Character;
+using GameEventSystem;
 using Managers;
 using System;
 using TwitchLib.Client.Events;
@@ -20,7 +21,7 @@ namespace Twitch.Commands
 			GameManager.Instance.CodeDisplay.text = "";
 			GameManager.Instance.ConnectPanel.SetActive(false);
 			TechTreeManager.StartCoroutine(TechTreeManager.DelayedSetup());
-			GameManager.Instance.GameEventManager.CanStartNewRulerVote = true;
+			GameEventManager.CanStartNewRulerVote = true;
 			if (GameManager.Instance.MetaDatas.LoadType == MetaData.LoadType.Generate || GameManager.Instance.MetaDatas.LoadType == MetaData.LoadType.Load && GameManager.Instance.UserPlayer == null)
 			{
                 PlayerCommands.TryCreatePlayer(e, out Player newPlayer);

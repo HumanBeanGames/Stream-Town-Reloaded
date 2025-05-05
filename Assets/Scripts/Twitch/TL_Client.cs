@@ -10,6 +10,7 @@ using Pets.Enumerations;
 using System;
 using UnityEngine.InputSystem;
 using GameEventSystem.Events;
+using GameEventSystem;
 
 namespace Twitch
 {
@@ -72,7 +73,7 @@ namespace Twitch
 			if (int.TryParse(e.RaidNotification.MsgParamViewerCount, out int viewerCount))
 			{
 				string[] enemies = new string[] { "Minotaur" };
-				GameManager.Instance.GameEventManager.AddEvent(new RaidEvent(0, 1200, enemies, boss: "MinotaurBoss", waves: 2, enemiesPerWave: viewerCount));
+				GameEventManager.AddEvent(new RaidEvent(0, 1200, enemies, boss: "MinotaurBoss", waves: 2, enemiesPerWave: viewerCount));
 			}
 		}
 

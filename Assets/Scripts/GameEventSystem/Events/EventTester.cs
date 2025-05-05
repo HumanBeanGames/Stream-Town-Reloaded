@@ -8,15 +8,11 @@ namespace GameEventSystem.Events
 {
 	public class EventTester : MonoBehaviour
 	{
-		private GameEventManager manager;
 		private bool _voteStarted = false;
-		private void Awake()
-		{
-			manager = GetComponent<GameEventManager>();
-		}
+
 		private void Update()
 		{
-			manager.ProcessEvents();
+			GameEventManager.ProcessEvents();
 			//Start vote
 			//if (Keyboard.current.oKey.wasReleasedThisFrame)
 			//{

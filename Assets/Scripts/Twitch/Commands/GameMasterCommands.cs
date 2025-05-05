@@ -107,7 +107,7 @@ namespace Twitch.Commands
         public static string StopCurrentEvent(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            var currentEvent = GameManager.Instance.GameEventManager.CurrentEvent;
+            var currentEvent = GameEventManager.CurrentEvent;
             if (currentEvent == null) return "No current event to stop.";
             currentEvent.Stop();
             return "Current event stopped.";
@@ -134,10 +134,10 @@ namespace Twitch.Commands
             switch (type)
             {
                 case GameEvent.EventType.FishGod:
-                    GameManager.Instance.GameEventManager.AddEvent(new FishGodEvent(0));
+                    GameEventManager.AddEvent(new FishGodEvent(0));
                     return "Queued FishGod Event.";
                 case GameEvent.EventType.MonsterRaid:
-                    GameManager.Instance.GameEventManager.AddEvent(new RaidEvent(0, 1200, new string[] { "Minotaur" }, boss: "MinotaurBoss"));
+                    GameEventManager.AddEvent(new RaidEvent(0, 1200, new string[] { "Minotaur" }, boss: "MinotaurBoss"));
                     return "Queued Monster Raid.";
                 default:
                     return "Invalid or unsupported event.";
@@ -172,7 +172,7 @@ namespace Twitch.Commands
         public static string ActionEvent(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            var ev = GameManager.Instance.GameEventManager.CurrentEvent;
+            var ev = GameEventManager.CurrentEvent;
             if (ev == null) return "No event to act on.";
             ev.Action();
             return "Event action triggered.";

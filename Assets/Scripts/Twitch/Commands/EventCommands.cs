@@ -42,21 +42,19 @@ namespace Twitch.Commands
 
 		public static void HandleFishGodEvent()
 		{
-			GameEventManager eventManager = GameManager.Instance.GameEventManager;
-
-			if(eventManager.CurrentEvent != null && eventManager.CurrentEvent.Event == GameEvent.EventType.FishGod)
+			if(GameEventManager.CurrentEvent != null && GameEventManager.CurrentEvent.Event == GameEvent.EventType.FishGod)
 			{
-				eventManager.CurrentEvent.Action();
+				GameEventManager.CurrentEvent.Action();
 				return;
 			}
 
-			if (eventManager.CurrentEvent != null)
+			if (GameEventManager.CurrentEvent != null)
 				return;
 
 			int rand = UnityEngine.Random.Range(0, 10);
 
 			if (rand == 0)
-				eventManager.AddEvent(new FishGodEvent(0));
+				GameEventManager.AddEvent(new FishGodEvent(0));
 		}
 	}
 }

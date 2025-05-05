@@ -1,4 +1,5 @@
 using Character;
+using GameEventSystem;
 using Managers;
 using UnityEngine;
 
@@ -16,12 +17,12 @@ namespace Twitch.Commands
 
             if (PlayerManager.Ruler == null)
             {
-                GameManager.Instance.GameEventManager.StartNewRulerVote();
+                GameEventManager.StartNewRulerVote();
                 return "Ruler vote started!";
             }
             else
             {
-                GameManager.Instance.GameEventManager.StartKeepRulerVote();
+                GameEventManager.StartKeepRulerVote();
                 return "Keep current ruler vote started!";
             }
         }

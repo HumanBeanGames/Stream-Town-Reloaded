@@ -184,7 +184,7 @@ namespace Managers
 
 			TechVote voteEvent = new TechVote(delay, 60, nodes);
 			voteEvent.EventEnded += OnTechVoteEnded;
-			GameManager.Instance.GameEventManager.AddEvent(voteEvent);
+			GameEventManager.AddEvent(voteEvent);
 		}
 
 		private static void OnTechVoteEnded(bool success, GameEvent.EventType type, object data)

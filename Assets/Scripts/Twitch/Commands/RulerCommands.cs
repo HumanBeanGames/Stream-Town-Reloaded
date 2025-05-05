@@ -1,4 +1,5 @@
 using Character;
+using GameEventSystem;
 using Managers;
 using System;
 using Twitch.Utils;
@@ -159,7 +160,7 @@ namespace Twitch.Commands
         public static string Resign(Player player)
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "Unauthorized.";
-            GameManager.Instance.GameEventManager.StartNewRulerVote();
+            GameEventManager.StartNewRulerVote();
             if (player.RoleHandler.TrySetRole(player.RoleHandler.PreviousRole, out string reason))
             {
                 PlayerManager.SetRuler(null);

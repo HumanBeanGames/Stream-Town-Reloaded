@@ -22,6 +22,7 @@ using Enemies;
 using Utils.Pooling;
 using SavingAndLoading.SavableObjects;
 using Target;
+using GameEventSystem;
 
 namespace SavingAndLoading
 {
@@ -289,7 +290,7 @@ namespace SavingAndLoading
 
 			worldSaveData.IsCurrentRuler = PlayerManager.Ruler == null ? false : true;
 
-			worldSaveData.TimeUntillNextRulerVote = GameManager.Instance.GameEventManager.TimeTillRulerVote;
+			worldSaveData.TimeUntillNextRulerVote = GameEventManager.TimeTillRulerVote;
 			if (worldSaveData.IsCurrentRuler)
 				worldSaveData.RulerName = PlayerManager.Ruler.TwitchUser.Username;
 
@@ -414,13 +415,13 @@ namespace SavingAndLoading
 			else
 				TechTreeManager.StartNewTechVote(20);
 
-			GameManager.Instance.GameEventManager.TimeTillRulerVote = worldData.TimeUntillNextRulerVote;
+			GameEventManager.TimeTillRulerVote = worldData.TimeUntillNextRulerVote;
 
 			// Sets ruler
 			if (worldData.IsCurrentRuler && PlayerManager.PlayerExistsByNameToLower(worldData.RulerName, out int index))
 				PlayerManager.SetRuler(PlayerManager.GetPlayer(index));
 			else
-				GameManager.Instance.GameEventManager.StartNewRulerVote();
+				GameEventManager.StartNewRulerVote();
 
 			// Force all buildings to update their graph bounds.
 			_generationObject.ScanWorld();

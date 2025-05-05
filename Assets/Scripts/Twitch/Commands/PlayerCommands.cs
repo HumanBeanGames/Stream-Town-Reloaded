@@ -1,4 +1,5 @@
 ﻿using Character;
+using GameEventSystem;
 using GameEventSystem.Events.Voting;
 using Managers;
 using Pets.Enumerations;
@@ -111,7 +112,7 @@ namespace Twitch.Commands
 
         public static string Vote(Player player, string command, params string[] args)
         {
-            var currentEvent = GameManager.Instance.GameEventManager.CurrentEvent;
+            var currentEvent = GameEventManager.CurrentEvent;
             if (currentEvent == null || !(currentEvent is VoteEvent voteEvent))
                 return "Failed - No Vote Active";
 

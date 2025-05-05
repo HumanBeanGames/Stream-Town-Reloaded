@@ -24,7 +24,6 @@ namespace GameEventSystem.Events
 		private UserInterface_Event _eventInterface;
 
 		protected StationMask _prevEnemyStationMask;
-		protected GameEventManager _eventManager;
 
 		protected bool _forceStop = false;
 
@@ -44,7 +43,6 @@ namespace GameEventSystem.Events
 			}
 
 			_eventInterface = GameManager.Instance.UIManager.EventInterface;
-			_eventManager = GameManager.Instance.GameEventManager;
 
 			_trackedEnemies = new List<Enemy>();
 		}
@@ -61,7 +59,7 @@ namespace GameEventSystem.Events
 			_eventInterface.TitleTMP.text = "Raid";
 			_eventInterface.DescriptionTMP.text = "";
 			_eventInterface.ActivateEventContainer();
-			GameManager.Instance.GameEventManager.StartCoroutine(HandleWaves());
+			GameEventManager.StartCoroutine(HandleWaves());
 
 			GameManager.Instance.EnemySpawner.CanSpawnEnemies = false;
 		}
@@ -69,7 +67,7 @@ namespace GameEventSystem.Events
 		protected override void OnStopped()
 		{
 			_forceStop = true;
-			GameManager.Instance.GameEventManager.StopCoroutine(HandleWaves());
+			GameEventManager.StopCoroutine(HandleWaves());
 
 			for (int i = _trackedEnemies.Count - 1; i >= 0; i--)
 			{

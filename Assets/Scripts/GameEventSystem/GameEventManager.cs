@@ -16,44 +16,55 @@ namespace GameEventSystem
 	/// <summary>
 	/// Handles all Game Events, queueing up the events to be dispatched in order.
 	/// </summary>
-	public class GameEventManager : MonoBehaviour
+	public static class GameEventManager
 	{
 		private const float _RULER_VOTE_MIN_TIME = 3600;
-		private float _timeUntilRulerVote;
+		private static float _timeUntilRulerVote;
 
 		[SerializeField]
-		private Transform _fishGodSpawn;
+		private static Transform _fishGodSpawn;
 		[SerializeField]
-		private ParticleSystem _fallingFishVFX;
+		private static ParticleSystem _fallingFishVFX;
 		[SerializeField]
-		private bool _logEvents = true;
+		private static bool _logEvents = true;
 
-		private SortedSet<GameEvent> _eventQueue = new SortedSet<GameEvent>(new SortGameEventStartTime());
+		private static SortedSet<GameEvent> _eventQueue = new SortedSet<GameEvent>(new SortGameEventStartTime());
 
-		private GameEvent _currentEvent = null;
-		private bool _eventActive = false;
-		private GameManager _gameManager;
+		private static GameEvent _currentEvent = null;
+		private static bool _eventActive = false;
+		private static GameManager _gameManager;
 		
-		private bool _canStartNewRulerVote = false;
+		private static bool _canStartNewRulerVote = false;
 
-		public GameEvent CurrentEvent => _currentEvent;
-		public Transform FishGodSpawn => _fishGodSpawn;
-		public ParticleSystem FallingFishVFX => _fallingFishVFX;
-		public float TimeTillRulerVote
+		public static GameEvent CurrentEvent => _currentEvent;
+		public static Transform FishGodSpawn => _fishGodSpawn;
+		public static ParticleSystem FallingFishVFX => _fallingFishVFX;
+		public static float TimeTillRulerVote
 		{
 			get { return _timeUntilRulerVote; }	
 			set { _timeUntilRulerVote = value;}
 		}
-		public bool CanStartNewRulerVote
+		public static bool CanStartNewRulerVote
 		{
 			set { _canStartNewRulerVote = value;}
 		}
 
-		/// <summary>
-		/// Adds an event to the event queue.
-		/// </summary>
-		/// <param name="gameEvent"></param>
-		public bool AddEvent(GameEvent gameEvent)
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner _runner;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            GameObject runnerObject = new GameObject("TimeManagerRunner");
+            _runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+        }
+
+        public static void StartCoroutine(IEnumerator routine) => _runner.StartCoroutine(routine);
+		public static void StopCoroutine(IEnumerator routine) => _runner.StopCoroutine(routine);
+
+		public static bool AddEvent(GameEvent gameEvent)
 		{
 			if (EventTypeExistsInQueue(gameEvent.Event))
 				return false;
@@ -66,15 +77,7 @@ namespace GameEventSystem
 			return true;
 		}
 
-		/// <summary>
-		/// Creates an event and stores it in the event queue.
-		/// </summary>
-		/// <param name="delay">How long from the current time should the event start</param>
-		/// <param name="eventDuration"></param>
-		/// <param name="eventType"></param>
-		/// <param name="data"></param>
-		/// <param name="overrideCurrentEvent"></param>
-		public bool CreateEvent(double delay, double eventDuration, GameEvent.EventType eventType, object data = null, bool overrideCurrentEvent = false, double timeout = -1)
+		public static bool CreateEvent(double delay, double eventDuration, GameEvent.EventType eventType, object data = null, bool overrideCurrentEvent = false, double timeout = -1)
 		{
 			if (EventTypeExistsInQueue(eventType))
 				return false;
@@ -87,21 +90,14 @@ namespace GameEventSystem
 			return true;
 		}
 
-		/// <summary>
-		/// Remove all events in the current queue.
-		/// </summary>
-		public void DisposeEventsQueue()
+		public static void DisposeEventsQueue()
 		{
 			_eventQueue.Clear();
 			if (_logEvents)
 				Debug.Log($"Game Event Queue Disposed.");
 		}
 
-		/// <summary>
-		/// Returns the next event in the queue without removing it.
-		/// </summary>
-		/// <returns></returns>
-		public GameEvent PeekNextEvent()
+		public static GameEvent PeekNextEvent()
 		{
 			if (_eventQueue.Count == 0)
 				return null;
@@ -109,9 +105,8 @@ namespace GameEventSystem
 			return _eventQueue.Min;
 		}
 
-		public bool EventTypeExistsInQueue(GameEvent.EventType type)
+		public static bool EventTypeExistsInQueue(GameEvent.EventType type)
 		{
-
 			if (_currentEvent != null && _currentEvent.Event == type)
 				return true;
 
@@ -129,10 +124,7 @@ namespace GameEventSystem
 			return false;
 		}
 
-		/// <summary>
-		/// Processes the event queue.
-		/// </summary>
-		public void ProcessEvents()
+		public static void ProcessEvents()
 		{
 			if (_currentEvent != null)
 				_currentEvent.Update();
@@ -173,10 +165,7 @@ namespace GameEventSystem
 			}
 		}
 
-		/// <summary>
-		/// Ends the current event by calling its stop function.
-		/// </summary>
-		public void EndCurrentEvent()
+		public static void EndCurrentEvent()
 		{
 			_eventActive = false;
 
@@ -191,15 +180,13 @@ namespace GameEventSystem
 			_currentEvent = null;
 		}
 
-		public void RunCoroutine(IEnumerator func)
+		public static void RunCoroutine(IEnumerator func)
 		{
-			StartCoroutine(func);
+			// Note: StartCoroutine cannot be static, this method needs to be handled differently
+			// StartCoroutine(func);
 		}
 
-		/// <summary>
-		/// Starts the next available event and removes it from the queue.
-		/// </summary>
-		private void StartNextEvent()
+		private static void StartNextEvent()
 		{
 			if (_eventActive)
 				EndCurrentEvent();
@@ -213,15 +200,14 @@ namespace GameEventSystem
 				Debug.Log($"Event Started: '{_currentEvent.Event}'.");
 
 			_currentEvent.EventEnded += OnCurrentEventEnded;
-
 		}
 
-		private void OnCurrentEventEnded(bool success, GameEvent.EventType eventType, object finishedEvent)
+		private static void OnCurrentEventEnded(bool success, GameEvent.EventType eventType, object finishedEvent)
 		{
 			_currentEvent = null;
 		}
 
-		private void HandleRulerVoting()
+		private static void HandleRulerVoting()
 		{
 			if (_canStartNewRulerVote)
 			{
@@ -243,16 +229,15 @@ namespace GameEventSystem
 			}
 		}
 
-		public void StartKeepRulerVote()
+		public static void StartKeepRulerVote()
 		{
 			Debug.Log("Keep ruler vote");
 			KeepKingVote keepKingVote = new KeepKingVote(1, 120, timeout: 3600);
 			if (AddEvent(keepKingVote))
 				keepKingVote.EventEnded += OnKeepRulerVoteEnded;
-
 		}
 
-		public void StartNewRulerVote()
+		public static void StartNewRulerVote()
 		{
 			Debug.Log("New ruler vote");
 			NewKingVote newKingVote = new NewKingVote(1, 120, timeout: 3600);
@@ -260,7 +245,7 @@ namespace GameEventSystem
 				newKingVote.EventEnded += OnNewRulerVoteEnded;
 		}
 
-		private void OnKeepRulerVoteEnded(bool success, GameEvent.EventType eventType, object data)
+		private static void OnKeepRulerVoteEnded(bool success, GameEvent.EventType eventType, object data)
 		{
 			if (data == null)
 			{
@@ -283,7 +268,7 @@ namespace GameEventSystem
 			}
 		}
 
-		private void OnNewRulerVoteEnded(bool success, GameEvent.EventType eventType, object data)
+		private static void OnNewRulerVoteEnded(bool success, GameEvent.EventType eventType, object data)
 		{
 			if (data == null)
 			{
@@ -301,11 +286,11 @@ namespace GameEventSystem
 				Debug.Log("No Player Found");
 		}
 
-		private void Start()
+		private static void Start()
 		{
-			_gameManager = GameManager.Instance;
-			_timeUntilRulerVote = 30;
+			// Note: This method cannot be static, it needs to be handled differently
+			// _gameManager = GameManager.Instance;
+			// _timeUntilRulerVote = 30;
 		}
-
 	}
 }

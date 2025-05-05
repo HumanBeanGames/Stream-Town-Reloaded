@@ -25,7 +25,7 @@ namespace GameEventSystem.Events
 
 		protected override void OnStarted()
 		{
-			GameManager.Instance.GameEventManager.FallingFishVFX.gameObject.SetActive(true);
+			GameEventManager.FallingFishVFX.gameObject.SetActive(true);
 			_eventInterface.Slider.gameObject.SetActive(true);
 			UpdateSlider();
 			_eventInterface.TitleTMP.text = "Fish God";
@@ -36,8 +36,8 @@ namespace GameEventSystem.Events
 		protected override void OnStopped()
 		{
 			_animator.SetTrigger("Exit");
-			GameManager.Instance.GameEventManager.StartCoroutine(DisableAfterTime());
-			GameManager.Instance.GameEventManager.FallingFishVFX.gameObject.SetActive(false);
+			GameEventManager.StartCoroutine(DisableAfterTime());
+			GameEventManager.FallingFishVFX.gameObject.SetActive(false);
 			_eventInterface.DeactivateEventContainer();
 
 			if (Success)
@@ -97,7 +97,7 @@ namespace GameEventSystem.Events
 		{
 			_fishGod = ObjectPoolingManager.GetPooledObject("FishGod").gameObject;
 			_animator = _fishGod.GetComponentInChildren<Animator>();
-			_fishGod.transform.position = GameManager.Instance.GameEventManager.FishGodSpawn.position;
+			_fishGod.transform.position = GameEventManager.FishGodSpawn.position;
 			_fishGod.SetActive(true);
 		}
 
