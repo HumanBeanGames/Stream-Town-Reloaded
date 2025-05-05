@@ -323,7 +323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2863939470258754367}
   - component: {fileID: 2863939470258754366}
-  - component: {fileID: 2863939470258754364}
   - component: {fileID: 2863939470258754362}
   - component: {fileID: 2863939470258754363}
   - component: {fileID: 4743046362108062370}
@@ -395,47 +394,6 @@ MonoBehaviour:
   <BuildingsCostResources>k__BackingField: 1
   <PlayerRoleLimits>k__BackingField: 1
   <IgnoreTechUnlocks>k__BackingField: 0
---- !u!114 &2863939470258754364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863939470258754337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5b55cf22fa07e48a4633be254e9858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetableData:
-  - TargetType: 1
-    UpdateType: 1
-  - TargetType: 2
-    UpdateType: 0
-  - TargetType: 4
-    UpdateType: 0
-  - TargetType: 8
-    UpdateType: 0
-  - TargetType: 16
-    UpdateType: 0
-  - TargetType: 32
-    UpdateType: 1
-  - TargetType: 64
-    UpdateType: 1
-  - TargetType: 128
-    UpdateType: 1
-  - TargetType: 256
-    UpdateType: 1
-  - TargetType: 512
-    UpdateType: 1
-  - TargetType: 1024
-    UpdateType: 1
-  - TargetType: 2048
-    UpdateType: 1
-  - TargetType: 4096
-    UpdateType: 1
-  - TargetType: 8192
-    UpdateType: 0
 --- !u!114 &2863939470258754362
 MonoBehaviour:
   m_ObjectHideFlags: 0

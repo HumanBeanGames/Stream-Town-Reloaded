@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using Target;
@@ -7,19 +8,24 @@ using Utils;
 namespace Managers
 {
 	//TODO:: Check if this is still required after BSP implementation
-	public class TargetManager : MonoBehaviour
+	[GameManager]
+	public static class TargetManager
 	{
-		[SerializeField]
-		private Dictionary<TargetMask, List<Targetable>> _targetDictionary = new Dictionary<TargetMask, List<Targetable>>();
-		[SerializeField]
-		private TargetableData[] _targetableData;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static TargetConfig Config = TargetConfig.Instance;
 
-		public StationUpdate GetUpdateType(TargetMask type)
+		[HideInInspector]
+        [SerializeField]
+		private static Dictionary<TargetMask, List<Targetable>> _targetDictionary = new Dictionary<TargetMask, List<Targetable>>();
+		[SerializeField]
+		private static TargetableData[] TargetableData => Config.targetableData;
+
+		public static StationUpdate GetUpdateType(TargetMask type)
 		{
-			return _targetableData[TargetFlagHelper.GetIndexByFlag(type)].UpdateType;
+			return TargetableData[TargetFlagHelper.GetIndexByFlag(type)].UpdateType;
 		}
 
-        public List<Targetable> GetSingleTargetList(TargetMask type)
+        public static List<Targetable> GetSingleTargetList(TargetMask type)
         {
             if (_targetDictionary.TryGetValue(type, out var list))
             {
@@ -36,7 +42,7 @@ namespace Managers
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public List<Targetable> GetTargetsByFlag(TargetMask flag)
+        public static List<Targetable> GetTargetsByFlag(TargetMask flag)
 		{
 			List<Targetable> targets = new List<Targetable>();
 
@@ -62,7 +68,7 @@ namespace Managers
 		/// Adds a target to the target dictionary
 		/// </summary>
 		/// <param name="target"></param>
-		public void AddTarget(Targetable target)
+		public static void AddTarget(Targetable target)
 		{
 			// Add to each flag type
 			foreach (int i in Enum.GetValues(typeof(TargetMask)))
@@ -84,7 +90,7 @@ namespace Managers
 		/// Removes a target from the target dictionary
 		/// </summary>
 		/// <param name="target"></param>
-		public void RemoveTarget(Targetable target)
+		public static void RemoveTarget(Targetable target)
 		{
 			foreach (int i in Enum.GetValues(typeof(TargetMask)))
 			{
@@ -105,7 +111,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="target"></param>
-		private void AddTarget(TargetMask type, Targetable target)
+		private static void AddTarget(TargetMask type, Targetable target)
 		{
 			if (!_targetDictionary.ContainsKey(type))
 				_targetDictionary[type] = new List<Targetable>();
@@ -121,7 +127,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="target"></param>
-		private void RemoveTarget(TargetMask type, Targetable target)
+		private static void RemoveTarget(TargetMask type, Targetable target)
 		{
 			if (!_targetDictionary.ContainsKey(type))
 				return;

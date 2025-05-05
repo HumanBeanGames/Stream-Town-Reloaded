@@ -31,8 +31,6 @@ namespace Sensors
 		[SerializeField]
 		private bool _attackAttacker = false;
 
-		private TargetManager _targetManager;
-
 		public Targetable CurrentTarget => _currentTarget;
 
 		private Targetable _previousTarget = null;
@@ -244,7 +242,6 @@ namespace Sensors
 
 		private void Start()
 		{
-			_targetManager = GameManager.Instance.TargetManager;
 			UpdateTarget = true;
 
 			if (TryGetComponent(out HealthHandler h))

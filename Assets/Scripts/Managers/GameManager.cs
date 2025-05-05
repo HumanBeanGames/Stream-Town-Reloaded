@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private TargetManager _targetManager = null;
 		private TownResourceManager _townResourceManager = null;
 		private StationManager _stationManager = null;
 		private CellSpacePartitioning _cellPartitionGrid = null;
@@ -97,7 +96,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public TargetManager TargetManager => _targetManager;
 		public TownResourceManager TownResourceManager => _townResourceManager;
 		public StationManager StationManager => _stationManager;
 		public CellSpacePartitioning CellPartitionGrid => _cellPartitionGrid;
@@ -199,9 +197,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _targetManager))
-				Debug.LogError("TargetManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _townResourceManager))
 				Debug.LogError("TownResourceManager not found on GameManager", this);
 
