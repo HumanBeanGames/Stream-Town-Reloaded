@@ -15,7 +15,6 @@ namespace STStateMachine.Helpers
 		private STSM_Action_DepositResource _depositState;
 		private RoleHandler _roleHandler;
 		private StationSensor _stationSensor;
-		private TownResourceManager _townResourceManager;
 		private STSM_Idle_Player _idle;
 
 		public override void Init()
@@ -25,13 +24,12 @@ namespace STStateMachine.Helpers
 			_roleHandler = GetComponent<RoleHandler>();
 			_stationSensor = GetComponent<StationSensor>();
 			_idle = (STSM_Idle_Player)_stateMachine.GetStateByName("Idle");
-			_townResourceManager = GameManager.Instance.TownResourceManager;
 		}
 
 		public override void InvokeHelper()
 		{
 			// If the resources are already full, swap to idle and reset position.
-			if (_townResourceManager.ResourceFull(_roleHandler.RoleData_SO.Resource))
+			if (TownResourceManager.ResourceFull(_roleHandler.RoleData_SO.Resource))
 			{
 				_goToState.SetNextState(_idle);
 				_goToState.UsePosition = true;

@@ -39,8 +39,6 @@ namespace Buildings
 		/// </summary>
 		private int _totalAmount = 0;
 
-		// Required Components.
-		private TownResourceManager _resourceManager => GameManager.Instance.TownResourceManager;
 		private LevelHandler _levelHandler;
 		// Properties.
 		public Resource ResourceType => _resource;
@@ -59,8 +57,8 @@ namespace Buildings
 		public void AddBaseStorage()
 		{
 			//int amount = _baseAmount;
-			//amount += (int)(amount * (_resourceManager.ResourceBoostValues[_resource] / 100.0f));
-			//_resourceManager.IncreaseStorage(_resource, amount);
+			//amount += (int)(amount * (TownResourceManager.ResourceBoostValues[_resource] / 100.0f));
+			//TownResourceManager.IncreaseStorage(_resource, amount);
 			//_totalAmount += amount;
 			RecalculateStorageAmount();
 		}
@@ -70,7 +68,7 @@ namespace Buildings
 		/// </summary>
 		public void RemoveTotalStorage()
 		{
-			_resourceManager.ReduceStorage(_resource, _totalAmount);
+			TownResourceManager.ReduceStorage(_resource, _totalAmount);
 			_totalAmount = 0;
 		}
 
@@ -80,9 +78,9 @@ namespace Buildings
 				_levelHandler = GetComponent<LevelHandler>();
 
 			int amount = _levelHandler.Level <= 1 ? _baseAmount : _incrementAmount * (int)(_levelHandler.Level * _incrementMultiPerLevel);
-			amount += (int)(amount * (_resourceManager.ResourceBoostValues[_resource] / 100.0f));
+			amount += (int)(amount * (TownResourceManager.ResourceBoostValues[_resource] / 100.0f));
 			RemoveTotalStorage();
-			_resourceManager.IncreaseStorage(_resource, amount);
+			TownResourceManager.IncreaseStorage(_resource, amount);
 			_totalAmount = amount;
 		}
 
@@ -104,8 +102,7 @@ namespace Buildings
 		/// </summary>
 		private void OnDisable()
 		{
-			if (_resourceManager != null)
-				RemoveTotalStorage();
+			RemoveTotalStorage();
 
 			GameManager.Instance.TechTreeManager.OnStorageBoostUnlocked -= OnResourceStorageIncreased;
 		}

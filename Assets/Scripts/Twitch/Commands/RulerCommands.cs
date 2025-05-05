@@ -60,10 +60,10 @@ namespace Twitch.Commands
             int successCount = 0;
             for (int i = 0; i < amount; i++)
             {
-                if (RoleManager.SlotsFull(role) || GameManager.Instance.TownResourceManager.ResourceFull(Resource.Recruit)) break;
+                if (RoleManager.SlotsFull(role) || TownResourceManager.ResourceFull(Resource.Recruit)) break;
                 Player recruit = new Player(new TwitchUser($"{UnityEngine.Random.Range(int.MinValue, 0)}", $""), true);
                 PlayerManager.AddNewPlayer(recruit, role);
-                GameManager.Instance.TownResourceManager.AddResource(Resource.Recruit, 1);
+                TownResourceManager.AddResource(Resource.Recruit, 1);
                 successCount++;
             }
             return successCount > 0 ? $"Recruited {successCount} {role}(s)." : "Failed to recruit any NPCs.";

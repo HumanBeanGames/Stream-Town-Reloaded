@@ -18,7 +18,6 @@ namespace UserInterface
 		private Color _positiveColor = Color.green;
 		[SerializeField]
 		private Color _negativeColor = Color.red;
-		private TownResourceManager _resourceManager;
 
 		/// <summary>
 		/// Called when a resource amount has changed and updates the text accordingly.
@@ -30,25 +29,23 @@ namespace UserInterface
 		{
 			return;
 
-			//int rateOfChange = _resourceManager.RateOfChangeForResource(resource);
+			//int rateOfChange = TownResourceManager.RateOfChangeForResource(resource);
 			//bool positiveROC = rateOfChange >= 0;
 
 			//Color toUse = positiveROC ? _positiveColor : _negativeColor;
 			//string rateOfChangeString = $"<color=#{ColorUtility.ToHtmlStringRGBA(toUse)}>" + (positiveROC ? " + " : "-") + $"{StringUtils.GetShortenedNumberAsString(rateOfChange * 60)}/h</color>";
 			//if ((int)resource - 1 >= _resourceTMPs.Length)
 			//	return;
-			//_resourceTMPs[(int)resource - 1].text = $"{_resourceManager.ResourcePrint(resource)} {rateOfChangeString}";
+			//_resourceTMPs[(int)resource - 1].text = $"{TownResourceManager.ResourcePrint(resource)} {rateOfChangeString}";
 		}
 
 		private void Start()
 		{
-			_resourceManager = GameManager.Instance.TownResourceManager;
-
-			_resourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
+			TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
 
 			for (int i = 1; i < (int)Resource.Count-1; i++)
 			{
-				_resourceManager.OnAnyResourceChangeEvent?.Invoke((Utils.Resource)i, 0, false);
+				TownResourceManager.OnAnyResourceChangeEvent?.Invoke((Utils.Resource)i, 0, false);
 			}
 		}
 	}

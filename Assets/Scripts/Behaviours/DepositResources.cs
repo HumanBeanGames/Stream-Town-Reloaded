@@ -16,7 +16,7 @@ namespace Behaviours
 		/// <param name="amount"></param>
 		public void Deposit(Utils.Resource type, int amount)
 		{
-			GameManager.Instance.TownResourceManager.AddResource(type, amount);
+			TownResourceManager.AddResource(type, amount);
 		}
 	}
 }

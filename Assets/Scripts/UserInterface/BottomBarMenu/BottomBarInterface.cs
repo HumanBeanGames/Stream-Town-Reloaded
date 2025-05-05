@@ -105,7 +105,7 @@ namespace UserInterface.BottomBarMenu
 					break;
 				case BottomBarContext.RecruitMenu:
 					ShowRecruitMenu();
-					GameManager.Instance.TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnRecruitAdded);
+					TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnRecruitAdded);
 					break;
 				case BottomBarContext.TechTreeMenu:
 					break;
@@ -123,7 +123,7 @@ namespace UserInterface.BottomBarMenu
 					break;
 				case BottomBarContext.RecruitMenu:
 					HideContextMenu();
-					GameManager.Instance.TownResourceManager.OnAnyResourceChangeEvent.RemoveListener(OnRecruitAdded);
+					TownResourceManager.OnAnyResourceChangeEvent.RemoveListener(OnRecruitAdded);
 					break;
 				case BottomBarContext.TechTreeMenu:
 					break;
@@ -199,7 +199,7 @@ namespace UserInterface.BottomBarMenu
 				if (rm.GetMaxSlots(_roleButtons[i].Item1) > 0 || rm.RoleIsInfinite(_roleButtons[i].Item1))
 					availableButtons.Add(_roleButtons[i].Item2);
 
-				if (rm.SlotsFull(_roleButtons[i].Item1) || GameManager.Instance.TownResourceManager.ResourceFull(Resource.Recruit))
+				if (rm.SlotsFull(_roleButtons[i].Item1) || TownResourceManager.ResourceFull(Resource.Recruit))
 					_roleButtons[i].Item2.GetComponentInChildren<Button>().interactable = false;
 				else
 					_roleButtons[i].Item2.GetComponentInChildren<Button>().interactable = true;
@@ -327,18 +327,18 @@ namespace UserInterface.BottomBarMenu
 				buttonList.Add(_roleButtons[i].Item2.GetComponentInChildren<Button>());
 			}
 
-			if (GameManager.Instance.TownResourceManager.ResourceFull(Resource.Recruit))
+			if (TownResourceManager.ResourceFull(Resource.Recruit))
 				for (int i = 0; i < buttonList.Count; i++)
 					buttonList[i].interactable = false;
 
 			RoleManager rm = GameManager.Instance.RoleManager;
-			if (rm.SlotsFull(role) || GameManager.Instance.TownResourceManager.ResourceFull(Resource.Recruit))
+			if (rm.SlotsFull(role) || TownResourceManager.ResourceFull(Resource.Recruit))
 				return;
 
 			Player recruit = new Player(new TwitchUser($"{-UnityEngine.Random.Range(int.MinValue, 0)}", $""), true);
 			GameManager.Instance.PlayerManager.AddNewPlayer(recruit, role);
 
-			if (GameManager.Instance.TownResourceManager.ResourceFull(Resource.Recruit))
+			if (TownResourceManager.ResourceFull(Resource.Recruit))
 			{
 				for (int i = 0; i < buttonList.Count; i++)
 					buttonList[i].interactable = false;

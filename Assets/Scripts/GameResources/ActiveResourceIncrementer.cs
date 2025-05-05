@@ -14,20 +14,12 @@ namespace GameResources
 		[SerializeField]
 		protected int _amount;
 
-		protected TownResourceManager _resourceManager;
-
 		/// <summary>
 		/// Increments the town resources of the specified type by the amount set.
 		/// </summary>
 		public void Increment()
 		{
-			_resourceManager.AddResource(_resource, _amount);
-		}
-
-		// Unity Events.
-		private void Awake()
-		{
-			_resourceManager = GameManager.Instance.TownResourceManager;
+			TownResourceManager.AddResource(_resource, _amount);
 		}
 	}
 }

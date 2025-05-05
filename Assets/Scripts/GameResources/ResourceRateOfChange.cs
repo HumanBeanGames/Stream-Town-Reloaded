@@ -1,108 +1,125 @@
-using DataStructures;
-using Managers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using Managers;
+using DataStructures;
+using Sirenix.OdinInspector;
+using Character;
 
 namespace GameResources
 {
-	/// <summary>
-	/// Used for calculating the rate of change of a resource.
-	/// </summary>
-	public class ResourceRateOfChange
-	{
-		private Queue<ChangeTimeStamp> _timestampData = new Queue<ChangeTimeStamp>();
-		private int _averageOverTime;
-		private float _timePeriod;
-		private float _updateRate;
-		private float _updateTimer;
-		private Utils.Resource _resourceType;
-		private int _changeDuringPeriod;
+    /// <summary>
+    /// Used for calculating the rate of change of a resource.
+    /// </summary>
+    [CreateAssetMenu(menuName = "Game Resources/Resource Rate Of Change", fileName = "NewResourceRateOfChange")]
+    public class ResourceRateOfChange : SerializedScriptableObject
+    {
+        [SerializeField] private Resource _resourceType;
+        [SerializeField] private float _timePeriod = 60f;
+        [SerializeField] private float _updateRate = 5f;
 
-		public int AverageOverTime => _averageOverTime;
+        private Queue<ChangeTimeStamp> _timestampData = new Queue<ChangeTimeStamp>();
+        private float _updateTimer = 0f;
+        private int _changeDuringPeriod = 0;
 
-		// Constructor.
-		public ResourceRateOfChange(Utils.Resource resourceType, float timePeriod, float updateRate, TownResourceManager resourceManager)
-		{
-			_timePeriod = timePeriod;
-			_updateRate = updateRate;
-			_resourceType = resourceType;
-			// Subscribe to resource change event
-			resourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
-		}
+        [NonSerialized] private int _averageOverTime;
+        public int AverageOverTime => _averageOverTime;
 
-		/// <summary>
-		/// Processes a queue and calculates rate of change for town resources.
-		/// </summary>
-		public void ProcessQueue()
-		{
-			_updateTimer += Time.deltaTime;
+        /// <summary>
+        /// Called by Unity when the ScriptableObject is enabled (e.g., loaded or instantiated).
+        /// </summary>
+        private void OnEnable()
+        {
+            TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
+        }
 
-			// Return if not enough time has elapsed.
-			if (_updateTimer < _updateRate)
-				return;
+        /// <summary>
+        /// Called by Unity when the ScriptableObject is disabled or destroyed.
+        /// </summary>
+        private void OnDisable()
+        {
+            TownResourceManager.OnAnyResourceChangeEvent.RemoveListener(OnResourceChange);
+        }
 
-			_updateTimer -= _updateRate;
+        /// <summary>
+        /// Optional initialization if created at runtime.
+        /// </summary>
+        public void Init(Resource resourceType, float timePeriod, float updateRate)
+        {
+            _resourceType = resourceType;
+            _timePeriod = timePeriod;
+            _updateRate = updateRate;
+        }
 
-			// Add change to queue and reset changeDuringPeriod
-			// Get the current time.
-			System.DateTime now = System.DateTime.UtcNow;
-			_timestampData.Enqueue(new ChangeTimeStamp(now, _changeDuringPeriod));
-			_changeDuringPeriod = 0;
+        /// <summary>
+        /// Processes a queue and calculates rate of change for town resources.
+        /// </summary>
+        public void ProcessQueue()
+        {
+            _updateTimer += Time.deltaTime;
 
-			//int accumlative = 0;
-			List<float> medianAmounts = new List<float>();
+            if (_updateTimer < _updateRate)
+                return;
 
-			// Loop through all timestamps and calculate the rate of change.
-			for (int i = _timestampData.Count - 1; i >= 0; i--)
-			{
-				ChangeTimeStamp cts = _timestampData.Dequeue();
-				double timeDifference = (now - cts.TimeStamp).TotalSeconds;
+            _updateTimer -= _updateRate;
 
-				if (timeDifference < _timePeriod)
-				{
-					medianAmounts.Add(cts.Change);
-					_timestampData.Enqueue(cts);
-				}
-			}
+            DateTime now = DateTime.UtcNow;
+            _timestampData.Enqueue(new ChangeTimeStamp(now, _changeDuringPeriod));
+            _changeDuringPeriod = 0;
 
-			if (medianAmounts.Count < 10)
-				return;
+            List<float> medianAmounts = new List<float>();
 
-			int half = medianAmounts.Count / 2;
-			List<float> plottedPoints = new List<float>();
-			for (int i = 2; i < medianAmounts.Count - 3; i++)
-			{
-				plottedPoints.Add((medianAmounts[i - 2] + medianAmounts[i - 1] + medianAmounts[i] + medianAmounts[i + 1] + medianAmounts[i + 2]) / 5.0f);
-			}
+            int count = _timestampData.Count;
+            for (int i = 0; i < count; i++)
+            {
+                ChangeTimeStamp cts = _timestampData.Dequeue();
+                double timeDifference = (now - cts.TimeStamp).TotalSeconds;
 
-			float movingMean = 0;
+                if (timeDifference < _timePeriod)
+                    medianAmounts.Add(cts.Change);
 
-			for (int i = 0; i < plottedPoints.Count; i++)
-			{
-				movingMean += plottedPoints[i];
-			}
+                _timestampData.Enqueue(cts);
+            }
 
-			movingMean /= plottedPoints.Count;
+            if (medianAmounts.Count < 10)
+                return;
 
-			_averageOverTime = (int)(movingMean * 60 * 60);
-		}
+            List<float> plottedPoints = new List<float>();
+            for (int i = 2; i < medianAmounts.Count - 2; i++)
+            {
+                float avg = (medianAmounts[i - 2] + medianAmounts[i - 1] + medianAmounts[i] + medianAmounts[i + 1] + medianAmounts[i + 2]) / 5f;
+                plottedPoints.Add(avg);
+            }
 
-		/// <summary>
-		/// Called when a town resource value changes and enqueues the rate of change to be calculated.
-		/// </summary>
-		/// <param name="resource"></param>
-		/// <param name="amount"></param>
-		/// <param name="purchase"></param>
-		private void OnResourceChange(Utils.Resource resource, int amount, bool purchase)
-		{
-			// If it was a purchase, we don't want to calculate the rate of change as it messes up the data.
-			if (resource != _resourceType || purchase)
-				return;
+            float movingMean = 0;
+            foreach (var point in plottedPoints)
+                movingMean += point;
 
-			_changeDuringPeriod += amount;
-			//System.DateTime dateTime = System.DateTime.UtcNow;
-			//_timestampData.Enqueue(new ChangeTimeStamp(dateTime, amount));
-		}
-	}
+            movingMean /= plottedPoints.Count;
+
+            _averageOverTime = Mathf.RoundToInt(movingMean * 60f * 60f);
+        }
+
+        /// <summary>
+        /// Called when a town resource value changes.
+        /// </summary>
+        private void OnResourceChange(Resource resource, int amount, bool purchase)
+        {
+            if (resource != _resourceType || purchase)
+                return;
+
+            _changeDuringPeriod += amount;
+        }
+
+        /// <summary>
+        /// Creates and initializes a new ResourceInventory ScriptableObject instance.
+        /// </summary>
+        public static ResourceRateOfChange CreateRROC(Resource resourceType, float timePeriod, float updateRate)
+        {
+            var rroc = ScriptableObject.CreateInstance<ResourceRateOfChange>();
+            rroc.Init(resourceType, timePeriod, updateRate);
+            return rroc;
+        }
+    }
 }

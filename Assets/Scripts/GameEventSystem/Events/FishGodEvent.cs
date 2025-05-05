@@ -42,7 +42,7 @@ namespace GameEventSystem.Events
 
 			if (Success)
 			{
-				GameManager.Instance.TownResourceManager.AddResource(Utils.Resource.Food, 1000, true);
+				TownResourceManager.AddResource(Utils.Resource.Food, 1000, true);
 
 				// Try to give a player a fish pet if roll hits
 				int roll = Random.Range(0, 100);

@@ -257,10 +257,10 @@ namespace SavingAndLoading
 		private WorldSaveData GetWorldData()
 		{
 			WorldSaveData worldSaveData = new WorldSaveData();
-			worldSaveData.WoodResourceAmount = GameManager.Instance.TownResourceManager.GetResourceAmount(Resource.Wood);
-			worldSaveData.OreResourceAmount = GameManager.Instance.TownResourceManager.GetResourceAmount(Resource.Ore);
-			worldSaveData.GoldResourceAmount = GameManager.Instance.TownResourceManager.GetResourceAmount(Resource.Gold);
-			worldSaveData.FoodResourceAmount = GameManager.Instance.TownResourceManager.GetResourceAmount(Resource.Food);
+			worldSaveData.WoodResourceAmount = TownResourceManager.GetResourceAmount(Resource.Wood);
+			worldSaveData.OreResourceAmount = TownResourceManager.GetResourceAmount(Resource.Ore);
+			worldSaveData.GoldResourceAmount = TownResourceManager.GetResourceAmount(Resource.Gold);
+			worldSaveData.FoodResourceAmount = TownResourceManager.GetResourceAmount(Resource.Food);
 			worldSaveData.WorldAgeInSeconds = TimeManager.WorldTimePassed;
 
 
@@ -398,10 +398,10 @@ namespace SavingAndLoading
 			//}
 
 			//Load worldSaveData
-			GameManager.Instance.TownResourceManager.SetResourceAmount(Resource.Wood, worldData.WoodResourceAmount);
-			GameManager.Instance.TownResourceManager.SetResourceAmount(Resource.Ore, worldData.OreResourceAmount);
-			GameManager.Instance.TownResourceManager.SetResourceAmount(Resource.Food, worldData.FoodResourceAmount);
-			GameManager.Instance.TownResourceManager.SetResourceAmount(Resource.Gold, worldData.GoldResourceAmount);
+			TownResourceManager.SetResourceAmount(Resource.Wood, worldData.WoodResourceAmount);
+			TownResourceManager.SetResourceAmount(Resource.Ore, worldData.OreResourceAmount);
+			TownResourceManager.SetResourceAmount(Resource.Food, worldData.FoodResourceAmount);
+			TownResourceManager.SetResourceAmount(Resource.Gold, worldData.GoldResourceAmount);
 			TimeManager.WorldTimePassed = worldData.WorldAgeInSeconds;
 			TimeManager.CalculateDayCount();
 			SeasonManager.SetSeasonByTimePassed();

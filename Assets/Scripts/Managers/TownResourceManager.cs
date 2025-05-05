@@ -4,57 +4,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 using UnityEngine.Events;
-using System;
+using System.Collections;
+using Sirenix.OdinInspector;
+using UnityEditor;
+using Events;
 
 namespace Managers
 {
 	/// <summary>
 	/// Managers all the resources for the town.
 	/// </summary>
-	public class TownResourceManager : MonoBehaviour
+	[GameManager]
+	public static class TownResourceManager
 	{
-		/// <summary>
-		/// How long to store the value of a resource at a given time, used in rate of change.
-		/// </summary>
-		public const float RESOURCE_RATE_TIME_PERIOD = 25;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static TownResourceConfig Config = TownResourceConfig.Instance;
 
-		/// <summary>
-		/// How frequenly should the rate of change be updated.
-		/// </summary>
-		public const float RESOURCE_UPDATE_RATE = 1;
+        /// <summary>
+        /// How long to store the value of a resource at a given time, used in rate of change.
+        /// </summary>
+        public static float RESOURCE_RATE_TIME_PERIOD => Config.RESOURCE_RATE_TIME_PERIOD;
 
-		/// <summary>
-		/// Current resources in the town, including max amounts.
-		/// </summary>
-		[SerializeField]
-		private Dictionary<Resource, ResourceInventory> _resources = new Dictionary<Resource, ResourceInventory>();
+        /// <summary>
+        /// How frequenly should the rate of change be updated.
+        /// </summary>
+        public static float RESOURCE_UPDATE_RATE=> Config.RESOURCE_UPDATE_RATE;
+
+        /// <summary>
+        /// Current resources in the town, including max amounts.
+        /// </summary>
+        [SerializeField]
+		private static Dictionary<Resource, ResourceInventory> _resources => Config.resources;
+
+        [SerializeField]
+        /// <summary>
+        /// Holds all rate of change data for all town resources.
+        /// </summary>
+        private static Dictionary<Resource, ResourceRateOfChange> _resourceRatesOfChange => Config.resourcesRateOfChange;
 
 		/// <summary>
 		/// A lookup table for each resource that get invoked when that resource amount has changed.
 		/// </summary>
-		private Dictionary<Resource, UnityEvent<StorageStatus>> _onResourceChangeEventDict = new Dictionary<Resource, UnityEvent<StorageStatus>>();
+		private static Dictionary<Resource, StorageStatusEventSO> _onResourceChangeEventDict => Config.onResourceChangeEventDict;
 
 		/// <summary>
 		/// Called when any resource amount has changed.
 		/// </summary>
-		private UnityEvent<Resource, int, bool> _onAnyResourceChangeEvent = new UnityEvent<Resource, int, bool>();
+		[HideInInspector]
+		private static UnityEvent<Resource, int, bool> _onAnyResourceChangeEvent = new UnityEvent<Resource, int, bool>();
 
-		public UnityEvent<Resource, int, bool> OnAnyResourceChangeEvent => _onAnyResourceChangeEvent;
-		/// <summary>
-		/// Holds all rate of change data for all town resources.
-		/// </summary>
-		private Dictionary<Resource, ResourceRateOfChange> _resourceRatesOfChange = new Dictionary<Resource, ResourceRateOfChange>();
+		public static UnityEvent<Resource, int, bool> OnAnyResourceChangeEvent => _onAnyResourceChangeEvent;
 
-
-
-		public Dictionary<Resource, int> ResourceBoostValues = new Dictionary<Resource, int>();
+		public static Dictionary<Resource, int> ResourceBoostValues => Config.resourceBoostValues;
 
 		/// <summary>
 		/// Returns a reference to the event called when a specific type of resource count changes.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public UnityEvent<StorageStatus> GetResourceChangeEvent(Resource type)
+		public static UnityEvent<StorageStatus> GetResourceChangeEvent(Resource type)
 		{
 			return _onResourceChangeEventDict[type];
 		}
@@ -64,7 +72,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="resourceType"></param>
 		/// <returns></returns>
-		public int GetResourceAmount(Resource resourceType)
+		public static int GetResourceAmount(Resource resourceType)
 		{
 			return _resources[resourceType].Amount;
 		}
@@ -74,7 +82,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="resourceType"></param>
 		/// <param name="resourceAmount"></param>
-		public void SetResourceAmount(Resource resourceType, int resourceAmount)
+		public static void SetResourceAmount(Resource resourceType, int resourceAmount)
 		{
 			_resources[resourceType].Amount = resourceAmount;
 		}
@@ -85,7 +93,7 @@ namespace Managers
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
 		/// <param name="purchase"></param>
-		public void AddResource(Resource type, int amount, bool purchase = false)
+		public static void AddResource(Resource type, int amount, bool purchase = false)
 		{
 			_resources[type].Amount += amount;
 			ResourceChanged(type, amount, purchase);
@@ -100,7 +108,7 @@ namespace Managers
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
 		/// <param name="purchase"></param>
-		public void RemoveResource(Resource type, int amount, bool purchase = false)
+		public static void RemoveResource(Resource type, int amount, bool purchase = false)
 		{
 			_resources[type].Amount -= amount;
 			ResourceChanged(type, -amount, purchase);
@@ -111,7 +119,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public bool ResourceFull(Resource type)
+		public static bool ResourceFull(Resource type)
 		{
 			return _resources[type].Full;
 		}
@@ -122,7 +130,7 @@ namespace Managers
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
 		/// <returns></returns>
-		public bool MoreThanEqualComparison(Resource type, int amount)
+		public static bool MoreThanEqualComparison(Resource type, int amount)
 		{
 			return _resources[type].Amount >= amount;
 		}
@@ -132,7 +140,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
-		public void IncreaseStorage(Resource type, int amount)
+		public static void IncreaseStorage(Resource type, int amount)
 		{
 			_resources[type].MaxAmount += amount;
 			ResourceChanged(type, amount,true);
@@ -143,7 +151,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
-		public void ReduceStorage(Resource type, int amount)
+		public static void ReduceStorage(Resource type, int amount)
 		{
 			_resources[type].MaxAmount -= amount;
 			ResourceChanged(type, -amount,true);
@@ -154,7 +162,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public StorageStatus GetResourceStatus(Resource type)
+		public static StorageStatus GetResourceStatus(Resource type)
 		{
 			StorageStatus storageStatus = StorageStatus.Empty;
 
@@ -171,17 +179,17 @@ namespace Managers
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public string ResourcePrint(Resource type)
+		public static string ResourcePrint(Resource type)
 		{
 			return _resources[type].ResourceDataToString;
 		}
 
-		public int CurrentResourceAmount(Resource type)
+		public static int CurrentResourceAmount(Resource type)
 		{
 			return _resources[type].Amount;
 		}
 
-		public int MaxResourceAmount(Resource type)
+		public static int MaxResourceAmount(Resource type)
 		{
 			return _resources[type].MaxAmount;
 		}
@@ -191,7 +199,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="resource"></param>
 		/// <returns></returns>
-		public int RateOfChangeForResource(Resource resource)
+		public static int RateOfChangeForResource(Resource resource)
 		{
 			return _resourceRatesOfChange[resource].AverageOverTime;
 		}
@@ -202,45 +210,27 @@ namespace Managers
 		/// <param name="type"></param>
 		/// <param name="amount"></param>
 		/// <param name="purchase"></param>
-		private void ResourceChanged(Resource type, int amount, bool purchase = false)
+		private static void ResourceChanged(Resource type, int amount, bool purchase = false)
 		{
 			_onAnyResourceChangeEvent?.Invoke(type, amount, purchase);
-			_onResourceChangeEventDict[type].Invoke(GetResourceStatus(type));
+			((UnityEvent<StorageStatus>)_onResourceChangeEventDict[type]).Invoke(GetResourceStatus(type));
 		}
 
-		// Unity Events.
-		private void Awake()
+
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+		private static void Initialize()
 		{
-			// TODO: Set starting amounts to config
-			_resources.Add(Resource.Food, new ResourceInventory(5000, 15000));
-			_resources.Add(Resource.Ore, new ResourceInventory(5000, 15000));
-			_resources.Add(Resource.Wood, new ResourceInventory(5000, 15000));
-			_resources.Add(Resource.Gold, new ResourceInventory(5000, 0, true));
-			_resources.Add(Resource.SaplingCounter, new ResourceInventory(0, 0, true));
-			_resources.Add(Resource.Recruit, new ResourceInventory(0, 5));
+		    GameObject runnerObject = new GameObject("TownResourcesManagerRunner");
+            runner = runnerObject.AddComponent<Runner>();
+            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+            runner.StartCoroutine(ProcessResources());
+        }
 
-			_resourceRatesOfChange.Add(Resource.Food, new ResourceRateOfChange(Resource.Food, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-			_resourceRatesOfChange.Add(Resource.Ore, new ResourceRateOfChange(Resource.Ore, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-			_resourceRatesOfChange.Add(Resource.Wood, new ResourceRateOfChange(Resource.Wood, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-			_resourceRatesOfChange.Add(Resource.Gold, new ResourceRateOfChange(Resource.Gold, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-            _resourceRatesOfChange.Add(Resource.SaplingCounter, new ResourceRateOfChange(Resource.SaplingCounter, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-            _resourceRatesOfChange.Add(Resource.Recruit, new ResourceRateOfChange(Resource.Recruit, RESOURCE_RATE_TIME_PERIOD, RESOURCE_UPDATE_RATE, this));
-
-			_onResourceChangeEventDict.Add(Resource.Food, new UnityEvent<StorageStatus>());
-			_onResourceChangeEventDict.Add(Resource.Ore, new UnityEvent<StorageStatus>());
-			_onResourceChangeEventDict.Add(Resource.Wood, new UnityEvent<StorageStatus>());
-			_onResourceChangeEventDict.Add(Resource.Gold, new UnityEvent<StorageStatus>());
-            _onResourceChangeEventDict.Add(Resource.SaplingCounter, new UnityEvent<StorageStatus>());
-            _onResourceChangeEventDict.Add(Resource.Recruit, new UnityEvent<StorageStatus>());
-
-			ResourceBoostValues.Add(Resource.Food, 0);
-			ResourceBoostValues.Add(Resource.Ore, 0);
-			ResourceBoostValues.Add(Resource.Wood, 0);
-            ResourceBoostValues.Add(Resource.SaplingCounter, 0);
-            ResourceBoostValues.Add(Resource.Recruit, 0);
-		}
-
-		public bool TryTakeReviveCost(Utils.ReviveType type)
+		public static bool TryTakeReviveCost(Utils.ReviveType type)
 		{
 			if(type == ReviveType.Others && CurrentResourceAmount(Resource.Food) >= 200)
 			{
@@ -255,11 +245,15 @@ namespace Managers
 			else return false;
 		}
 
-		private void Update()
+		private static IEnumerator ProcessResources()
 		{
-			foreach (var r in _resourceRatesOfChange)
+			while (true)
 			{
-				r.Value.ProcessQueue();
+				foreach (var r in _resourceRatesOfChange)
+				{
+					r.Value.ProcessQueue();
+				}
+				yield return new WaitForEndOfFrame();
 			}
 		}
 	}

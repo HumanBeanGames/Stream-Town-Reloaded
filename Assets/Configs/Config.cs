@@ -1,12 +1,14 @@
 using System.Linq;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace Managers
 {
-    public abstract class Config<T> : ScriptableObject where T : ScriptableObject
+    public abstract class Config<T> : SerializedScriptableObject where T : SerializedScriptableObject
     {
         private static T _instance;
 

@@ -35,7 +35,6 @@ namespace Units
 
 		private int _baseMaxHealth;
 
-		private TownResourceManager _resourceManager;
 		private bool _deathInvoked = false;
 		public bool Dead => _health <= 0 ? true : false;
 		public int Health => _health;
@@ -104,7 +103,7 @@ namespace Units
 
 		public bool TryRevive(Utils.ReviveType type)
 		{
-			if(_resourceManager.TryTakeReviveCost(type))
+			if(TownResourceManager.TryTakeReviveCost(type))
 			{
 				Revive();
 				return true;
@@ -175,10 +174,10 @@ namespace Units
                 }
                 else
                 {
-                    if (_resourceManager.MoreThanEqualComparison(Utils.Resource.Food, rounded))
+                    if (TownResourceManager.MoreThanEqualComparison(Utils.Resource.Food, rounded))
                     {
                         ModHealth(rounded);
-                        _resourceManager.RemoveResource(Utils.Resource.Food, rounded);
+                        TownResourceManager.RemoveResource(Utils.Resource.Food, rounded);
                     }
                 }
             }
@@ -199,7 +198,6 @@ namespace Units
 		{
 			_baseMaxHealth = _maxHealth;
 			_health = _maxHealth;
-			_resourceManager = GameManager.Instance.TownResourceManager;
 		}
 
 		private void Update()

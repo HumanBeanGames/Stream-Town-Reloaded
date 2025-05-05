@@ -218,7 +218,6 @@ namespace Managers
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeRunner()
         {
-            Debug.Log(Config);
             GameObject runnerObject = new GameObject("SeasonManagerRunner");
             runner = runnerObject.AddComponent<Runner>();
             UnityEngine.Object.DontDestroyOnLoad(runnerObject);

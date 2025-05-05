@@ -73,7 +73,7 @@ namespace PlayerControls.ObjectSelection
 
 			OnButtonTwoClick += OnBuildingLevelUp;
 			_selectedObjectTypeUI.SelectionButtonTwo.onClick.AddListener(OnButtonTwoClick);
-			GameManager.Instance.TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourcesAdded);
+			TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourcesAdded);
 		}
 
 		private void OnResourcesAdded(Utils.Resource resource, int amount, bool yes)

@@ -18,19 +18,6 @@ namespace Managers
 		public static float SellTaxRate = 0.5f;
 		public static float BuyTaxRate = 0.6f;
 
-
-		private static TownResourceManager _resourceManager;
-		public static TownResourceManager ResourceManager
-		{
-			get
-			{
-				if (_resourceManager == null)
-					_resourceManager = GameManager.Instance.TownResourceManager;
-
-				return _resourceManager;
-			}
-		}
-
 		/// <summary>
 		/// Sells an amount of a resource for gold.
 		/// </summary>
@@ -41,7 +28,7 @@ namespace Managers
 		{
 			message = "";
 
-			int availableAmount = ResourceManager.CurrentResourceAmount(resource);
+			int availableAmount = TownResourceManager.CurrentResourceAmount(resource);
 
 			if (amount <= 0)
 			{
@@ -52,12 +39,12 @@ namespace Managers
 			if (amount > availableAmount)
 				amount = availableAmount;
 
-			ResourceManager.RemoveResource(resource, amount, true);
+			TownResourceManager.RemoveResource(resource, amount, true);
 
 			int goldValue = (int)(amount * ResourceSellRates[resource]);
 			goldValue -= (int)(goldValue * SellTaxRate);
 
-			ResourceManager.AddResource(Resource.Gold, goldValue, true);
+			TownResourceManager.AddResource(Resource.Gold, goldValue, true);
 			EventManager.ResourceSold?.Invoke(resource, amount);
 			message = $"Sold {amount} {resource} for {goldValue} gold.";
 		}
@@ -72,8 +59,8 @@ namespace Managers
 		{
 			message = "";
 
-			int availableGold = ResourceManager.CurrentResourceAmount(Resource.Gold);
-			int remainingStorageAmount = ResourceManager.MaxResourceAmount(resource) - ResourceManager.CurrentResourceAmount(resource);
+			int availableGold = TownResourceManager.CurrentResourceAmount(Resource.Gold);
+			int remainingStorageAmount = TownResourceManager.MaxResourceAmount(resource) - TownResourceManager.CurrentResourceAmount(resource);
 
 			if (remainingStorageAmount <= 0)
 			{
@@ -93,8 +80,8 @@ namespace Managers
 				costForAll = (int)(costPerResource * amount);
 			}
 
-			ResourceManager.RemoveResource(Resource.Gold, costForAll, true);
-			ResourceManager.AddResource(resource, amount, true);
+			TownResourceManager.RemoveResource(Resource.Gold, costForAll, true);
+			TownResourceManager.AddResource(resource, amount, true);
 			EventManager.ResourceBought?.Invoke(resource, amount);
 			message = $"Bought {amount} {resource} for {costForAll} gold.";
 		}

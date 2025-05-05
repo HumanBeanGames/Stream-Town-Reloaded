@@ -65,18 +65,18 @@ namespace Managers
 
 		private void UpdateResourcesDisplay()
 		{
-			_woodDisplayText.text = FormattedResourceString(_gm.TownResourceManager.CurrentResourceAmount(Resource.Wood), _gm.TownResourceManager.MaxResourceAmount(Resource.Wood));
-			_foodDisplayText.text = FormattedResourceString(_gm.TownResourceManager.CurrentResourceAmount(Resource.Food), _gm.TownResourceManager.MaxResourceAmount(Resource.Food));
-			_oreDisplayText.text = FormattedResourceString(_gm.TownResourceManager.CurrentResourceAmount(Resource.Ore), _gm.TownResourceManager.MaxResourceAmount(Resource.Ore));
-			_goldDisplayText.text = FormattedResourceString(_gm.TownResourceManager.CurrentResourceAmount(Resource.Gold));
+			_woodDisplayText.text = FormattedResourceString(TownResourceManager.CurrentResourceAmount(Resource.Wood), TownResourceManager.MaxResourceAmount(Resource.Wood));
+			_foodDisplayText.text = FormattedResourceString(TownResourceManager.CurrentResourceAmount(Resource.Food), TownResourceManager.MaxResourceAmount(Resource.Food));
+			_oreDisplayText.text = FormattedResourceString(TownResourceManager.CurrentResourceAmount(Resource.Ore), TownResourceManager.MaxResourceAmount(Resource.Ore));
+			_goldDisplayText.text = FormattedResourceString(TownResourceManager.CurrentResourceAmount(Resource.Gold));
 		}
 
 		private void UpdateResourcesRateOfChange()
         {
-			_woodRateOfChangeText.text = FormattedRateOfChangeString(_gm.TownResourceManager.RateOfChangeForResource(Resource.Wood));
-			_foodRateOfChangeText.text = FormattedRateOfChangeString(_gm.TownResourceManager.RateOfChangeForResource(Resource.Food));
-			_oreRateOfChangeText.text = FormattedRateOfChangeString(_gm.TownResourceManager.RateOfChangeForResource(Resource.Ore));
-			_goldRateOfChangeText.text = FormattedRateOfChangeString(rateOfChange: _gm.TownResourceManager.RateOfChangeForResource(Resource.Gold));
+			_woodRateOfChangeText.text = FormattedRateOfChangeString(TownResourceManager.RateOfChangeForResource(Resource.Wood));
+			_foodRateOfChangeText.text = FormattedRateOfChangeString(TownResourceManager.RateOfChangeForResource(Resource.Food));
+			_oreRateOfChangeText.text = FormattedRateOfChangeString(TownResourceManager.RateOfChangeForResource(Resource.Ore));
+			_goldRateOfChangeText.text = FormattedRateOfChangeString(rateOfChange: TownResourceManager.RateOfChangeForResource(Resource.Gold));
         }
 
 		private void UpdateCountTexts()

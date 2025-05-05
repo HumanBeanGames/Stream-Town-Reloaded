@@ -215,7 +215,7 @@ namespace UserInterface
 		/// <param name="value"></param>
 		public void AddWood(int value)
 		{
-			GameManager.Instance.TownResourceManager.AddResource(Utils.Resource.Wood, value);
+			TownResourceManager.AddResource(Utils.Resource.Wood, value);
 		}
 
 		/// <summary>
@@ -224,7 +224,7 @@ namespace UserInterface
 		/// <param name="value"></param>
 		public void AddOre(int value)
 		{
-			GameManager.Instance.TownResourceManager.AddResource(Utils.Resource.Ore, value);
+			TownResourceManager.AddResource(Utils.Resource.Ore, value);
 		}
 
 		/// <summary>
@@ -233,7 +233,7 @@ namespace UserInterface
 		/// <param name="value"></param>
 		public void AddFood(int value)
 		{
-			GameManager.Instance.TownResourceManager.AddResource(Utils.Resource.Food, value);
+			TownResourceManager.AddResource(Utils.Resource.Food, value);
 		}
 
 		/// <summary>
@@ -242,7 +242,7 @@ namespace UserInterface
 		/// <param name="value"></param>
 		public void AddGold(int value)
 		{
-			GameManager.Instance.TownResourceManager.AddResource(Utils.Resource.Gold, value);
+			TownResourceManager.AddResource(Utils.Resource.Gold, value);
 		}
 
 		/// <summary>

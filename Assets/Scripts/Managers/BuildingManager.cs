@@ -32,8 +32,6 @@ namespace Managers
 		[SerializeField]
 		private AllBuildingDataScriptable _allBuildingData;
 
-		private TownResourceManager _townResourceManager = null;
-
 		private Dictionary<Player, BuildingPlacer> _placers = new Dictionary<Player, BuildingPlacer>();
 
 		private Dictionary<BuildingType, List<BuildingBase>> _buildings = new Dictionary<BuildingType, List<BuildingBase>>();
@@ -51,7 +49,6 @@ namespace Managers
 		public void Initialize()
 		{
 			InitializeBuildingData();
-			_townResourceManager = GameManager.Instance.TownResourceManager;
 		}
 
 		/// <summary>
@@ -93,10 +90,10 @@ namespace Managers
 			int oreCost = data.BuildResourceCost.OreCost + (int)((float)(data.BuildResourceCost.OreCost * BuildingCounts[type]) * data.CostIncreasePerBuildingMultiplier);
 			int foodCost = data.BuildResourceCost.FoodCost + (int)((float)(data.BuildResourceCost.FoodCost * BuildingCounts[type]) * data.CostIncreasePerBuildingMultiplier);
 			int goldCost = data.BuildResourceCost.GoldCost + (int)((float)(data.BuildResourceCost.GoldCost * BuildingCounts[type]) * data.CostIncreasePerBuildingMultiplier);
-			if (_townResourceManager.MoreThanEqualComparison(Resource.Wood, woodCost - CalculateCostReduction(type, woodCost))
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Ore, oreCost - CalculateCostReduction(type, oreCost))
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Food, foodCost - CalculateCostReduction(type, foodCost))
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Gold, goldCost - CalculateCostReduction(type, goldCost)))
+			if (TownResourceManager.MoreThanEqualComparison(Resource.Wood, woodCost - CalculateCostReduction(type, woodCost))
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Ore, oreCost - CalculateCostReduction(type, oreCost))
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Food, foodCost - CalculateCostReduction(type, foodCost))
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Gold, goldCost - CalculateCostReduction(type, goldCost)))
 				return true;
 			else
 				return false;
@@ -121,10 +118,10 @@ namespace Managers
 				int oreCost = data.BuildResourceCost.OreCost + (int)((float)(data.BuildResourceCost.OreCost * BuildingCounts[building.BuildingType]) * data.CostIncreasePerBuildingMultiplier);
 				int foodCost = data.BuildResourceCost.FoodCost + (int)((float)(data.BuildResourceCost.FoodCost * BuildingCounts[building.BuildingType]) * data.CostIncreasePerBuildingMultiplier);
 				int goldCost = data.BuildResourceCost.GoldCost + (int)((float)(data.BuildResourceCost.GoldCost * BuildingCounts[building.BuildingType]) * data.CostIncreasePerBuildingMultiplier);
-				_townResourceManager.RemoveResource(Resource.Wood, woodCost - CalculateCostReduction(building.BuildingType, woodCost), true);
-				_townResourceManager.RemoveResource(Resource.Ore, oreCost - CalculateCostReduction(building.BuildingType, oreCost), true);
-				_townResourceManager.RemoveResource(Resource.Food, foodCost - CalculateCostReduction(building.BuildingType, foodCost), true);
-				_townResourceManager.RemoveResource(Resource.Gold, goldCost - CalculateCostReduction(building.BuildingType, goldCost), true);
+				TownResourceManager.RemoveResource(Resource.Wood, woodCost - CalculateCostReduction(building.BuildingType, woodCost), true);
+				TownResourceManager.RemoveResource(Resource.Ore, oreCost - CalculateCostReduction(building.BuildingType, oreCost), true);
+				TownResourceManager.RemoveResource(Resource.Food, foodCost - CalculateCostReduction(building.BuildingType, foodCost), true);
+				TownResourceManager.RemoveResource(Resource.Gold, goldCost - CalculateCostReduction(building.BuildingType, goldCost), true);
 			}
 
 			if (!_buildings.ContainsKey(building.BuildingType))
@@ -190,10 +187,10 @@ namespace Managers
 
 
 			// Store this calculation in a better way rather.
-			if (_townResourceManager.MoreThanEqualComparison(Resource.Wood, woodCost)
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Ore, oreCost)
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Gold, goldCost)
-				&& _townResourceManager.MoreThanEqualComparison(Resource.Food, foodCost))
+			if (TownResourceManager.MoreThanEqualComparison(Resource.Wood, woodCost)
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Ore, oreCost)
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Gold, goldCost)
+				&& TownResourceManager.MoreThanEqualComparison(Resource.Food, foodCost))
 				return true;
 			else
 				return false;
@@ -219,10 +216,10 @@ namespace Managers
 			int foodCost = (int)(data.LevelResourceCost.FoodCost * currentLevel * currentLevel * data.CostIncreasePerLevelMultiplier);
 			foodCost -= CalculateCostReduction(type, woodCost);
 
-			_townResourceManager.RemoveResource(Resource.Wood, woodCost);
-			_townResourceManager.RemoveResource(Resource.Ore, oreCost);
-			_townResourceManager.RemoveResource(Resource.Gold, goldCost);
-			_townResourceManager.RemoveResource(Resource.Food, foodCost);
+			TownResourceManager.RemoveResource(Resource.Wood, woodCost);
+			TownResourceManager.RemoveResource(Resource.Ore, oreCost);
+			TownResourceManager.RemoveResource(Resource.Gold, goldCost);
+			TownResourceManager.RemoveResource(Resource.Food, foodCost);
 		}
 
 		/// <summary>

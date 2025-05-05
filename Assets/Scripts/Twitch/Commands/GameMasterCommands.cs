@@ -42,7 +42,7 @@ namespace Twitch.Commands
             if (resource == Resource.None) return "Unknown resource type.";
             if (!int.TryParse(args[1], out int amount)) return "Invalid amount.";
 
-            GameManager.Instance.TownResourceManager.AddResource(resource, amount);
+            TownResourceManager.AddResource(resource, amount);
             return $"Added {amount} {resource}.";
         }
 

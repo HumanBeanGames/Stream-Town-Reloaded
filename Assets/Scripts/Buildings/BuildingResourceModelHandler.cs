@@ -102,7 +102,7 @@ namespace Buildings
 		private void Start()
 		{
 			// Subscribe to resource change event based on resource type
-			GameManager.Instance.TownResourceManager.GetResourceChangeEvent(_resourceModifier.ResourceType).AddListener(HandleResourceChange);
+			TownResourceManager.GetResourceChangeEvent(_resourceModifier.ResourceType).AddListener(HandleResourceChange);
 		}
 	}
 }

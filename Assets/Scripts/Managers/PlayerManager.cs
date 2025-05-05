@@ -61,7 +61,7 @@ namespace Managers
 			if (_recruits.Contains(player))
 			{
 				_recruits.Remove(player);
-				GameManager.Instance.TownResourceManager.RemoveResource(Resource.Recruit, 1);
+				TownResourceManager.RemoveResource(Resource.Recruit, 1);
 				GameManager.Instance.RoleManager.TakeFromRole(player.RoleHandler.CurrentRole);
 				player.Character.SetActive(false);
 			}
@@ -139,7 +139,7 @@ namespace Managers
 				if (CanAddRecruit)
 				{
 					_recruits.Add(data);
-					GameManager.Instance.TownResourceManager.AddResource(Resource.Recruit, 1);
+					TownResourceManager.AddResource(Resource.Recruit, 1);
 					data.TwitchUser.GameUserType = Twitch.Utils.GameUserType.Normal;
 				}
 
@@ -166,7 +166,7 @@ namespace Managers
 				if (CanAddRecruit)
 				{
 					_recruits.Add(data);
-					GameManager.Instance.TownResourceManager.AddResource(Resource.Recruit, 1);
+					TownResourceManager.AddResource(Resource.Recruit, 1);
 				}
 				else
 					return null;

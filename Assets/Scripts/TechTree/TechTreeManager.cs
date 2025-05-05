@@ -38,7 +38,6 @@ namespace TechTree
 
 		private PlayerManager _playerManager;
 		private BuildingManager _buildingManager;
-		private TownResourceManager _townResourceManager;
 		private UserInterface_TownGoal _townGoalInterface;
 
 		public int MinTimeBetweenVotes => _minTimeBetweenVotes;
@@ -59,7 +58,6 @@ namespace TechTree
 
 			_buildingManager = GameManager.Instance.BuildingManager;
 			_playerManager = GameManager.Instance.PlayerManager;
-			_townResourceManager = GameManager.Instance.TownResourceManager;
 			//PrintAvailableNodes();
 
 		}
@@ -305,8 +303,8 @@ namespace TechTree
 		{
 			Resource resourceType = data.ResourceType;
 
-			if (_townResourceManager.ResourceBoostValues.ContainsKey(resourceType))
-				_townResourceManager.ResourceBoostValues[resourceType] += data.IntValue;
+			if (TownResourceManager.ResourceBoostValues.ContainsKey(resourceType))
+				TownResourceManager.ResourceBoostValues[resourceType] += data.IntValue;
 
 			OnStorageBoostUnlocked?.Invoke(resourceType);
 		}

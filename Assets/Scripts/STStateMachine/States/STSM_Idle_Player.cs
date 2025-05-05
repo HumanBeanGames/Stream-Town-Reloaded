@@ -78,7 +78,7 @@ namespace STStateMachine.States
 			//Check inventory is not full and town resource isnt full
 			Utils.Resource resourceType = _roleHandler.RoleData_SO.Resource;
 
-			if (GameManager.Instance.TownResourceManager.ResourceFull(resourceType))
+			if (TownResourceManager.ResourceFull(resourceType))
 				return false;
 
 			if (_inventory.ResourceFull(resourceType))
