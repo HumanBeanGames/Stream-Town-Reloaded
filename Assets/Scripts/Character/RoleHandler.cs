@@ -31,7 +31,6 @@ namespace Character
 		private CollectResource _collectResource;
 		private AnimationHandler _animationHandler;
 		private CharacterModelHandler _equipmentHandler;
-		private RoleManager _roleManager;
 
 		//Sensors
 		private TargetSensor _targetSensor;
@@ -71,11 +70,11 @@ namespace Character
         /// <returns></returns>
         public bool TrySetRole(PlayerRole role, out string failureReason, bool decrement = true)
         {
-            if (!_roleManager.TryChangeRole(_currentRole, role, out failureReason, decrement))
+            if (!RoleManager.TryChangeRole(_currentRole, role, out failureReason, decrement))
                 return false;
 
             _onRoleChanged.Invoke(_currentRole, role, _equipmentHandler.CurrentBodyType);
-            _currentRoleData_SO = _roleManager.GetRoleData(role);
+            _currentRoleData_SO = RoleManager.GetRoleData(role);
             _targetSensor.TargetMask = _currentRoleData_SO.TargetFlags;
             _stationSensor.StationMask = _currentRoleData_SO.StationFlags;
             _roleType = _currentRoleData_SO.RoleFlags;
@@ -95,7 +94,7 @@ namespace Character
         /// <param name="role"></param>
         public void SetStarterRole(PlayerRole role)
 		{
-			if (_roleManager.SlotsFull(role) && GameManager.Instance.PlayerRoleLimits)
+			if (RoleManager.SlotsFull(role) && GameManager.Instance.PlayerRoleLimits)
 				return;
 
 			_starterRole = role;
@@ -148,14 +147,13 @@ namespace Character
 			_collectResource = GetComponent<CollectResource>();
 			_animationHandler = GetComponentInChildren<AnimationHandler>();
 			_equipmentHandler = GetComponent<CharacterModelHandler>();
-			_roleManager = GameManager.Instance.RoleManager;
 			_healthHandler = GetComponent<HealthHandler>();
 			_aiPath = GetComponent<AIPath>();
 			_playerRoleData = new PlayerRoleData[(int)PlayerRole.Count];
 
 			for (int i = 0; i < (int)PlayerRole.Count; i++)
 			{
-				_playerRoleData[i] = new PlayerRoleData((PlayerRole)i, _roleManager, _inventory, _aiPath, _healthHandler, this);
+				_playerRoleData[i] = new PlayerRoleData((PlayerRole)i, _inventory, _aiPath, _healthHandler, this);
 			}
 
 			_characterGlobalPassives = new Dictionary<StatType, float>();

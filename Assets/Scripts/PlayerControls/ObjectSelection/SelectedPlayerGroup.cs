@@ -25,7 +25,7 @@ namespace PlayerControls.ObjectSelection
 			for (int i = 0; i < players.Count; i++)
 				if (players[i] != null)
 				{
-					players[i].TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index), out string reason);
+					players[i].TrySetRole(RoleManager.GetAvailableRoleFromIndex(index), out string reason);
 					if (reason != "")
 						Debug.Log(reason);
 				}
@@ -38,8 +38,8 @@ namespace PlayerControls.ObjectSelection
 
 			_selectedObjectTypeUI.SelectionDropdown.ClearOptions();
 
-			_selectedObjectTypeUI.SelectionDropdown.AddOptions(GameManager.Instance.RoleManager.GetAvailableRolesAsString());
-			_selectedObjectTypeUI.SelectionDropdown.SetValueWithoutNotify(GameManager.Instance.RoleManager.GetRoleIndex(Utils.PlayerRole.Builder));
+			_selectedObjectTypeUI.SelectionDropdown.AddOptions(RoleManager.GetAvailableRolesAsString());
+			_selectedObjectTypeUI.SelectionDropdown.SetValueWithoutNotify(RoleManager.GetRoleIndex(Utils.PlayerRole.Builder));
 
 			OnButtonClick += OnDismissButtonClick;
 			_selectedObjectTypeUI.SelectionButton.onClick.AddListener(OnButtonClick);

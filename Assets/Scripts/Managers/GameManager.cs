@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private RoleManager _roleManager = null;
 		private DebugManager _debugManager = null;
 		private PlayerManager _playerManager = null;
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
@@ -91,7 +90,6 @@ namespace Managers
 		public bool DebugBuildingControls => _debugBuildingControls;
 
 		// Properties
-		public RoleManager RoleManager => _roleManager;
 		public DebugManager DebugManager => _debugManager;
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
 		public PlayerManager PlayerManager => _playerManager;
@@ -158,7 +156,7 @@ namespace Managers
 			BuildingManager.Initialize();
 			_playerManager.Initialize();
 			_townGoalManager.Initialize();
-			_roleManager.Initialize();
+			RoleManager.Initialize();
 			yield return new WaitForEndOfFrame();
 			_techTreeManager.InitializeTree();
 			GUIDManager.Initialize();   // Must happen before pooling manager
@@ -187,9 +185,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _roleManager))
-				Debug.LogError("RoleManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _debugManager))
 				Debug.LogError("DebugManager not found on GameManager", this);
 

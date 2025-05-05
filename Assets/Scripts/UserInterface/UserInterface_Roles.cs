@@ -18,8 +18,6 @@ namespace UserInterface
 
 		//private Dictionary<PlayerRole, Text>
 
-		private RoleManager _roleManager;
-
 		[SerializeField]
 		private GameObject _roleUIPrefab;
 
@@ -38,9 +36,9 @@ namespace UserInterface
 				return;
 			if (role == PlayerRole.Ruler)
 				return;
-			_roleDisplays[role].RoleAmount.text = $"{_roleManager.GetSlotPrint(role)}";
+			_roleDisplays[role].RoleAmount.text = $"{RoleManager.GetSlotPrint(role)}";
 
-			if (_roleManager.GetMaxSlots(role) == 0 && !_roleManager.RoleIsInfinite(role))
+			if (RoleManager.GetMaxSlots(role) == 0 && !RoleManager.RoleIsInfinite(role))
 				_roleDisplays[role].gameObject.SetActive(false);
 			else
 				_roleDisplays[role].gameObject.SetActive(true);
@@ -49,8 +47,7 @@ namespace UserInterface
 		private void Start()
 		{
 			_roleDisplays = new Dictionary<PlayerRole, UIRoleDisplay>();
-			_roleManager = GameManager.Instance.RoleManager;
-			_roleManager.OnRoleSlotsChangedEvent.AddListener(OnRoleSlotsChanged);
+			RoleManager.OnRoleSlotsChangedEvent.AddListener(OnRoleSlotsChanged);
 			List<RoleDataScriptable> _resourceRoles = new List<RoleDataScriptable>();
 			List<RoleDataScriptable> _combatRoles = new List<RoleDataScriptable>();
 			List<RoleDataScriptable> _otherRoles = new List<RoleDataScriptable>();
@@ -61,8 +58,8 @@ namespace UserInterface
 
 			for (int i = 0; i < (int)PlayerRole.Count; i++)
 			{
-				_roleManager.OnRoleSlotsChangedEvent.Invoke((PlayerRole)i);
-				RoleDataScriptable rds = GameManager.Instance.RoleManager.GetRoleData((PlayerRole)i);
+				RoleManager.OnRoleSlotsChangedEvent.Invoke((PlayerRole)i);
+				RoleDataScriptable rds = RoleManager.GetRoleData((PlayerRole)i);
 
 				if (rds.RoleFlags == PlayerRoleType.Damage || rds.RoleFlags == PlayerRoleType.Healer)
 				{

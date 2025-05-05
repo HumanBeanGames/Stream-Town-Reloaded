@@ -61,7 +61,7 @@ namespace Managers
 			{
 				_recruits.Remove(player);
 				TownResourceManager.RemoveResource(Resource.Recruit, 1);
-				GameManager.Instance.RoleManager.TakeFromRole(player.RoleHandler.CurrentRole);
+				RoleManager.TakeFromRole(player.RoleHandler.CurrentRole);
 				player.Character.SetActive(false);
 			}
 		}

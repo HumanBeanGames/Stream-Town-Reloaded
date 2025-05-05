@@ -188,16 +188,14 @@ namespace UserInterface.BottomBarMenu
 
 		private static void ShowRecruitMenu()
 		{
-			RoleManager rm = GameManager.Instance.RoleManager;
-
 			List<GameObject> availableButtons = new List<GameObject>();
 
 			for (int i = 0; i < _roleButtons.Count; i++)
 			{
-				if (rm.GetMaxSlots(_roleButtons[i].Item1) > 0 || rm.RoleIsInfinite(_roleButtons[i].Item1))
+				if (RoleManager.GetMaxSlots(_roleButtons[i].Item1) > 0 || RoleManager.RoleIsInfinite(_roleButtons[i].Item1))
 					availableButtons.Add(_roleButtons[i].Item2);
 
-				if (rm.SlotsFull(_roleButtons[i].Item1) || TownResourceManager.ResourceFull(Resource.Recruit))
+				if (RoleManager.SlotsFull(_roleButtons[i].Item1) || TownResourceManager.ResourceFull(Resource.Recruit))
 					_roleButtons[i].Item2.GetComponentInChildren<Button>().interactable = false;
 				else
 					_roleButtons[i].Item2.GetComponentInChildren<Button>().interactable = true;
@@ -327,8 +325,7 @@ namespace UserInterface.BottomBarMenu
 				for (int i = 0; i < buttonList.Count; i++)
 					buttonList[i].interactable = false;
 
-			RoleManager rm = GameManager.Instance.RoleManager;
-			if (rm.SlotsFull(role) || TownResourceManager.ResourceFull(Resource.Recruit))
+			if (RoleManager.SlotsFull(role) || TownResourceManager.ResourceFull(Resource.Recruit))
 				return;
 
 			Player recruit = new Player(new TwitchUser($"{-UnityEngine.Random.Range(int.MinValue, 0)}", $""), true);

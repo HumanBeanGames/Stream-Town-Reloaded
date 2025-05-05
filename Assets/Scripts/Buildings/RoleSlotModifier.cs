@@ -32,19 +32,6 @@ namespace Buildings
 		/// </summary>
 		private int _totalAmount = 0;
 
-		// Required Components.
-		private RoleManager _roleManager;
-
-		public RoleManager RoleManager
-		{
-			get
-			{
-				if (_roleManager == null)
-					_roleManager = GameManager.Instance.RoleManager;
-				return _roleManager;
-			}
-		}
-
 		// Properties.
 		public PlayerRole Role => _role;
 
@@ -71,7 +58,7 @@ namespace Buildings
 		/// </summary>
 		public void RemoveTotalSlots()
 		{
-			_roleManager.RemoveSlots(_role, _totalAmount);
+			RoleManager.RemoveSlots(_role, _totalAmount);
 			_totalAmount = 0;
 		}
 
@@ -80,8 +67,7 @@ namespace Buildings
 		/// </summary>
 		private void OnDisable()
 		{
-			if (RoleManager)
-				RemoveTotalSlots();
+			RemoveTotalSlots();
 		}
 	}
 }

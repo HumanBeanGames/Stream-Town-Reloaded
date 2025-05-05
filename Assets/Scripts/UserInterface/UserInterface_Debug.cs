@@ -151,7 +151,7 @@ namespace UserInterface
 		/// </summary>
 		public void SetCharacterRole()
 		{
-			//GameManager.Instance.RoleManager.QueueRoleChange((RoleHandler)_data, (PlayerRole)_roleDropdownCharacter.value);
+			//RoleManager.QueueRoleChange((RoleHandler)_data, (PlayerRole)_roleDropdownCharacter.value);
 			if (((RoleHandler)_data).TrySetRole((PlayerRole)_roleDropdownCharacter.value, out string reason))
 			{
 				_characterRole.text = "Role: " + ((RoleHandler)_data).CurrentRole.ToString();

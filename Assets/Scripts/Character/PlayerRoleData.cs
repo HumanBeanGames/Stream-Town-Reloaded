@@ -32,7 +32,6 @@ namespace Character
 		private int _damageReduction;
 		private AudioClip[] _actionClips;
 
-		private RoleManager _roleManager;
 		private PlayerInventory _playerInventory;
 		private AIPath _aiPath;
 		private HealthHandler _healthHandler;
@@ -49,7 +48,7 @@ namespace Character
 		public int CurrentLevel => _level;
 		public int CurrentExp => _experience;
 		public int RequiredExp => _requiredExp;
-		public bool IsMaxLevel => (_level >= RoleManager.MAX_ROLE_LEVEl);
+		public bool IsMaxLevel => (_level >= RoleManager.MaxRoleLevel);
 		public AudioClip[] ActionClips => _actionClips;
 
 		public event Action<RoleHandler> OnExperienceChange;
@@ -57,30 +56,28 @@ namespace Character
 		public HealthHandler HealthHandler => _healthHandler;
 
 		// Constructors.
-		public PlayerRoleData(PlayerRole role, RoleManager roleManager, PlayerInventory inventory, AIPath aiPath, HealthHandler healthHandler, RoleHandler roleHandler)
+		public PlayerRoleData(PlayerRole role, PlayerInventory inventory, AIPath aiPath, HealthHandler healthHandler, RoleHandler roleHandler)
 		{
 			_role = role;
-			_roleManager = roleManager;
 			_level = 1;
 			_experience = 0;
-			_requiredExp = _roleManager.GetRequiredExperience(_level);
-			_roleType = roleManager.GetRoleData(role).RoleFlags;
+			_requiredExp = RoleManager.GetRequiredExperience(_level);
+			_roleType = RoleManager.GetRoleData(role).RoleFlags;
 			_playerInventory = inventory;
 			_aiPath = aiPath;
 			_healthHandler = healthHandler;
 			_roleHandler = roleHandler;
-			_actionClips = roleManager.GetRoleData(role).ActionClips;
+			_actionClips = RoleManager.GetRoleData(role).ActionClips;
 			//TODO: Implement ranged check
 			RecalculateStats();
 		}
 
-		public PlayerRoleData(PlayerRole role, int level, int experience, RoleManager roleManager, PlayerInventory inventory, AIPath aiPath, HealthHandler healthHandler)
+		public PlayerRoleData(PlayerRole role, int level, int experience, PlayerInventory inventory, AIPath aiPath, HealthHandler healthHandler)
 		{
 			_role = role;
-			_roleManager = roleManager;
 			_level = level;
 			_experience = experience;
-			_requiredExp = _roleManager.GetRequiredExperience(_level);
+			_requiredExp = RoleManager.GetRequiredExperience(_level);
 
 			RecalculateStats();
 		}
@@ -91,7 +88,7 @@ namespace Character
 		/// <param name="amount"></param>
 		public void IncreaseExperience(int amount)
 		{
-			amount = Mathf.Max(1,(int)( amount * _roleManager.GetRoleData(_role).ExpModifier));
+			amount = Mathf.Max(1,(int)( amount * RoleManager.GetRoleData(_role).ExpModifier));
 			if (IsMaxLevel)
 			{
 				_experience = 0;
@@ -133,7 +130,7 @@ namespace Character
 				return;
 
 			_level++;
-			_requiredExp = _roleManager.GetRequiredExperience(_level);
+			_requiredExp = RoleManager.GetRequiredExperience(_level);
 			RecalculateStats();
 			_healthHandler.SetHealth(_healthHandler.MaxHealth);
 		}
@@ -143,7 +140,7 @@ namespace Character
 		/// </summary>
 		public void RecalculateStats()
 		{
-			RoleDataScriptable data = _roleManager.GetRoleData(_role);
+			RoleDataScriptable data = RoleManager.GetRoleData(_role);
 			StatModifiers statMod = GameManager.Instance.PlayerManager.GetStatModifiers(_role);
 
 			_actionAmount = data.BaseActionAmount + (int)(data.ActionAmountPerLevel * (_level - 1));

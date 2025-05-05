@@ -4,6 +4,8 @@ using UnityEngine;
 using Character;
 using UnityEngine.Events;
 using Scriptables;
+using Sirenix.OdinInspector;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,47 +17,35 @@ namespace Managers
 	/// Manages data for all roles in the game.
 	/// </summary>
 	[SerializeField, System.Serializable]
-	public class RoleManager : MonoBehaviour
+	[GameManager]
+	public static class RoleManager
 	{
-		//YES
-		public const int MAX_ROLE_LEVEl = 99;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        private static RoleConfig Config = RoleConfig.Instance;
 
-		/// <summary>
-		/// The amount of exp used for the last level. EXP table is calculated using this value.
-		/// </summary>
-		//YES but debugging ReadOnly
-		private const int MAX_LEVEL_EXP = 100000;
+		public static int MaxRoleLevel => RoleConfig.maxRoleLevel;
 
-		//[SerializeField]
-		//private RoleDataScriptable[] _storedData = new RoleDataScriptable[(int)PlayerRole.Count];
 		[SerializeField]
-		private AllRoleDataScriptable _allRoleData;
+		private static AllRoleDataScriptable _allRoleData => Config.allRoleData;
 
-		/// YES YES YES
-        const float ER = 1.2f;
-        const float RT = 0.5f;
-        const float RM = 100f;
+        private static int[] _expTableLookup => Config.expTableLookup;
 
-        private Dictionary<PlayerRole, RoleDataScriptable> _roleDataDictionary;
+        [HideInInspector]
+        private static Dictionary<PlayerRole, RoleDataScriptable> _roleDataDictionary;
+        [HideInInspector]
+        private static Dictionary<PlayerRole, RoleSlot> _roleSlotsDictionary;
+        [HideInInspector]
+        private static UnityEvent<PlayerRole> _onRoleSlotsChangedEvent = new UnityEvent<PlayerRole>();
 
-        //YES but debugging ReadOnly
-        [SerializeField]
-		private int[] _expTableLookup = new int[MAX_ROLE_LEVEl];
-		private int expMultiplier = 10;
-
-		private Dictionary<PlayerRole, RoleSlot> _roleSlotsDictionary;
-
-		private UnityEvent<PlayerRole> _onRoleSlotsChangedEvent = new UnityEvent<PlayerRole>();
-
-		public AllRoleDataScriptable AllRoleData => _allRoleData;
-		public UnityEvent<PlayerRole> OnRoleSlotsChangedEvent => _onRoleSlotsChangedEvent;
+		public static AllRoleDataScriptable AllRoleData => _allRoleData;
+		public static UnityEvent<PlayerRole> OnRoleSlotsChangedEvent => _onRoleSlotsChangedEvent;
 
         /// <summary>
         /// Returns the required amount of experience to level up.
         /// </summary>
         /// <param name="level"></param>
         /// <returns></returns>
-        public int GetRequiredExperience(int level)
+        public static int GetRequiredExperience(int level)
 		{
 			return _expTableLookup[level - 1];
 		}
@@ -65,7 +55,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="role"></param>
 		/// <returns></returns>
-		public RoleDataScriptable GetRoleData(PlayerRole role)
+		public static RoleDataScriptable GetRoleData(PlayerRole role)
 		{
 			if (!_roleDataDictionary.ContainsKey(role))
 			{
@@ -76,7 +66,7 @@ namespace Managers
 			return _roleDataDictionary[role];
 		}
 
-		public List<string> GetAvailableRolesAsString()
+		public static List<string> GetAvailableRolesAsString()
 		{
 			List<string> roles = new List<string>();
 			foreach (PlayerRole role in _roleSlotsDictionary.Keys)
@@ -87,7 +77,7 @@ namespace Managers
 			return roles;
 		}
 
-		public List<PlayerRole> GetAvailableRoles()
+		public static List<PlayerRole> GetAvailableRoles()
 		{
 			List<PlayerRole> roles = new List<PlayerRole>();
 			foreach (PlayerRole role in _roleSlotsDictionary.Keys)
@@ -98,14 +88,14 @@ namespace Managers
 			return roles;
 		}
 
-		public PlayerRole GetAvailableRoleFromIndex(int index)
+		public static PlayerRole GetAvailableRoleFromIndex(int index)
 		{
 			List<PlayerRole> availableRoles = GetAvailableRoles();
 
 			return availableRoles[index];
 		}
 
-		public int GetRoleIndex(PlayerRole playerRole)
+		public static int GetRoleIndex(PlayerRole playerRole)
 		{
 			List<PlayerRole> availableRoles = GetAvailableRoles();
 			for (int i = 0; i < availableRoles.Count; i++)
@@ -116,12 +106,12 @@ namespace Managers
 			return 0;
 		}
 
-		public void TakeFromRole(PlayerRole role)
+		public static void TakeFromRole(PlayerRole role)
 		{
 			_roleSlotsDictionary[role].OnSlotRemoved();
 		}
 
-		public bool IsRoleAvailabe(PlayerRole role)
+		public static bool IsRoleAvailabe(PlayerRole role)
 		{
 			return !_roleSlotsDictionary[role].Full;
 		}
@@ -132,7 +122,7 @@ namespace Managers
         /// <param name="newRole"></param>
         /// <param name="decrement"></param>
         /// <returns>true if the role can be switched too.</returns>
-        public bool TryChangeRole(PlayerRole previousRole, PlayerRole newRole, out string failureReason, bool decrement = true)
+        public static bool TryChangeRole(PlayerRole previousRole, PlayerRole newRole, out string failureReason, bool decrement = true)
         {
             failureReason = null;
 
@@ -175,7 +165,7 @@ namespace Managers
         /// </summary>
         /// <param name="role"></param>
         /// <param name="amount"></param>
-        public void AddSlots(PlayerRole role, int amount)
+        public static void AddSlots(PlayerRole role, int amount)
 		{
 			_roleSlotsDictionary[role].IncreaseMaxSlots(amount);
 			_onRoleSlotsChangedEvent.Invoke(role);
@@ -186,7 +176,7 @@ namespace Managers
 		/// </summary>
 		/// <param name="role"></param>
 		/// <param name="amount"></param>
-		public void RemoveSlots(PlayerRole role, int amount)
+		public static void RemoveSlots(PlayerRole role, int amount)
 		{
 			_roleSlotsDictionary[role].DecreaseMaxSlots(amount);
 			_onRoleSlotsChangedEvent.Invoke(role);
@@ -194,29 +184,29 @@ namespace Managers
 
 		/// <param name="role"></param>
 		/// <returns>true if all slots for the PlayerRole are taken.</returns>
-		public bool SlotsFull(PlayerRole role)
+		public static bool SlotsFull(PlayerRole role)
 		{
 			return _roleSlotsDictionary[role].Full;
 		}
 
 		/// <param name="role"></param>
 		/// <returns>a formatted string displaying number of role slots taken and slots available.</returns>
-		public string GetSlotPrint(PlayerRole role)
+		public static string GetSlotPrint(PlayerRole role)
 		{
 			return _roleSlotsDictionary[role].SlotDataAsString;
 		}
 
-		public int GetMaxSlots(PlayerRole role)
+		public static int GetMaxSlots(PlayerRole role)
 		{
 			return _roleSlotsDictionary[role].MaxSlots;
 		}
 
-		public bool RoleIsInfinite(PlayerRole role)
+		public static bool RoleIsInfinite(PlayerRole role)
 		{
 			return _roleSlotsDictionary[role].Infinite;
 		}
 
-		public bool TryReplaceInactivePlayer(PlayerRole role, out Player player)
+		public static bool TryReplaceInactivePlayer(PlayerRole role, out Player player)
 		{
 			player = null;
 
@@ -239,7 +229,7 @@ namespace Managers
 			return false;
 		}
 
-		private void InitializeRoleData()
+		private static void InitializeRoleData()
 		{
 			_roleDataDictionary = new Dictionary<PlayerRole, RoleDataScriptable>();
 			_roleSlotsDictionary = new Dictionary<PlayerRole, RoleSlot>();
@@ -257,30 +247,8 @@ namespace Managers
 			}
 		}
 
-        //Max role level = 99
-        //Expon rate = ER = 1.2
-		//Rate temper = RT = 0.5
-		//Rate multiplier = RM = 100
-        //((ER^(level-1))^RT-(ER^(-1))^RT)*RM
-		//This formula starts at zero and increases at a high but reasonable rate, controllable by 3 parameters
-		//The expon rate combined with the rate multiplier will determine the overall rate of change of the EXP table
-		//The rate multiplier simply scales all the EXP values by a factor
-        private void CalculateEXPTable()
+		public static void Initialize()
 		{
-			for (int i = 0; i < MAX_ROLE_LEVEl; i++)
-			{
-
-				//float t = ((float)i + 2) / 100;
-				//float pow = (t * t);
-				//float sqrt = 1 - Mathf.Sqrt(1 - pow);
-				_expTableLookup[i] = Mathf.RoundToInt(RM * (Mathf.Pow(Mathf.Pow(ER, i - 1),RT) - Mathf.Pow(Mathf.Pow(ER, -1),RT)));
-
-            }
-		}
-
-		public void Initialize()
-		{
-			Debug.Log("Init: " + this);
 			InitializeRoleData();
 		}
 	}

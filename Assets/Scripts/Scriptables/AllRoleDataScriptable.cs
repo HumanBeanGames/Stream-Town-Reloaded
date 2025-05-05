@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Utils;
 
@@ -6,7 +7,8 @@ namespace Scriptables
 	[CreateAssetMenu(fileName = "All Role Data", menuName = "ScriptableObjects/AllRoleDataScriptable", order = 2)]
 	public class AllRoleDataScriptable : ScriptableObject
 	{
-		public RoleDataScriptable[] RoleData;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        public RoleDataScriptable[] RoleData;
 
 		public RoleDataScriptable GetDataByRoleType(PlayerRole role)
 		{

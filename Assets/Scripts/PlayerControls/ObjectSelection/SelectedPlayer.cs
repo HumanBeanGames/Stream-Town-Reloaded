@@ -21,7 +21,7 @@ namespace PlayerControls.ObjectSelection
 		public void RecruitChange(int index)
 		{
 			RoleHandler roleHandler = ((RoleHandler)_selectedObject);
-			if (roleHandler.TrySetRole(GameManager.Instance.RoleManager.GetAvailableRoleFromIndex(index), out string reason))
+			if (roleHandler.TrySetRole(RoleManager.GetAvailableRoleFromIndex(index), out string reason))
 			{
 				UpdateExperience(roleHandler);
 			}
@@ -45,8 +45,8 @@ namespace PlayerControls.ObjectSelection
 
 				_selectedObjectTypeUI.SelectionDropdown.ClearOptions();
 
-				_selectedObjectTypeUI.SelectionDropdown.AddOptions(GameManager.Instance.RoleManager.GetAvailableRolesAsString());
-				_selectedObjectTypeUI.SelectionDropdown.SetValueWithoutNotify(GameManager.Instance.RoleManager.GetRoleIndex(roleHandler.CurrentRole));
+				_selectedObjectTypeUI.SelectionDropdown.AddOptions(RoleManager.GetAvailableRolesAsString());
+				_selectedObjectTypeUI.SelectionDropdown.SetValueWithoutNotify(RoleManager.GetRoleIndex(roleHandler.CurrentRole));
 
 				if (string.IsNullOrEmpty(roleHandler.Player.TwitchUser.Username))
 				{
@@ -150,12 +150,12 @@ namespace PlayerControls.ObjectSelection
 		public void UpdateRole(RoleHandler roleHandler)
 		{
 			_selectedObjectTypeUI.Role.text = "Role: " + roleHandler.CurrentRole.ToString();
-			_selectedObjectTypeUI.RoleImage.sprite = GameManager.Instance.RoleManager.AllRoleData.GetDataByRoleType(roleHandler.CurrentRole).DisplayIcon;
+			_selectedObjectTypeUI.RoleImage.sprite = RoleManager.AllRoleData.GetDataByRoleType(roleHandler.CurrentRole).DisplayIcon;
 		}
 
 		public void UpdateExperience(RoleHandler roleHandler)
 		{
-			_selectedObjectTypeUI.Description.text = "Lvl. " + roleHandler.PlayerRoleData.CurrentLevel + " /  Lvl. " + RoleManager.MAX_ROLE_LEVEl;
+			_selectedObjectTypeUI.Description.text = "Lvl. " + roleHandler.PlayerRoleData.CurrentLevel + " /  Lvl. " + RoleManager.MaxRoleLevel;
 			_selectedObjectTypeUI.GreenSliderValue.text = roleHandler.PlayerRoleData.CurrentExp + " / " + roleHandler.PlayerRoleData.RequiredExp;
 			if (roleHandler.PlayerRoleData.CurrentExp != 0.0f)
 				_selectedObjectTypeUI.GreenSlider.value = ((float)roleHandler.PlayerRoleData.CurrentExp / roleHandler.PlayerRoleData.RequiredExp);

@@ -12,9 +12,6 @@ namespace Twitch.Commands
         private static PlayerManager _playerManager;
         public static PlayerManager PlayerManager => _playerManager ??= GameManager.Instance.PlayerManager;
 
-        private static RoleManager _roleManager;
-        public static RoleManager RoleManager => _roleManager ??= GameManager.Instance.RoleManager;
-
         public static string SellResource(Player player, string command, params string[] args)
         {
             if (PlayerManager.Ruler != player && !GameMasterCommands.IsGameMaster(player)) return "You are not authorized to sell resources.";
@@ -138,7 +135,7 @@ namespace Twitch.Commands
                 string r = char.ToUpper(args[1][0]) + args[1].Substring(1);
                 if (Enum.TryParse(r, out PlayerRole role))
                 {
-                    if (GameManager.Instance.RoleManager.IsRoleAvailabe(role))
+                    if (RoleManager.IsRoleAvailabe(role))
                     {
                         GameManager.Instance.PlayerManager.SwapRecruitRole(recruit, role);
                         return $"{player.TwitchUser.Username} Successfully changed recruit {id} to {role}!";
@@ -157,7 +154,7 @@ namespace Twitch.Commands
             if (int.TryParse(args[0], out int id))
             {
                 Player recruit = GameManager.Instance.PlayerManager.GetRecruitByIndex(id);
-                return $"{player.TwitchUser.Username} ----- Recruit {id} | Current role {recruit.RoleHandler.CurrentRole} | Health: {recruit.HealthHandler.Health}/{recruit.HealthHandler.MaxHealth} | Level: {recruit.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MAX_ROLE_LEVEl} | Experience: {recruit.RoleHandler.PlayerRoleData.CurrentExp}/{recruit.RoleHandler.PlayerRoleData.RequiredExp}";
+                return $"{player.TwitchUser.Username} ----- Recruit {id} | Current role {recruit.RoleHandler.CurrentRole} | Health: {recruit.HealthHandler.Health}/{recruit.HealthHandler.MaxHealth} | Level: {recruit.RoleHandler.PlayerRoleData.CurrentLevel}/{RoleManager.MaxRoleLevel} | Experience: {recruit.RoleHandler.PlayerRoleData.CurrentExp}/{recruit.RoleHandler.PlayerRoleData.RequiredExp}";
             }
             return $"{args[0]} is not a valid id";
         }
