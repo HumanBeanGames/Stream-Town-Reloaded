@@ -9,7 +9,7 @@ namespace Managers
 	/// Handles the time passage in game.
 	/// </summary>
 	[GameManager]
-	public static class TimeManager
+	public static class TimeManager 
 	{
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static TimeConfig Config = TimeConfig.Instance;
@@ -48,16 +48,30 @@ namespace Managers
         [HideInInspector]
         private static Runner runner;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void InitializeRunner()
+        private static Runner RunnerInstance
         {
-            GameObject runnerObject = new GameObject("TimeManagerRunner");
-            runner = runnerObject.AddComponent<Runner>();
-            UnityEngine.Object.DontDestroyOnLoad(runnerObject);
-			runner.StartCoroutine(UpdateWorldTimeCoroutine());
+            get
+            {
+                if (runner == null)
+                {
+                    GameObject runnerObject = new GameObject("TimeManagerRunner");
+                    runnerObject.hideFlags = HideFlags.HideAndDontSave;
+                    runner = runnerObject.AddComponent<Runner>();
+                    UnityEngine.Object.DontDestroyOnLoad(runnerObject);
+                }
+                return runner;
+            }
         }
 
-        public static void StartCoroutine(IEnumerator routine) => runner.StartCoroutine(routine);
+        public static Coroutine StartCoroutine(IEnumerator routine)
+        {
+            return RunnerInstance.StartCoroutine(routine);
+        }
+
+        public static void StopCoroutine(Coroutine coroutine)
+        {
+            RunnerInstance.StopCoroutine(coroutine);
+        }
 
         private static IEnumerator UpdateWorldTimeCoroutine()
         {
@@ -66,6 +80,12 @@ namespace Managers
                 worldTimePassed += Time.deltaTime;
                 yield return null; // Wait for the next frame
             }
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InitializeRunner()
+        {
+            StartCoroutine(UpdateWorldTimeCoroutine());
         }
 	}
 }

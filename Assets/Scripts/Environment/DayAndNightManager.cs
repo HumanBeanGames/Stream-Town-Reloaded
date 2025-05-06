@@ -49,7 +49,10 @@ namespace Environment
 		
 		[HideInInspector]
 		private static Volume _postProcessVolume;
-		public static Volume PostProcessVolume => _postProcessVolume;
+		public static Volume PostProcessVolume
+		{
+			get => GetVolume(ref _postProcessVolume, Config.dayPP);
+		}
 
 		//Day and night private properties
 		[HideInInspector]
