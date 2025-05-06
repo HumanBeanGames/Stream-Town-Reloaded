@@ -2,6 +2,7 @@ using Buildings;
 using Character;
 using GameEventSystem.Events.Voting;
 using Managers;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,29 +17,70 @@ namespace GameEventSystem
 	/// <summary>
 	/// Handles all Game Events, queueing up the events to be dispatched in order.
 	/// </summary>
+	[GameManager]
 	public static class GameEventManager
 	{
-		private const float _RULER_VOTE_MIN_TIME = 3600;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static GameEventConfig Config = GameEventConfig.Instance;
+
+		private static float _rulerVoteMinTime => Config.rulerVoteMinTime;
+
+		[HideInInspector]
 		private static float _timeUntilRulerVote;
 
-		[SerializeField]
-		private static Transform _fishGodSpawn;
-		[SerializeField]
-		private static ParticleSystem _fallingFishVFX;
-		[SerializeField]
-		private static bool _logEvents = true;
+        [HideInInspector]
+        private static Transform _fishGodSpawn;
+		public static Transform FishGodSpawn
+		{
+			get
+			{
+				if (_fishGodSpawn == null)
+				{
+					GameObject foundObject = GameObject.FindWithTag("FishGodSpawn");
+					if (foundObject != null)
+					{
+						_fishGodSpawn = foundObject.transform;
+					}
+				}
+				return _fishGodSpawn;
+			}
+			set { _fishGodSpawn = value; }
+		}
 
-		private static SortedSet<GameEvent> _eventQueue = new SortedSet<GameEvent>(new SortGameEventStartTime());
+        [HideInInspector]
+        private static ParticleSystem _fallingFishVFX;
+		public static ParticleSystem FallingFishVFX
+		{
+			get
+			{
+				if (_fallingFishVFX == null)
+				{
+					GameObject foundObject = GameObject.FindWithTag("RainingFish");
+					if (foundObject != null)
+					{
+						_fallingFishVFX = foundObject.GetComponent<ParticleSystem>();
+					}
+				}
+				return _fallingFishVFX;
+			}
+			set { _fallingFishVFX = value; }
+		}
 
-		private static GameEvent _currentEvent = null;
-		private static bool _eventActive = false;
-		private static GameManager _gameManager;
-		
-		private static bool _canStartNewRulerVote = false;
+        [HideInInspector]
+        private static bool _logEvents = true;
+
+        [HideInInspector]
+        private static SortedSet<GameEvent> _eventQueue = new SortedSet<GameEvent>(new SortGameEventStartTime());
+
+        [HideInInspector]
+        private static GameEvent _currentEvent = null;
+        [HideInInspector]
+        private static bool _eventActive = false;
+
+        [HideInInspector]
+        private static bool _canStartNewRulerVote;
 
 		public static GameEvent CurrentEvent => _currentEvent;
-		public static Transform FishGodSpawn => _fishGodSpawn;
-		public static ParticleSystem FallingFishVFX => _fallingFishVFX;
 		public static float TimeTillRulerVote
 		{
 			get { return _timeUntilRulerVote; }	
@@ -46,6 +88,7 @@ namespace GameEventSystem
 		}
 		public static bool CanStartNewRulerVote
 		{
+			get { return _canStartNewRulerVote; }
 			set { _canStartNewRulerVote = value;}
 		}
 
@@ -224,7 +267,7 @@ namespace GameEventSystem
 						StartNewRulerVote();
 					}
 
-					_timeUntilRulerVote = _RULER_VOTE_MIN_TIME;
+					_timeUntilRulerVote = _rulerVoteMinTime;
 				}
 			}
 		}

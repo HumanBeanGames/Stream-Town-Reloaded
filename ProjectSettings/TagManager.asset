@@ -9,6 +9,8 @@ TagManager:
   - Tree
   - GameMenu
   - UI_Main
+  - FishGodSpawn
+  - RainingFish
   layers:
   - Default
   - TransparentFX
