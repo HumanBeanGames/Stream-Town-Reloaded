@@ -115,7 +115,7 @@ namespace Managers
                 }
 
                 SetSeasonMaterial(nextSeason, transition);
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
 
             CurrentSeason = nextSeason;

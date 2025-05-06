@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using Managers;
 using System;
 using Sirenix.OdinInspector;
+using Buildings;
 
 namespace Environment
 {
@@ -118,7 +119,7 @@ namespace Environment
 					_timeTillTransition = 0;
 
 					yield return null;
-				}
+                }
 
 				IsDayTime = !IsDayTime;
 				OnTimeChanged();
@@ -143,7 +144,7 @@ namespace Environment
 					_timeTillTransition = 0;
 
 					yield return null;
-				}
+                }
 
 				IsDayTime = !IsDayTime;
 				OnTimeChanged();

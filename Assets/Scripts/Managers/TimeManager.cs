@@ -78,7 +78,7 @@ namespace Managers
             while (true)
             {
                 worldTimePassed += Time.deltaTime;
-                yield return null; // Wait for the next frame
+                yield return null;
             }
         }
 
