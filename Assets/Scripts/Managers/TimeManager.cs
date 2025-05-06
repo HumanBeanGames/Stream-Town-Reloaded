@@ -57,6 +57,8 @@ namespace Managers
 			runner.StartCoroutine(UpdateWorldTimeCoroutine());
         }
 
+        public static void StartCoroutine(IEnumerator routine) => runner.StartCoroutine(routine);
+
         private static IEnumerator UpdateWorldTimeCoroutine()
         {
             while (true)

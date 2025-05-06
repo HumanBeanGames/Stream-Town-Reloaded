@@ -1,3 +1,4 @@
+using Environment;
 using Managers;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,7 +78,7 @@ namespace Enemies
 					_spawnedEnemies.RemoveAt(i);
 			}
 
-			if (!GameStateManager.ObjectsPooled || !CanSpawnEnemies || GameManager.Instance.DayNightManager.IsDayTime)
+			if (!GameStateManager.ObjectsPooled || !CanSpawnEnemies || DayAndNightManager.IsDayTime)
 				return;
 
 			if (_spawnedEnemies.Count < _maxEnemies)
@@ -118,7 +119,7 @@ namespace Enemies
 
 		private void Start()
 		{
-			GameManager.Instance.DayNightManager.OnDayStarted += OnDayStarted;
+			DayAndNightManager.OnDayStarted += OnDayStarted;
 		}
 	}
 }

@@ -12,6 +12,8 @@ TagManager:
   - FishGodSpawn
   - RainingFish
   - WeatherVFX
+  - MainLight
+  - PostProcessing
   layers:
   - Default
   - TransparentFX

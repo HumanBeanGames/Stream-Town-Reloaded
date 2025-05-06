@@ -47,7 +47,6 @@ namespace Managers
 		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
-		private DayAndNightManager _dayNightManager = null;
 		private AudioSourcesManager _audioSourcesManager = null;
 
 		public UIManager UIManager { get; set; }
@@ -88,7 +87,6 @@ namespace Managers
 		public SaveManager SaveManager => _saveManager;
 		public GUIDManager GUIDManager => _gUIDManager;
 		public EnemySpawner EnemySpawner => _enemySpawner;
-		public DayAndNightManager DayNightManager => _dayNightManager;
 
 		public AudioSourcesManager AudioSourcesManager => _audioSourcesManager;
 
@@ -175,9 +173,6 @@ namespace Managers
 
 			if (!TryGetComponent(out _gUIDManager))
 				Debug.LogError("GUIDManager not found on GameManager", this);
-
-			if (!TryGetComponent(out _dayNightManager))
-				Debug.LogError("DayAndNightManager not found on GameManager");
 
 			if (!TryGetComponent(out _audioSourcesManager))
 				Debug.LogError("AudioSourcesManager not found on GameManager");

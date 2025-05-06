@@ -323,7 +323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2863939470258754367}
   - component: {fileID: 2863939470258754366}
-  - component: {fileID: 306413591106896399}
   - component: {fileID: 713519632}
   - component: {fileID: 713519633}
   - component: {fileID: 8939439480643344643}
@@ -380,27 +379,6 @@ MonoBehaviour:
   <BuildingsCostResources>k__BackingField: 1
   <PlayerRoleLimits>k__BackingField: 1
   <IgnoreTechUnlocks>k__BackingField: 0
---- !u!114 &306413591106896399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863939470258754337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386db9562b417e49904e1fbe98f5389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainLightSource: {fileID: 3093599078454480756}
-  _dayLength: 236
-  _nightLength: 56
-  _transitionLength: 8
-  _nightLightIntensity: 0.3
-  _dayLightIntensity: 2
-  _buildingMaterial: {fileID: 2100000, guid: fdfb0b9e62e356e46ae2218394e8fabc, type: 2}
-  _maxEmissionStrength: 2.5
-  _postProcessVolume: {fileID: 0}
 --- !u!114 &713519632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,11 +638,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 9001309304378457942}
   m_SourcePrefab: {fileID: 100100000, guid: 34590dfb0cca38a4da0a81ba32b47104, type: 3}
---- !u!108 &3093599078454480756 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 3888943752515097505, guid: 34590dfb0cca38a4da0a81ba32b47104, type: 3}
-  m_PrefabInstance: {fileID: 2240231051591048405}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3093599078454480757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3888943752515097504, guid: 34590dfb0cca38a4da0a81ba32b47104, type: 3}
