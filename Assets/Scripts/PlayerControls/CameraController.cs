@@ -310,11 +310,11 @@ namespace PlayerControls
 				if (obj != null)
 				{
 					_target = obj;
-					_gameManager.SelectionManager.OnObjectSelected.Invoke(_target, _target.Data);
+					ObjectSelectionManager.OnObjectSelected.Invoke(_target, _target.Data);
 					_autofollow = true;
 				}
 				else
-					_gameManager.SelectionManager.HideUI();
+					ObjectSelectionManager.HideUI();
 			}
 		}
 

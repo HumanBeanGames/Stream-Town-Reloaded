@@ -15,43 +15,41 @@ using Sensors;
 using Target;
 using SavingAndLoading.SavableObjects;
 using PlayerControls.ObjectSelection;
+using Sirenix.OdinInspector;
 
 namespace Managers
 {
-	public class ObjectSelectionManager : MonoBehaviour
+	[GameManager]
+	public static class ObjectSelectionManager
 	{
-		[SerializeField]
-		private UserInterface_ObjectSelection _selectionUI;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static ObjectSelectionConfig Config = ObjectSelectionConfig.Instance;
 
-		private UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
+        [SerializeField]
+		private static UserInterface_ObjectSelection _selectionUI;
 
-		private bool _startedGroupSelection = false;
-		private bool _startedSelection = false;
-		private Vector3 _startedSelectionPosition = Vector3.zero;
-		private Vector3 _endedSelectionPosition = Vector3.zero;
+		private static UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
 
-		private (SelectableObject, object) _selectedObject;
-		private bool _objectSelected = false;
+		private static bool _startedGroupSelection = false;
+		private static bool _startedSelection = false;
+		private static Vector3 _startedSelectionPosition = Vector3.zero;
+		private static Vector3 _endedSelectionPosition = Vector3.zero;
 
-		private List<RoleHandler> _selectedPlayerGroup;
-		private bool _groupSelected = false;
+		private static (SelectableObject, object) _selectedObject;
+		private static bool _objectSelected = false;
 
-		public UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
+		private static List<RoleHandler> _selectedPlayerGroup;
+		private static bool _groupSelected = false;
 
-		/// <summary>
-		/// Called when SelectableObject is selected by the mouse and displays it's data.
-		/// </summary>
-		/// <param name="selected"></param>
-		/// <param name="data"></param>
-		private void ObjectSelected(SelectableObject selected, object data)
+		public static UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
+
+		private static void ObjectSelected(SelectableObject selected, object data)
 		{
 			if (_selectionUI == null)
 				return;
 
 			_selectedObject.Item1 = selected;
 			_selectedObject.Item2 = data;
-
-			//		Debug.Log($"Object Selected: {selected.gameObject.transform.parent.name}, {selected.SelectableType}");
 
 			_objectSelected = true;
 			switch (selected.SelectableType)
@@ -77,7 +75,7 @@ namespace Managers
 			}
 		}
 
-		private void Select(PlayerInputManager.Button button)
+		private static void Select(PlayerInputManager.Button button)
 		{
 			_startedSelection = true;
 			if (RayTraceFromCamera(Camera.main, PlayerInputManager.MousePosition, out Vector3 hitPos))
@@ -100,42 +98,31 @@ namespace Managers
 
 				_selectionUI.DisableCheckUI();
 			}
-			//Debug.Log("Started Object Selection");
 		}
 
-		private void StartGroupSelect(PlayerInputManager.Button button)
+		private static void StartGroupSelect(PlayerInputManager.Button button)
 		{
 			_startedGroupSelection = true;
 			_selectionUI.HideContext();
-
-			//Debug.Log("Started Group Selection");
 		}
 
-		/// <summary>
-		/// Creates a ray from the camera that stops at the world height (y == 0)
-		/// </summary>
-		/// <param name="cam">The camera doing the trace</param>
-		/// <param name="mousePos">The mouses position in screen space</param>
-		/// <param name="hitPosition">The world position rays ending</param>
-		/// <returns></returns>
-		public bool RayTraceFromCamera(Camera cam, Vector2 mousePos, out Vector3 hitPosition)
+		public static bool RayTraceFromCamera(Camera cam, Vector2 mousePos, out Vector3 hitPosition)
         {
 			Vector3 camRay = cam.ScreenPointToRay(mousePos).direction;
 			float t = (0 - cam.transform.position.y) / camRay.y;
 			hitPosition = cam.transform.position + (camRay * t);
 
-			//return GameManager.Instance.ProceduralWorldGenerator.IsPointWithinBounds(hitPosition);
 			return true;
         }
 
-		private void GroupSelect(PlayerInputManager.Button button)
+		private static void GroupSelect(PlayerInputManager.Button button)
 		{
 			if (_startedGroupSelection)
 			{
 				if (RayTraceFromCamera(Camera.main, PlayerInputManager.MousePosition, out Vector3 hitPos))
 					_endedSelectionPosition = hitPos;
 				else
-					Debug.LogError("This should not be happening" + this);
+					Debug.LogError("This should not be happening" + typeof(ObjectSelectionManager));
 
 				List<PoolableObject> objs = ObjectPoolingManager.GetAllActiveObjectsOfTypeWithinAABB(_startedSelectionPosition, _endedSelectionPosition, "Player");
 				List<RoleHandler> roleHandlers = new List<RoleHandler>();
@@ -165,7 +152,6 @@ namespace Managers
 					_objectSelected = false;
 					_groupSelected = false;
 				}
-				Debug.Log("Ended selections");
 				_startedGroupSelection = false;
 				_startedSelection = false;
 
@@ -175,10 +161,9 @@ namespace Managers
 				_selectionUI.HideContext();
 				_selectionUI.DisableCheckUI();
 			}
-			// Find all object of selected type within the AABB of _startedSelectionPosition and _endedSelectionPosition
 		}
 
-		public void HideUI()
+		public static void HideUI()
 		{
 			if (_selectionUI == null)
 				return;
@@ -186,19 +171,29 @@ namespace Managers
 			_selectionUI.HideContext();
 		}
 
-		public void SetSelectionFalse()
+		public static void SetSelectionFalse()
 		{
 			_groupSelected = false;
 			_objectSelected = false;
 		}
 
-		// Unity Events.
-		private void Awake()
+		private static void OnEnable()
 		{
-			_onObjectSelected.AddListener(ObjectSelected);
+			PlayerInputManager.OnLeftClickPress += Select;
+			PlayerInputManager.OnRightClickPress += OnRightClick;
+			PlayerInputManager.OnLeftClickRelease += GroupSelect;
+			PlayerInputManager.OnLeftClickHold += StartGroupSelect;
 		}
 
-		private void Update()
+		private static void OnDisable()
+		{
+			PlayerInputManager.OnLeftClickPress -= Select;
+			PlayerInputManager.OnRightClickPress -= OnRightClick;
+			PlayerInputManager.OnLeftClickRelease -= GroupSelect;
+			PlayerInputManager.OnLeftClickHold -= StartGroupSelect;
+		}
+
+		private static void Update()
 		{
 			if (_startedGroupSelection)
 			{
@@ -206,11 +201,10 @@ namespace Managers
 				if (RayTraceFromCamera(Camera.main, PlayerInputManager.MousePosition, out Vector3 hitPos ))
 					mousePos = hitPos + (Vector3.up * 0.01f);
 				else
-					Debug.LogError("Cant find mouse point" + this);
+					Debug.LogError("Cant find mouse point" + typeof(ObjectSelectionManager));
 
 				_selectionUI.SetGroupSelectionArea(_startedSelectionPosition, mousePos);
 			}
-
 
 			if (PlayerInputManager.EscapePressed)
 			{
@@ -218,7 +212,7 @@ namespace Managers
 			}
 		}
 
-		public void OnRightClick(PlayerInputManager.Button button)
+		public static void OnRightClick(PlayerInputManager.Button button)
 		{
 
 			if (_groupSelected)
@@ -278,34 +272,19 @@ namespace Managers
 			}
 		}
 
-		public void SetGroupTarget(List<RoleHandler> recruits, Targetable target)
+		public static void SetGroupTarget(List<RoleHandler> recruits, Targetable target)
 		{
 			for (int i = 0; i < recruits.Count; i++)
 				recruits[i].Player.TargetSensor.TrySetTarget(target, recruits[i].Player);
 		}
 
-		public void SetGroupStation(List<RoleHandler> recruits, Station station)
+		public static void SetGroupStation(List<RoleHandler> recruits, Station station)
 		{
 			for (int i = 0; i < recruits.Count; i++)
 				recruits[i].Player.StationSensor.TrySetStation(station, recruits[i].Player);
 		}
 
-		private void OnEnable()
-		{
-			PlayerInputManager.OnLeftClickPress += Select;
-			PlayerInputManager.OnRightClickPress += OnRightClick;
-			PlayerInputManager.OnLeftClickRelease += GroupSelect;
-			PlayerInputManager.OnLeftClickHold += StartGroupSelect;
-		}
-
-		private void OnDisable()
-		{
-			PlayerInputManager.OnLeftClickPress -= Select;
-			PlayerInputManager.OnRightClickPress -= OnRightClick;
-			PlayerInputManager.OnLeftClickRelease -= GroupSelect;
-			PlayerInputManager.OnLeftClickHold -= StartGroupSelect;
-		}
-		private void OnDrawGizmos()
+		private static void OnDrawGizmos()
 		{
 			if (_startedGroupSelection)
 			{

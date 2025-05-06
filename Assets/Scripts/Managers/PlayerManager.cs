@@ -22,9 +22,9 @@ namespace Managers
 	public static class PlayerManager
 	{
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        private static PlayerConfig Config = PlayerConfig.Instance;
+        private static ObjectSelectionConfig Config = ObjectSelectionConfig.Instance;
 
-		[HideInInspector]
+        [HideInInspector]
         private static List<Player> _players = new List<Player>();
         [HideInInspector]
         private static List<Player> _recruits = new List<Player>();
