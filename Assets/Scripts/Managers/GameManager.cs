@@ -47,7 +47,6 @@ namespace Managers
 		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
-		private WeatherManager _weatherManager = null;
 		private DayAndNightManager _dayNightManager = null;
 		private AudioSourcesManager _audioSourcesManager = null;
 
@@ -102,8 +101,6 @@ namespace Managers
 		private BuildingType _lastBuilding = BuildingType.Barracks;
 		//END TEMP
 		public List<PathProbe> PathProbes => _pathProbes;
-
-		public WeatherManager WeatherManager => _weatherManager;
 
 		public GameObject ConnectPanel
 		{
@@ -178,9 +175,6 @@ namespace Managers
 
 			if (!TryGetComponent(out _gUIDManager))
 				Debug.LogError("GUIDManager not found on GameManager", this);
-
-			if (!TryGetComponent(out _weatherManager))
-				Debug.LogError("WeatherManager not found on GameManager");
 
 			if (!TryGetComponent(out _dayNightManager))
 				Debug.LogError("DayAndNightManager not found on GameManager");

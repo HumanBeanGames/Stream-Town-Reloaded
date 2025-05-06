@@ -84,7 +84,7 @@ namespace Managers
         private static IEnumerator TransitionSeason(Season nextSeason, float transitionTime, bool triggerEvent = true)
         {
             yield return new WaitUntil(()=>GameManager.Instance != null);
-            GameManager.Instance.WeatherManager.StopWeather();
+            WeatherManager.StopWeather();
             yield return new WaitForEndOfFrame();
 
             OnSeasonChanging?.Invoke(nextSeason);
@@ -94,7 +94,7 @@ namespace Managers
             var nextSeasonData = AllSeasonsData?.GetSeasonData(nextSeason);
 
             float transition = 0;
-            GameManager.Instance.WeatherManager.StartWeather(nextSeason);
+            WeatherManager.StartWeather(nextSeason);
             while (transition < 1)
             {
                 transition += (transitionTime == 0) ? 1 : Time.deltaTime / transitionTime;

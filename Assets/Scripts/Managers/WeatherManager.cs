@@ -1,4 +1,5 @@
 using Scriptables;
+using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -6,32 +7,34 @@ using Utils;
 
 namespace Managers
 {
-	public class WeatherManager : MonoBehaviour
+	[GameManager]
+	public static class WeatherManager
 	{
-		private VisualEffect _currentVFX;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static WeatherConfig Config = WeatherConfig.Instance;
 
-		[SerializeField]
-		private VisualEffect _autumnVFX;
-		[SerializeField]
-		private VisualEffect _winterVFX;
-		[SerializeField]
-		private VisualEffect _summerVFX;
-		[SerializeField]
-		private VisualEffect _springVFX;
-		public void StartWeather(Season season)
+		[HideInInspector]
+        private static VisualEffect _currentVFX;
+
+		private static VisualEffect _autumnVFX => Config.autumnVFX;
+		private static VisualEffect _winterVFX => Config.winterVFX;
+		private static VisualEffect _summerVFX => Config.summerVFX;
+		private static VisualEffect _springVFX => Config.springVFX;
+
+		public static void StartWeather(Season season)
 		{
-			StartCoroutine(RunWeather(SeasonManager.AllSeasonsData.GetSeasonData(season)));
+			runner.StartCoroutine(RunWeather(SeasonManager.AllSeasonsData.GetSeasonData(season)));
 		}
 
-		public void StopWeather()
+		public static void StopWeather()
 		{
-			StopCoroutine("RunWeather");
+			runner.StopAllCoroutines();
 
 			if (_currentVFX != null)
 				_currentVFX.Stop();
 		}
 
-		private IEnumerator RunWeather(SeasonScriptable data)
+		private static IEnumerator RunWeather(SeasonScriptable data)
 		{
 			_currentVFX = data.VFX;
 			_currentVFX.Play();
@@ -55,7 +58,7 @@ namespace Managers
 			_currentVFX = null;
 		}
 
-		private void SetDataVFX()
+		private static void SetDataVFX()
 		{
 			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Summer).VFX = _summerVFX;
 			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Autumn).VFX = _autumnVFX;
@@ -63,9 +66,20 @@ namespace Managers
 			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Spring).VFX = _springVFX;
 		}
 
-		private void Start()
+
+        private class Runner : MonoBehaviour { }
+        [HideInInspector]
+        private static Runner runner;
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+		private static void InitializeRunner()
 		{
+			GameObject runnerObject = new GameObject("WeatherManagerRunner");
+			runner = runnerObject.AddComponent<Runner>();
+			UnityEngine.Object.DontDestroyOnLoad(runnerObject);
 			SetDataVFX();
 		}
+
+
 	}
 }
