@@ -42,7 +42,6 @@ namespace Managers
 		private GameObject _connectPanel;
 
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
-		private SaveManager _saveManager = null;
 		private MetaData.MetaData _metaData = null;
 		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
@@ -84,7 +83,6 @@ namespace Managers
 		// Properties
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
 		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
-		public SaveManager SaveManager => _saveManager;
 		public GUIDManager GUIDManager => _gUIDManager;
 		public EnemySpawner EnemySpawner => _enemySpawner;
 
@@ -155,7 +153,7 @@ namespace Managers
 				else if (_metaData.LoadType == MetaData.LoadType.Load)
 				{
 					Debug.Log("Loading World!");
-					_saveManager.LoadGame();
+					SaveManager.LoadGame();
 				}
 			}
 			else
@@ -168,9 +166,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _saveManager))
-				Debug.LogError("SaveManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _gUIDManager))
 				Debug.LogError("GUIDManager not found on GameManager", this);
 

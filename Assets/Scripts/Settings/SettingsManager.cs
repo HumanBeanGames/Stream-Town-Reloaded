@@ -928,7 +928,7 @@ namespace Settings
 			if (_apply)
 			{
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+					SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
 			}
 			if (!_loadingData)
 			{
@@ -1144,7 +1144,7 @@ namespace Settings
 				_apply = false;
 
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+					SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
 			}
 			else
 			{
@@ -1209,7 +1209,7 @@ namespace Settings
 			SetChannelName(_channelName);
 
 			if (GameManager.Instance)
-				GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+				SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
 			_apply = false;
 		}
 

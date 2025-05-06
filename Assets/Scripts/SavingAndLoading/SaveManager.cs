@@ -24,36 +24,66 @@ using SavingAndLoading.SavableObjects;
 using Target;
 using GameEventSystem;
 using TownGoal;
+using Sirenix.OdinInspector;
 
 namespace SavingAndLoading
 {
-	public class SaveManager : MonoBehaviour
+	[GameManager]
+	public static class SaveManager
 	{
-		[SerializeField]
-		private ProceduralWorldGenerator _generationObject = null;
-		private List<Player> _players = null;
-		private List<Enemy> _enemies = null;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static SaveConfig Config = SaveConfig.Instance;
 
-		private bool _autosave = false;
-		private float _autosaveTime = 0.0f;
-		private float _timeElapsed = 0.0f;
+		[HideInInspector]
+        private static ProceduralWorldGenerator _generationObject = null;
 
-		private int _loadPercent = 0;
-		public int LoadPercent => _loadPercent;
+        [HideInInspector]
+        private static ProceduralWorldGenerator GenerationObject
+        {
+            get
+            {
+                if (_generationObject == null)
+                {
+                    GameObject genObject = GameObject.FindWithTag("GenObject");
+                    if (genObject != null)
+                    {
+                        _generationObject = genObject.GetComponent<ProceduralWorldGenerator>();
+                    }
+                }
+                return _generationObject;
+            }
+        }
 
-		public event Action<float> UpdateProgress;
-		private void EscapePressed()
+		[HideInInspector]
+        private static List<Player> _players = null;
+		[HideInInspector]
+        private static List<Enemy> _enemies = null;
+
+		[HideInInspector]
+        private static bool _autosave = false;
+		[HideInInspector]
+        private static float _autosaveTime = 0.0f;
+		[HideInInspector]
+        private static float _timeElapsed = 0.0f;
+
+		[HideInInspector]
+        private static int _loadPercent = 0;
+		public static int LoadPercent => _loadPercent;
+
+		public static event Action<float> UpdateProgress;
+
+		private static void EscapePressed()
 		{
 			SceneManager.LoadScene(0);
 		}
 
-		public void SetAutosaveTime(float time)
+		public static void SetAutosaveTime(float time)
 		{
 			_autosaveTime = time;
 			_autosave = _autosaveTime <= 0.0f ? false : true;
 		}
 
-		private void Update()
+		private static void Update()
 		{
 			if(_autosave)
 				if(_timeElapsed >= _autosaveTime)
@@ -66,9 +96,9 @@ namespace SavingAndLoading
 		}
 
 		/// <summary>
-		/// Saves the entire game
+		/// Saves the current game state
 		/// </summary>
-		public void SaveGame()
+		public static void SaveGame()
 		{
 			Debug.Log("Saving Game");
 			WorldGenSaveData worldGenSave = GetWorldGenerationData();
@@ -92,7 +122,7 @@ namespace SavingAndLoading
 		/// </summary>
 		/// <param name="data">A list of PlayerSaveData to set GUIDs for</param>
 		/// <returns>An updated list of PlayerSaveData with GUIDs set</returns>
-		private List<PlayerSaveData> SetPlayerTargetGUIDs(List<PlayerSaveData> data)
+		private static List<PlayerSaveData> SetPlayerTargetGUIDs(List<PlayerSaveData> data)
 		{
 			for (int i = 0; i < data.Count; i++)
 			{
@@ -119,7 +149,7 @@ namespace SavingAndLoading
 		/// </summary>
 		/// <param name="data">A list of EnemySaveData to set GUIDs for</param>
 		/// <returns>An updated list of EnemySaveData with GUIDs set</returns>
-		private List<EnemySaveData> SetEnemyTargetGUIDs(List<EnemySaveData> data)
+		private static List<EnemySaveData> SetEnemyTargetGUIDs(List<EnemySaveData> data)
 		{
 			for (int i = 0; i < data.Count; i++)
 			{
@@ -142,7 +172,7 @@ namespace SavingAndLoading
 		/// Gathers all the enemies data needed for saving
 		/// </summary>
 		/// <returns>A list of enemy data structs to be saved</returns>
-		private List<EnemySaveData> GetEnemySaveData()
+		private static List<EnemySaveData> GetEnemySaveData()
 		{
 			List<EnemySaveData> enemySaveData = new List<EnemySaveData>();
 			_enemies = new List<Enemy>();
@@ -162,7 +192,7 @@ namespace SavingAndLoading
 		/// Gathers all the players data needed for saving
 		/// </summary>
 		/// <returns>A list of player data structs to be saved</returns>
-		private List<PlayerSaveData> GetPlayerSaveData()
+		private static List<PlayerSaveData> GetPlayerSaveData()
 		{
 			List<PlayerSaveData> playerSaveDatas = new List<PlayerSaveData>();
 
@@ -179,15 +209,16 @@ namespace SavingAndLoading
 		}
 
 		/// <summary>
-		/// Gathers all world generation data needed for saving
+		/// Gathers all the world generation data needed for saving
 		/// </summary>
-		/// <returns>The struct of world generation data</returns>
-		private WorldGenSaveData GetWorldGenerationData()
+		/// <returns>A WorldGenSaveData struct containing the world generation data</returns>
+		private static WorldGenSaveData GetWorldGenerationData()
 		{
 			WorldGenSaveData worldGenData = new WorldGenSaveData();
 
-			// The generated mesh 
-			worldGenData.MapMesh = new MeshSaveData(GameManager.Instance.ProceduralWorldGenerator.GeneratedMesh);
+			Mesh meshData = GenerationObject.GeneratedMesh;
+
+			worldGenData.MapMesh = new MeshSaveData(meshData);
 
 			// The generated resources
 			List<ResourceSaveData> resources = new List<ResourceSaveData>();
@@ -237,8 +268,8 @@ namespace SavingAndLoading
 		/// <summary>
 		/// Gathers all the buildings data needed for saving
 		/// </summary>
-		/// <returns>A list of building data structs to be saved to file</returns>
-		private List<BuildingSaveData> GetBuildingsData()
+		/// <returns>A list of building data structs to be saved</returns>
+		private static List<BuildingSaveData> GetBuildingsData()
 		{
 			List<BuildingSaveData> buildings = new List<BuildingSaveData>();
 			for (int i = 0; i < (int)BuildingType.Count; i++)
@@ -253,10 +284,10 @@ namespace SavingAndLoading
 		}
 
 		/// <summary>
-		/// Gathers the world data needed for saving
+		/// Gathers all the world data needed for saving
 		/// </summary>
 		/// <returns>The struct of world data to be saved to file</returns>
-		private WorldSaveData GetWorldData()
+		private static WorldSaveData GetWorldData()
 		{
 			WorldSaveData worldSaveData = new WorldSaveData();
 			worldSaveData.WoodResourceAmount = TownResourceManager.GetResourceAmount(Resource.Wood);
@@ -301,9 +332,9 @@ namespace SavingAndLoading
 
 
 		/// <summary>
-		/// Starts the loading coroutine,
+		/// Loads the saved game state
 		/// </summary>
-		public void LoadGame()
+		public static void LoadGame()
 		{
 			StartCoroutine(DelayedLoadGame());
 		}
@@ -313,7 +344,7 @@ namespace SavingAndLoading
 		/// Loads the game from file.
 		/// </summary>
 		/// <returns></returns>
-		private IEnumerator DelayedLoadGame()
+		private static IEnumerator DelayedLoadGame()
 		{
 			yield return null;
 			SaveGameData gameData = GameIO.LoadGameData();
@@ -329,7 +360,7 @@ namespace SavingAndLoading
 			// World generation mesh
 			Mesh meshData = genData.MapMesh.GetMeshFromData();
 
-			GameManager.Instance.ProceduralWorldGenerator.SetMesh(meshData);
+			GenerationObject.SetMesh(meshData);
 
 			// Resources
 			for (int i = 0; i < genData.Resources.Count; i++)
@@ -354,7 +385,7 @@ namespace SavingAndLoading
 			for (int i = 0; i < buildings.Count; i++)
 			{
 				var building = ObjectPoolingManager.GetPooledObject(buildings[i].BuildingType, false);
-				 ((SaveableBuilding)((building).SaveableObject)).LoadData((object)buildings[i]);
+				((SaveableBuilding)((building).SaveableObject)).LoadData((object)buildings[i]);
 
 				UpdateGraphBounds ugb = building.GetComponent<UpdateGraphBounds>();
 				if (ugb)
@@ -425,7 +456,7 @@ namespace SavingAndLoading
 				GameEventManager.StartNewRulerVote();
 
 			// Force all buildings to update their graph bounds.
-			_generationObject.ScanWorld();
+			GenerationObject.ScanWorld();
 
 			yield return new WaitForSeconds(25);
 			for(int i = 0; i < buildingsToUpdate.Count;i++)
@@ -434,16 +465,46 @@ namespace SavingAndLoading
 			}
 		}
 
-		private void OnEnable()
+		private class Runner : MonoBehaviour {
+            private void OnEnable()
+            {
+                DontDestroyOnLoad(this);
+            }
+        }
+		[HideInInspector]
+        private static Runner runner;
+
+		private static Runner RunnerInstance
 		{
-			//PlayerInputManager.OnEscape += EscapePressed;
-			//PlayerInputManager.OnSaveGame += SaveGame;
+			get
+			{
+				if (runner == null)
+				{
+					GameObject runnerObject = new GameObject("SaveManagerRunner");
+					runnerObject.hideFlags = HideFlags.HideAndDontSave;
+					runner = runnerObject.AddComponent<Runner>();
+				}
+				return runner;
+			}
 		}
 
-		private void OnDisable()
+		/// <summary>
+		/// Starts a coroutine
+		/// </summary>
+		/// <param name="routine">The coroutine to start</param>
+		/// <returns>The started coroutine</returns>
+		public static Coroutine StartCoroutine(IEnumerator routine)
 		{
-			//PlayerInputManager.OnEscape -= EscapePressed;
-			//PlayerInputManager.OnSaveGame -= SaveGame;
+			return RunnerInstance.StartCoroutine(routine);
+		}
+
+		/// <summary>
+		/// Stops a coroutine
+		/// </summary>
+		/// <param name="coroutine">The coroutine to stop</param>
+		public static void StopCoroutine(Coroutine coroutine)
+		{
+			RunnerInstance.StopCoroutine(coroutine);
 		}
 	}
 }

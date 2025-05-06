@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using PlayerControls;
 using UserInterface.MainMenu;
 using Managers;
+using SavingAndLoading;
 
 namespace UserInterface 
 {
@@ -83,7 +84,7 @@ namespace UserInterface
 				_settingsManager.SetUpCamera();
 				_settingsManager.GameSettingData(_cameraApplyChanges);
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_settingsManager.AutosaveTimeIntervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);
+					SaveManager.SetAutosaveTime(_settingsManager.AutosaveTimeIntervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);
 			}
 		}
 
