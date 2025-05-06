@@ -10,12 +10,11 @@ namespace VFX
 	{
         [SerializeField]
         private VisualEffect _visualEffect;
-        [SerializeField]
-        private Transform _transform;
+        public Transform transform;
 
         private void UpdateParticlePosition()
         {
-            _visualEffect.SetVector3("particlePosition", new Vector3(_transform.position.x, transform.position.y, _transform.position.z));
+            _visualEffect.SetVector3("particlePosition", new Vector3(transform.position.x, base.transform.position.y, transform.position.z));
         }
 
         private void Update()

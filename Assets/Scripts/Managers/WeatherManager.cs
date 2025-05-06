@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 using Utils;
+using VFX;
 
 namespace Managers
 {
@@ -42,6 +43,11 @@ namespace Managers
 					{
 						GameObject instance = GameObject.Instantiate(prefab, parent.transform);
 						vfx = instance.GetComponent<VisualEffect>();
+						VfxParticlePosition vfxParticlePosition = instance.GetComponent<VfxParticlePosition>();
+						if (vfxParticlePosition != null)
+						{
+							vfxParticlePosition.transform = Camera.main != null ? Camera.main.transform : GameObject.FindWithTag("MainCamera").transform;
+						}
 					}
 				}
 			}
