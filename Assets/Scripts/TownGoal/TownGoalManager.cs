@@ -3,25 +3,33 @@ using UnityEngine;
 
 namespace TownGoal
 {
-	using Data;
-	using System;
+    using Data;
+    using Managers;
+    using Sirenix.OdinInspector;
 
-	public class TownGoalManager : MonoBehaviour
+
+    [GameManager]
+    public static class TownGoalManager
 	{
-		public static int MaxGoals = 2;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static TownGoalConfig Config = TownGoalConfig.Instance;
 
-		private List<Goal> _currentGoals;
+		[HideInInspector]
+        public static int MaxGoals = 2;
 
-		public List<Goal> CurrentGoals => _currentGoals;
+        [HideInInspector]
+        private static List<Goal> _currentGoals;
+
+		public static List<Goal> CurrentGoals => _currentGoals;
 
 		// Objective UI.
 
-		public void Initialize()
+		public static void Initialize()
 		{
 			_currentGoals = new List<Goal>(1);
 		}
 
-		public bool StartNewGoal(Goal goal)
+		public static bool StartNewGoal(Goal goal)
 		{
 			if (_currentGoals.Contains(goal))
 			{
@@ -35,7 +43,7 @@ namespace TownGoal
 			return true;
 		}
 
-		public bool ForceStopGoal(Goal goal)
+		public static bool ForceStopGoal(Goal goal)
 		{
 			List<KeyValuePair<Objective, bool>> statuses = new List<KeyValuePair<Objective, bool>>();
 			foreach (var v in goal.ObjectivesStatuses)
@@ -49,7 +57,7 @@ namespace TownGoal
 			return true;
 		}
 
-		private void OnGoalCompleted(Goal goal)
+		private static void OnGoalCompleted(Goal goal)
 		{
 			goal.OnGoalCompleted -= OnGoalCompleted;
 			if (!_currentGoals.Contains(goal))
@@ -62,12 +70,12 @@ namespace TownGoal
 
 		}
 
-		private void BuildObjectiveUI(Objective objective)
+		private static void BuildObjectiveUI(Objective objective)
 		{
 
 		}
 
-		private void RemoveUIElement(Goal goal)
+		private static void RemoveUIElement(Goal goal)
 		{
 
 		}

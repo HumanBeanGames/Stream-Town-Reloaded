@@ -14,6 +14,7 @@ using Utils;
 using UserInterface;
 using System.Collections;
 using Sirenix.OdinInspector;
+using TownGoal;
 
 namespace Managers
 {
@@ -211,7 +212,7 @@ namespace Managers
 		public static Goal StartGoalFromNode(Node_SO node)
 		{
 			Goal goal = new Goal(node.Objectives);
-			GameManager.Instance.TownGoalManager.StartNewGoal(goal);
+			TownGoalManager.StartNewGoal(goal);
 			goal.OnGoalCompleted += GoalCompleted;
 			_goalsFollowed.Add(goal, node);
 			 if(_townGoalInterface == null)

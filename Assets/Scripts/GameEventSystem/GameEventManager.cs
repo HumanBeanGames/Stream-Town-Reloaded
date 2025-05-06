@@ -26,7 +26,7 @@ namespace GameEventSystem
 		private static float _rulerVoteMinTime => Config.rulerVoteMinTime;
 
 		[HideInInspector]
-		private static float _timeUntilRulerVote;
+		private static float _timeUntilRulerVote = 30;
 
         [HideInInspector]
         private static Transform _fishGodSpawn;
@@ -223,12 +223,6 @@ namespace GameEventSystem
 			_currentEvent = null;
 		}
 
-		public static void RunCoroutine(IEnumerator func)
-		{
-			// Note: StartCoroutine cannot be static, this method needs to be handled differently
-			// StartCoroutine(func);
-		}
-
 		private static void StartNextEvent()
 		{
 			if (_eventActive)
@@ -327,13 +321,6 @@ namespace GameEventSystem
 			}
 			else
 				Debug.Log("No Player Found");
-		}
-
-		private static void Start()
-		{
-			// Note: This method cannot be static, it needs to be handled differently
-			// _gameManager = GameManager.Instance;
-			// _timeUntilRulerVote = 30;
 		}
 	}
 }

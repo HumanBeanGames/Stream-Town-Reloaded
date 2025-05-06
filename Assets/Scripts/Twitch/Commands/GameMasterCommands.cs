@@ -6,6 +6,7 @@ using Pets.Enumerations;
 using System;
 using System.Linq;
 using TechTree;
+using TownGoal;
 using Twitch.Utils;
 using Utils;
 
@@ -147,9 +148,9 @@ namespace Twitch.Commands
         public static string CompleteCurrentGoal(Player player)
         {
             if (!player.IsGameMaster()) return null;
-            if (GameManager.Instance.TownGoalManager.CurrentGoals.Count > 0)
+            if (TownGoalManager.CurrentGoals.Count > 0)
             {
-                GameManager.Instance.TownGoalManager.CurrentGoals[0].ForceComplete();
+                TownGoalManager.CurrentGoals[0].ForceComplete();
                 return "Completed current goal.";
             }
             return "No goal to complete.";

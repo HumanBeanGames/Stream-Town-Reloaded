@@ -23,6 +23,7 @@ using Utils.Pooling;
 using SavingAndLoading.SavableObjects;
 using Target;
 using GameEventSystem;
+using TownGoal;
 
 namespace SavingAndLoading
 {
@@ -274,7 +275,7 @@ namespace SavingAndLoading
 				techTree.CurrentTechName = TechTreeManager.CurrentTech.name;
 				List<ObjectiveSaveData> objectives = new List<ObjectiveSaveData>();
 				Node_SO currentNode = TechTreeManager.CurrentTech;
-				Goal goal = GameManager.Instance.TownGoalManager.CurrentGoals[0];
+				Goal goal = TownGoalManager.CurrentGoals[0];
 				List<Objective> objs = new List<Objective>();
 
 				foreach (KeyValuePair<Objective, bool> obj in goal.ObjectivesStatuses)
