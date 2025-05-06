@@ -45,7 +45,6 @@ namespace Managers
 		private MetaData.MetaData _metaData = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
-		private AudioSourcesManager _audioSourcesManager = null;
 
 		public UIManager UIManager { get; set; }
 
@@ -84,8 +83,6 @@ namespace Managers
 		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
 		public EnemySpawner EnemySpawner => _enemySpawner;
 
-		public AudioSourcesManager AudioSourcesManager => _audioSourcesManager;
-
 		public MetaData.MetaData MetaDatas => _metaData;
 
 		public SettingsScriptable SettingsData => _settingsData;
@@ -122,7 +119,7 @@ namespace Managers
 			//UpdateManager.Update();
 			TileHelper.ProcessQueue();
 			GameEventManager.ProcessEvents();
-			_audioSourcesManager.ProcessSources();
+			AudioSourcesManager.ProcessSources();
 		}
 
 		private IEnumerator StartupSequence()
@@ -164,9 +161,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _audioSourcesManager))
-				Debug.LogError("AudioSourcesManager not found on GameManager");
-
 			_proceduralWorldGen = GetComponentInChildren<ProceduralWorldGenerator>();
 			if (_proceduralWorldGen == null)
 				Debug.LogError("ProceduralWorldGenerator not found in child object");

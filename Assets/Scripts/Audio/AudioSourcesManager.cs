@@ -1,19 +1,27 @@
-using System;
+using Managers;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Audio
 {
-	public class AudioSourcesManager : MonoBehaviour
+	[GameManager]
+	public static class AudioSourcesManager
 	{
-		private Queue<AudioHandler> _audioHandlers = new Queue<AudioHandler>();
-		private int _updatesPerTick = 30;
-		public void Initialize()
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static AudioSourcesConfig Config = AudioSourcesConfig.Instance;
+
+        [HideInInspector]
+        private static Queue<AudioHandler> _audioHandlers = new Queue<AudioHandler>();
+        [HideInInspector]
+        private static int _updatesPerTick = 30;
+
+		public static void Initialize()
 		{
 			_audioHandlers.Clear();
 		}
 
-		internal void ProcessSources()
+		internal static void ProcessSources()
 		{
 			for (int i = 0; i < _updatesPerTick && i < _audioHandlers.Count; i++)
 			{
@@ -28,7 +36,7 @@ namespace Audio
 			}
 		}
 
-		public void AddSourceToQueue(AudioHandler handler)
+		public static void AddSourceToQueue(AudioHandler handler)
 		{
 			_audioHandlers.Enqueue(handler);
 			handler.Tracked = true;

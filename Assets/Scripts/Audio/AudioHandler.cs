@@ -64,7 +64,7 @@ namespace Audio
 		private void OnEnable()
 		{
 			if (!Tracked)
-				GameManager.Instance.AudioSourcesManager.AddSourceToQueue(this);
+				AudioSourcesManager.AddSourceToQueue(this);
 		}
 
 		private void OnDisable()
