@@ -15,6 +15,7 @@ TagManager:
   - MainLight
   - PostProcessing
   - GenObject
+  - ExitToMainMenu
   layers:
   - Default
   - TransparentFX
