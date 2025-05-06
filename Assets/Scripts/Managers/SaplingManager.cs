@@ -1,12 +1,12 @@
-using Managers;
-using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using Target;
 using UnityEngine;
+using Target;
 using Utils;
-using World;
+using Managers;
 using World.Generation;
+using Utils.Pooling;
+using World;
 
 namespace Environment
 {
@@ -14,97 +14,55 @@ namespace Environment
     /// Manages all trees in the environment and places SaplingLocation targets
     /// at valid positions near trees or randomly. Foresters detect these with TargetSensor.
     /// </summary>
-    [GameManager]
-    public static class SaplingManager
+    public class SaplingManager : MonoBehaviour
     {
-        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
-        private static SaplingConfig Config = SaplingConfig.Instance;
-
         [Header("Spawn Parameters")]
-        [HideInInspector] private static GameObject SaplingLocationPrefab => Config.saplingLocationPrefab;
-        [HideInInspector] private static GameObject TreePrefab => Config.treePrefab;
-        [HideInInspector] private static float TreeSpawnRadius => Config.treeSpawnRadius;
-        [HideInInspector] private static float SaplingLifespan =>  Config.saplingLifespan;
-        [HideInInspector] private static float NearTreeInterval => Config.nearTreeInterval;
-        [HideInInspector] private static float RandomInterval => Config.randomInterval;
+        [SerializeField] private GameObject saplingLocationPrefab;
+        [SerializeField] private GameObject treePrefab;
+        [SerializeField] private float treeSpawnRadius = 15f;
+        [SerializeField] private float saplingLifespan = 20f;
+        [SerializeField] private float nearTreeInterval = 5f;
+        [SerializeField] private float randomInterval = 15f;
 
-        [HideInInspector] private static float _nearTreeTimer;
-        [HideInInspector] private static float _randomTimer;
+        private float nearTreeTimer;
+        private float randomTimer;
 
-        [HideInInspector] private static List<Targetable> _treeTargets;
-        [HideInInspector] private static ResourceGenerationSettings _treeGenerationSettings;
+        private List<Targetable> _treeTargets;
+        private ResourceGenerationSettings _treeGenerationSettings;
 
-        private class Runner : MonoBehaviour {
-            private void OnEnable()
-            {
-                DontDestroyOnLoad(this);
-            }
-        }
-        [HideInInspector]
-        private static Runner runner;
-
-        private static Runner RunnerInstance
+        private void Start()
         {
-            get
-            {
-                if (runner == null)
-                {
-                    GameObject runnerObject = new GameObject("SaplingManagerRunner");
-                    runnerObject.hideFlags = HideFlags.HideAndDontSave;
-                    runner = runnerObject.AddComponent<Runner>();
-                }
-                return runner;
-            }
-        }
-
-        public static Coroutine StartCoroutine(IEnumerator routine)
-        {
-            return RunnerInstance.StartCoroutine(routine);
-        }
-
-        public static void StopCoroutine(Coroutine coroutine)
-        {
-            RunnerInstance.StopCoroutine(coroutine);
-        }
-
-        private static IEnumerator UpdateSaplingCoroutine()
-        {
-            while (true)
-            {
-                _nearTreeTimer += Time.deltaTime;
-                _randomTimer += Time.deltaTime;
-
-                if (_nearTreeTimer >= NearTreeInterval)
-                {
-                    if (TryPlaceNearTree())
-                    {
-                        _nearTreeTimer = 0f;
-                        _randomTimer = 0f;
-                    }
-                }
-
-                if (_randomTimer >= RandomInterval)
-                {
-                    if (TryPlaceRandom())
-                    {
-                        _randomTimer = 0f;
-                    }
-                }
-                yield return null;
-            }
-        }
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void InitializeRunner()
-        {
+            //CacheTreeList();
             CacheTreeGenerationSettings();
-            StartCoroutine(UpdateSaplingCoroutine());
+        }
+
+        private void Update()
+        {
+            nearTreeTimer += Time.deltaTime;
+            randomTimer += Time.deltaTime;
+
+            if (nearTreeTimer >= nearTreeInterval)
+            {
+                if (TryPlaceNearTree())
+                {
+                    nearTreeTimer = 0f;
+                    randomTimer = 0f;
+                }
+            }
+
+            if (randomTimer >= randomInterval)
+            {
+                if (TryPlaceRandom())
+                {
+                    randomTimer = 0f;
+                }
+            }
         }
 
         /// <summary>
         /// Caches a direct reference to the list of trees tracked by the TargetManager.
         /// </summary>
-        public static void CacheTreeList()
+        public void CacheTreeList()
         {
             _treeTargets = TargetManager.GetSingleTargetList(TargetMask.Tree);
             Debug.Log($"[SaplingManager] Cached {_treeTargets.Count} tracked trees.");
@@ -113,7 +71,7 @@ namespace Environment
         /// <summary>
         /// Caches the resource generation settings used for tree placement.
         /// </summary>
-        private static void CacheTreeGenerationSettings()
+        private void CacheTreeGenerationSettings()
         {
             var worldGen = GameManager.Instance.ProceduralWorldGenerator;
             if (worldGen == null)
@@ -142,7 +100,7 @@ namespace Environment
         /// <summary>
         /// Attempts to place a sapling near a tracked tree.
         /// </summary>
-        private static bool TryPlaceNearTree()
+        private bool TryPlaceNearTree()
         {
             if (_treeTargets == null || _treeTargets.Count == 0)
             {
@@ -159,7 +117,7 @@ namespace Environment
         /// <summary>
         /// Attempts to place a sapling randomly within the procedural world bounds.
         /// </summary>
-        private static bool TryPlaceRandom()
+        private bool TryPlaceRandom()
         {
             if (_treeGenerationSettings == null)
             {
@@ -184,7 +142,7 @@ namespace Environment
         /// <summary>
         /// Tries to spawn a SaplingLocation at a valid world position using terrain validation.
         /// </summary>
-        private static bool TrySpawnAt(Vector3 position)
+        private bool TrySpawnAt(Vector3 position)
         {
             (bool valid, float height) = WorldUtils.OnGroundCheckHeight(position);
 
@@ -206,7 +164,7 @@ namespace Environment
                 }
             }
 
-            GameObject sapling = ObjectPoolingManager.GetPooledObject(SaplingLocationPrefab.name, false).gameObject;
+            GameObject sapling = ObjectPoolingManager.GetPooledObject(saplingLocationPrefab.name, false).gameObject;
             sapling.transform.position = spawnPoint;
             sapling.transform.rotation = Quaternion.identity;
             sapling.SetActive(true);

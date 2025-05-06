@@ -163,7 +163,7 @@ namespace PlayerControls
 
                 //THIS WAS ORIGINALLY IN LATEUPDATE; WORRIED IT MAY NOT WORK PROPERLY.
                 _previousMousePos = _playerInput.BasicControls.MousePosition.ReadValue<Vector2>();
-                yield return null;
+                yield return new WaitForEndOfFrame();
             }
         }
 

@@ -161,8 +161,8 @@ namespace UserInterface
 						ToggleMainMenuPanel();
 					}
 				}
-                yield return new WaitForEndOfFrame();
-            }
+				yield return null;
+			}
 		}
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

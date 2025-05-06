@@ -322,6 +322,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2863939470258754367}
+  - component: {fileID: 2863939470258754366}
+  - component: {fileID: 1998052291604305952}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -350,6 +352,47 @@ Transform:
   - {fileID: 3093599079090509798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2863939470258754366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863939470258754337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7170ffe19a9502a42979525d7a6e6376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingPlacer: {fileID: 0}
+  _playerSpawnPosition: {fileID: 787490676}
+  _enemySpawner: {fileID: 0}
+  _settingsData: {fileID: 11400000, guid: 9019b7dfbd0b09c44abf68d4700429f3, type: 2}
+  _connectPanel: {fileID: 0}
+  _debugBuildingControls: 1
+  _minButtonDelay: 0.1
+  CodeDisplay: {fileID: 0}
+  <BuildingsCostResources>k__BackingField: 1
+  <PlayerRoleLimits>k__BackingField: 1
+  <IgnoreTechUnlocks>k__BackingField: 0
+--- !u!114 &1998052291604305952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863939470258754337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb2182da458ee6458b2106b34eb0099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saplingLocationPrefab: {fileID: 4378729008253417980, guid: 911ae7b8d9e05364bb546935a6d23306, type: 3}
+  treePrefab: {fileID: 5335933013444573462, guid: f3edecc4dd1cc6343a639fc6171db1c1, type: 3}
+  treeSpawnRadius: 15
+  saplingLifespan: 20
+  nearTreeInterval: 5
+  randomInterval: 15
 --- !u!1 &5570708335557983075
 GameObject:
   m_ObjectHideFlags: 0
