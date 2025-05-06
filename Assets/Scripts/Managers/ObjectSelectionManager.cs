@@ -25,27 +25,52 @@ namespace Managers
         [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
         private static ObjectSelectionConfig Config = ObjectSelectionConfig.Instance;
 
-        [SerializeField]
+		[HideInInspector]
 		private static UserInterface_ObjectSelection _selectionUI;
 
-		private static UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
+		public static UserInterface_ObjectSelection SelectionUI
+		{
+			get
+			{
+				if (_selectionUI == null)
+				{
+					GameObject uiMainObject = GameObject.FindWithTag("UI_Main");
+					if (uiMainObject != null)
+					{
+						_selectionUI = uiMainObject.GetComponent<UserInterface_ObjectSelection>();
+					}
+				}
+				return _selectionUI;
+			}
+		}
 
-		private static bool _startedGroupSelection = false;
-		private static bool _startedSelection = false;
-		private static Vector3 _startedSelectionPosition = Vector3.zero;
-		private static Vector3 _endedSelectionPosition = Vector3.zero;
+        [HideInInspector]
+        private static UnityEvent<SelectableObject, object> _onObjectSelected = new UnityEvent<SelectableObject, object>();
 
-		private static (SelectableObject, object) _selectedObject;
-		private static bool _objectSelected = false;
+        [HideInInspector]
+        private static bool _startedGroupSelection = false;
+        [HideInInspector]
+        private static bool _startedSelection = false;
+        [HideInInspector]
+        private static Vector3 _startedSelectionPosition = Vector3.zero;
+        [HideInInspector]
+        private static Vector3 _endedSelectionPosition = Vector3.zero;
 
-		private static List<RoleHandler> _selectedPlayerGroup;
-		private static bool _groupSelected = false;
+        [HideInInspector]
+        private static (SelectableObject, object) _selectedObject;
+        [HideInInspector]
+        private static bool _objectSelected = false;
+
+        [HideInInspector]
+        private static List<RoleHandler> _selectedPlayerGroup;
+        [HideInInspector]
+        private static bool _groupSelected = false;
 
 		public static UnityEvent<SelectableObject, object> OnObjectSelected => _onObjectSelected;
 
 		private static void ObjectSelected(SelectableObject selected, object data)
 		{
-			if (_selectionUI == null)
+			if (SelectionUI == null)
 				return;
 
 			_selectedObject.Item1 = selected;
@@ -55,19 +80,19 @@ namespace Managers
 			switch (selected.SelectableType)
 			{
 				case Selectable.Player:
-					_selectionUI.OnCharacterContext((RoleHandler)data);
+					SelectionUI.OnCharacterContext((RoleHandler)data);
 					break;
 				case Selectable.Building:
-					_selectionUI.OnBuildingContext((BuildingBase)data);
+					SelectionUI.OnBuildingContext((BuildingBase)data);
 					break;
 				case Selectable.Enemy:
-					_selectionUI.OnEnemyContext((Enemy)data);
+					SelectionUI.OnEnemyContext((Enemy)data);
 					break;
 				case Selectable.Resource:
-					_selectionUI.OnResourceContext((ResourceHolder)data);
+					SelectionUI.OnResourceContext((ResourceHolder)data);
 					break;
 				case Selectable.EnemyCamp:
-					_selectionUI.OnEnemyCampContext((Station)data);
+					SelectionUI.OnEnemyCampContext((Station)data);
 					break;
 				default:
 					SetSelectionFalse();
@@ -96,14 +121,14 @@ namespace Managers
 				else
 					HideUI();
 
-				_selectionUI.DisableCheckUI();
+				SelectionUI.DisableCheckUI();
 			}
 		}
 
 		private static void StartGroupSelect(PlayerInputManager.Button button)
 		{
 			_startedGroupSelection = true;
-			_selectionUI.HideContext();
+			SelectionUI.HideContext();
 		}
 
 		public static bool RayTraceFromCamera(Camera cam, Vector2 mousePos, out Vector3 hitPosition)
@@ -137,14 +162,14 @@ namespace Managers
 				}
 				if (roleHandlers.Count > 1)
 				{
-					_selectionUI.OnCharacterGroupContext(roleHandlers);
+					SelectionUI.OnCharacterGroupContext(roleHandlers);
 					_selectedPlayerGroup = roleHandlers;
 					_groupSelected = true;
 					_objectSelected = false;
 				}
 				else if (roleHandlers.Count == 1)
 				{
-					_selectionUI.OnCharacterContext(roleHandlers[0]);
+					SelectionUI.OnCharacterContext(roleHandlers[0]);
 					_objectSelected = true;
 				}
 				else
@@ -158,17 +183,17 @@ namespace Managers
 			}
 			if (!_objectSelected && !_groupSelected)
 			{
-				_selectionUI.HideContext();
-				_selectionUI.DisableCheckUI();
+				SelectionUI.HideContext();
+				SelectionUI.DisableCheckUI();
 			}
 		}
 
 		public static void HideUI()
 		{
-			if (_selectionUI == null)
+			if (SelectionUI == null)
 				return;
 			_selectedObject.Item1 = null;
-			_selectionUI.HideContext();
+			SelectionUI.HideContext();
 		}
 
 		public static void SetSelectionFalse()
@@ -203,12 +228,12 @@ namespace Managers
 				else
 					Debug.LogError("Cant find mouse point" + typeof(ObjectSelectionManager));
 
-				_selectionUI.SetGroupSelectionArea(_startedSelectionPosition, mousePos);
+				SelectionUI.SetGroupSelectionArea(_startedSelectionPosition, mousePos);
 			}
 
 			if (PlayerInputManager.EscapePressed)
 			{
-				_selectionUI.HideContext();
+				SelectionUI.HideContext();
 			}
 		}
 
@@ -296,7 +321,7 @@ namespace Managers
 				Gizmos.DrawSphere(mousePos, 1.0f);
 			}
 			else if (!_objectSelected)
-				_selectionUI.HideSelectionOutline();
+				SelectionUI.HideSelectionOutline();
 		}
 	}
 }
