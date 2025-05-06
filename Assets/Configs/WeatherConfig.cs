@@ -7,9 +7,9 @@ namespace Managers
     [CreateAssetMenu(menuName = "Configs/Weather Manager Config")]
     public class WeatherConfig : Config<WeatherConfig>
     {
-        public VisualEffect autumnVFX;
-        public VisualEffect winterVFX;
-        public VisualEffect summerVFX;
-        public VisualEffect springVFX;
+        public GameObject autumnVFXPrefab;
+        public GameObject winterVFXPrefab;
+        public GameObject summerVFXPrefab;
+        public GameObject springVFXPrefab;
     }
 }

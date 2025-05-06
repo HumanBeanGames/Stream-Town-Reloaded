@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  autumnVFX: {fileID: 0}
-  winterVFX: {fileID: 0}
-  summerVFX: {fileID: 0}
-  springVFX: {fileID: 0}
+  autumnVFXPrefab: {fileID: 1165757894445870042, guid: dc4b7ba8f71592443a592d2f8b20fbf7, type: 3}
+  winterVFXPrefab: {fileID: 6600462042638859315, guid: 86b3585e775c64743b5c7e8f692b2cfe, type: 3}
+  summerVFXPrefab: {fileID: 5644476405385927711, guid: bd5cac94f88999d4aa64db704484c4d4, type: 3}
+  springVFXPrefab: {fileID: 1198076418066071491, guid: 173d3042884a24f48bd0a9f72f801860, type: 3}

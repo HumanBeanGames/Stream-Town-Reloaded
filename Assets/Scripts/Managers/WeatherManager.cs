@@ -16,14 +16,46 @@ namespace Managers
 		[HideInInspector]
         private static VisualEffect _currentVFX;
 
-		private static VisualEffect _autumnVFX => Config.autumnVFX;
-		private static VisualEffect _winterVFX => Config.winterVFX;
-		private static VisualEffect _summerVFX => Config.summerVFX;
-		private static VisualEffect _springVFX => Config.springVFX;
+		[HideInInspector]
+		private static VisualEffect _autumnVFX;
+		[HideInInspector]
+		private static VisualEffect _winterVFX;
+		[HideInInspector]
+		private static VisualEffect _summerVFX;
+		[HideInInspector]
+		private static VisualEffect _springVFX;
+
+		private static VisualEffect GetVFX(ref VisualEffect vfx, GameObject prefab)
+		{
+			if (vfx == null && prefab != null)
+			{
+#if UNITY_EDITOR
+				if (!Application.isPlaying)
+				{
+					vfx = prefab.GetComponent<VisualEffect>();
+				}
+				else
+#endif
+				{
+					GameObject parent = GameObject.FindWithTag("WeatherVFX");
+					if (parent != null)
+					{
+						GameObject instance = GameObject.Instantiate(prefab, parent.transform);
+						vfx = instance.GetComponent<VisualEffect>();
+					}
+				}
+			}
+			return vfx;
+		}
+
+		private static VisualEffect AutumnVFX => GetVFX(ref _autumnVFX, Config.autumnVFXPrefab);
+		private static VisualEffect WinterVFX => GetVFX(ref _winterVFX, Config.winterVFXPrefab);
+		private static VisualEffect SummerVFX => GetVFX(ref _summerVFX, Config.summerVFXPrefab);
+		private static VisualEffect SpringVFX => GetVFX(ref _springVFX, Config.springVFXPrefab);
 
 		public static void StartWeather(Season season)
 		{
-			runner.StartCoroutine(RunWeather(SeasonManager.AllSeasonsData.GetSeasonData(season)));
+				runner.StartCoroutine(RunWeather(SeasonManager.AllSeasonsData.GetSeasonData(season)));
 		}
 
 		public static void StopWeather()
@@ -36,7 +68,8 @@ namespace Managers
 
 		private static IEnumerator RunWeather(SeasonScriptable data)
 		{
-			_currentVFX = data.VFX;
+            SetDataVFX();
+            _currentVFX = data.VFX;
 			_currentVFX.Play();
 			float runTime = Random.Range(data.MinRunTime, data.MaxRunTime);
 			if (_currentVFX != null)
@@ -60,26 +93,23 @@ namespace Managers
 
 		private static void SetDataVFX()
 		{
-			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Summer).VFX = _summerVFX;
-			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Autumn).VFX = _autumnVFX;
-			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Winter).VFX = _winterVFX;
-			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Spring).VFX = _springVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Summer).VFX = SummerVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Autumn).VFX = AutumnVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Winter).VFX = WinterVFX;
+			SeasonManager.AllSeasonsData.GetSeasonData(Utils.Season.Spring).VFX = SpringVFX;
 		}
 
 
-        private class Runner : MonoBehaviour { }
-        [HideInInspector]
-        private static Runner runner;
+		private class Runner : MonoBehaviour { }
+		[HideInInspector]
+		private static Runner runner;
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 		private static void InitializeRunner()
 		{
-			GameObject runnerObject = new GameObject("WeatherManagerRunner");
+            GameObject runnerObject = new GameObject("WeatherManagerRunner");
 			runner = runnerObject.AddComponent<Runner>();
 			UnityEngine.Object.DontDestroyOnLoad(runnerObject);
-			SetDataVFX();
 		}
-
-
 	}
 }

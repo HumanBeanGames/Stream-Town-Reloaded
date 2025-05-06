@@ -91,7 +91,7 @@ namespace Managers
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeRunner()
         {
-            GameObject runnerObject = new GameObject("TimeManagerRunner");
+            GameObject runnerObject = new GameObject("TechTreeRunner");
             runner = runnerObject.AddComponent<Runner>();
             UnityEngine.Object.DontDestroyOnLoad(runnerObject);
         }

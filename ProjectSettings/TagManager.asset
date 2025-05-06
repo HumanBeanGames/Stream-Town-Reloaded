@@ -11,6 +11,7 @@ TagManager:
   - UI_Main
   - FishGodSpawn
   - RainingFish
+  - WeatherVFX
   layers:
   - Default
   - TransparentFX

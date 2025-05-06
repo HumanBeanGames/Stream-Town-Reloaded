@@ -99,7 +99,7 @@ namespace GameEventSystem
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeRunner()
         {
-            GameObject runnerObject = new GameObject("TimeManagerRunner");
+            GameObject runnerObject = new GameObject("GameEventRunner");
             _runner = runnerObject.AddComponent<Runner>();
             UnityEngine.Object.DontDestroyOnLoad(runnerObject);
         }
