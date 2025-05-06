@@ -257,7 +257,7 @@ namespace SavingAndLoading
 			List<PoolableObject> campObjects = ObjectPoolingManager.GetAllActivePooledObjectsOfType(SaveItem.EnemyCamp_Goblin);
 			for (int i = 0; i < campObjects.Count; i++)
 			{
-				EnemyCampSaveData enemyCampSaveData = new EnemyCampSaveData(campObjects[i].transform, ((SaveableEnemyCamp)campObjects[i].SaveableObject).HealthHandler.Health, GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(campObjects[i]));
+				EnemyCampSaveData enemyCampSaveData = new EnemyCampSaveData(campObjects[i].transform, ((SaveableEnemyCamp)campObjects[i].SaveableObject).HealthHandler.Health, GUIDManager.CreateGUIDandAddToDictionary(campObjects[i]));
 				camps.Add(enemyCampSaveData);
 			}
 			worldGenData.EnemyCamps = camps;
@@ -407,7 +407,7 @@ namespace SavingAndLoading
 			for (int i = 0; i < playerSaveDatas.Count; i++)
 			{
 				playerObjs.Add(PlayerManager.AddExistingPlayer(playerSaveDatas[i].ToPlayer(playerSaveDatas[i].GUID, playerSaveDatas[i].TargetGUID, playerSaveDatas[i].StationGUID), playerSaveDatas[i].CurrentRole).PoolableObject);
-				//GameManager.Instance.GUIDManager.AddToDictionary(playerObjs[playerObjs.Count - 1]);
+				//GUIDManager.AddToDictionary(playerObjs[playerObjs.Count - 1]);
 			}
 
 			// TODO: Test this, problem where players/enemies automaticly go to the closest target/station
@@ -416,18 +416,18 @@ namespace SavingAndLoading
 			//for (int i = 0; i < playerObjs.Count; i++)
 			//{
 			//	if (playerSaveDatas[i].TargetGUID != 0)
-			//		((SaveablePlayer)playerObjs[i].SaveableObject).RoleHandler.Player.TargetSensor.TrySetTarget(((SaveableObject)GameManager.Instance.GUIDManager.GetComponentFromID(playerSaveDatas[i].TargetGUID).SaveableObject).Target);
+			//		((SaveablePlayer)playerObjs[i].SaveableObject).RoleHandler.Player.TargetSensor.TrySetTarget(((SaveableObject)GUIDManager.GetComponentFromID(playerSaveDatas[i].TargetGUID).SaveableObject).Target);
 			//	if (playerSaveDatas[i].StationGUID != 0)
-			//		((SaveablePlayer)playerObjs[i].SaveableObject).RoleHandler.Player.StationSensor.TrySetStation(((SaveablePlayer)GameManager.Instance.GUIDManager.GetComponentFromID(playerSaveDatas[i].StationGUID).SaveableObject).RoleHandler.Player.StationSensor.CurrentStation);
+			//		((SaveablePlayer)playerObjs[i].SaveableObject).RoleHandler.Player.StationSensor.TrySetStation(((SaveablePlayer)GUIDManager.GetComponentFromID(playerSaveDatas[i].StationGUID).SaveableObject).RoleHandler.Player.StationSensor.CurrentStation);
 			//}
 
 			//// Setting enemy connections
 			//for (int i = 0; i < enemyObjs.Count; i++)
 			//{
 			//	if (enemies[i].TargetGUID != 0)
-			//		((SaveableEnemy)enemyObjs[i].SaveableObject).Enemy.TargetSensor.TrySetTarget(((SaveableObject)GameManager.Instance.GUIDManager.GetComponentFromID(enemies[i].TargetGUID).SaveableObject).Target);
+			//		((SaveableEnemy)enemyObjs[i].SaveableObject).Enemy.TargetSensor.TrySetTarget(((SaveableObject)GUIDManager.GetComponentFromID(enemies[i].TargetGUID).SaveableObject).Target);
 			//	if (enemies[i].CampGUID != 0)
-			//		((SaveableEnemy)enemyObjs[i].SaveableObject).Enemy.StationSensor.TrySetStation(((SaveableEnemy)GameManager.Instance.GUIDManager.GetComponentFromID(enemies[i].CampGUID).SaveableObject).Enemy.StationSensor.CurrentStation);
+			//		((SaveableEnemy)enemyObjs[i].SaveableObject).Enemy.StationSensor.TrySetStation(((SaveableEnemy)GUIDManager.GetComponentFromID(enemies[i].CampGUID).SaveableObject).Enemy.StationSensor.CurrentStation);
 			//}
 
 			//Load worldSaveData

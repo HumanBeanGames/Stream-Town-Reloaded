@@ -1,10 +1,9 @@
+using Managers;
 using SavingAndLoading.SavableObjects;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Utils.Pooling;
 
 namespace GUIDSystem
@@ -12,17 +11,23 @@ namespace GUIDSystem
 	/// <summary>
 	/// Class that manages GUIDs 
 	/// </summary>
-	public class GUIDManager : MonoBehaviour
-	{
-		private Dictionary<string, Dictionary<uint, PoolableObject>> _worldObjects;
-		private bool _initialized = false;
+	[GameManager]
+	public static class GUIDManager
+    {
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static GuidConfig Config = GuidConfig.Instance;
 
-		public bool IsInitialized => _initialized;
+        [HideInInspector]
+		private static Dictionary<string, Dictionary<uint, PoolableObject>> _worldObjects;
+		[HideInInspector]
+		private static bool _initialized = false;
+
+		public static bool IsInitialized => _initialized;
 
 		/// <summary>
 		/// Initializes the dictionary
 		/// </summary>
-		public void Initialize()
+		public static void Initialize()
 		{
 			if (!_initialized)
 			{
@@ -35,7 +40,7 @@ namespace GUIDSystem
 				}
 			}
 			else
-				Debug.Log("GUIDManager: Is already initialized" + this);
+				Debug.Log("GUIDManager: Is already initialized" + typeof(GUIDManager));
 
 			_initialized = true;
 		}
@@ -45,7 +50,7 @@ namespace GUIDSystem
 		/// </summary>
 		/// <param name="comp"></param>
 		/// <returns></returns>
-		public uint CreateGUIDandAddToDictionary(PoolableObject comp)
+		public static uint CreateGUIDandAddToDictionary(PoolableObject comp)
 		{
 			uint gUID = GenerateNewGUID(comp.PoolType.ToString());
 			((SaveableObject)comp.SaveableObject).GUIDComponent.SetGUID(gUID);
@@ -55,7 +60,7 @@ namespace GUIDSystem
 			return gUID;
 		}
 
-		public void RemoveFromGUID(PoolType type, uint gUID)
+		public static void RemoveFromGUID(PoolType type, uint gUID)
 		{
 			if (_worldObjects.ContainsKey(type.ToString()))
 			{
@@ -64,12 +69,11 @@ namespace GUIDSystem
 			}
 		}
 
-
 		/// <summary>
 		/// Generates a new GUID
 		/// </summary>
 		/// <returns>The new GUID</returns>
-		private uint GenerateNewGUID(string type)
+		private static uint GenerateNewGUID(string type)
 		{
 			uint gUID = 0;
 			bool newGUIDFound = false;
@@ -89,7 +93,7 @@ namespace GUIDSystem
 		/// Adds A GUIDComponent to the dictionary,
 		/// </summary>
 		/// <param name="comp">The component being added to the dictionary</param>
-		public void AddToDictionary(PoolableObject comp)
+		public static void AddToDictionary(PoolableObject comp)
 		{
 			List<uint> keys = _worldObjects[comp.PoolType.ToString()].Keys.ToList();
 			if (!_worldObjects[comp.PoolType.ToString()].ContainsKey(((SaveableObject)comp.SaveableObject).GUIDComponent.GUID))
@@ -105,8 +109,7 @@ namespace GUIDSystem
 		/// </summary>
 		/// <param name="gUID">A GUID as a key</param>
 		/// <returns>The GUIDComponent value from the key</returns>
-
-		public PoolableObject GetComponentFromID(uint gUID, string type)
+		public static PoolableObject GetComponentFromID(uint gUID, string type)
 		{
 			if (_worldObjects[type].TryGetValue(gUID, out PoolableObject comp))
 				return comp;

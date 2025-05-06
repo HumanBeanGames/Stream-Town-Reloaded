@@ -43,7 +43,6 @@ namespace Managers
 
 		private ProceduralWorldGenerator _proceduralWorldGen = null;
 		private MetaData.MetaData _metaData = null;
-		private GUIDManager _gUIDManager = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
 		private AudioSourcesManager _audioSourcesManager = null;
@@ -83,7 +82,6 @@ namespace Managers
 		// Properties
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
 		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
-		public GUIDManager GUIDManager => _gUIDManager;
 		public EnemySpawner EnemySpawner => _enemySpawner;
 
 		public AudioSourcesManager AudioSourcesManager => _audioSourcesManager;
@@ -166,9 +164,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			if (!TryGetComponent(out _gUIDManager))
-				Debug.LogError("GUIDManager not found on GameManager", this);
-
 			if (!TryGetComponent(out _audioSourcesManager))
 				Debug.LogError("AudioSourcesManager not found on GameManager");
 

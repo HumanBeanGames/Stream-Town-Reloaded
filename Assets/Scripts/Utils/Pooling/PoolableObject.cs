@@ -79,14 +79,14 @@ namespace Utils.Pooling
 
 		private void OnEnable()
 		{
-			if (GameManager.Instance != null && GameManager.Instance.GUIDManager != null && _saveableObject != null && ((SaveableObject)_saveableObject).GUIDComponent != null)
-				GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(this);
+			if (GameManager.Instance != null && _saveableObject != null && ((SaveableObject)_saveableObject).GUIDComponent != null)
+				GUIDManager.CreateGUIDandAddToDictionary(this);
 		}
 
 		private void OnDisable()
 		{
-			if (GameManager.Instance != null && GameManager.Instance.GUIDManager != null && _saveableObject != null && ((SaveableObject)_saveableObject).GUIDComponent !=null)
-				GameManager.Instance.GUIDManager.RemoveFromGUID(PoolType, ((SaveableObject)_saveableObject).GUIDComponent.GUID);
+			if (GameManager.Instance != null && _saveableObject != null && ((SaveableObject)_saveableObject).GUIDComponent !=null)
+				GUIDManager.RemoveFromGUID(PoolType, ((SaveableObject)_saveableObject).GUIDComponent.GUID);
 
 			ObjectPoolingManager.AddToPool(_poolName, this);
 		}

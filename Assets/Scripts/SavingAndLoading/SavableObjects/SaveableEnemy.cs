@@ -14,7 +14,7 @@ namespace SavingAndLoading.SavableObjects
 
 		public override object SaveData()
 		{
-			return (object)new EnemySaveData(Enemy.transform, Enemy.EnemyType.ToString(), Enemy.HealthHandler.Health, GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(PoolableObject));
+			return (object)new EnemySaveData(Enemy.transform, Enemy.EnemyType.ToString(), Enemy.HealthHandler.Health, GUIDManager.CreateGUIDandAddToDictionary(PoolableObject));
 		}
 
 		public override void LoadData(object data)
@@ -27,7 +27,7 @@ namespace SavingAndLoading.SavableObjects
 			Enemy.HealthHandler.SetHealth(enemyData.Health);
 
 			GUIDComponent.SetGUID(enemyData.GUID);
-			GameManager.Instance.GUIDManager.AddToDictionary(PoolableObject);
+			GUIDManager.AddToDictionary(PoolableObject);
 		}
 
 		public void SetVariables(Targetable target, GUIDComponent component, string poolName, PoolableObject poolableObject, Enemy enemy)

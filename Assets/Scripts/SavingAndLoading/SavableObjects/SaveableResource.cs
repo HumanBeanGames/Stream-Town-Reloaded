@@ -13,7 +13,7 @@ namespace SavingAndLoading.SavableObjects
 		public ResourceHolder ResourceHolder;
 		public override object SaveData()
 		{
-			return (object)new ResourceSaveData(ResourceHolder.transform, PoolName, ResourceHolder.Amount, GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(PoolableObject));
+			return (object)new ResourceSaveData(ResourceHolder.transform, PoolName, ResourceHolder.Amount, GUIDManager.CreateGUIDandAddToDictionary(PoolableObject));
 		}
 
 		public override void LoadData(object data)
@@ -28,7 +28,7 @@ namespace SavingAndLoading.SavableObjects
 			ResourceHolder.transform.localScale = Vector3SaveData.ToUnityVec3(resourceData.ResourceTransform.LossyScale);
 			ResourceHolder.gameObject.SetActive(true);
 			GUIDComponent.SetGUID(resourceData.GUID);
-			GameManager.Instance.GUIDManager.AddToDictionary(PoolableObject);
+			GUIDManager.AddToDictionary(PoolableObject);
 		}
 
 		public void SetVariables(Targetable target, GUIDComponent component, string poolName, PoolableObject poolableObject, ResourceHolder resourceHolder)

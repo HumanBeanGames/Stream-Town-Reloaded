@@ -26,7 +26,7 @@ namespace SavingAndLoading.SavableObjects
 			HealthHandler.SetHealth(enemyCampData.Health);
 
 			GUIDComponent.SetGUID(enemyCampData.GUID);
-			GameManager.Instance.GUIDManager.AddToDictionary(PoolableObject);
+			GUIDManager.AddToDictionary(PoolableObject);
 		}
 
 		public void SetVariables(Targetable target, GUIDComponent component, string poolName, PoolableObject poolableObject, HealthHandler healthHandler)

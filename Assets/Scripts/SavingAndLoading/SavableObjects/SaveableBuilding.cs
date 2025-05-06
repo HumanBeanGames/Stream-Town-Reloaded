@@ -27,7 +27,7 @@ namespace SavingAndLoading.SavableObjects
 			BuildingBase.BuildingState = buildingData.BuildingState;
 			BuildingBase.SetRemovedFoliage(buildingData.DestroyedFoliage);
 			GUIDComponent.SetGUID(buildingData.GUID);
-			GameManager.Instance.GUIDManager.AddToDictionary(PoolableObject);
+			GUIDManager.AddToDictionary(PoolableObject);
 			BuildingManager.AddLoadedBuilding(BuildingBase);
 
 			if (BuildingBase.BuildingState == Utils.BuildingState.Building)

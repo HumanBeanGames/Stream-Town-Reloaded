@@ -156,10 +156,10 @@ namespace SavingAndLoading.Structs
 			comp.SetGUID(gUID);
 
 			//if (stationGUID != 0)
-			//	player.StationSensor.TrySetStation(GameManager.Instance.GUIDManager.GetComponentFromID(stationGUID).gameObject.GetComponent<Station>());
+			//	player.StationSensor.TrySetStation(GUIDManager.GetComponentFromID(stationGUID).gameObject.GetComponent<Station>());
 
 			//if (targetGUID != 0)
-			//	player.TargetSensor.TrySetTarget(GameManager.Instance.GUIDManager.GetComponentFromID(TargetGUID).gameObject.GetComponent<Targetable>());
+			//	player.TargetSensor.TrySetTarget(GUIDManager.GetComponentFromID(TargetGUID).gameObject.GetComponent<Targetable>());
 
 			player.RoleHandler.Player = player;
 

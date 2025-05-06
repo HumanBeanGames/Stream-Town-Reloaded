@@ -28,7 +28,7 @@ namespace SavingAndLoading.SavableObjects
 				, RoleHandler.Player.TwitchUser.TwitchUserType
 				, RoleHandler.Player.TwitchUser.GameUserType
 				, RoleHandler.Player.TwitchUser.IsBroadcaster
-				, GameManager.Instance.GUIDManager.CreateGUIDandAddToDictionary(PoolableObject)
+				, GUIDManager.CreateGUIDandAddToDictionary(PoolableObject)
 				, RoleHandler.Player.Pet.IsActive
 				, currentPet
 				, unlockedPets
