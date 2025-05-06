@@ -190,11 +190,7 @@ namespace World.Generation
 				}
 
                 // ✅ Tell the SaplingManager the trees exist now
-                var saplingManager = FindAnyObjectByType<SaplingManager>();
-                if (saplingManager != null)
-                {
-                    saplingManager.CacheTreeList();
-                }
+                SaplingManager.CacheTreeList();
             }
 
 			// Generate all resources for water on the shore line (fish).
