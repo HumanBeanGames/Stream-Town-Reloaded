@@ -24,23 +24,206 @@ MonoBehaviour:
   xScale: 4
   yScale: 4
   generationSettings:
-    Size: 0
+    Size: 150
     LevelOfDetail: 0
-    NoiseScale: 0
-    Octaves: 0
+    NoiseScale: 23
+    Octaves: 6
     Persistance: 0
-    Lacunarity: 0
+    Lacunarity: 16.62
+    Seed: -1747536282
+    Offset: {x: -2.84, y: 0}
+    MeshHeightMultiplier: 3.5
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: -Infinity
+        outSlope: -Infinity
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 20.090515
+        value: 1.0686188
+        inSlope: 0.053190213
+        outSlope: 0.053190213
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 0
+  resourceGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 17
+    Octaves: 6
+    Persistance: 0.452
+    Lacunarity: 22.47
     Seed: 0
     Offset: {x: 0, y: 0}
-    MeshHeightMultiplier: 0
+    MeshHeightMultiplier: 6
     MeshHeightCurve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    Spacing: 0
-  resourceGenerationSettings:
+    Spacing: 2
+    TargetType: 2
+    PoolName: Tree
+  - Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 7
+    Octaves: 1
+    Persistance: 1
+    Lacunarity: 0
+    Seed: 0
+    Offset: {x: 0.5, y: 0.5}
+    MeshHeightMultiplier: 11
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    TargetType: 4
+    PoolName: Ore
+  - Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 7
+    Octaves: 2
+    Persistance: 1
+    Lacunarity: 0
+    Seed: 0
+    Offset: {x: 0.5, y: 0.5}
+    MeshHeightMultiplier: 10
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    TargetType: 8
+    PoolName: Bush
+  waterResourceGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 0
+    NoiseScale: 1
+    Octaves: 3
+    Persistance: 1
+    Lacunarity: 1
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 5
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    TargetType: 32
+    PoolName: Fish
+  foliageGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.847
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 7
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    PoolNames:
+    - GrassLong1
+    - GrassLong2
+    - GrassLong3
+    - GrassShort1
+    - GrassShort2
+    - GrassShort3
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 4
+    Octaves: 1
+    Persistance: 0.847
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 14
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    PoolNames:
+    - Flower1
+    - Flower2
+    - Flower3
+    - Flower4
+    - Flower5
+    - Flower6
+  waterFoliageGenerationSettings:
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.8
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 7
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    PoolNames:
+    - Seaweed1
+    - Seaweed2
+    - Seaweed3
+  - Size: 150
+    LevelOfDetail: 2
+    NoiseScale: 6.68
+    Octaves: 1
+    Persistance: 0.8
+    Lacunarity: 1.53
+    Seed: 0
+    Offset: {x: 0, y: 0}
+    MeshHeightMultiplier: 10
+    MeshHeightCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Spacing: 1
+    PoolNames:
+    - CoralBrown1
+    - CoralBrown2
+    - CoralOrange1
+    - CoralOrange2
+    - CoralPurple1
+    - CoralPurple2
+  campGenerationSettings:
   - Size: 0
     LevelOfDetail: 0
     NoiseScale: 0
@@ -57,17 +240,18 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     Spacing: 0
-    TargetType: 0
     PoolName: 
-  waterResourceGenerationSettings: []
-  foliageGenerationSettings: []
-  waterFoliageGenerationSettings: []
-  campGenerationSettings: []
+    MaxBounds: {x: 120, y: 120}
+    MinBounds: {x: 50, y: 50}
+    MaxAmount: 10
+    MinDistanceFromCenter: 0
+    MinDistanceFromOther: 60
+    CampSize: 10
   generateOnStart: 1
   randomizeSeed: 1
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 449
   terrainMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 528

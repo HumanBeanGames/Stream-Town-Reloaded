@@ -196,7 +196,7 @@ namespace SavingAndLoading
 		{
 			WorldGenSaveData worldGenData = new WorldGenSaveData();
 
-			Mesh meshData = ProceduralWorldGenerator.GeneratedMesh;
+			Mesh meshData = ProcWorldGenManager.GeneratedMesh;
 
 			worldGenData.MapMesh = new MeshSaveData(meshData);
 
@@ -340,7 +340,7 @@ namespace SavingAndLoading
 			// World generation mesh
 			Mesh meshData = genData.MapMesh.GetMeshFromData();
 
-			ProceduralWorldGenerator.SetMesh(meshData);
+			ProcWorldGenManager.SetMesh(meshData);
 
 			// Resources
 			for (int i = 0; i < genData.Resources.Count; i++)
@@ -436,7 +436,7 @@ namespace SavingAndLoading
 				GameEventManager.StartNewRulerVote();
 
 			// Force all buildings to update their graph bounds.
-			ProceduralWorldGenerator.ScanWorld();
+			ProcWorldGenManager.ScanWorld();
 
 			yield return new WaitForSeconds(25);
 			for(int i = 0; i < buildingsToUpdate.Count;i++)

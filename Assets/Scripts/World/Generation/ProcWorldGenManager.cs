@@ -14,9 +14,10 @@ using Utils.Pooling;
 namespace World.Generation
 {
 	[GameManager]
-	public static class ProceduralWorldGenerator
+	public static class ProcWorldGenManager
 	{
-        private static ProcWorldGenConfig Config => ProcWorldGenConfig.Instance;
+        [InlineEditor(InlineEditorObjectFieldModes.Hidden)]
+        private static ProcWorldGenConfig Config = ProcWorldGenConfig.Instance;
 
         public static float XScale => Config.xScale;
         public static float YScale => Config.yScale;
@@ -34,8 +35,10 @@ namespace World.Generation
         /// <summary>
         /// The max number of attempts the generation will try to place an enemy camp. Prevents an infinite loop.
         /// </summary>
+		[HideInInspector]
         private const int MAX_CAMP_GENERATION_ATTEMPTS = 500;
-		private static Mesh _generatedMesh;
+        [HideInInspector]
+        private static Mesh _generatedMesh;
 
 		public static Mesh GeneratedMesh => _generatedMesh;
 
@@ -53,7 +56,8 @@ namespace World.Generation
 		private static bool _previewFoliagePlacements = false;
 		[SerializeField, HideInInspector]
 		private static Mesh _treeMesh;
-		private static List<Vector3> _previewTreePositions = new List<Vector3>();
+        [HideInInspector]
+        private static List<Vector3> _previewTreePositions = new List<Vector3>();
 #endif
 		/// <summary>
 		/// Generates a terrain based on the stored settings.

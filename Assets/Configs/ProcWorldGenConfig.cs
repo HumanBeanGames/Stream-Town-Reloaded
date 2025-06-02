@@ -8,18 +8,6 @@ namespace Managers
     [CreateAssetMenu(menuName = "Configs/Proc World Gen Config")]
     public class ProcWorldGenConfig : Config<ProcWorldGenConfig>
     {
-        [Button("Generate Terrain")]
-        public void GenerateTerrainButton()
-        {
-            ProceduralWorldGenerator.GenerateTerrain();
-        }
-
-        [Button("Generate Fake Resources")]
-        public void GenerateFakeResourcesButton()
-        {
-            ProceduralWorldGenerator.MainMenuGenerateWorld();
-        }
-
         public float xScale = 4;
         public float yScale = 4;
         public GenerationSettings generationSettings;
@@ -32,5 +20,17 @@ namespace Managers
         public bool randomizeSeed = true;
         public LayerMask collisionMask;
         public LayerMask terrainMask;
+
+        [Button("Generate Terrain")]
+        public void GenerateTerrainButton()
+        {
+            ProcWorldGenManager.GenerateTerrain();
+        }
+
+        [Button("Generate Fake Resources")]
+        public void GenerateFakeResourcesButton()
+        {
+            ProcWorldGenManager.MainMenuGenerateWorld();
+        }
     }
 }

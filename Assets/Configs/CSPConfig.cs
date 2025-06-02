@@ -1,8 +1,5 @@
 using UnityEngine;
-using Scriptables;
 using Sirenix.OdinInspector;
-using Utils;
-using Target;
 using GridSystem.Partitioning;
 
 namespace Managers

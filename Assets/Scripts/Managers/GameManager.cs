@@ -140,7 +140,7 @@ namespace Managers
 				if (_metaData.LoadType == MetaData.LoadType.Generate)
 				{
 					Debug.Log("Generating new world!");
-					yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
+					yield return StartCoroutine(ProcWorldGenManager.TryGenerateWorld());
 				}
 
 				else if (_metaData.LoadType == MetaData.LoadType.Load)
@@ -150,7 +150,7 @@ namespace Managers
 				}
 			}
 			else
-				yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
+				yield return StartCoroutine(ProcWorldGenManager.TryGenerateWorld());
 
 			yield return new WaitForSeconds(3);
 			AstarPath.active.Scan();
@@ -234,7 +234,7 @@ namespace Managers
 		private IEnumerator WorldStart()
 		{
 			yield return StartCoroutine(ObjectPoolingManager.InitializePooling());
-			yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
+			yield return StartCoroutine(ProcWorldGenManager.TryGenerateWorld());
 		}
 
 		private void Update()

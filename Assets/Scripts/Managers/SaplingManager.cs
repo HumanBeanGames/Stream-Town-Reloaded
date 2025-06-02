@@ -116,7 +116,7 @@ namespace Environment
         /// </summary>
         private static void CacheTreeGenerationSettings()
         {
-            var settingsList = ProceduralWorldGenerator.GetResourceGenerationSettings();
+            var settingsList = ProcWorldGenManager.GetResourceGenerationSettings();
 
             if (settingsList != null)
             {
