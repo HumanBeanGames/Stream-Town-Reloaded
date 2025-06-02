@@ -42,6 +42,25 @@ namespace World.Generation
 
 		public static Mesh GeneratedMesh => _generatedMesh;
 
+		private static GameObject _genObject;
+		private static GameObject GenObject
+		{
+			get
+			{
+				if (_genObject == null)
+				{
+					_genObject = Resources.Load<GameObject>("GenerationBlank");
+					if (_genObject == null)
+					{
+						Debug.LogError("GenerationBlank prefab not found in Resources.");
+					}
+					_genObject = UnityEngine.Object.Instantiate(_genObject);
+					_genObject.name="GenerationObject";
+				}
+				return _genObject;
+			}
+		}
+
         public static List<ResourceGenerationSettings> GetResourceGenerationSettings()
         {
             return ResourceGenerationSettings;
@@ -82,12 +101,12 @@ namespace World.Generation
 		}
 		public static void GenerateTerrain()
 		{
-			_generatedMesh = ProceduralMeshGenerator.CreateMesh(ProceduralMeshGenerator.GenerateTerrainMeshData(GenerationSettings), null);
+			_generatedMesh = ProceduralMeshGenerator.CreateMesh(ProceduralMeshGenerator.GenerateTerrainMeshData(GenerationSettings), GenObject);
 		}
 
 		public static void SetMesh(Mesh mesh)
 		{
-			_generatedMesh = ProceduralMeshGenerator.CreateMesh(mesh, null);
+			_generatedMesh = ProceduralMeshGenerator.CreateMesh(mesh, GenObject);
 		}
 
 		/// <summary>
