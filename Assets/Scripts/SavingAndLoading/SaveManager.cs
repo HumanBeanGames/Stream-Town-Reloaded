@@ -35,26 +35,6 @@ namespace SavingAndLoading
         private static SaveConfig Config = SaveConfig.Instance;
 
 		[HideInInspector]
-        private static ProceduralWorldGenerator _generationObject = null;
-
-        [HideInInspector]
-        private static ProceduralWorldGenerator GenerationObject
-        {
-            get
-            {
-                if (_generationObject == null)
-                {
-                    GameObject genObject = GameObject.FindWithTag("GenObject");
-                    if (genObject != null)
-                    {
-                        _generationObject = genObject.GetComponent<ProceduralWorldGenerator>();
-                    }
-                }
-                return _generationObject;
-            }
-        }
-
-		[HideInInspector]
         private static List<Player> _players = null;
 		[HideInInspector]
         private static List<Enemy> _enemies = null;
@@ -216,7 +196,7 @@ namespace SavingAndLoading
 		{
 			WorldGenSaveData worldGenData = new WorldGenSaveData();
 
-			Mesh meshData = GenerationObject.GeneratedMesh;
+			Mesh meshData = ProceduralWorldGenerator.GeneratedMesh;
 
 			worldGenData.MapMesh = new MeshSaveData(meshData);
 
@@ -360,7 +340,7 @@ namespace SavingAndLoading
 			// World generation mesh
 			Mesh meshData = genData.MapMesh.GetMeshFromData();
 
-			GenerationObject.SetMesh(meshData);
+			ProceduralWorldGenerator.SetMesh(meshData);
 
 			// Resources
 			for (int i = 0; i < genData.Resources.Count; i++)
@@ -456,7 +436,7 @@ namespace SavingAndLoading
 				GameEventManager.StartNewRulerVote();
 
 			// Force all buildings to update their graph bounds.
-			GenerationObject.ScanWorld();
+			ProceduralWorldGenerator.ScanWorld();
 
 			yield return new WaitForSeconds(25);
 			for(int i = 0; i < buildingsToUpdate.Count;i++)

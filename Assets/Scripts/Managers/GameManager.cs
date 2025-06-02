@@ -41,7 +41,6 @@ namespace Managers
 		[SerializeField]
 		private GameObject _connectPanel;
 
-		private ProceduralWorldGenerator _proceduralWorldGen = null;
 		private MetaData.MetaData _metaData = null;
 		private Player _debugPlayer;
 		public TwitchUser _broadcaster;
@@ -80,7 +79,6 @@ namespace Managers
 
 		// Properties
 		public Vector3 PlayerSpawnPosition => _playerSpawnPosition.position;
-		public ProceduralWorldGenerator ProceduralWorldGenerator => _proceduralWorldGen;
 		public EnemySpawner EnemySpawner => _enemySpawner;
 
 		public MetaData.MetaData MetaDatas => _metaData;
@@ -142,7 +140,7 @@ namespace Managers
 				if (_metaData.LoadType == MetaData.LoadType.Generate)
 				{
 					Debug.Log("Generating new world!");
-					yield return StartCoroutine(_proceduralWorldGen.TryGenerateWorld());
+					yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
 				}
 
 				else if (_metaData.LoadType == MetaData.LoadType.Load)
@@ -152,7 +150,7 @@ namespace Managers
 				}
 			}
 			else
-				yield return StartCoroutine(_proceduralWorldGen.TryGenerateWorld());
+				yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
 
 			yield return new WaitForSeconds(3);
 			AstarPath.active.Scan();
@@ -161,10 +159,6 @@ namespace Managers
 
 		private void GetAllRequiredComponents()
 		{
-			_proceduralWorldGen = GetComponentInChildren<ProceduralWorldGenerator>();
-			if (_proceduralWorldGen == null)
-				Debug.LogError("ProceduralWorldGenerator not found in child object");
-
 			GameObject obj = GameObject.Find("MetaData");
 
 			if (obj != null)
@@ -240,7 +234,7 @@ namespace Managers
 		private IEnumerator WorldStart()
 		{
 			yield return StartCoroutine(ObjectPoolingManager.InitializePooling());
-			yield return StartCoroutine(_proceduralWorldGen.TryGenerateWorld());
+			yield return StartCoroutine(ProceduralWorldGenerator.TryGenerateWorld());
 		}
 
 		private void Update()

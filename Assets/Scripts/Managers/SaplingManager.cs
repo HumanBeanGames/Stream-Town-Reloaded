@@ -116,16 +116,7 @@ namespace Environment
         /// </summary>
         private static void CacheTreeGenerationSettings()
         {
-            var worldGen = GameManager.Instance.ProceduralWorldGenerator;
-            if (worldGen == null)
-            {
-                Debug.LogWarning("[SaplingManager] ProceduralWorldGenerator not found for bounds.");
-                return;
-            }
-
-            var settingsList = typeof(ProceduralWorldGenerator)
-                .GetField("_resourceGenerationSettings", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.GetValue(worldGen) as List<ResourceGenerationSettings>;
+            var settingsList = ProceduralWorldGenerator.GetResourceGenerationSettings();
 
             if (settingsList != null)
             {
