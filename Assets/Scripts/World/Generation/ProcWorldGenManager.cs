@@ -103,12 +103,14 @@ namespace World.Generation
 		public static void GenerateTerrain()
 		{
 			_generatedMesh = ProceduralMeshGenerator.CreateMesh(ProceduralMeshGenerator.GenerateTerrainMeshData(GenerationSettings), GenObject);
+			GenObject.GetComponent<MeshFilter>().mesh = _generatedMesh;
 		}
 
 		public static void SetMesh(Mesh mesh)
 		{
 			_generatedMesh = ProceduralMeshGenerator.CreateMesh(mesh, GenObject);
-		}
+            GenObject.GetComponent<MeshFilter>().mesh = _generatedMesh;
+        }
 
 		/// <summary>
 		/// Attempts to generate enemy camps.
