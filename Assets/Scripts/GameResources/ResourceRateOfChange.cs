@@ -31,7 +31,10 @@ namespace GameResources
         /// </summary>
         private void OnEnable()
         {
-            TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
+            if (Application.isPlaying)
+            {
+                TownResourceManager.OnAnyResourceChangeEvent.AddListener(OnResourceChange);
+            }
         }
 
         /// <summary>
@@ -39,7 +42,10 @@ namespace GameResources
         /// </summary>
         private void OnDisable()
         {
-            TownResourceManager.OnAnyResourceChangeEvent.RemoveListener(OnResourceChange);
+            if (Application.isPlaying)
+            {
+                TownResourceManager.OnAnyResourceChangeEvent.RemoveListener(OnResourceChange);
+            }
         }
 
         /// <summary>

@@ -42,12 +42,13 @@ namespace World.Generation
 
 		public static Mesh GeneratedMesh => _generatedMesh;
 
+		[HideInInspector]
 		private static GameObject _genObject;
 		private static GameObject GenObject
 		{
 			get
 			{
-				if (_genObject == null)
+				if (_genObject == null && Application.isPlaying)
 				{
 					_genObject = Resources.Load<GameObject>("GenerationBlank");
 					if (_genObject == null)
@@ -377,7 +378,7 @@ namespace World.Generation
 			// Check all enemy spawns have a valid path to the town
 			AstarPath.active.Scan();
 
-			Transform[] enemySpawners = GameManager.Instance.EnemySpawner.SpawnLocations;
+			/*Transform[] enemySpawners = GameManager.Instance.EnemySpawner.SpawnLocations;
 			GraphNode a = AstarPath.active.GetNearest(Vector3.zero, NNConstraint.Default).node;
 
 			for (int i = 0; i < enemySpawners.Length; i++)
@@ -390,7 +391,7 @@ namespace World.Generation
 					Debug.Log($"Path wasn't possible from Enemy Spawner {i}");
 					return false;
 				}
-			}
+			}*/
 
 			return true;
 		}
