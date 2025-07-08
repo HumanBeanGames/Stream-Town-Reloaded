@@ -6,6 +6,6 @@ public class ChannelDataInstaller : MonoBehaviour, IInstaller
 
     void IInstaller.InstallBindings(ContainerBuilder containerBuilder)
     {
-        containerBuilder.AddSingleton<ChannelData>(container => new ChannelData(container.Parent));
+        containerBuilder.AddSingleton<ChannelData>(container => new ChannelData(container));
     }
 }
