@@ -20,9 +20,6 @@ namespace Settings
 		[SerializeField]
 		private SettingPreset[] _settingPreset;
 
-		[SerializeField]
-		private UniversalRendererData _forwardRenderer;
-
 		//Post processing
 		[SerializeField]
 		private Volume _postProcessVolume;
@@ -598,6 +595,7 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] private UniversalRendererData _forwardRenderer;
 		public void AOToggle(bool toggle)
 		{
 			if (!_presetChange)

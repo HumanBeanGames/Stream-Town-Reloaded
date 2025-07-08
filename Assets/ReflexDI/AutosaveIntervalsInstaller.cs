@@ -8,6 +8,6 @@ public class AutosaveIntervalsInstaller : MonoBehaviour, IInstaller
 
     void IInstaller.InstallBindings(ContainerBuilder containerBuilder)
     {
-        containerBuilder.AddSingleton<Autosave>(container => new Autosave(container, _autosaveTimeIntervals));
+        containerBuilder.AddSingleton(new Autosave(_autosaveTimeIntervals));
     }
 }

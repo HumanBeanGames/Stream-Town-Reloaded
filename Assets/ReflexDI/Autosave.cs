@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Reflex.Core;
 
-public class Autosave : PSAccess
+public class Autosave
 {
     public readonly List<int> Intervals;
 
-    public Autosave(Container container, List<int> intervals) : base(container)
+    public Autosave(List<int> intervals)
     {
         Intervals = intervals;
     }
