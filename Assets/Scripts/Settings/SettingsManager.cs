@@ -20,23 +20,19 @@ namespace Settings
 		[SerializeField]
 		private SettingPreset[] _settingPreset;
 
-		//Post processing
+		//Post processing PER SCENE
 		[SerializeField]
 		private Volume _postProcessVolume;
 
-		//Audio
-		[SerializeField]
-		private AudioMixer _mixer;
-
-		//Camera AA
+		//Camera AA PER SCENE
 		[Space, Header("Camera settings")]
 		[SerializeField]
 		private UniversalAdditionalCameraData _cameraData;
 
-		[SerializeField]
+		[SerializeField] //PER SCENE
 		private Camera _camera;
 
-		//UI
+		//UI PER SCENE?
 		[Space, Header("UI")]
 
 		[SerializeField]
@@ -86,6 +82,7 @@ namespace Settings
 
 		[SerializeField]
 		private Slider _gammaSlider;
+
 		//AUDIO UI
 		[Space, Header("Audio Settings")]
 
@@ -220,7 +217,7 @@ namespace Settings
 		private bool _borderDetection;
 		private bool _mouseControls;
 
-		private CameraApplyChanges _cameraApplyChanges;
+		private CameraApplyChanges _cameraApplyChanges; //PER SCENE
 		public GameObject SettingsPanel => _settingsPanel;
 
 		[System.Serializable]
@@ -693,6 +690,7 @@ namespace Settings
 		/// AUDIO SETTINGS
 		/// </summary>
 
+		[Inject] private AudioMixer _mixer;
 		public void MasterVolumeOnChange(float v)
 		{
 			_masterVolumeSlider.value = v;
