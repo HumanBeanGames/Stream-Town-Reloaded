@@ -170,6 +170,7 @@ Transform:
   - {fileID: 6499102722871105756}
   - {fileID: 6493806608817289511}
   - {fileID: 3155992380837634047}
+  - {fileID: 508828707624070862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8650229674345330984
@@ -229,6 +230,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _forwardRenderer: {fileID: 11400000, guid: 5c2a42d48299b2a47896e95a00b9905b, type: 2}
+--- !u!1 &7736263504004512454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508828707624070862}
+  - component: {fileID: 2175930862871360780}
+  m_Layer: 0
+  m_Name: SettingPresets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &508828707624070862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736263504004512454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2318173867771375550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2175930862871360780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736263504004512454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f75fa042ac2034fa648bc087d853bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presets:
+  - {fileID: 11400000, guid: 911539399396c4a4a87801d4db0fa2f3, type: 2}
+  - {fileID: 11400000, guid: fd980b87f55886443ac4515adf4a485f, type: 2}
+  - {fileID: 11400000, guid: d03ec8633a6bb7c48b4c3ed1259f85e0, type: 2}
+  - {fileID: 11400000, guid: 50fed1172642e664c93bb2f7463b6bfc, type: 2}
 --- !u!1 &8027941300749433859
 GameObject:
   m_ObjectHideFlags: 0

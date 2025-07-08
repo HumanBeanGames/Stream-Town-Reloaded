@@ -17,9 +17,6 @@ namespace Settings
 {
 	public class SettingsManager : MonoBehaviour
 	{
-		[SerializeField]
-		private SettingPreset[] _settingPreset;
-
 		//Post processing PER SCENE
 		[SerializeField]
 		private Volume _postProcessVolume;
@@ -221,25 +218,6 @@ namespace Settings
 		public GameObject SettingsPanel => _settingsPanel;
 
 		[System.Serializable]
-		class SettingPreset
-		{
-			public int antiAliasing;
-			public int shadowType;
-			public int shadowResolution;
-			public bool vSync;
-			public bool enabledAO;
-			public int cameraAA;
-			public SettingPreset(int _antiAliasing, int _shadowType, int _shadowResolution, bool _vSync, bool _enableAO, int _cameraAA)
-			{
-				antiAliasing = _antiAliasing;
-				shadowType = _shadowType;
-				shadowResolution = _shadowResolution;
-				vSync = _vSync;
-				enabledAO = _enableAO;
-				cameraAA = _cameraAA;
-			}
-		}
-		[System.Serializable]
 		class SettingPages
 		{
 			public List<GameObject> UIPanels;
@@ -335,6 +313,7 @@ namespace Settings
 		/// </summary>
 
 		[Inject] SaveState SaveState;
+		[Inject] SettingPreset[] _settingPreset;
 		public void PresetOnChange(int v)
 		{
 			if (v < 5)
@@ -696,7 +675,7 @@ namespace Settings
 			_masterVolumeSlider.value = v;
 			_masterVolumeText.text = Mathf.RoundToInt(v * 50).ToString();
 
-
+				
 			_mixer.SetFloat("_masterVolume", Mathf.Log10(v) * 40);
 
 
