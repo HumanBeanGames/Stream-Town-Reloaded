@@ -8,6 +8,6 @@ public class AudioMixerInstaller : MonoBehaviour, IInstaller
     private AudioMixer _audioMixer;
     public void InstallBindings(ContainerBuilder containerBuilder)
     {
-        containerBuilder.AddSingleton(_audioMixer);
+        containerBuilder.AddSingleton<AudioMixer>(c => _audioMixer, typeof(AudioMixer));
     }
 }
