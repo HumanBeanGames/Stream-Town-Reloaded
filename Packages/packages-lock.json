@@ -14,11 +14,7 @@
       "dependencies": {}
     },
     "com.unity.ai.navigation": {
-<<<<<<< Updated upstream
       "version": "2.0.8",
-=======
-      "version": "2.0.5",
->>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -62,10 +58,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-<<<<<<< Updated upstream
-    "com.unity.ide.visualstudio": {
-      "version": "2.0.23",
-=======
     "com.unity.ide.rider": {
       "version": "3.0.31",
       "depth": 0,
@@ -76,8 +68,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
->>>>>>> Stashed changes
+      "version": "2.0.23",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -85,10 +76,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.ide.vscode": {
+      "version": "1.2.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.inputsystem": {
       "version": "1.11.2",
-<<<<<<< Updated upstream
-=======
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -98,30 +94,7 @@
     },
     "com.unity.mathematics": {
       "version": "1.3.2",
->>>>>>> Stashed changes
       "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-<<<<<<< Updated upstream
-    "com.unity.mathematics": {
-      "version": "1.3.2",
-=======
-    "com.unity.multiplayer.center": {
-      "version": "1.0.0",
->>>>>>> Stashed changes
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      }
-    },
-    "com.unity.nuget.mono-cecil": {
-      "version": "1.11.4",
-      "depth": 3,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -151,19 +124,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.probuilder": {
-<<<<<<< Updated upstream
       "version": "6.0.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.shadergraph": "17.0.3",
-=======
-      "version": "6.0.4",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.shadergraph": "17.0.2",
->>>>>>> Stashed changes
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.physics": "1.0.0",
         "com.unity.settings-manager": "1.0.3"
@@ -253,11 +218,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-<<<<<<< Updated upstream
       "version": "1.4.6",
-=======
-      "version": "1.4.5",
->>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -278,11 +239,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-<<<<<<< Updated upstream
       "version": "1.8.8",
-=======
-      "version": "1.8.7",
->>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
