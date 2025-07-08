@@ -117,16 +117,13 @@ namespace UserInterface.MainMenu
 			Application.Quit();
 		}
 
-		private void Awake()
+		private void Start()
 		{
 			_settingsManager = FindObjectOfType<SettingsManager>();
 			_loadingManager = FindObjectOfType<LoadingManager>();
 			_metaData = FindObjectOfType<MetaData.MetaData>();
 			_settingsManager.LoadSettings();
-		}
 
-		private void Start()
-		{
 			if (GameIO.DoesSaveFileExist(GameIO.SaveFileType.GameSave))
 				return;
 

@@ -11,6 +11,7 @@ using System.IO;
 using SavingAndLoading;
 using PlayerControls;
 using Managers;
+using Reflex.Attributes;
 
 namespace Settings
 {
@@ -187,8 +188,6 @@ namespace Settings
 
 		private SavePreset _savePreset;
 
-		private bool _savedData;
-		private bool _loadingData;
 		private bool _apply;
 		//save variables
 		private int _preset;
@@ -229,8 +228,6 @@ namespace Settings
 
 		private bool _borderDetection;
 		private bool _mouseControls;
-
-		private string _channelName;
 
 		private CameraApplyChanges _cameraApplyChanges;
 		public GameObject SettingsPanel => _settingsPanel;
@@ -350,6 +347,7 @@ namespace Settings
 		/// VIDEO SETTINGS
 		/// </summary>
 
+		[Inject] SaveState SaveState;
 		public void PresetOnChange(int v)
 		{
 			if (v < 5)
@@ -370,11 +368,8 @@ namespace Settings
 				_presetButtons[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
 				_presetChange = false;
 
-				if (!_loadingData)
-				{
-					_savedData = false;
-				}
-			}
+                SaveState.SafeSave();
+            }
 		}
 
 		public void AAOnChange(int v)
@@ -409,11 +404,8 @@ namespace Settings
 			}
 			_antiAliasing = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 		public void CameraAAOnChange(int v)
 		{
 			if (!_presetChange)
@@ -446,11 +438,8 @@ namespace Settings
 				}
 			_cameraAA = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		//Shadow settings
 		public void ShadowQualityOnChange(int v)
@@ -494,11 +483,8 @@ namespace Settings
 			}
 			_shadowResolution = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void ShadowsOnChange(int v)
 		{
@@ -548,11 +534,8 @@ namespace Settings
 
 			_shadowType = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		//FPS modifiers
 		public void VSyncToggle(bool vSyncEnabled)
@@ -582,11 +565,8 @@ namespace Settings
 
 			_vSync = vSyncEnabled;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void FPSOnChange(int v)
 		{
@@ -620,11 +600,8 @@ namespace Settings
 			_fpsLimiter = v;
 
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void AOToggle(bool toggle)
 		{
@@ -646,11 +623,8 @@ namespace Settings
 
 			_enabledAO = toggle;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void DisplayModeOnChange(int v)
 		{
@@ -674,11 +648,8 @@ namespace Settings
 
 			_displayMode = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void ResoultionOnChange(int v)
 		{
@@ -693,8 +664,8 @@ namespace Settings
 
 			_resolution = v;
 
-			_savedData = false;
-		}
+            SaveState.SafeSave();
+        }
 
 		//Post processing effects
 		public void GammaOnChange(float v)
@@ -708,11 +679,8 @@ namespace Settings
 
 			_gamma = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void BrightnessOnChange(float v)
 		{
@@ -725,11 +693,8 @@ namespace Settings
 
 			_brightness = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		/// <summary>
 		/// AUDIO SETTINGS
@@ -746,11 +711,8 @@ namespace Settings
 
 			_masterVolume = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void MusicVolumeOnChange(float v)
 		{
@@ -763,11 +725,8 @@ namespace Settings
 
 			_musicVolume = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void SoundEffectsVolumeOnChange(float v)
 		{
@@ -780,11 +739,8 @@ namespace Settings
 
 			_playerVolume = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void AmbienceVolumeOnChange(float v)
 		{
@@ -797,11 +753,8 @@ namespace Settings
 
 			_environmentVolume = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		/// <summary>
 		/// GAMEPLAY SETTINGS
@@ -824,11 +777,8 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void ZoomSensitivityOnChange(float v)
 		{
@@ -847,11 +797,8 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void WASDSensitivityOnChange(float v)
 		{
@@ -870,11 +817,8 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void BorderDetectionSensitivityOnChange(float v)
 		{
@@ -893,11 +837,8 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void FOVOnChange(float v)
 		{
@@ -914,11 +855,8 @@ namespace Settings
 
 			_fov = (int)v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void AutoSaveTimer(int v)
 		{
@@ -930,33 +868,25 @@ namespace Settings
 				if (GameManager.Instance)
 					GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
 			}
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+
+            SaveState.SafeSave();
+        }
 
 		public void DisplayUserNames(int v)
 		{
 			_displayNameDropdown.value = v;
 			_displayName = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void DisplayBuildingData(int v)
 		{
 			_displayBuildingDropdown.value = v;
 			_displayBuildings = v;
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void ToggleBorderDectionMovement(bool toggle)
 		{
@@ -975,11 +905,8 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
 		public void ToggleMouseControls(bool toggle)
 		{
@@ -998,21 +925,17 @@ namespace Settings
 				}
 			}
 
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+            SaveState.SafeSave();
+        }
 
+		[Inject] ChannelData _channelData;
 		public void SetChannelName(string name)
 		{
-			_channelName = name.ToLower();
+			_channelData.SetChannelName(name);
 			_channelNameInput.text = name;
-			if (!_loadingData)
-			{
-				_savedData = false;
-			}
-		}
+
+            SaveState.SafeSave();
+        }
 
 		/// <summary>
 		/// Update the data with the game scene
@@ -1036,7 +959,7 @@ namespace Settings
 
 		public void ToggleSettingsPanel()
 		{
-			if (_savedData)
+			if (SaveState._savedData)
 			{
 				_settingsPanel.SetActive(!_settingsPanel.activeSelf);
 				if (_settingsPanel.activeSelf == false)
@@ -1086,7 +1009,7 @@ namespace Settings
 
 			UpdateSettingScriptableObject();
 
-			_savedData = true;
+			SaveState._savedData = true;
 		}
 
 		public void LoadSettings()
@@ -1094,7 +1017,7 @@ namespace Settings
 			if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Panda Belly/Stream Town/SettingsData.json"))
 			{
 				_savePreset = GameIO.LoadSettingsData();
-				_loadingData = true;
+				SaveState._loadingData = true;
 				_apply = true;
 				//Visual
 
@@ -1139,8 +1062,8 @@ namespace Settings
 				if (_cameraApplyChanges)
 					_cameraApplyChanges.UpdateCameraSettings();
 
-				_loadingData = false;
-				_savedData = true;
+				SaveState._loadingData = false;
+				SaveState._savedData = true;
 				_apply = false;
 
 				if (GameManager.Instance)
@@ -1165,7 +1088,7 @@ namespace Settings
 			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").fov = _fov;
 			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").displayBuildings = _displayBuildings;
 			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").displayName = _displayName;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").channelName = _channelName;
+			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").channelName = _channelData.name;
 			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").autosaveTime = _autosaveTime;
 		}
 
@@ -1206,7 +1129,7 @@ namespace Settings
 			
 
 			//Twitch
-			SetChannelName(_channelName);
+			SetChannelName(_channelData.name);
 
 			if (GameManager.Instance)
 				GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
@@ -1302,7 +1225,7 @@ namespace Settings
 			_savePreset.keyboardMovement = _borderDetection;
 			_savePreset.mouseMovement = _mouseControls;
 
-			_savePreset.channelName = _channelName;
+			_savePreset.channelName = _channelData.name;
 		}
 
 		// Setting all the settings values to the UI values
@@ -1348,7 +1271,7 @@ namespace Settings
 			_borderDetection = _borderDetectionToggle.isOn;
 			_mouseControls = _mouseControlsToggle.isOn;
 
-			_channelName = _channelNameInput.text;
+			_channelData.name = _channelNameInput.text;
 
 			SaveSettings();
 
@@ -1372,7 +1295,7 @@ namespace Settings
 		/// UNITY FUNCTIONS
 		/// </summary>
 
-		private void Awake()
+		private void Start()
 		{
 			if (!Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + GameIO.SAVE_FILEPATH))
 			{
