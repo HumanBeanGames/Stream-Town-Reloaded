@@ -18,12 +18,6 @@ namespace Settings
 	public class SettingsManager : MonoBehaviour
 	{
 		[SerializeField]
-		private List<int> _autosaveTimeIntervals;
-		//Render pipeline
-		[SerializeField]
-		private UniversalRenderPipelineAsset _renderPipeline;
-
-		[SerializeField]
 		private SettingPreset[] _settingPreset;
 
 		[SerializeField]
@@ -231,7 +225,6 @@ namespace Settings
 
 		private CameraApplyChanges _cameraApplyChanges;
 		public GameObject SettingsPanel => _settingsPanel;
-		public List<int> AutosaveTimeIntervals => _autosaveTimeIntervals;
 
 		[System.Serializable]
 		class SettingPreset
@@ -371,6 +364,8 @@ namespace Settings
                 SaveState.SafeSave();
             }
 		}
+
+		[Inject] UniversalRenderPipelineAsset _renderPipeline;
 
 		public void AAOnChange(int v)
 		{
@@ -858,6 +853,7 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] private Autosave _autoSave;
 		public void AutoSaveTimer(int v)
 		{
 			_autosaveTimerDropdown.value = v;
@@ -866,7 +862,7 @@ namespace Settings
 			if (_apply)
 			{
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+					GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
 			}
 
             SaveState.SafeSave();
@@ -1067,7 +1063,7 @@ namespace Settings
 				_apply = false;
 
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+					GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
 			}
 			else
 			{
@@ -1132,7 +1128,7 @@ namespace Settings
 			SetChannelName(_channelData.name);
 
 			if (GameManager.Instance)
-				GameManager.Instance.SaveManager.SetAutosaveTime(_autosaveTimeIntervals[_autosaveTime] * 60.0f);
+				GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
 			_apply = false;
 		}
 

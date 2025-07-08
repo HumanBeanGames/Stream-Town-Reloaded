@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using PlayerControls;
 using UserInterface.MainMenu;
 using Managers;
+using Reflex.Attributes;
 
 namespace UserInterface 
 {
@@ -71,7 +72,8 @@ namespace UserInterface
 			_cameraApplyChanges.gameObject.GetComponent<CameraController>().IsIdle = toggle;
 		}
 
-		private void Awake()
+		[Inject] private Autosave Autosave;
+		private void Start()
 		{
 			_cameraApplyChanges = FindObjectOfType<CameraApplyChanges>();
 			_loadingManager = FindObjectOfType<LoadingManager>();
@@ -82,7 +84,7 @@ namespace UserInterface
 				_settingsManager.SetUpCamera();
 				_settingsManager.GameSettingData(_cameraApplyChanges);
 				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_settingsManager.AutosaveTimeIntervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);
+					GameManager.Instance.SaveManager.SetAutosaveTime(Autosave.Intervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);
 			}
 		}
 
