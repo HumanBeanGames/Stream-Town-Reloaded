@@ -26,7 +26,7 @@ namespace Settings
 		private SettingPreset[] _settingPreset;
 
 		[SerializeField]
-		private ForwardRendererData _forwardRenderer;
+		private UniversalRendererData _forwardRenderer;
 
 		//Post processing
 		[SerializeField]
@@ -1222,7 +1222,7 @@ namespace Settings
 			_postProcessVolume = GetComponentInChildren<Volume>();
 			_postProcessVolume.profile.TryGet(out _gammaAndBrightness);
 
-			GraphicsSettings.renderPipelineAsset = _renderPipeline;
+			GraphicsSettings.defaultRenderPipeline = _renderPipeline;
 			QualitySettings.renderPipeline = _renderPipeline;
 		}
 

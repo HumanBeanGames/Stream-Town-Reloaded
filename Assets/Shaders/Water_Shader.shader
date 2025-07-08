@@ -278,7 +278,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -805,7 +805,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -1150,7 +1150,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -1466,7 +1466,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -1807,7 +1807,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -2139,7 +2139,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
@@ -2489,7 +2489,7 @@ Shader "Water_Shader"
 				float _TessMaxDisp;
 			#endif
 			CBUFFER_END
-			uniform float4 _CameraDepthTexture_TexelSize;
+
 			sampler2D _MainTexture;
 			sampler2D _NoiseTexture;
 			UNITY_INSTANCING_BUFFER_START(Water_Shader)
