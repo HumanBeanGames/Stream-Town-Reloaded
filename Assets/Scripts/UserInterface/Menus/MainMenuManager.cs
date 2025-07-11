@@ -1,4 +1,5 @@
 using MetaData;
+using Reflex.Attributes;
 using SavingAndLoading;
 using Scriptables;
 using Settings;
@@ -107,9 +108,10 @@ namespace UserInterface.MainMenu
 			_loadingManager.LoadNonWorldScenes(creditsSceneIndex);
 		}
 
+		[Inject] private SettingsPanel _settingsPanel;
 		public void OptionMenuToggle()
 		{
-			_settingsManager.SettingsPanel.SetActive(!_settingsManager.SettingsPanel.activeSelf);
+			_settingsPanel.Enabled = !_settingsPanel.Enabled;
 		}
 
 		public void QuitGame()
@@ -136,7 +138,7 @@ namespace UserInterface.MainMenu
 		{
 			if (Keyboard.current.escapeKey.wasPressedThisFrame)
 			{
-				if (_settingsManager.SettingsPanel.activeSelf)
+				if (_settingsPanel.Enabled)
 				{
 					_settingsManager.ToggleSettingsPanel();
 				}

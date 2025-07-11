@@ -12,158 +12,12 @@ using SavingAndLoading;
 using PlayerControls;
 using Managers;
 using Reflex.Attributes;
+using Scriptables;
 
 namespace Settings
 {
 	public class SettingsManager : MonoBehaviour
 	{
-		//Post processing PER SCENE
-		[SerializeField]
-		private Volume _postProcessVolume;
-
-		//Camera AA PER SCENE
-		[Space, Header("Camera settings")]
-		[SerializeField]
-		private UniversalAdditionalCameraData _cameraData;
-
-		[SerializeField] //PER SCENE
-		private Camera _camera;
-
-		//UI PER SCENE?
-		[Space, Header("UI")]
-
-		[SerializeField]
-		private GameObject _settingsPanel;
-
-		[SerializeField]
-		private SettingPages _settingPages;
-
-		[SerializeField]
-		private GameObject _confirmSettingsPanel;
-
-		//VIDEO UI
-		[Space, Header("Video Settings")]
-
-		[SerializeField]
-		private List<GameObject> _presetButtons;
-
-		[SerializeField]
-		private TMP_Dropdown _resolutionDropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _displayModeDropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _shadowTypeDropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _shadowQualityDropdown;
-
-		[SerializeField]
-		private Toggle _vSyncToggle;
-
-		[SerializeField]
-		private TMP_Dropdown _fpsLimiterDropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _AADropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _cameraAADropdown;
-
-		[SerializeField]
-		private Toggle _AOToggle;
-
-		[SerializeField]
-		private Slider _brightnessSlider;
-
-		[SerializeField]
-		private Slider _gammaSlider;
-
-		//AUDIO UI
-		[Space, Header("Audio Settings")]
-
-		[SerializeField]
-		private TextMeshProUGUI _masterVolumeText;
-
-		[SerializeField]
-		private Slider _masterVolumeSlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _musicVolumeText;
-
-		[SerializeField]
-		private Slider _musicVolumeSlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _soundEffectsVolumeText;
-
-		[SerializeField]
-		private Slider _soundEffectsVolumeSlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _ambienceVolumeText;
-
-		[SerializeField]
-		private Slider _ambienceVolumeSlider;
-
-		//GAMEPLAY SETTINGS
-		[Space, Header("Gameplay Settings")]
-
-		[SerializeField]
-		private TextMeshProUGUI _panningSensitivityText;
-
-		[SerializeField]
-		private Slider _panningSensitivitySlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _zoomingSensitivityText;
-
-		[SerializeField]
-		private Slider _zoomingSensitivitySlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _wasdSensitivityText;
-
-		[SerializeField]
-		private Slider _wasdSensitivitySlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _borderDetectionSensitivityText;
-
-		[SerializeField]
-		private Slider _borderDetectionSensitivitySlider;
-
-		[SerializeField]
-		private TextMeshProUGUI _fovLevelText;
-
-		[SerializeField]
-		private Slider _fovLevelSlider;
-
-		[SerializeField]
-		private TMP_Dropdown _autosaveTimerDropdown;
-
-		[SerializeField]
-		private Toggle _borderDetectionToggle;
-
-		[SerializeField]
-		private Toggle _mouseControlsToggle;
-
-		[SerializeField]
-		private TMP_Dropdown _displayNameDropdown;
-
-		[SerializeField]
-		private TMP_Dropdown _displayBuildingDropdown;
-
-		//TWITCH SETTINGS
-		[Space, Header("Twitch Settings")]
-
-		[SerializeField]
-		private GameObject _connectionTab;
-
-		[SerializeField]
-		private TMP_InputField _channelNameInput;
-
 		//private variables
 		private Resolution[] _resolutions;
 
@@ -173,9 +27,7 @@ namespace Settings
 
 		private SavePreset _savePreset;
 
-		private bool _apply;
 		//save variables
-		private int _preset;
 
 		private int _displayMode;
 		private int _resolution;
@@ -215,104 +67,204 @@ namespace Settings
 		private bool _mouseControls;
 
 		private CameraApplyChanges _cameraApplyChanges; //PER SCENE
-		public GameObject SettingsPanel => _settingsPanel;
-
-		[System.Serializable]
-		class SettingPages
-		{
-			public List<GameObject> UIPanels;
-			public List<GameObject> tabs;
-
-			public SettingPages(List<GameObject> UIPanels, List<GameObject> tabs)
-			{
-				this.UIPanels = UIPanels;
-				this.tabs = tabs;
-			}
-		}
-		[System.Serializable]
-		public class SavePreset
-		{
-			//VIDEO SETTINGS
-
-			public int preset;
-
-			public int displayMode;
-			public int resoultion;
-
-			public int shadowType;
-			public int shadowResolution;//Shadow Res
-
-			public bool enabledAO; // Bool
-
-			public bool vSync; // Bool
-			public int fpsLimiter;
-
-			public float brightness;
-			public float gamma;
-
-			public int antiAliasing;
-			public int cameraAA;
-
-			//AUDIO SETTINGS
-
-			public float masterVolume;
-			public float musicVolume;
-			public float playerVolume;
-			public float environmentVolume;
-
-			//GAMEPLAY SETTINGS
-
-			public float panSensitivity;
-			public float zoomSensitivity;
-			public float wasdSensitivity;
-			public float borderDetectionSensitivity;
-			public int fov;
-
-			public int autosaveTime;
-
-			public int displayName;
-			public int displayBuildings;
-
-			public bool keyboardMovement;
-			public bool mouseMovement;
-
-			public string channelName;
-		}
-
-		//UI Functionality
-		public void ChangeTab(int v)
-		{
-			//Enables and disables tabs
-			List<GameObject> tabs = new List<GameObject>(_settingPages.tabs);
-
-			tabs.RemoveAt(v);
-
-			for (int i = 0; i < tabs.Count; i++)
-			{
-				tabs[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-			}
-
-			_settingPages.tabs[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-
-			//Enables and disables pages
-
-			List<GameObject> pages = new List<GameObject>(_settingPages.UIPanels);
-
-			pages.RemoveAt(v);
-
-			for (int i = 0; i < pages.Count; i++)
-			{
-				pages[i].SetActive(false);
-			}
-
-			_settingPages.UIPanels[v].SetActive(true);
-		}
 
 		/// <summary>
 		/// VIDEO SETTINGS
 		/// </summary>
+		/// 
+		private bool _apply = false;
 
-		[Inject] SaveState SaveState;
+		private int _preset = 0;
+
+		[Inject] Camera _camera;
+		[Inject] UniversalAdditionalCameraData _cameraData;
+		[Inject] List<GameObject> _presetButtons; //REVISIT TO CHANGE TYPE
+        public void CameraAAOnChange(int v)
+        {
+            if (!_presetChange)
+            {
+                for (int i = 0; i < _presetButtons.Count; i++)
+                {
+                    //REVISIT
+                    _presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                }
+                _preset = 5;
+            }
+
+            if (_camera)
+                if (_apply)
+                {
+                    switch (v)
+                    {
+                        case 1:
+                            _cameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
+                            break;
+                        case 2:
+                            _cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
+                            break;
+                        default:
+                            _cameraData.antialiasing = AntialiasingMode.None;
+                            break;
+                    }
+
+                    _cameraData.antialiasingQuality = AntialiasingQuality.High;
+                }
+            _cameraAA = v;
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_PanningSensitivitySlider _panningSensitivitySlider;
+		[Inject] Access_PanningSensitivityText _panningSensitivityText;
+        public void PanSensitivityOnChange(float v)
+        {
+            _panningSensitivitySlider.val = v;
+            _panningSensitivityText.val = (v / 10).ToString("F1");
+            _panSensitivity = v;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().PanSensitivity = v;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_ZoomingSensitivitySlider _zoomingSensitivitySlider;
+		[Inject] Access_ZoomingSensitivityText _zoomingSensitivityText;
+        public void ZoomSensitivityOnChange(float v)
+        {
+            _zoomingSensitivitySlider.val = v;
+            _zoomingSensitivityText.val = (v / 10).ToString("F1");
+            _zoomSensitivity = v;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().ZoomSensitivity = v;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_WasdSensitivitySlider _wasdSensitivitySlider;
+		[Inject] Access_WasdSensitivityText _wasdSensitivityText;
+        public void WASDSensitivityOnChange(float v)
+        {
+            _wasdSensitivitySlider.val = v;
+            _wasdSensitivityText.val = (v / 10).ToString("F1");
+            _wasdSensitivity = v;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().WasdSensitivity = v;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_BorderDetectionSensitivitySlider _borderDetectionSensitivitySlider;
+		[Inject] Access_BorderDetectionSensitivityText _borderDetectionSensitivityText;
+        public void BorderDetectionSensitivityOnChange(float v)
+        {
+            _borderDetectionSensitivitySlider.val = v;
+            _borderDetectionSensitivityText.val = (v / 10).ToString("F1");
+            _borderDetectionSensitivity = v;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().BorderDetectionSensitivity = v;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_FOVLevelSlider _fovLevelSlider;
+        [Inject] Access_FOVLevelText _fovLevelText;
+        public void FOVOnChange(float v)
+        {
+            _fovLevelSlider.val = v;
+            _fovLevelText.val = ((int)v).ToString();
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    _camera.fieldOfView = (int)v;
+                }
+            }
+
+            _fov = (int)v;
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_BorderDetectionToggle _borderDetectionToggle;
+        public void ToggleBorderDectionMovement(bool toggle)
+        {
+            _borderDetectionToggle.isOn = toggle;
+
+            _borderDetection = toggle;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().BorderDetection = toggle;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+		[Inject] Access_MouseControlsToggle _mouseControlsToggle;
+        public void ToggleMouseControls(bool toggle)
+        {
+            _mouseControlsToggle.isOn = toggle;
+
+            _mouseControls = toggle;
+
+            if (_apply)
+            {
+                if (_camera)
+                {
+                    if (_camera.GetComponent<CameraController>())
+                    {
+                        _camera.GetComponent<CameraController>().MouseControls = toggle;
+                    }
+                }
+            }
+
+            SaveState.SafeSave();
+        }
+
+        [Inject] SaveState SaveState;
 		[Inject] SettingPreset[] _settingPreset;
 		public void PresetOnChange(int v)
 		{
@@ -327,7 +279,8 @@ namespace Settings
 				ShadowsOnChange(_settingPreset[v].shadowType);
 				ShadowQualityOnChange(_settingPreset[v].shadowResolution);
 				AAOnChange(_settingPreset[v].antiAliasing);
-				CameraAAOnChange(_settingPreset[v].cameraAA);
+				//REVISIT
+				//CameraAAOnChange(_settingPreset[v].cameraAA);
 				AOToggle(_settingPreset[v].enabledAO);
 				VSyncToggle(_settingPreset[v].vSync);
 				_preset = v;
@@ -338,8 +291,8 @@ namespace Settings
             }
 		}
 
-		[Inject] UniversalRenderPipelineAsset _renderPipeline;
-
+        [Inject] UniversalRenderPipelineAsset _renderPipeline;
+		[Inject] Access_AADropdown _AADropdown;
 		public void AAOnChange(int v)
 		{
 			if (!_presetChange)
@@ -351,7 +304,7 @@ namespace Settings
 				_preset = 5;
 			}
 
-			_AADropdown.value = v;
+			_AADropdown.val = v;
 			if (_apply)
 			{
 				switch (v)
@@ -374,41 +327,8 @@ namespace Settings
 
             SaveState.SafeSave();
         }
-		public void CameraAAOnChange(int v)
-		{
-			if (!_presetChange)
-			{
-				for (int i = 0; i < _presetButtons.Count; i++)
-				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-				}
-				_preset = 5;
-			}
 
-			_cameraAADropdown.value = v;
-			if (_camera)
-				if (_apply)
-				{
-					switch (v)
-					{
-						case 1:
-							_cameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
-							break;
-						case 2:
-							_cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-							break;
-						default:
-							_cameraData.antialiasing = AntialiasingMode.None;
-							break;
-					}
-
-					_cameraData.antialiasingQuality = AntialiasingQuality.High;
-				}
-			_cameraAA = v;
-
-            SaveState.SafeSave();
-        }
-
+		[Inject] Access_ShadowQualityDropdown _shadowQualityDropdown;
 		//Shadow settings
 		public void ShadowQualityOnChange(int v)
 		{
@@ -421,7 +341,7 @@ namespace Settings
 				_preset = 5;
 			}
 
-			_shadowQualityDropdown.value = v;
+			_shadowQualityDropdown.val = v;
 
 			if (_apply)
 			{
@@ -454,6 +374,7 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_ShadowTypeDropdown _shadowTypeDropdown;
 		public void ShadowsOnChange(int v)
 		{
 			if (!_presetChange)
@@ -465,7 +386,7 @@ namespace Settings
 				_preset = 5;
 			}
 
-			_shadowTypeDropdown.value = v;
+			_shadowTypeDropdown.val = v;
 			if (_apply)
 			{
 				switch (v)
@@ -490,13 +411,13 @@ namespace Settings
 			switch (v)
 			{
 				case 1: // hard shadows
-					_shadowQualityDropdown.interactable = true;
+					_shadowQualityDropdown.dropDown.interactable = true;
 					break;
 				case 2: // soft shadows
-					_shadowQualityDropdown.interactable = true;
+					_shadowQualityDropdown.dropDown.interactable = true;
 					break;
 				default: // no shadows
-					_shadowQualityDropdown.interactable = false;
+					_shadowQualityDropdown.dropDown.interactable = false;
 					break;
 			}
 
@@ -505,6 +426,7 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_VsyncToggle _vSyncToggle;
 		//FPS modifiers
 		public void VSyncToggle(bool vSyncEnabled)
 		{
@@ -536,9 +458,10 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_FPSLimiterDropdown _fpsLimiterDropdown;
 		public void FPSOnChange(int v)
 		{
-			_fpsLimiterDropdown.value = v;
+			_fpsLimiterDropdown.val = v;
 
 			if (_apply)
 			{
@@ -572,6 +495,7 @@ namespace Settings
         }
 
 		[Inject] private UniversalRendererData _forwardRenderer;
+		[Inject] Access_AOToggle _AOToggle;
 		public void AOToggle(bool toggle)
 		{
 			if (!_presetChange)
@@ -595,9 +519,10 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_DisplayModeDropdown _displayModeDropdown;
 		public void DisplayModeOnChange(int v)
 		{
-			_displayModeDropdown.value = v;
+			_displayModeDropdown.val = v;
 
 			if (_apply)
 			{
@@ -620,9 +545,10 @@ namespace Settings
             SaveState.SafeSave();
         }
 
-		public void ResoultionOnChange(int v)
+		[Inject] Access_ResolutionDropdown _resolutionDropdown;
+		public void ResolutionOnChange(int v)
 		{
-			_resolutionDropdown.value = v;
+			_resolutionDropdown.val = v;
 
 			Resolution resolution = _resolutions[v];
 
@@ -637,9 +563,10 @@ namespace Settings
         }
 
 		//Post processing effects
+		[Inject] Access_GammaSlider _gammaSlider;
 		public void GammaOnChange(float v)
 		{
-			_gammaSlider.value = v;
+			_gammaSlider.val = v;
 
 			if (_apply)
 			{
@@ -651,9 +578,10 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_BrightnessSlider _brightnessSlider;
 		public void BrightnessOnChange(float v)
 		{
-			_brightnessSlider.value = v;
+			_brightnessSlider.val = v;
 
 			if (_apply)
 			{
@@ -668,12 +596,13 @@ namespace Settings
 		/// <summary>
 		/// AUDIO SETTINGS
 		/// </summary>
-
+		[Inject] Access_MasterVolumeSlider _masterVolumeSlider;
+		[Inject] Access_MasterVolumeText _masterVolumeText;
 		[Inject] private AudioMixer _mixer;
 		public void MasterVolumeOnChange(float v)
 		{
-			_masterVolumeSlider.value = v;
-			_masterVolumeText.text = Mathf.RoundToInt(v * 50).ToString();
+			_masterVolumeSlider.val = v;
+			_masterVolumeText.val = Mathf.RoundToInt(v * 50).ToString();
 
 				
 			_mixer.SetFloat("_masterVolume", Mathf.Log10(v) * 40);
@@ -684,10 +613,12 @@ namespace Settings
             SaveState.SafeSave();
         }
 
-		public void MusicVolumeOnChange(float v)
+        [Inject] Access_MusicVolumeSlider _musicVolumeSlider;
+        [Inject] Access_MusicVolumeText _musicVolumeText;
+        public void MusicVolumeOnChange(float v)
 		{
-			_musicVolumeSlider.value = v;
-			_musicVolumeText.text = Mathf.RoundToInt(v * 50).ToString();
+			_musicVolumeSlider.val = v;
+			_musicVolumeText.val = Mathf.RoundToInt(v * 50).ToString();
 
 
 			_mixer.SetFloat("_musicVolume", Mathf.Log10(v) * 40);
@@ -698,10 +629,12 @@ namespace Settings
             SaveState.SafeSave();
         }
 
-		public void SoundEffectsVolumeOnChange(float v)
+        [Inject] Access_SoundEffectsVolumeSlider _soundEffectsVolumeSlider;
+        [Inject] Access_SoundEffectsVolumeText _soundEffectsVolumeText;
+        public void SoundEffectsVolumeOnChange(float v)
 		{
-			_soundEffectsVolumeSlider.value = v;
-			_soundEffectsVolumeText.text = Mathf.RoundToInt(v * 50).ToString();
+			_soundEffectsVolumeSlider.val = v;
+			_soundEffectsVolumeText.val = Mathf.RoundToInt(v * 50).ToString();
 
 
 			_mixer.SetFloat("_soundEffectsVolume", Mathf.Log10(v) * 40);
@@ -712,10 +645,12 @@ namespace Settings
             SaveState.SafeSave();
         }
 
-		public void AmbienceVolumeOnChange(float v)
+        [Inject] Access_AmbienceVolumeSlider _ambienceVolumeSlider;
+        [Inject] Access_AmbienceVolumeText _ambienceVolumeText;
+        public void AmbienceVolumeOnChange(float v)
 		{
-			_ambienceVolumeSlider.value = v;
-			_ambienceVolumeText.text = Mathf.RoundToInt(v * 50).ToString();
+			_ambienceVolumeSlider.val = v;
+			_ambienceVolumeText.val = Mathf.RoundToInt(v * 50).ToString();
 
 
 			_mixer.SetFloat("_ambienceVolume", Mathf.Log10(v) * 40);
@@ -730,108 +665,13 @@ namespace Settings
 		/// GAMEPLAY SETTINGS
 		/// </summary>
 
-		public void PanSensitivityOnChange(float v)
-		{
-			_panningSensitivitySlider.value = v;
-			_panningSensitivityText.text = (v / 10).ToString("F1");
-			_panSensitivity = v;
 
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().PanSensitivity = v;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
-		public void ZoomSensitivityOnChange(float v)
-		{
-			_zoomingSensitivitySlider.value = v;
-			_zoomingSensitivityText.text = (v / 10).ToString("F1");
-			_zoomSensitivity = v;
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().ZoomSensitivity = v;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
-		public void WASDSensitivityOnChange(float v)
-		{
-			_wasdSensitivitySlider.value = v;
-			_wasdSensitivityText.text = (v / 10).ToString("F1");
-			_wasdSensitivity = v;
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().WasdSensitivity = v;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
-		public void BorderDetectionSensitivityOnChange(float v)
-		{
-			_borderDetectionSensitivitySlider.value = v;
-			_borderDetectionSensitivityText.text = (v / 10).ToString("F1");
-			_borderDetectionSensitivity = v;
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().BorderDetectionSensitivity = v;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
-		public void FOVOnChange(float v)
-		{
-			_fovLevelSlider.value = v;
-			_fovLevelText.text = ((int)v).ToString();
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					_camera.fieldOfView = (int)v;
-				}
-			}
-
-			_fov = (int)v;
-
-            SaveState.SafeSave();
-        }
 
 		[Inject] private Autosave _autoSave;
+		[Inject] Access_AutosaveTimerDropdown _autosaveTimerDropdown;
 		public void AutoSaveTimer(int v)
 		{
-			_autosaveTimerDropdown.value = v;
+			_autosaveTimerDropdown.val = v;
 			_autosaveTime = v;
 
 			if (_apply)
@@ -843,63 +683,26 @@ namespace Settings
             SaveState.SafeSave();
         }
 
+		[Inject] Access_DisplayNameDropdown _displayNameDropdown;
 		public void DisplayUserNames(int v)
 		{
-			_displayNameDropdown.value = v;
+			_displayNameDropdown.val = v;
 			_displayName = v;
 
             SaveState.SafeSave();
         }
 
+		[Inject] Access_DisplayBuildingDropdown _displayBuildingDropdown;
 		public void DisplayBuildingData(int v)
 		{
-			_displayBuildingDropdown.value = v;
+			_displayBuildingDropdown.val = v;
 			_displayBuildings = v;
 
             SaveState.SafeSave();
         }
 
-		public void ToggleBorderDectionMovement(bool toggle)
-		{
-			_borderDetectionToggle.isOn = toggle;
-
-			_borderDetection = toggle;
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().BorderDetection = toggle;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
-		public void ToggleMouseControls(bool toggle)
-		{
-			_mouseControlsToggle.isOn = toggle;
-
-			_mouseControls = toggle;
-
-			if (_apply)
-			{
-				if (_camera)
-				{
-					if (_camera.GetComponent<CameraController>())
-					{
-						_camera.GetComponent<CameraController>().MouseControls = toggle;
-					}
-				}
-			}
-
-            SaveState.SafeSave();
-        }
-
 		[Inject] ChannelData _channelData;
+		[Inject] Access_ChannelNameInput _channelNameInput;
 		public void SetChannelName(string name)
 		{
 			_channelData.SetChannelName(name);
@@ -919,198 +722,45 @@ namespace Settings
 		/// <summary>
 		/// Disables and enables the connection tab in world game
 		/// </summary>
+		[Inject] ConnectionTab _connectionTab;
 		public void TogglingConnectionTab(bool enabled)
 		{
-			_connectionTab.SetActive(enabled);
+			_connectionTab.enabled = true;
 		}
 
 		/// <summary>
 		/// Enable settings panel
 		/// </summary>
-
+		[Inject] SettingsPanel _settingsPanel;
+		[Inject] ConfirmSettingsPanel _confirmSettingsPanel;
 		public void ToggleSettingsPanel()
 		{
 			if (SaveState._savedData)
 			{
-				_settingsPanel.SetActive(!_settingsPanel.activeSelf);
-				if (_settingsPanel.activeSelf == false)
+				_settingsPanel.Enabled = !_settingsPanel.Enabled;
+				if (_settingsPanel.Enabled == false)
 				{
 					ChangeTab(0);
 				}
 			}
 			else
 			{
-				if (_settingsPanel.activeSelf == true)
+				if (_settingsPanel.Enabled == true)
 				{
-					_confirmSettingsPanel.SetActive(true);
+					_confirmSettingsPanel.Enabled = true;
 				}
 				else
 				{
-					_settingsPanel.SetActive(true);
+					_settingsPanel.Enabled = true;
 				}
 			}
-		}
-
-		public void ConfirmSettings()
-		{
-			SaveSettings();
-			LoadSettings();
-			ChangeTab(0);
-			_confirmSettingsPanel.SetActive(false);
-			_settingsPanel.SetActive(false);
-		}
-
-		public void CloseSettingPanel()
-		{
-			ChangeTab(0);
-			LoadSettings();
-			_confirmSettingsPanel.SetActive(false);
-			_settingsPanel.SetActive(false);
-		}
-
-		/// <summary>
-		/// Saving and loading
-		/// </summary>
-
-		public void SaveSettings()
-		{
-			SetUpSavePreset();
-			ApplySettings();
-			GameIO.SaveSettingsData(_savePreset);
-
-			UpdateSettingScriptableObject();
-
-			SaveState._savedData = true;
-		}
-
-		public void LoadSettings()
-		{
-			if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Panda Belly/Stream Town/SettingsData.json"))
-			{
-				_savePreset = GameIO.LoadSettingsData();
-				SaveState._loadingData = true;
-				_apply = true;
-				//Visual
-
-				ShadowsOnChange(_savePreset.shadowType);
-				ShadowQualityOnChange(_savePreset.shadowResolution);
-				AAOnChange(_savePreset.antiAliasing);
-				CameraAAOnChange(_savePreset.cameraAA);
-				AOToggle(_savePreset.enabledAO);
-				VSyncToggle(_savePreset.vSync);
-
-				PresetOnChange(_savePreset.preset);
-
-
-				FPSOnChange(_savePreset.fpsLimiter);
-				ResoultionOnChange(_savePreset.resoultion);
-				DisplayModeOnChange(_savePreset.displayMode);
-				GammaOnChange(_savePreset.gamma);
-				BrightnessOnChange(_savePreset.brightness);
-
-				//Audio
-				MasterVolumeOnChange(_savePreset.masterVolume);
-				MusicVolumeOnChange(_savePreset.musicVolume);
-				SoundEffectsVolumeOnChange(_savePreset.playerVolume);
-				AmbienceVolumeOnChange(_savePreset.environmentVolume);
-
-				//Gameplay
-				PanSensitivityOnChange(_savePreset.panSensitivity);
-				ZoomSensitivityOnChange(_savePreset.zoomSensitivity);
-				WASDSensitivityOnChange(_savePreset.wasdSensitivity);
-				BorderDetectionSensitivityOnChange(_savePreset.borderDetectionSensitivity);
-				FOVOnChange(_savePreset.fov);
-				DisplayBuildingData(_savePreset.displayBuildings);
-				DisplayUserNames(_savePreset.displayName);
-				AutoSaveTimer(_savePreset.autosaveTime);
-				ToggleMouseControls(_savePreset.mouseMovement);
-				ToggleBorderDectionMovement(_savePreset.keyboardMovement);
-				//Twitch
-				SetChannelName(_savePreset.channelName);
-
-				UpdateSettingScriptableObject();
-
-				if (_cameraApplyChanges)
-					_cameraApplyChanges.UpdateCameraSettings();
-
-				SaveState._loadingData = false;
-				SaveState._savedData = true;
-				_apply = false;
-
-				if (GameManager.Instance)
-					GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
-			}
-			else
-			{
-				Debug.Log("No setting file located");
-				SetUpSettingsDataFile();
-			}
-		}
-
-		private void UpdateSettingScriptableObject()
-		{
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").panSensitivity = _panSensitivity;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").zoomSensitivity = _zoomSensitivity;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").wasdSensitivity = _wasdSensitivity;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").borderDetectionSensitivity = _borderDetectionSensitivity;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").mouseControls = _mouseControls;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").borderDetection = _borderDetection;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").camAA = _cameraAA;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").fov = _fov;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").displayBuildings = _displayBuildings;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").displayName = _displayName;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").channelName = _channelData.name;
-			Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData").autosaveTime = _autosaveTime;
-		}
-
-		private void ApplySettings()
-		{
-			_apply = true;
-			//Video
-			ShadowsOnChange(_shadowType);
-			ShadowQualityOnChange(_shadowResolution);
-			AAOnChange(_antiAliasing);
-			CameraAAOnChange(_cameraAA);
-			AOToggle(_enabledAO);
-			VSyncToggle(_vSync);
-			PresetOnChange(_preset);
-			FPSOnChange(_fpsLimiter);
-			ResoultionOnChange(_resolution);
-			DisplayModeOnChange(_displayMode);
-			GammaOnChange(_gamma);
-			BrightnessOnChange(_brightness);
-
-			//Audio
-			MasterVolumeOnChange(_masterVolume);
-			MusicVolumeOnChange(_musicVolume);
-			SoundEffectsVolumeOnChange(_playerVolume);
-			AmbienceVolumeOnChange(_environmentVolume);
-
-			//Gameplay
-			PanSensitivityOnChange(_panSensitivity);
-			ZoomSensitivityOnChange(_zoomSensitivity);
-			WASDSensitivityOnChange(_wasdSensitivity);
-			BorderDetectionSensitivityOnChange(_borderDetectionSensitivity);
-			FOVOnChange(_fov);
-			DisplayBuildingData(_displayBuildings);
-			DisplayUserNames(_displayName);
-			AutoSaveTimer(_autosaveTime);
-			ToggleMouseControls(_mouseControls);
-			ToggleBorderDectionMovement(_borderDetection);
-			
-
-			//Twitch
-			SetChannelName(_channelData.name);
-
-			if (GameManager.Instance)
-				GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
-			_apply = false;
 		}
 
 		/// <summary>
 		/// SET UP FUNCTIONS
 		/// </summary>
 
+		[Inject] Volume _postProcessVolume;
 		private void SetUpPipelineAndPostProcessing()
 		{
 			_postProcessVolume = GetComponentInChildren<Volume>();
@@ -1120,12 +770,13 @@ namespace Settings
 			QualitySettings.renderPipeline = _renderPipeline;
 		}
 
-		private void SetUpResoultion()
+
+		private void SetUpResolution()
 		{
 			List<Resolution> res = new List<Resolution>();
 			_resolutions = Screen.resolutions;
 
-			_resolutionDropdown.ClearOptions();
+			_resolutionDropdown.dropDown.ClearOptions();
 
 			List<string> options = new List<string>();
 
@@ -1147,135 +798,315 @@ namespace Settings
 				}
 			}
 
-			_resolutionDropdown.AddOptions(options);
-			_resolutionDropdown.value = currentResolutionIndex;
+			_resolutionDropdown.dropDown.AddOptions(options);
+			_resolutionDropdown.val = currentResolutionIndex;
 			_resolution = currentResolutionIndex;
-			_resolutionDropdown.RefreshShownValue();
+			_resolutionDropdown.dropDown.RefreshShownValue();
 			_resolutions = res.ToArray();
 		}
+        public void ConfirmSettings()
+        {
+            SaveSettings();
+            LoadSettings();
+            ChangeTab(0);
+            _confirmSettingsPanel.Enabled = false;
+            _settingsPanel.Enabled = false;
+        }
 
-		private void SetUpSavePreset()
-		{
-			_savePreset = new SavePreset();
 
-			_savePreset.preset = _preset;
+        private void ApplySettings()
+        {
+            _apply = true;
+            //Video
+            ShadowsOnChange(_shadowType);
+            ShadowQualityOnChange(_shadowResolution);
+            AAOnChange(_antiAliasing);
+            CameraAAOnChange(_cameraAA);
+            AOToggle(_enabledAO);
+            VSyncToggle(_vSync);
+            PresetOnChange(_preset);
+            FPSOnChange(_fpsLimiter);
+            ResolutionOnChange(_resolution);
+            DisplayModeOnChange(_displayMode);
+            GammaOnChange(_gamma);
+            BrightnessOnChange(_brightness);
 
-			_savePreset.displayMode = _displayMode;
-			_savePreset.resoultion = _resolution;
+            //Audio
+            MasterVolumeOnChange(_masterVolume);
+            MusicVolumeOnChange(_musicVolume);
+            SoundEffectsVolumeOnChange(_playerVolume);
+            AmbienceVolumeOnChange(_environmentVolume);
 
-			_savePreset.shadowType = _shadowType;
-			_savePreset.shadowResolution = _shadowResolution;
+            //Gameplay
+            //REVISIT
+            //PanSensitivityOnChange(_panSensitivity);
+            //ZoomSensitivityOnChange(_zoomSensitivity);
+            //WASDSensitivityOnChange(_wasdSensitivity);
+            //BorderDetectionSensitivityOnChange(_borderDetectionSensitivity);
+            //FOVOnChange(_fov);
+            DisplayBuildingData(_displayBuildings);
+            DisplayUserNames(_displayName);
+            AutoSaveTimer(_autosaveTime);
+            //ToggleMouseControls(_mouseControls);
+            //ToggleBorderDectionMovement(_borderDetection);
 
-			_savePreset.enabledAO = _enabledAO;
 
-			_savePreset.vSync = _vSync;
-			_savePreset.fpsLimiter = _fpsLimiter;
+            //Twitch
+            SetChannelName(_channelData.name);
 
-			_savePreset.brightness = _brightness;
-			_savePreset.gamma = _gamma;
+            if (GameManager.Instance)
+                GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
+            _apply = false;
+        }
 
-			_savePreset.antiAliasing = _antiAliasing;
-			_savePreset.cameraAA = _cameraAA;
+        /// <summary>
+        /// Saving and loading
+        /// </summary>
 
-			_savePreset.masterVolume = _masterVolume;
-			_savePreset.musicVolume = _musicVolume;
-			_savePreset.playerVolume = _playerVolume;
-			_savePreset.environmentVolume = _environmentVolume;
+        public void SaveSettings()
+        {
+            SetUp_SavePreset();
+            ApplySettings();
+            GameIO.SaveSettingsData(_savePreset);
 
-			_savePreset.panSensitivity = _panSensitivity;
-			_savePreset.zoomSensitivity = _zoomSensitivity;
-			_savePreset.wasdSensitivity = _wasdSensitivity;
-			_savePreset.borderDetectionSensitivity = _borderDetectionSensitivity;
-			_savePreset.fov = _fov;
+            UpdateSettingScriptableObject();
 
-			_savePreset.autosaveTime = _autosaveTime;
+            SaveState._savedData = true;
+        }
 
-			_savePreset.displayName = _displayName;
-			_savePreset.displayBuildings = _displayBuildings;
+        public void CloseSettingPanel()
+        {
+            ChangeTab(0);
+            LoadSettings();
+            _confirmSettingsPanel.SetActive(false);
+            _settingsPanel.SetActive(false);
+        }
 
-			_savePreset.keyboardMovement = _borderDetection;
-			_savePreset.mouseMovement = _mouseControls;
 
-			_savePreset.channelName = _channelData.name;
-		}
+        public void LoadSettings()
+        {
+            if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Panda Belly/Stream Town/SettingsData.json"))
+            {
+                _savePreset = GameIO.LoadSettingsData();
+                SaveState._loadingData = true;
+                _apply = true;
+                //Visual
 
-		// Setting all the settings values to the UI values
-		private void SetUpSettingsDataFile()
-		{
-			Debug.Log("Creating settings save file");
+                ShadowsOnChange(_savePreset.shadowType);
+                ShadowQualityOnChange(_savePreset.shadowResolution);
+                AAOnChange(_savePreset.antiAliasing);
 
-			_preset = 5;
+                //REVISIT
+                //CameraAAOnChange(_savePreset.cameraAA);
+                AOToggle(_savePreset.enabledAO);
+                VSyncToggle(_savePreset.vSync);
 
-			_displayMode = _displayModeDropdown.value;
+                PresetOnChange(_savePreset.preset);
 
-			_shadowType = _shadowTypeDropdown.value;
-			_shadowResolution = _shadowQualityDropdown.value;
 
-			_enabledAO = _AOToggle.isOn;
+                FPSOnChange(_savePreset.fpsLimiter);
+                ResolutionOnChange(_savePreset.resoultion);
+                DisplayModeOnChange(_savePreset.displayMode);
+                GammaOnChange(_savePreset.gamma);
+                BrightnessOnChange(_savePreset.brightness);
 
-			_vSync = _vSyncToggle.isOn;
-			_fpsLimiter = _fpsLimiterDropdown.value;
+                //Audio
+                MasterVolumeOnChange(_savePreset.masterVolume);
+                MusicVolumeOnChange(_savePreset.musicVolume);
+                SoundEffectsVolumeOnChange(_savePreset.playerVolume);
+                AmbienceVolumeOnChange(_savePreset.environmentVolume);
 
-			_brightness = _brightnessSlider.value;
-			_gamma = _gammaSlider.value;
+                //Gameplay
+                //REVISIT
+                //PanSensitivityOnChange(_savePreset.panSensitivity);
+                //ZoomSensitivityOnChange(_savePreset.zoomSensitivity);
+                //WASDSensitivityOnChange(_savePreset.wasdSensitivity);
+                //BorderDetectionSensitivityOnChange(_savePreset.borderDetectionSensitivity);
+                //FOVOnChange(_savePreset.fov);
+                DisplayBuildingData(_savePreset.displayBuildings);
+                DisplayUserNames(_savePreset.displayName);
+                AutoSaveTimer(_savePreset.autosaveTime);
+                //ToggleMouseControls(_savePreset.mouseMovement);
+                //ToggleBorderDectionMovement(_savePreset.keyboardMovement);
+                //Twitch
+                SetChannelName(_savePreset.channelName);
+                UpdateSettingScriptableObject();
 
-			_antiAliasing = _AADropdown.value;
-			_cameraAA = _cameraAADropdown.value;
+                if (_cameraApplyChanges)
+                    _cameraApplyChanges.UpdateCameraSettings();
 
-			_masterVolume = _masterVolumeSlider.value;
-			_musicVolume = _musicVolumeSlider.value;
-			_playerVolume = _soundEffectsVolumeSlider.value;
-			_environmentVolume = _ambienceVolumeSlider.value;
+                SaveState._loadingData = false;
+                SaveState._savedData = true;
+                _apply = false;
 
-			_panSensitivity = _panningSensitivitySlider.value;
-			_zoomSensitivity = _zoomingSensitivitySlider.value;
-			_wasdSensitivity = _wasdSensitivitySlider.value;
-			_borderDetectionSensitivity = _borderDetectionSensitivitySlider.value;
+                if (GameManager.Instance)
+                    GameManager.Instance.SaveManager.SetAutosaveTime(_autoSave.Intervals[_autosaveTime] * 60.0f);
+            }
+            else
+            {
+                Debug.Log("No setting file located");
+                SetUpSettingsDataFile();
+            }
+        }
 
-			_fov = (int)_fovLevelSlider.value;
+		private bool mouseControls = true; //REVISIT
+		private bool borderDetection = true; //REVISIT
+		[Inject] Access_CameraAADropdown _cameraAADropdown;
+        // Setting all the settings values to the UI values
+        private void SetUpSettingsDataFile()
+        {
+            Debug.Log("Creating settings save file");
 
-			_autosaveTime = _autosaveTimerDropdown.value;
+            _preset = 5;
 
-			_displayName = _displayNameDropdown.value;
-			_displayBuildings = _displayBuildingDropdown.value;
+            _savePreset.displayMode = _displayModeDropdown.val;
 
-			_borderDetection = _borderDetectionToggle.isOn;
-			_mouseControls = _mouseControlsToggle.isOn;
+            _savePreset.shadowType = _shadowTypeDropdown.val;
+            _savePreset.shadowResolution = _shadowQualityDropdown.val;
 
-			_channelData.name = _channelNameInput.text;
+            _savePreset.enabledAO = _AOToggle.isOn;
 
-			SaveSettings();
+            _savePreset.vSync = _vSyncToggle.isOn;
+            _savePreset.fpsLimiter = _fpsLimiterDropdown.val;
 
-			LoadSettings();
-			Debug.Log("Created and loaded new settings save file");
-		}
+            _savePreset.brightness = _brightnessSlider.val;
+            _savePreset.gamma = _gammaSlider.val;
 
-		public void SetUpCamera()
-		{
-			_camera = new Camera();
-			_cameraData = new UniversalAdditionalCameraData();
-			if (Camera.main)
-			{
-				_camera = Camera.main;
-				_cameraData = _camera.GetUniversalAdditionalCameraData();
-				LoadSettings();
-			}
-		}
+            _savePreset.antiAliasing = _AADropdown.val;
+            _savePreset.cameraAA = _cameraAADropdown.val;
 
-		/// <summary>
-		/// UNITY FUNCTIONS
-		/// </summary>
+            _savePreset.masterVolume = _masterVolumeSlider.val;
+            _savePreset.musicVolume = _musicVolumeSlider.val;
+            _savePreset.playerVolume = _soundEffectsVolumeSlider.val;
+            _savePreset.environmentVolume = _ambienceVolumeSlider.val;
 
-		private void Start()
+            _savePreset.panSensitivity = _panningSensitivitySlider.val;
+            _savePreset.zoomSensitivity = _zoomingSensitivitySlider.val;
+            _savePreset.wasdSensitivity = _wasdSensitivitySlider.val;
+            _savePreset.borderDetectionSensitivity = _borderDetectionSensitivitySlider.val;
+
+            _savePreset.fov = (int)_fovLevelSlider.val;
+
+            _savePreset.autosaveTime = _autosaveTimerDropdown.val;
+
+            _savePreset.displayName = _displayNameDropdown.val;
+            _savePreset.displayBuildings = _displayBuildingDropdown.val;
+
+            borderDetection = _borderDetectionToggle.isOn;
+            mouseControls = _mouseControlsToggle.isOn; //Private bool
+
+            _channelData.name = _channelNameInput.text;
+
+            SaveSettings();
+
+            LoadSettings();
+            Debug.Log("Created and loaded new settings save file");
+        }
+
+        private void UpdateSettingScriptableObject()
+        {
+            SettingsScriptable data = Resources.Load<Scriptables.SettingsScriptable>("ScriptableObjects/Settings/SettingsData");
+            data.panSensitivity = _panSensitivity;
+            data.zoomSensitivity = _zoomSensitivity;
+            data.wasdSensitivity = _wasdSensitivity;
+            data.borderDetectionSensitivity = _borderDetectionSensitivity;
+            data.mouseControls = _mouseControls;
+            data.borderDetection = _borderDetection;
+            data.camAA = _cameraAA;
+            data.fov = _fov;
+            data.displayBuildings = _displayBuildings;
+            data.displayName = _displayName;
+            data.channelName = _channelData.name;
+            data.autosaveTime = _autosaveTime;
+        }
+
+		//UI Functionality
+		[Inject] SettingPages _settingPages;
+        public void ChangeTab(int v)
+        {
+            //Enables and disables tabs
+            List<GameObject> tabs = new List<GameObject>(_settingPages.tabs);
+
+            tabs.RemoveAt(v);
+
+            for (int i = 0; i < tabs.Count; i++)
+            {
+                tabs[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            }
+
+            _settingPages.tabs[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+
+            //Enables and disables pages
+
+            List<GameObject> pages = new List<GameObject>(_settingPages.UIPanels);
+
+            pages.RemoveAt(v);
+
+            for (int i = 0; i < pages.Count; i++)
+            {
+                pages[i].SetActive(false);
+            }
+
+            _settingPages.UIPanels[v].SetActive(true);
+        }
+
+        private void SetUp_SavePreset()
+        {
+            _savePreset = new SavePreset();
+
+            _savePreset.preset = _preset;
+
+            _savePreset.displayMode = _displayModeDropdown.val;
+            _savePreset.resoultion = _resolutionDropdown.val;
+
+            _savePreset.shadowType = _shadowTypeDropdown.val;
+            _savePreset.shadowResolution = _shadowQualityDropdown.val;
+
+            _savePreset.enabledAO = _enabledAO;
+
+            _savePreset.vSync = _vSync;
+            _savePreset.fpsLimiter = _fpsLimiter;
+
+            _savePreset.brightness = _brightness;
+            _savePreset.gamma = _gamma;
+
+            _savePreset.antiAliasing = _antiAliasing;
+            _savePreset.cameraAA = _cameraAA;
+
+            _savePreset.masterVolume = _masterVolume;
+            _savePreset.musicVolume = _musicVolume;
+            _savePreset.playerVolume = _playerVolume;
+            _savePreset.environmentVolume = _environmentVolume;
+
+            _savePreset.panSensitivity = _panSensitivity;
+            _savePreset.zoomSensitivity = _zoomSensitivity;
+            _savePreset.wasdSensitivity = _wasdSensitivity;
+            _savePreset.borderDetectionSensitivity = _borderDetectionSensitivity;
+            _savePreset.fov = _fov;
+
+            _savePreset.autosaveTime = _autosaveTime;
+
+            _savePreset.displayName = _displayNameDropdown.val;
+            _savePreset.displayBuildings = _displayBuildingDropdown.val;
+
+            _savePreset.keyboardMovement = _borderDetection;
+            _savePreset.mouseMovement = _mouseControls;
+
+            _savePreset.channelName = _channelData.name;
+        }
+
+        /// <summary>
+        /// UNITY FUNCTIONS
+        /// </summary>
+
+        private void Start()
 		{
 			if (!Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + GameIO.SAVE_FILEPATH))
 			{
 				Directory.CreateDirectory(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + GameIO.SAVE_FILEPATH);
 			}
-
-			SetUpCamera();
 			SetUpPipelineAndPostProcessing();
-			SetUpResoultion();
+			SetUpResolution();
 
 			if (!File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Panda Belly" + "/Stream Town" + "/SettingsData.json"))
 			{

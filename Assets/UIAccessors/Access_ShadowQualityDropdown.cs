@@ -1,0 +1,1 @@
+public class Access_ShadowQualityDropdown : Access_Dropdown { }

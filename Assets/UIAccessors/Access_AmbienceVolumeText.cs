@@ -1,0 +1,1 @@
+public class Access_AmbienceVolumeText : Access_Text { }

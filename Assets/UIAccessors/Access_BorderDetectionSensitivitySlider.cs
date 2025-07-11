@@ -1,0 +1,1 @@
+public class Access_BorderDetectionSensitivitySlider : Access_Slider { }

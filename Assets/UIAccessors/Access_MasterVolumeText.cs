@@ -1,0 +1,1 @@
+public class Access_MasterVolumeText : Access_Text { }

@@ -1,0 +1,1 @@
+public class Access_PanningSensitivitySlider : Access_Slider { }

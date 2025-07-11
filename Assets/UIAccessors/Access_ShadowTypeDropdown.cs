@@ -1,0 +1,1 @@
+public class Access_ShadowTypeDropdown : Access_Dropdown { }

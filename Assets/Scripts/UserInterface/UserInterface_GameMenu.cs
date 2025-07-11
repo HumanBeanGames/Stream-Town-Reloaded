@@ -79,9 +79,8 @@ namespace UserInterface
 			_loadingManager = FindObjectOfType<LoadingManager>();
 			if (FindObjectOfType<SettingsManager>())
 			{
-				_settingsManager = FindObjectOfType<SettingsManager>();
-				_settingsPanel = _settingsManager.SettingsPanel;
-				_settingsManager.SetUpCamera();
+				//REVISIT
+				//_settingsManager.SetUpCamera();
 				_settingsManager.GameSettingData(_cameraApplyChanges);
 				if (GameManager.Instance)
 					GameManager.Instance.SaveManager.SetAutosaveTime(Autosave.Intervals[GameManager.Instance.SettingsData.autosaveTime] * 60.0f);

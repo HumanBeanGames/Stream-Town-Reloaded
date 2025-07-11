@@ -1,0 +1,1 @@
+public class Access_MusicVolumeText : Access_Text { }
