@@ -76,8 +76,7 @@ namespace Settings
 
 		private int _preset = 0;
 
-		[Inject] Camera _camera;
-		[Inject] UniversalAdditionalCameraData _cameraData;
+		[Inject] ProjectCamera _camera;
 		[Inject] List<GameObject> _presetButtons; //REVISIT TO CHANGE TYPE
         public void CameraAAOnChange(int v)
         {
@@ -91,23 +90,23 @@ namespace Settings
                 _preset = 5;
             }
 
-            if (_camera)
+            if (_camera.Exists)
                 if (_apply)
                 {
                     switch (v)
                     {
                         case 1:
-                            _cameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
+                            _camera.Data.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
                             break;
                         case 2:
-                            _cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
+                            _camera.Data.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
                             break;
                         default:
-                            _cameraData.antialiasing = AntialiasingMode.None;
+                            _camera.Data.antialiasing = AntialiasingMode.None;
                             break;
                     }
 
-                    _cameraData.antialiasingQuality = AntialiasingQuality.High;
+                    _camera.Data.antialiasingQuality = AntialiasingQuality.High;
                 }
             _cameraAA = v;
 
@@ -124,11 +123,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().PanSensitivity = v;
+                        _camera.Cam.GetComponent<CameraController>().PanSensitivity = v;
                     }
                 }
             }
@@ -146,11 +145,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().ZoomSensitivity = v;
+                        _camera.Cam.GetComponent<CameraController>().ZoomSensitivity = v;
                     }
                 }
             }
@@ -168,11 +167,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().WasdSensitivity = v;
+                        _camera.Cam.GetComponent<CameraController>().WasdSensitivity = v;
                     }
                 }
             }
@@ -190,11 +189,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().BorderDetectionSensitivity = v;
+                        _camera.Cam.GetComponent<CameraController>().BorderDetectionSensitivity = v;
                     }
                 }
             }
@@ -211,9 +210,9 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    _camera.fieldOfView = (int)v;
+                    _camera.Cam.fieldOfView = (int)v;
                 }
             }
 
@@ -231,11 +230,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().BorderDetection = toggle;
+                        _camera.Cam.GetComponent<CameraController>().BorderDetection = toggle;
                     }
                 }
             }
@@ -252,11 +251,11 @@ namespace Settings
 
             if (_apply)
             {
-                if (_camera)
+                if (_camera.Exists)
                 {
-                    if (_camera.GetComponent<CameraController>())
+                    if (_camera.Cam.GetComponent<CameraController>())
                     {
-                        _camera.GetComponent<CameraController>().MouseControls = toggle;
+                        _camera.Cam.GetComponent<CameraController>().MouseControls = toggle;
                     }
                 }
             }
@@ -887,7 +886,7 @@ namespace Settings
         {
             if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Panda Belly/Stream Town/SettingsData.json"))
             {
-                _savePreset = GameIO.LoadSettingsData();
+                //_savePreset = GameIO.LoadSettingsData();
                 SaveState._loadingData = true;
                 _apply = true;
                 //Visual

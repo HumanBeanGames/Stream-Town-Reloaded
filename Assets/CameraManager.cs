@@ -10,6 +10,7 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(UniversalAdditionalCameraData))]
 public class CameraManager : MonoBehaviour
 {
+    /*
     [Inject] private Camera _camera;
     [Inject] private UniversalAdditionalCameraData _cameraData;
     [Inject] SaveState SaveState;
@@ -28,5 +29,5 @@ public class CameraManager : MonoBehaviour
             SettingsManager _settingsManager = FindObjectsByType<SettingsManager>(FindObjectsSortMode.None)[0];
             _settingsManager.LoadSettings();
         }
-    }
+    }*/
 }
