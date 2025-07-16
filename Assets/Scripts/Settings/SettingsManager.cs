@@ -77,15 +77,16 @@ namespace Settings
 		private int _preset = 0;
 
 		[Inject] ProjectCamera _camera;
-		[Inject] List<GameObject> _presetButtons; //REVISIT TO CHANGE TYPE
+		[Inject] PresetButtons _presetButtons; //REVISIT TO CHANGE TYPE
+
         public void CameraAAOnChange(int v)
         {
             if (!_presetChange)
             {
-                for (int i = 0; i < _presetButtons.Count; i++)
+                for (int i = 0; i < _presetButtons.Buttons.Count; i++)
                 {
                     //REVISIT
-                    _presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                    _presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
                 }
                 _preset = 5;
             }
@@ -221,7 +222,7 @@ namespace Settings
             SaveState.SafeSave();
         }
 
-		[Inject] Access_BorderDetectionToggle _borderDetectionToggle;
+		/*[Inject] Access_BorderDetectionToggle _borderDetectionToggle; //REVISIT - THERE IS NO TOGGLE
         public void ToggleBorderDectionMovement(bool toggle)
         {
             _borderDetectionToggle.isOn = toggle;
@@ -240,7 +241,7 @@ namespace Settings
             }
 
             SaveState.SafeSave();
-        }
+        }*/
 
 		[Inject] Access_MouseControlsToggle _mouseControlsToggle;
         public void ToggleMouseControls(bool toggle)
@@ -271,9 +272,9 @@ namespace Settings
 			{
 				_presetChange = true;
 
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				ShadowsOnChange(_settingPreset[v].shadowType);
 				ShadowQualityOnChange(_settingPreset[v].shadowResolution);
@@ -283,7 +284,7 @@ namespace Settings
 				AOToggle(_settingPreset[v].enabledAO);
 				VSyncToggle(_settingPreset[v].vSync);
 				_preset = v;
-				_presetButtons[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+				_presetButtons.Buttons[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
 				_presetChange = false;
 
                 SaveState.SafeSave();
@@ -296,9 +297,9 @@ namespace Settings
 		{
 			if (!_presetChange)
 			{
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				_preset = 5;
 			}
@@ -333,9 +334,9 @@ namespace Settings
 		{
 			if (!_presetChange)
 			{
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				_preset = 5;
 			}
@@ -378,9 +379,9 @@ namespace Settings
 		{
 			if (!_presetChange)
 			{
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				_preset = 5;
 			}
@@ -431,9 +432,9 @@ namespace Settings
 		{
 			if (!_presetChange)
 			{
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				_preset = 5;
 			}
@@ -499,9 +500,9 @@ namespace Settings
 		{
 			if (!_presetChange)
 			{
-				for (int i = 0; i < _presetButtons.Count; i++)
+				for (int i = 0; i < _presetButtons.Buttons.Count; i++)
 				{
-					_presetButtons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+					_presetButtons.Buttons[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 				}
 				_preset = 5;
 			}
@@ -949,7 +950,7 @@ namespace Settings
         }
 
 		private bool mouseControls = true; //REVISIT
-		private bool borderDetection = true; //REVISIT
+		//private bool borderDetection = true; //REVISIT
 		[Inject] Access_CameraAADropdown _cameraAADropdown;
         // Setting all the settings values to the UI values
         private void SetUpSettingsDataFile()
@@ -991,7 +992,7 @@ namespace Settings
             _savePreset.displayName = _displayNameDropdown.val;
             _savePreset.displayBuildings = _displayBuildingDropdown.val;
 
-            borderDetection = _borderDetectionToggle.isOn;
+            //borderDetection = _borderDetectionToggle.isOn; //REVISIT - THERE IS NO TOGGLE??
             mouseControls = _mouseControlsToggle.isOn; //Private bool
 
             _channelData.name = _channelNameInput.text;
