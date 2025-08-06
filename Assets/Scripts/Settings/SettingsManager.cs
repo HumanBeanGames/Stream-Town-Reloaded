@@ -1021,33 +1021,29 @@ namespace Settings
         }
 
 		//UI Functionality
-		[Inject] SettingPages _settingPages;
+		[Inject] Access_SettingsMenus _menus;
+		[Inject] Access_SettingsTabs _tabs;
         public void ChangeTab(int v)
         {
-            //Enables and disables tabs
-            List<GameObject> tabs = new List<GameObject>(_settingPages.tabs);
+			//REVISIT BECAUSE I DON'T THINK IT SHOULD BE REMOVING??
+            _tabs.list.RemoveAt(v);
 
-            tabs.RemoveAt(v);
-
-            for (int i = 0; i < tabs.Count; i++)
+            for (int i = 0; i < _tabs.list.Count; i++)
             {
-                tabs[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                _tabs.list[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             }
 
-            _settingPages.tabs[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            _tabs.list[v].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
 
             //Enables and disables pages
+            _menus.list.RemoveAt(v);
 
-            List<GameObject> pages = new List<GameObject>(_settingPages.UIPanels);
-
-            pages.RemoveAt(v);
-
-            for (int i = 0; i < pages.Count; i++)
+            for (int i = 0; i < _menus.list.Count; i++)
             {
-                pages[i].SetActive(false);
+                _menus.list[i].SetActive(false);
             }
 
-            _settingPages.UIPanels[v].SetActive(true);
+            _menus.list[v].SetActive(true);
         }
 
         private void SetUp_SavePreset()
