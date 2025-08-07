@@ -31,7 +31,7 @@ namespace UserInterface.MainMenu
 
 		private bool _loading = false;
 
-		private SettingsManager _settingsManager;
+		[Inject] private SettingsManager _settingsManager;
 
 		private LoadType _loadType;
 
@@ -121,7 +121,6 @@ namespace UserInterface.MainMenu
 
 		private void Start()
 		{
-			_settingsManager = FindObjectOfType<SettingsManager>();
 			_loadingManager = FindObjectOfType<LoadingManager>();
 			_metaData = FindObjectOfType<MetaData.MetaData>();
 			_settingsManager.LoadSettings();
